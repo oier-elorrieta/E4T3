@@ -1,3 +1,10 @@
+.settings/
+bin/
+target/
+.classpath
+.project
+README.md
+
 # Compiled class file
 *.class
 

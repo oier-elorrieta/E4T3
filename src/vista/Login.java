@@ -85,7 +85,11 @@ public class Login extends JFrame {
         		String bezeroa = textFieldBezeroa.getText();
         		String pasahitza = passwordFieldPasahitza.getText();
         		try {
-        			System.out.println(DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza));
+        			if(DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && comboBoxRoles.equals("Bezeroa")) {
+        				System.out.println("True");
+        			} else {
+        				System.out.println("Erabiltzailea edo pasahitza okerrak");
+        			}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
