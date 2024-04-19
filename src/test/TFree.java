@@ -88,13 +88,11 @@ public class TFree {
 
 	@Test
 	public void TestGetJaioteguna() {
-		Date eguna = new Date(2024, 04, 18);
 		assertEquals(eguna, f1.getJaioteguna());
 	}
 
 	@Test
 	public void TestSetJaioteguna() {
-		Date eguna = new Date(2024, 04, 18);
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setJaioteguna(eguna2);
 		assertEquals(eguna2, f1.getJaioteguna());
@@ -104,13 +102,11 @@ public class TFree {
 
 	@Test
 	public void TestGetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		assertEquals(eguna, f1.getErregistroEguna());
 	}
 
 	@Test
 	public void TestSetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setErregistroEguna(eguna2);
 		assertEquals(eguna2, f1.getErregistroEguna());
@@ -133,7 +129,7 @@ public class TFree {
 	// ********************** EQUALS **********************
 
 	@Test
-	public void TestEqualsDira() {
+	public void TestEqualsObjetuBerdina() {
 		assertTrue(f1.equals(f1));
 	}
 
@@ -149,7 +145,7 @@ public class TFree {
 	}
 
 	@Test
-	public void TestEqualsClaseBerdinak() {
+	public void TestEqualsClaseAtrBerdinak() {
 		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna,
 				eguna);
 		assertTrue(f1.equals(f2));
