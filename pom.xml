@@ -19,11 +19,6 @@
 		  <artifactId>junit</artifactId>
 		  <version>4.13.2</version>
 		</dependency>
-		<dependency>
-			<groupId>ggas</groupId>
-			<artifactId>ggas</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
    </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
