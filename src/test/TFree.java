@@ -7,15 +7,16 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-
+import model.objektuak.*;
 
 public class TFree {
-	private static model.objektuak.Bezero f1;
+	private static Free f1;
+	private static Date eguna;
 
 	@Before
 	public void setUp() throws Exception {
-		Date eguna = new Date(2024, 04, 18);
-		f1 = new model.objektuak.Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+		eguna = new Date(2024, 04, 18);
+		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
 	}
 
 	// ********************** IZENA **********************
@@ -125,6 +126,8 @@ public class TFree {
 				+ f1.getHizkuntza() + ", erabiltzaileIzena=" + f1.getErabiltzaileIzena() + ", pasahitza="
 				+ f1.getPasahitza() + ", jaioteguna=" + f1.getJaioteguna() + ", erregistroEguna="
 				+ f1.getErregistroEguna() + "]";
+
+		assertEquals(txt, esperotakoa);
 	}
 
 	// ********************** EQUALS **********************
@@ -147,8 +150,8 @@ public class TFree {
 
 	@Test
 	public void TestEqualsClaseBerdinak() {
-		Date eguna = new Date(2024, 04, 18);
-		model.objektuak.Free f2 = new model.objektuak.Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna,
+				eguna);
 		assertTrue(f1.equals(f2));
 	}
 
