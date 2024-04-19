@@ -41,9 +41,7 @@ public class DB_Konexioa {
 		}
 		return null;
 	}
-	public static void itxi(Statement sentencia, ResultSet emaitza) throws SQLException {
-		emaitza.close();
-		sentencia.close();
+	public static void itxi() throws SQLException {
 		conexioa.close();
 	}
 }
