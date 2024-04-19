@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import model.objektuak.Free;
+
 
 
 public class DB_funtzioak {
@@ -17,23 +19,21 @@ public class DB_funtzioak {
 		Statement sentencia = conex.createStatement();
 		
 		
-		String kontsulta = "SELECT * from Bezeroa";
+		String kontsulta = "SELECT * from Bezeroa where Erabiltzailea ='" + erabiltzailea + "'" ;
 		ResultSet erabiltzaileak = sentencia.executeQuery(kontsulta);
 		
-		while(erabiltzaileak.next()) {
-			
-			if (erabiltzaileak.getString("Erabiltzailea").equals(erabiltzailea)) {
-				
-				if (BCrypt.checkpw(pasahitza,erabiltzaileak.getString("Pasahitza"))) {
-				
-					String pass = erabiltzaileak.getString("Pasahitza");
-					pass = BCrypt.hashpw(pass, BCrypt.gensalt());
-					// Bezero erabiltzaile = new Free(erabiltzaileak.getString("Izen"),erabiltzaileak.getString("Abizena"),erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass, erabiltzaileak.getDate("Jaiotze_data"),erabiltzaileak.getDate("Erregistro_data"));
-					DB_Konexioa.itxi(sentencia, erabiltzaileak);
-					return true;
-				}
-			}
+		
+		erabiltzaileak.next();
+							
+		if (BCrypt.checkpw(pasahitza,erabiltzaileak.getString("Pasahitza"))) {
+			String pass = erabiltzaileak.getString("Pasahitza");
+			pass = BCrypt.hashpw(pass, BCrypt.gensalt());
+			model.Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"),erabiltzaileak.getString("Abizena"),erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass, erabiltzaileak.getDate("Jaiotze_data"),erabiltzaileak.getDate("Erregistro_data"));
+			DB_Konexioa.itxi(sentencia, erabiltzaileak);
+			return true;
 		}
+			
+		
 		DB_Konexioa.itxi(sentencia, erabiltzaileak);
 		return false;
 	}

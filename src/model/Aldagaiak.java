@@ -3,6 +3,8 @@ package model;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
+import model.objektuak.Bezero;
+
 public class Aldagaiak {
 	
 	//Pantalla
@@ -15,5 +17,7 @@ public class Aldagaiak {
 		
 		public static BufferedImage imagenFondo;
 		//Pantalla
+		
+		public static Bezero erabiltzailea;
 	
 }
