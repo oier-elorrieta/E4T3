@@ -7,15 +7,14 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import ggas.Premium;
 
 public class TPremium {
-	static Premium p1;
+	private static model.objektuak.Premium p1;
 
 	@Before
 	public void setUp() throws Exception {
 		Date eguna = new Date(2024, 04, 18);
-		p1 = new Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
+		p1 = new model.objektuak.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 	}
 
 	// ********************** IRAUNGITZE DATA **********************
@@ -67,7 +66,7 @@ public class TPremium {
 	@Test
 	public void TestEqualsClaseBerdinak() {
 		Date eguna = new Date(2024, 04, 18);
-		Premium p2 = new Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
+		model.objektuak.Premium p2 = new model.objektuak.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 		assertTrue(p1.equals(p2));
 	}
 
