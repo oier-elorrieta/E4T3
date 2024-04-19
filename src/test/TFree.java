@@ -7,15 +7,16 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-
+import model.objektuak.*;
 
 public class TFree {
-	private static model.objektuak.Bezero f1;
+	private static Free f1;
+	private static Date eguna;
 
 	@Before
 	public void setUp() throws Exception {
-		Date eguna = new Date(2024, 04, 18);
-		f1 = new model.objektuak.Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+		eguna = new Date(2024, 04, 18);
+		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
 	}
 
 	// ********************** IZENA **********************
@@ -87,13 +88,11 @@ public class TFree {
 
 	@Test
 	public void TestGetJaioteguna() {
-		Date eguna = new Date(2024, 04, 18);
 		assertEquals(eguna, f1.getJaioteguna());
 	}
 
 	@Test
 	public void TestSetJaioteguna() {
-		Date eguna = new Date(2024, 04, 18);
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setJaioteguna(eguna2);
 		assertEquals(eguna2, f1.getJaioteguna());
@@ -103,13 +102,11 @@ public class TFree {
 
 	@Test
 	public void TestGetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		assertEquals(eguna, f1.getErregistroEguna());
 	}
 
 	@Test
 	public void TestSetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setErregistroEguna(eguna2);
 		assertEquals(eguna2, f1.getErregistroEguna());
@@ -125,12 +122,14 @@ public class TFree {
 				+ f1.getHizkuntza() + ", erabiltzaileIzena=" + f1.getErabiltzaileIzena() + ", pasahitza="
 				+ f1.getPasahitza() + ", jaioteguna=" + f1.getJaioteguna() + ", erregistroEguna="
 				+ f1.getErregistroEguna() + "]";
+
+		assertEquals(txt, esperotakoa);
 	}
 
 	// ********************** EQUALS **********************
 
 	@Test
-	public void TestEqualsDira() {
+	public void TestEqualsObjetuBerdina() {
 		assertTrue(f1.equals(f1));
 	}
 
@@ -146,9 +145,9 @@ public class TFree {
 	}
 
 	@Test
-	public void TestEqualsClaseBerdinak() {
-		Date eguna = new Date(2024, 04, 18);
-		model.objektuak.Free f2 = new model.objektuak.Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+	public void TestEqualsClaseAtrBerdinak() {
+		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna,
+				eguna);
 		assertTrue(f1.equals(f2));
 	}
 
