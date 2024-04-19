@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.Event;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +21,9 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.beans.EventHandler;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -29,7 +32,6 @@ public class Erregistroa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldAbizena;
-	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textFieldIzena;
 	private JTextField textField_8;
@@ -70,11 +72,6 @@ public class Erregistroa extends JFrame {
 		contentPane.add(textFieldAbizena);
 		textFieldAbizena.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(173, 218, 256, 20);
-		contentPane.add(textField_4);
-		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
 		textField_6.setBounds(173, 187, 256, 20);
@@ -87,7 +84,7 @@ public class Erregistroa extends JFrame {
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(173, 247, 256, 20);
+		textField_8.setBounds(173, 218, 256, 20);
 		contentPane.add(textField_8);
 		
 		textFieldErabiltzailea = new JTextField();
@@ -115,16 +112,12 @@ public class Erregistroa extends JFrame {
 		lblJaiodata.setBounds(88, 190, 61, 14);
 		contentPane.add(lblJaiodata);
 		
-		JLabel lblErregistrodata = new JLabel("Erregistro-Data");
-		lblErregistrodata.setBounds(88, 221, 75, 14);
-		contentPane.add(lblErregistrodata);
-		
 		JLabel lblPremiummuga = new JLabel("Premium-Muga:");
-		lblPremiummuga.setBounds(88, 250, 75, 14);
+		lblPremiummuga.setBounds(88, 221, 75, 14);
 		contentPane.add(lblPremiummuga);
 		
 		JLabel lblHitz = new JLabel("Hizkuntza:");
-		lblHitz.setBounds(88, 281, 75, 14);
+		lblHitz.setBounds(88, 246, 75, 14);
 		contentPane.add(lblHitz);
 		
 		JLabel lblAbizena = new JLabel("Abizena:");
@@ -141,11 +134,11 @@ public class Erregistroa extends JFrame {
 		
 		JComboBox comboBoxHizkuntza = new JComboBox();
 		comboBoxHizkuntza.setModel(new DefaultComboBoxModel(new String[] {"ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR"}));
-		comboBoxHizkuntza.setBounds(173, 278, 256, 22);
+		comboBoxHizkuntza.setBounds(173, 249, 256, 22);
 		contentPane.add(comboBoxHizkuntza);
 		
-		JButton btnEditatu = new JButton("Editatu");
-		btnEditatu.addActionListener(new ActionListener() {
+		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
+		btnGordeAldaketa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
@@ -172,8 +165,8 @@ public class Erregistroa extends JFrame {
 				
 			}
 		});
-		btnEditatu.setBounds(25, 309, 120, 41);
-		contentPane.add(btnEditatu);
+		btnGordeAldaketa.setBounds(25, 309, 120, 41);
+		contentPane.add(btnGordeAldaketa);
 		
 		JButton btnPrime = new JButton("Erosi Premium");
 		btnPrime.addActionListener(new ActionListener() {
@@ -200,7 +193,15 @@ public class Erregistroa extends JFrame {
 		});
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-	
+		
+		 DatePicker datePicker = new DatePicker();
+		 datePicker.setOnAction(new EventHandler(anchor, title, title, title) {
+		     public void handle(Event t) {
+		         LocalDate date = datePicker.getValue();
+		         System.err.println("Selected date: " + date);
+		     }
+		 });
+		
 	}
 }
 

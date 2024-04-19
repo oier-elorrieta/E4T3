@@ -1,7 +1,5 @@
 package control;
 
-import java.sql.SQLException;
-
 import control.funtzioak.Funtzioak;
 
 public class Master {
