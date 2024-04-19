@@ -84,9 +84,12 @@ public class Login extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		String bezeroa = textFieldBezeroa.getText();
         		String pasahitza = passwordFieldPasahitza.getText();
+        		String rola = (String) comboBoxRoles.getSelectedItem();
         		try {
-        			if(DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && comboBoxRoles.equals("Bezeroa")) {
-        				System.out.println("True");
+        			if(DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
+        				System.out.println("TrueBezero");
+        			} else if (DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
+        				System.out.println("TrueAdmin");
         			} else {
         				System.out.println("Erabiltzailea edo pasahitza okerrak");
         			}
@@ -103,6 +106,7 @@ public class Login extends JFrame {
         btnRegistrar = new JButton("Registrar");
         btnRegistrar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         	}
         });
         btnRegistrar.setBounds(240, 150, 90, 30); // Posición y tamaño del botón Registrar
