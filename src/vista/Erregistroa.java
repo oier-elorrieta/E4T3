@@ -9,8 +9,9 @@ import model.*;
 import model.db.*;
 import model.objektuak.Bezero;
 import model.objektuak.Free;
+import model.objektuak.Hizkuntza;
 import model.objektuak.Premium;
-
+import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -53,8 +55,9 @@ public class Erregistroa extends JFrame {
 	}
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public Erregistroa() {
+	public Erregistroa() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 550, 400);
 		setResizable(false);
@@ -138,7 +141,9 @@ public class Erregistroa extends JFrame {
 		contentPane.add(passwordFieldKonfirmatu);
 		
 		JComboBox comboBoxHizkuntza = new JComboBox();
-		comboBoxHizkuntza.setModel(new DefaultComboBoxModel(new String[] {"ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR"}));
+		ArrayList<Hizkuntza> hizkuntzak = new ArrayList<>(DB_funtzioak.getHizkuntzak());
+		String[] ID_hiz 
+		comboBoxHizkuntza.setModel(new DefaultComboBoxModel<Hizkuntza>().get);
 		comboBoxHizkuntza.setBounds(173, 278, 256, 22);
 		contentPane.add(comboBoxHizkuntza);
 		
@@ -148,6 +153,7 @@ public class Erregistroa extends JFrame {
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
 				String hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
+		
 				String erabiltzailea = textFieldErabiltzailea.getText();
 				String pasahitza = passwordFieldPasahitza.getText();
 				String konfirmazioa = passwordFieldKonfirmatu.getText();

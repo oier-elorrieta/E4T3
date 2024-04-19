@@ -3,10 +3,12 @@ package model.db;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import control.funtzioak.Funtzioak;
+import model.Aldagaiak;
 import model.objektuak.*;
 
 
@@ -29,7 +31,7 @@ public class DB_funtzioak {
 		if (BCrypt.checkpw(pasahitza,erabiltzaileak.getString("Pasahitza"))) {
 			String pass = erabiltzaileak.getString("Pasahitza");
 			pass = Funtzioak.enkriptatzailea(pass);
-			model.Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"),erabiltzaileak.getString("Abizena"),erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass, erabiltzaileak.getDate("Jaiotze_data"),erabiltzaileak.getDate("Erregistro_data"));
+			Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"),erabiltzaileak.getString("Abizena"),erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass, erabiltzaileak.getDate("Jaiotze_data"),erabiltzaileak.getDate("Erregistro_data"));
 			DB_Konexioa.itxi();
 			return true;
 		}
@@ -40,7 +42,6 @@ public class DB_funtzioak {
 	}
 	
 	public static boolean erregistratuErabiltzailea(Bezero erregistratu) throws SQLException {
-		boolean premiumDa = erregistratu.getClass().getSimpleName().equals("Premium");
 		Connection conex = DB_Konexioa.bezeroa();
 		
 		Statement sentencia = conex.createStatement();
@@ -53,28 +54,36 @@ public class DB_funtzioak {
 		String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('" + erregistratu.getIzena() +"', '" + erregistratu.getAbizena() +"', '" + erregistratu.getHizkuntza() +"', '" + erregistratu.getErabiltzaileIzena() +"', '" + erregistratu.getPasahitza() +"', '" + sqlDateJaioteguna +"', '" + erregistroDateJaioteguna +"', '" + erregistratu.getClass().getSimpleName() +"')" ;
 		sentencia.executeUpdate(kontsulta);
 		
-		if(premiumDa) {
-			Premium premiumAux = (Premium) erregistratu;
-			premiumBezeroa(premiumAux,conex,sentencia);
-		}
+	
 		
 		DB_Konexioa.itxi();
 		return true;
 	}
 	
-	private static void premiumBezeroa(Premium premium, Connection conex, Statement sentencia) throws SQLException{
-		String kontsulta = "SELECT max(ID_Bezeroa) from Bezeroa" ;
-		ResultSet bezeroID = sentencia.executeQuery(kontsulta);
-		bezeroID.next();
-		int bezero = bezeroID.getInt(0);
+	public static ArrayList<Hizkuntza> getHizkuntzak() throws SQLException {
+		ArrayList<Hizkuntza> retArray = new ArrayList<>();
+		Connection conex = DB_Konexioa.bezeroa();
 		
-		java.sql.Date sqlDateIraungitze = new java.sql.Date(premium.getIraungitzeData().getTime());
+		Statement sentencia = conex.createStatement();
+		
+		String kontsulta ="select * from Hizkuntza" ;
+		ResultSet hizkuntzak = sentencia.executeQuery(kontsulta);
+		
+		Hizkuntza HizkuntzaAux;
+		
+		while(hizkuntzak.next()) {
+			HizkuntzaAux = new Hizkuntza(hizkuntzak.getString("ID_Hizkuntza"),hizkuntzak.getString("Deskribapena"));
+			retArray.add(HizkuntzaAux);
+		}
 		
 		
-		String konsulta = "INSERT INTO Premium (ID_Bezeroa,Iraungitze_data) VALUES ('" + bezero + "', '" + sqlDateIraungitze + "')";
-		sentencia.executeUpdate(kontsulta);
-
+		DB_Konexioa.itxi();
+		return retArray;
 	}
+	
+
+	
+
 	
 	
 }
