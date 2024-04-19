@@ -1,23 +1,26 @@
 package control.funtzioak;
 
+
 import java.awt.Rectangle;
+
 
 import model.Aldagaiak;
 import vista.*;
 
+
 public class FuntzioBista {
 	
-	public static void cambioVentana(Rectangle Cordenada, int x, int y) {
-		cordenadas(Cordenada);
-		resolucion(x, y);
+	public static void bistaAldatu(Rectangle kordenada, int x, int y) {
+		kordenadak(kordenada);
+		resoluzioa(x, y);
 	}
 	
-	public static void cordenadas(Rectangle Cordenada) {
-		Aldagaiak.cordX = (int)Cordenada.getX();
-		Aldagaiak.cordY = (int)Cordenada.getY();
+	public static void kordenadak(Rectangle kordenada) {
+		Aldagaiak.cordX = (int)kordenada.getX();
+		Aldagaiak.cordY = (int)kordenada.getY();
 	}
 	
-	public static void resolucion(int x, int y) {
+	public static void resoluzioa(int x, int y) {
 		Aldagaiak.resolucionX = x;
 		Aldagaiak.resolucionY = y;
 	}
@@ -31,4 +34,17 @@ public class FuntzioBista {
 		}
 	}
 	
+	public static void irekiErregistroa() {
+		try {
+			Erregistroa frame = new Erregistroa();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
+
+
+
+
