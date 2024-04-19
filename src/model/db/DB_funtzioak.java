@@ -40,12 +40,17 @@ public class DB_funtzioak {
 	}
 	
 	public static boolean erregistratuErabiltzailea(Bezero erregistratu) throws SQLException {
-		boolean premiumDa = erregistratu.getClass().getName().equals("Premium");
+		boolean premiumDa = erregistratu.getClass().getSimpleName().equals("Premium");
 		Connection conex = DB_Konexioa.bezeroa();
 		
 		Statement sentencia = conex.createStatement();
 		
-		String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('" + erregistratu.getIzena() +"', '" + erregistratu.getAbizena() +"', '" + erregistratu.getHizkuntza() +"', '" + erregistratu.getErabiltzaileIzena() +"', '" + erregistratu.getPasahitza() +"', '" + erregistratu.getJaioteguna() +"', '" + erregistratu.getJaioteguna() +"', '" + erregistratu.getClass().getName() +"')" ;
+		java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
+		java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
+		
+
+		
+		String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('" + erregistratu.getIzena() +"', '" + erregistratu.getAbizena() +"', '" + erregistratu.getHizkuntza() +"', '" + erregistratu.getErabiltzaileIzena() +"', '" + erregistratu.getPasahitza() +"', '" + sqlDateJaioteguna +"', '" + erregistroDateJaioteguna +"', '" + erregistratu.getClass().getSimpleName() +"')" ;
 		sentencia.executeUpdate(kontsulta);
 		
 		if(premiumDa) {
@@ -63,8 +68,10 @@ public class DB_funtzioak {
 		bezeroID.next();
 		int bezero = bezeroID.getInt(0);
 		
+		java.sql.Date sqlDateIraungitze = new java.sql.Date(premium.getIraungitzeData().getTime());
 		
-		String konsulta = "INSERT INTO Premium (ID_Bezeroa,Iraungitze_data) VALUES ('" + bezero + "', '" + premium.getIraungitzeData() + "')";
+		
+		String konsulta = "INSERT INTO Premium (ID_Bezeroa,Iraungitze_data) VALUES ('" + bezero + "', '" + sqlDateIraungitze + "')";
 		sentencia.executeUpdate(kontsulta);
 
 	}
