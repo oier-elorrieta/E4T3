@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import model.Aldagaiak;
 import vista.*;
+import vista.bezero.BezeroMenu;
 
 
 public class FuntzioBista {
@@ -43,7 +44,16 @@ public class FuntzioBista {
 		}
 	}
 	
-}
+	public static void irekiBezeroMenu() {
+		try {
+			BezeroMenu frame = new BezeroMenu();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+}	
 
 
 

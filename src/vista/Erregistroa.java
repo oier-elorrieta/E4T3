@@ -1,4 +1,5 @@
 package vista;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+
 public class Erregistroa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
