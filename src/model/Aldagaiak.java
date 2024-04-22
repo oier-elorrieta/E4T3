@@ -19,5 +19,5 @@ public class Aldagaiak {
 		//Pantalla
 		
 		public static Bezero erabiltzailea;
-	
+		
 }

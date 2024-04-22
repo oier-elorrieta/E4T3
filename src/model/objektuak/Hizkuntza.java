@@ -9,13 +9,15 @@ public class Hizkuntza {
 		Deskribapena = deskribapena;
 	}
 
-	public void setID_Hizkuntza(String iD_Hizkuntza) {
-		ID_Hizkuntza = iD_Hizkuntza;
+	public String getID_Hizkuntza() {
+		return ID_Hizkuntza;
 	}
 
-	public void setDeskribapena(String deskribapena) {
-		Deskribapena = deskribapena;
+	public String getDeskribapena() {
+		return Deskribapena;
 	}
+
+
 	
 	
 	

@@ -75,6 +75,9 @@ public class Login extends JFrame {
        		try {
        			if(DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
        				System.out.println("TrueBezero");
+       				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+    				FuntzioBista.irekiBezeroMenu();
+    				dispose();
        			} else if (DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
        				System.out.println("TrueAdmin");
        			} else {

@@ -7,13 +7,16 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.objektuak.Premium;
+
 
 public class TPremium {
-	private static model.objektuak.Premium p1;
+	private static Premium p1;
+	private static Date eguna;
 
 	@Before
 	public void setUp() throws Exception {
-		Date eguna = new Date(2024, 04, 18);
+		eguna = new Date(2024, 04, 18);
 		p1 = new model.objektuak.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 	}
 
@@ -21,13 +24,11 @@ public class TPremium {
 
 	@Test
 	public void TestGetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		assertEquals(eguna, p1.getIraungitzeData());
 	}
 
 	@Test
 	public void TestSetErreGuna() {
-		Date eguna = new Date(2024, 04, 18);
 		Date eguna2 = new Date(2024, 04, 20);
 		p1.setIraungitzeData(eguna2);
 		assertEquals(eguna2, p1.getIraungitzeData());
@@ -48,7 +49,7 @@ public class TPremium {
 	// ********************** EQUALS **********************
 
 	@Test
-	public void TestEqualsDira() {
+	public void TestEqualsObjetuBerdina() {
 		assertTrue(p1.equals(p1));
 	}
 
@@ -64,9 +65,8 @@ public class TPremium {
 	}
 
 	@Test
-	public void TestEqualsClaseBerdinak() {
-		Date eguna = new Date(2024, 04, 18);
-		model.objektuak.Premium p2 = new model.objektuak.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
+	public void TestEqualsClaseAtrBerdinak() {
+		Premium p2 = new Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 		assertTrue(p1.equals(p2));
 	}
 
