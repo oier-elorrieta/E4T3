@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.Event;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,28 +9,21 @@ import model.*;
 import model.db.*;
 import model.objektuak.Bezero;
 import model.objektuak.Free;
-import model.objektuak.Hizkuntza;
 import model.objektuak.Premium;
-import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
-import java.beans.EventHandler;
 import java.sql.SQLException;
-
-import java.util.ArrayList;
-
-import java.time.LocalDate;
 
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
 import javax.swing.JTextPane;
 
 public class Erregistroa extends JFrame {
@@ -47,24 +38,10 @@ public class Erregistroa extends JFrame {
 	private boolean prime = false;
 	
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Erregistroa frame = new Erregistroa();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Erregistroa() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 550, 400);
@@ -74,25 +51,34 @@ public class Erregistroa extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		textFieldIzena = new JTextField();
+		textFieldIzena.setColumns(10);
+		textFieldIzena.setBounds(155, 63, 86, 20);
+		contentPane.add(textFieldIzena);
+		
 		textFieldAbizena = new JTextField();
-		textFieldAbizena.setBounds(343, 63, 86, 20);
+		textFieldAbizena.setBounds(324, 63, 105, 20);
 		contentPane.add(textFieldAbizena);
 		textFieldAbizena.setColumns(10);
 		
-		textFieldJaioData = new JTextField();
-		textFieldJaioData.setColumns(10);
-		textFieldJaioData.setBounds(173, 187, 256, 20);
-		contentPane.add(textFieldJaioData);
-		
-		textFieldIzena = new JTextField();
-		textFieldIzena.setColumns(10);
-		textFieldIzena.setBounds(173, 63, 86, 20);
-		contentPane.add(textFieldIzena);
-		
 		textFieldErabiltzailea = new JTextField();
 		textFieldErabiltzailea.setColumns(10);
-		textFieldErabiltzailea.setBounds(173, 94, 256, 20);
+		textFieldErabiltzailea.setBounds(155, 94, 274, 20);
 		contentPane.add(textFieldErabiltzailea);
+		
+		passwordFieldPasahitza = new JPasswordField();
+		passwordFieldPasahitza.setBounds(155, 125, 274, 20);
+		contentPane.add(passwordFieldPasahitza);
+		
+		passwordFieldKonfirmatu = new JPasswordField();
+		passwordFieldKonfirmatu.setBounds(155, 156, 274, 20);
+		contentPane.add(passwordFieldKonfirmatu);
+		
+		textFieldJaioData = new JTextField();
+		textFieldJaioData.setColumns(10);
+		textFieldJaioData.setBounds(155, 187, 274, 20);
+		contentPane.add(textFieldJaioData);
+		
 		
 		JLabel lblNewLabel = new JLabel("Izena:");
 		lblNewLabel.setBounds(72, 66, 46, 14);
@@ -123,22 +109,13 @@ public class Erregistroa extends JFrame {
 		contentPane.add(lblHitz);
 		
 		JLabel lblAbizena = new JLabel("Abizena:");
-		lblAbizena.setBounds(269, 66, 46, 14);
+		lblAbizena.setBounds(251, 66, 46, 14);
 		contentPane.add(lblAbizena);
 		
-		passwordFieldPasahitza = new JPasswordField();
-		passwordFieldPasahitza.setBounds(173, 125, 256, 20);
-		contentPane.add(passwordFieldPasahitza);
-		
-		passwordFieldKonfirmatu = new JPasswordField();
-		passwordFieldKonfirmatu.setBounds(173, 156, 256, 20);
-		contentPane.add(passwordFieldKonfirmatu);
-		
-
 
 		JComboBox comboBoxHizkuntza = new JComboBox();
         comboBoxHizkuntza.setModel(new DefaultComboBoxModel(new String[] {"ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR"}));
-        comboBoxHizkuntza.setBounds(173, 249, 256, 22);
+        comboBoxHizkuntza.setBounds(155, 249, 274, 22);
         contentPane.add(comboBoxHizkuntza);
 
 		contentPane.add(comboBoxHizkuntza);
@@ -151,24 +128,35 @@ public class Erregistroa extends JFrame {
 				String hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
 		
 				String erabiltzailea = textFieldErabiltzailea.getText();
+				@SuppressWarnings("deprecation")
 				String pasahitza = passwordFieldPasahitza.getText();
+				@SuppressWarnings("deprecation")
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
 				Date noizData = new Date();
-				if (pasahitza.equals(konfirmazioa)) {
-					pasahitza = Funtzioak.enkriptatzailea(pasahitza);
-					Bezero bezeroa;
-					if (prime) {
-						bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData, noizData);
+				
+				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("")) {
+					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (pasahitza.equals(konfirmazioa)) {
+						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+						pasahitza = Funtzioak.enkriptatzailea(pasahitza);
+						Bezero bezeroa;
+						if (prime) {
+							bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData, noizData);
+						} else {
+							bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData);
+						}
+						try {
+							DB_funtzioak.erregistratuErabiltzailea(bezeroa);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					} else {
-						bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData);
-					}
-					try {
-						DB_funtzioak.erregistratuErabiltzailea(bezeroa);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
 					}
 				}
+				
 				
 			}
 		});
@@ -200,14 +188,11 @@ public class Erregistroa extends JFrame {
 		});
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-		
 
-	
-		 
 
 		JTextPane textPanePremium = new JTextPane();
 		textPanePremium.setEditable(false);
-		textPanePremium.setBounds(173, 215, 256, 20);
+		textPanePremium.setBounds(155, 215, 274, 20);
 		contentPane.add(textPanePremium);
 		
 		JLabel lblMuga = new JLabel("Muga");
