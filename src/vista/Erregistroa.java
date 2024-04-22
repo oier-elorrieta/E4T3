@@ -88,16 +88,16 @@ public class Erregistroa extends JFrame {
 		textFieldJaioData.setBounds(155, 187, 274, 20);
 		contentPane.add(textFieldJaioData);
 		
-		
-		JLabel lblNewLabel = new JLabel("Izena:");
-		lblNewLabel.setBounds(72, 66, 46, 14);
-		contentPane.add(lblNewLabel);
-		
 
 		// Izenaren label
 		JLabel lblIzena = new JLabel("Izena:");
 		lblIzena.setBounds(72, 66, 46, 14);
 		contentPane.add(lblIzena);
+		
+		// Abizena label
+		JLabel lblAbizena = new JLabel("Abizena:");
+		lblAbizena.setBounds(251, 66, 46, 14);
+		contentPane.add(lblAbizena);
 
 		// Erabiltzailearen label
 		JLabel lblErabiltzailea = new JLabel("Erabiltzailea:");
@@ -129,10 +129,8 @@ public class Erregistroa extends JFrame {
 		lblHitz.setBounds(72, 253, 75, 14);
 		contentPane.add(lblHitz);
 
-		// Abizena label
-		JLabel lblAbizena = new JLabel("Abizena:");
-		lblAbizena.setBounds(251, 66, 46, 14);
-		contentPane.add(lblAbizena);
+		
+	
 		
 
 		ArrayList<Hizkuntza> hizkuntzak = new ArrayList<Hizkuntza>();
@@ -162,6 +160,19 @@ public class Erregistroa extends JFrame {
 		 * Aldaketak gordetzeko botoia. Sakatzen denean erabiltzaile hori datubasean
 		 * gordetzen da.
 		 */
+		
+		if (Aldagaiak.erabiltzailea != null) {
+			textFieldIzena.setText(Aldagaiak.erabiltzailea.getIzena());
+			textFieldAbizena.setText(Aldagaiak.erabiltzailea.getAbizena());
+			textFieldErabiltzailea.setText(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+			textFieldJaioData.setText(Aldagaiak.erabiltzailea.getJaioteguna().toString());
+			passwordFieldPasahitza.setText(Aldagaiak.erabiltzailea.getPasahitza());
+			passwordFieldKonfirmatu.setText(Aldagaiak.erabiltzailea.getPasahitza());
+			
+			comboBoxHizkuntza.setSelectedItem(Aldagaiak.erabiltzailea.getHizkuntza());;
+		
+
+		}
 
 		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
 		btnGordeAldaketa.addActionListener(new ActionListener() {

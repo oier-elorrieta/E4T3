@@ -38,7 +38,7 @@ public class BezeroDao {
 			String pass = erabiltzaileak.getString("Pasahitza");
 			pass = Funtzioak.enkriptatzailea(pass);
 			Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
-					erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
+					erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 					erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
 			DB_Konexioa.itxi();
 			return true;
