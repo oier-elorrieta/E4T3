@@ -135,21 +135,33 @@ public class Erregistroa extends JFrame {
 		contentPane.add(passwordFieldKonfirmatu);
 		
 
-
+		ArrayList<Hizkuntza> hizkuntzak = new ArrayList<Hizkuntza>();
+		hizkuntzak = DB_funtzioak.getHizkuntzak();
+		
+		
 		JComboBox comboBoxHizkuntza = new JComboBox();
-        comboBoxHizkuntza.setModel(new DefaultComboBoxModel(new String[] {"ES", "EU", "EN", "FR", "DE", "CA", "GA", "AR"}));
+		
+		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+		for (int i = 0; i<= hizkuntzak.size()-1; i++) {
+			modelo.addElement(hizkuntzak.get(i).getDeskribapena());
+		}
+        comboBoxHizkuntza.setModel(modelo);
+        comboBoxHizkuntza.setSelectedIndex(0);
         comboBoxHizkuntza.setBounds(173, 249, 256, 22);
         contentPane.add(comboBoxHizkuntza);
 
 		contentPane.add(comboBoxHizkuntza);
+		
+		final ArrayList<Hizkuntza> hizkuntzakFinal = new ArrayList<Hizkuntza>(hizkuntzak);
 		
 		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
 		btnGordeAldaketa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
-				String hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
-		
+				int indexHizkuntza = comboBoxHizkuntza.getSelectedIndex();
+				String hizkuntza =  hizkuntzakFinal.get(indexHizkuntza).getID_Hizkuntza();
+				
 				String erabiltzailea = textFieldErabiltzailea.getText();
 				String pasahitza = passwordFieldPasahitza.getText();
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
@@ -200,10 +212,6 @@ public class Erregistroa extends JFrame {
 		});
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-		
-
-	
-		 
 
 		JTextPane textPanePremium = new JTextPane();
 		textPanePremium.setEditable(false);
