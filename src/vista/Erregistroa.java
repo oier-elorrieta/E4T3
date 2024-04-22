@@ -24,11 +24,11 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
 import java.sql.SQLException;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
-=======
+
 import java.time.LocalDate;
->>>>>>> 5d43cbc3a64db8493869ab66972fa8fbb71948f9
+
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -201,10 +201,10 @@ public class Erregistroa extends JFrame {
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
 		
-<<<<<<< HEAD
+
 	
-		 });
-=======
+		 
+
 		JTextPane textPanePremium = new JTextPane();
 		textPanePremium.setEditable(false);
 		textPanePremium.setBounds(173, 215, 256, 20);
@@ -214,7 +214,7 @@ public class Erregistroa extends JFrame {
 		lblMuga.setBounds(74, 227, 75, 14);
 		contentPane.add(lblMuga);
 		
->>>>>>> 7857e163b3523f52e3c0797de272c8187fffc8bb
+
 		
 	}
 }
