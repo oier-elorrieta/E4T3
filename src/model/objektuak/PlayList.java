@@ -2,6 +2,7 @@ package model.objektuak;
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.ArrayList;
 
 public class PlayList {
 
@@ -9,12 +10,15 @@ public class PlayList {
 	private String izena;
 	private Date sorreraData;
 	private Bezero bezeroa;
+	private ArrayList<Abestia> abestiak;
 
-	public PlayList(int id, String izena, Date sorreraData, Bezero bezeroa) {
+	public PlayList(int id, String izena, Date sorreraData, Bezero bezeroa, ArrayList<Abestia> abestiak) {
+		super();
 		this.id = id;
 		this.izena = izena;
 		this.sorreraData = sorreraData;
 		this.bezeroa = bezeroa;
+		this.abestiak = abestiak;
 	}
 
 	public int getId() {
@@ -49,10 +53,18 @@ public class PlayList {
 		this.bezeroa = bezeroa;
 	}
 
+	public ArrayList<Abestia> getAbestiak() {
+		return abestiak;
+	}
+
+	public void setAbestiak(ArrayList<Abestia> abestiak) {
+		this.abestiak = abestiak;
+	}
+
 	@Override
 	public String toString() {
 		return "PlayList [id=" + id + ", izena=" + izena + ", sorreraData=" + sorreraData + ", bezeroa=" + bezeroa
-				+ "]";
+				+ ", abestiak=" + abestiak + "]";
 	}
 
 	@Override
@@ -67,7 +79,5 @@ public class PlayList {
 		return Objects.equals(bezeroa, other.bezeroa) && id == other.id && Objects.equals(izena, other.izena)
 				&& Objects.equals(sorreraData, other.sorreraData);
 	}
-
-	
 
 }

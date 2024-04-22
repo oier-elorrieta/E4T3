@@ -3,23 +3,23 @@ package model.objektuak;
 import java.util.Objects;
 
 public abstract class Artistak {
-	protected int id;
+	protected String id;
 	protected String izen_Artistikoa;
 	protected String irudia;
 	protected String deskribapena;
 	
-	public Artistak(int id, String izen_Artistikoa, String irudia, String deskribapena) {
+	public Artistak(String id, String izen_Artistikoa, String irudia, String deskribapena) {
 		this.id = id;
 		this.izen_Artistikoa = izen_Artistikoa;
 		this.irudia = irudia;
 		this.deskribapena = deskribapena;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -59,18 +59,4 @@ public abstract class Artistak {
 		return Objects.equals(deskribapena, other.deskribapena) && id == other.id
 				&& Objects.equals(irudia, other.irudia) && Objects.equals(izen_Artistikoa, other.izen_Artistikoa);
 	}
-
-	@Override
-	public String toString() {
-		return "Artistak [id=" + id + ", Izen_Artistikoa=" + izen_Artistikoa + ", irudia=" + irudia + ", Deskribapena="
-				+ deskribapena + "]";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -22,9 +22,10 @@ public class Premium extends Bezero {
 
 	@Override
 	public String toString() {
-		return "Premium [izena=" + izena + ", abizena=" + abizena + ", hizkuntza=" + hizkuntza + ", erabiltzaileIzena="
-				+ erabiltzaileIzena + ", pasahitza=" + pasahitza + ", jaioteguna=" + jaioteguna + ", erregistroEguna="
-				+ erregistroEguna + "iraungitzeData=" + iraungitzeData + "]";
+		String txt = "";
+		txt = super.toString();
+
+		return txt + "Premium [iraungitzeData=" + iraungitzeData + "]";
 	}
 
 	@Override

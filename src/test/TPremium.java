@@ -52,10 +52,12 @@ public class TPremium {
 	public void TestToString() {
 		String txt = p1.toString();
 
-		String esperotakoa = "Premium [izena=" + p1.getIzena() + ", abizena=" + p1.getAbizena() + ", hizkuntza="
+		String esperotakoa = "Bezero [izena=" + p1.getIzena() + ", abizena=" + p1.getAbizena() + ", hizkuntza="
 				+ p1.getHizkuntza() + ", erabiltzaileIzena=" + p1.getErabiltzaileIzena() + ", pasahitza="
 				+ p1.getPasahitza() + ", jaioteguna=" + p1.getJaioteguna() + ", erregistroEguna="
-				+ p1.getErregistroEguna() + "iraungitzeData=" + p1.getIraungitzeData() + "]";
+				+ p1.getErregistroEguna() + "]" + "Premium [iraungitzeData=" + p1.getIraungitzeData() + "]";
+		
+		assertEquals(txt, esperotakoa);
 	}
 
 	// ********************** EQUALS **********************

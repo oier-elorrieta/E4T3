@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Before;
@@ -14,12 +15,14 @@ public class TPlayList {
 	private static PlayList pl1;
 	private static Free f1;
 	private static Date eguna;
+	private static ArrayList<Abestia> abestiak;
 
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 19);
+		abestiak = new ArrayList<Abestia>();
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
-		pl1 = new PlayList(1, "Rock lista", eguna, f1);
+		pl1 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
 	}
 
 	// ********************** ID **********************
@@ -124,6 +127,35 @@ public class TPlayList {
 		assertNotEquals(f1, pl1.getBezeroa());
 	}
 
+	// ********************** ABESTIAK **********************
+
+	@Test
+	public void TestGetAbestiak() {
+		assertEquals(abestiak, pl1.getAbestiak());
+	}
+
+	@Test
+	public void TestSetAbestiak() {
+		ArrayList<Abestia> abestiak2 = new ArrayList<Abestia>();
+		pl1.setAbestiak(abestiak2);
+		assertEquals(abestiak2, pl1.getAbestiak());
+	}
+
+	@Test
+	public void TestGetAbestiakTxarto() {
+		ArrayList<Abestia> abestiak2 = new ArrayList<Abestia>();
+		abestiak.add(null);
+		assertNotEquals(abestiak2, pl1.getAbestiak());
+	}
+
+	@Test
+	public void TestSetAbestiakTxarto() {
+		ArrayList<Abestia> abestiak2 = new ArrayList<Abestia>();
+		abestiak.add(null);
+		pl1.setAbestiak(abestiak2);
+		assertNotEquals(abestiak, pl1.getAbestiak());
+	}
+
 	// ********************** TO STRING **********************
 
 	@Test
@@ -131,7 +163,7 @@ public class TPlayList {
 		String txt = pl1.toString();
 
 		String esperotakoa = "PlayList [id=" + pl1.getId() + ", izena=" + pl1.getIzena() + ", sorreraData="
-				+ pl1.getSorreraData() + ", bezeroa=" + pl1.getBezeroa() + "]";
+				+ pl1.getSorreraData() + ", bezeroa=" + pl1.getBezeroa() + ", abestiak=" + pl1.getAbestiak() + "]";
 
 		assertEquals(txt, esperotakoa);
 	}
@@ -156,7 +188,7 @@ public class TPlayList {
 
 	@Test
 	public void TestEqualsClaseAtrBerdinak() {
-		PlayList pl2 = new PlayList(1, "Rock lista", eguna, f1);
+		PlayList pl2 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
 		assertTrue(pl1.equals(pl2));
 	}
 }
