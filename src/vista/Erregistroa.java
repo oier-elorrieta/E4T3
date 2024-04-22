@@ -27,14 +27,15 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.JTextPane;
 
 public class Erregistroa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldAbizena;
-	private JTextField textField_6;
+	private JTextField textFieldJaioData;
 	private JTextField textFieldIzena;
-	private JTextField textField_8;
 	private JTextField textFieldErabiltzailea;
 	private JPasswordField passwordFieldPasahitza;
 	private JPasswordField passwordFieldKonfirmatu;
@@ -72,20 +73,15 @@ public class Erregistroa extends JFrame {
 		contentPane.add(textFieldAbizena);
 		textFieldAbizena.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(173, 187, 256, 20);
-		contentPane.add(textField_6);
+		textFieldJaioData = new JTextField();
+		textFieldJaioData.setColumns(10);
+		textFieldJaioData.setBounds(173, 187, 256, 20);
+		contentPane.add(textFieldJaioData);
 		
 		textFieldIzena = new JTextField();
 		textFieldIzena.setColumns(10);
 		textFieldIzena.setBounds(173, 63, 86, 20);
 		contentPane.add(textFieldIzena);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(173, 218, 256, 20);
-		contentPane.add(textField_8);
 		
 		textFieldErabiltzailea = new JTextField();
 		textFieldErabiltzailea.setColumns(10);
@@ -93,35 +89,35 @@ public class Erregistroa extends JFrame {
 		contentPane.add(textFieldErabiltzailea);
 		
 		JLabel lblNewLabel = new JLabel("Izena:");
-		lblNewLabel.setBounds(88, 66, 46, 14);
+		lblNewLabel.setBounds(72, 66, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblErabiltzailea = new JLabel("Erabiltzailea:");
-		lblErabiltzailea.setBounds(88, 97, 61, 14);
+		lblErabiltzailea.setBounds(72, 97, 61, 14);
 		contentPane.add(lblErabiltzailea);
 		
 		JLabel lblPasahitza = new JLabel("Pasahitza:");
-		lblPasahitza.setBounds(88, 128, 61, 14);
+		lblPasahitza.setBounds(72, 128, 61, 14);
 		contentPane.add(lblPasahitza);
 		
 		JLabel lblKonfirmatu = new JLabel("Konfirmatu:");
-		lblKonfirmatu.setBounds(88, 159, 61, 14);
+		lblKonfirmatu.setBounds(72, 159, 61, 14);
 		contentPane.add(lblKonfirmatu);
 		
 		JLabel lblJaiodata = new JLabel("Jaio-Data:");
-		lblJaiodata.setBounds(88, 190, 61, 14);
+		lblJaiodata.setBounds(72, 190, 61, 14);
 		contentPane.add(lblJaiodata);
 		
-		JLabel lblPremiummuga = new JLabel("Premium-Muga:");
-		lblPremiummuga.setBounds(88, 221, 75, 14);
+		JLabel lblPremiummuga = new JLabel("Premium");
+		lblPremiummuga.setBounds(72, 214, 75, 14);
 		contentPane.add(lblPremiummuga);
 		
 		JLabel lblHitz = new JLabel("Hizkuntza:");
-		lblHitz.setBounds(88, 246, 75, 14);
+		lblHitz.setBounds(72, 253, 75, 14);
 		contentPane.add(lblHitz);
 		
 		JLabel lblAbizena = new JLabel("Abizena:");
-		lblAbizena.setBounds(287, 66, 46, 14);
+		lblAbizena.setBounds(269, 66, 46, 14);
 		contentPane.add(lblAbizena);
 		
 		passwordFieldPasahitza = new JPasswordField();
@@ -194,13 +190,15 @@ public class Erregistroa extends JFrame {
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
 		
-		 DatePicker datePicker = new DatePicker();
-		 datePicker.setOnAction(new EventHandler(anchor, title, title, title) {
-		     public void handle(Event t) {
-		         LocalDate date = datePicker.getValue();
-		         System.err.println("Selected date: " + date);
-		     }
-		 });
+		JTextPane textPanePremium = new JTextPane();
+		textPanePremium.setEditable(false);
+		textPanePremium.setBounds(173, 215, 256, 20);
+		contentPane.add(textPanePremium);
+		
+		JLabel lblMuga = new JLabel("Muga");
+		lblMuga.setBounds(74, 227, 75, 14);
+		contentPane.add(lblMuga);
+		
 		
 	}
 }
