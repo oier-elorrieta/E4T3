@@ -40,11 +40,11 @@ public class BezeroDao {
 			pass = Funtzioak.enkriptatzailea(pass);
 			if(erabiltzaileak.getString("Mota").equals("Free")) {
 				Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
-						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
+						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
 			} else {
 				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
-						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
+						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"), null);
 			}
 			
