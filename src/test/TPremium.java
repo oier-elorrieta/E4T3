@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import model.objektuak.bezero.Premium;
 
-
 public class TPremium {
 	private static Premium p1;
 	private static Date eguna;
@@ -32,6 +31,19 @@ public class TPremium {
 		Date eguna2 = new Date(2024, 04, 20);
 		p1.setIraungitzeData(eguna2);
 		assertEquals(eguna2, p1.getIraungitzeData());
+	}
+
+	@Test
+	public void TestGetErreGunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		assertNotEquals(eguna2, p1.getIraungitzeData());
+	}
+
+	@Test
+	public void TestSetErreGunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		p1.setIraungitzeData(eguna2);
+		assertNotEquals(eguna, p1.getIraungitzeData());
 	}
 
 	// ********************** TO STRING **********************

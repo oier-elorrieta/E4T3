@@ -36,6 +36,17 @@ public class TPlayList {
 		assertEquals(2, pl1.getId());
 	}
 
+	@Test
+	public void TestGetIdTxarto() {
+		assertNotEquals(2, pl1.getId());
+	}
+
+	@Test
+	public void TestSetIdTxarto() {
+		pl1.setId(2);
+		assertNotEquals(1, pl1.getId());
+	}
+
 	// ********************** IZENA **********************
 
 	@Test
@@ -47,6 +58,17 @@ public class TPlayList {
 	public void TestSetIzena() {
 		pl1.setIzena("Rap lista");
 		assertEquals("Rap lista", pl1.getIzena());
+	}
+
+	@Test
+	public void TestGetIzenaTxarto() {
+		assertNotEquals("Rock list", pl1.getIzena());
+	}
+
+	@Test
+	public void TestSetIzenaTxarto() {
+		pl1.setIzena("Rap lista");
+		assertNotEquals("Rap list", pl1.getIzena());
 	}
 
 	// ********************** SORRERA DATA **********************
@@ -63,6 +85,19 @@ public class TPlayList {
 		assertEquals(eguna2, pl1.getSorreraData());
 	}
 
+	@Test
+	public void TestGetSorreraDataTxarto() {
+		Date eguna2 = new Date(2024, 05, 19);
+		assertNotEquals(eguna2, pl1.getSorreraData());
+	}
+
+	@Test
+	public void TestSetSorreraDataTxarto() {
+		Date eguna2 = new Date(2024, 05, 19);
+		pl1.setSorreraData(eguna2);
+		assertNotEquals(eguna, pl1.getSorreraData());
+	}
+
 	// ********************** BEZEROA **********************
 
 	@Test
@@ -75,6 +110,19 @@ public class TPlayList {
 		Free f2 = new Free("iker", "sanchez", "euskera", "ikersahe", "1234", null, null);
 		pl1.setBezeroa(f2);
 		assertEquals(f2, pl1.getBezeroa());
+	}
+
+	@Test
+	public void TestGetBezeroaTxarto() {
+		Free f2 = new Free("iker", "sanchez", "euskera", "ikersahe", "1234", null, null);
+		assertNotEquals(f2, pl1.getBezeroa());
+	}
+
+	@Test
+	public void TestSetBezeroaTxarto() {
+		Free f2 = new Free("iker", "sanchez", "euskera", "ikersahe", "1234", null, null);
+		pl1.setBezeroa(f2);
+		assertNotEquals(f1, pl1.getBezeroa());
 	}
 
 	// ********************** TO STRING **********************
