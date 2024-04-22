@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Podcaster;
-import model.objektuak.Premium;
+import model.objektuak.bezero.Premium;
 
 public class TPodcaster {
 
