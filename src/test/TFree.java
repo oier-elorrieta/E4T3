@@ -32,6 +32,16 @@ public class TFree {
 		assertEquals("iker", f1.getIzena());
 	}
 
+	@Test
+	public void TestGetIzenaTxarto() {
+		assertNotEquals("unais", f1.getIzena());
+	}
+
+	@Test
+	public void TestSetIzenaTxarto() {
+		f1.setIzena("iker");
+		assertNotEquals("unai", f1.getIzena());
+	}
 	// ********************** ABIZENA **********************
 
 	@Test
@@ -43,6 +53,17 @@ public class TFree {
 	public void TestSetAbizena() {
 		f1.setAbizena("torres");
 		assertEquals("torres", f1.getAbizena());
+	}
+
+	@Test
+	public void TestGetAbizenaTxarto() {
+		assertNotEquals("soutot", f1.getAbizena());
+	}
+
+	@Test
+	public void TestSetAbizenaTxarto() {
+		f1.setAbizena("torres");
+		assertNotEquals("souto", f1.getAbizena());
 	}
 
 	// ********************** HIZKUNTZA **********************
@@ -58,17 +79,39 @@ public class TFree {
 		assertEquals("gaztelania", f1.getHizkuntza());
 	}
 
+	@Test
+	public void TestGetHizkuntzaTxarto() {
+		assertNotEquals("gaztelania", f1.getHizkuntza());
+	}
+
+	@Test
+	public void TestSetHizkuntzaTxarto() {
+		f1.setHizkuntza("gaztelania");
+		assertNotEquals("euskera", f1.getHizkuntza());
+	}
+
 	// ********************** ERABILTZAILE IZENA **********************
 
 	@Test
 	public void TestGetErabIzena() {
-		assertEquals("unai", f1.getIzena());
+		assertEquals("unaisouto", f1.getErabiltzaileIzena());
 	}
 
 	@Test
 	public void TestSetErabIzena() {
 		f1.setErabiltzaileIzena("ikersanchez");
 		assertEquals("ikersanchez", f1.getErabiltzaileIzena());
+	}
+
+	@Test
+	public void TestGetErabIzenaTxarto() {
+		assertNotEquals("unais", f1.getErabiltzaileIzena());
+	}
+
+	@Test
+	public void TestSetErabIzenaTxarto() {
+		f1.setErabiltzaileIzena("ikersanchez");
+		assertNotEquals("unaisouto", f1.getErabiltzaileIzena());
 	}
 
 	// ********************** PASAHITZA **********************
@@ -82,6 +125,17 @@ public class TFree {
 	public void TestSetPasahitza() {
 		f1.setPasahitza("123");
 		assertEquals("123", f1.getPasahitza());
+	}
+
+	@Test
+	public void TestGetPasahitzaTxarto() {
+		assertNotEquals("123", f1.getPasahitza());
+	}
+
+	@Test
+	public void TestSetPasahitzaTxarto() {
+		f1.setPasahitza("123");
+		assertNotEquals("1234", f1.getPasahitza());
 	}
 
 	// ********************** JAIOTEGUNA **********************
@@ -98,6 +152,19 @@ public class TFree {
 		assertEquals(eguna2, f1.getJaioteguna());
 	}
 
+	@Test
+	public void TestGetJaiotegunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		assertNotEquals(eguna2, f1.getJaioteguna());
+	}
+
+	@Test
+	public void TestSetJaiotegunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		f1.setJaioteguna(eguna2);
+		assertNotEquals(eguna, f1.getJaioteguna());
+	}
+
 	// ********************** ERREGISTRO EGUNA **********************
 
 	@Test
@@ -110,6 +177,19 @@ public class TFree {
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setErregistroEguna(eguna2);
 		assertEquals(eguna2, f1.getErregistroEguna());
+	}
+
+	@Test
+	public void TestGetErreGunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		assertNotEquals(eguna2, f1.getErregistroEguna());
+	}
+
+	@Test
+	public void TestSetErreGunaTxarto() {
+		Date eguna2 = new Date(2024, 04, 20);
+		f1.setErregistroEguna(eguna2);
+		assertNotEquals(eguna, f1.getErregistroEguna());
 	}
 
 	// ********************** TO STRING **********************
@@ -146,8 +226,7 @@ public class TFree {
 
 	@Test
 	public void TestEqualsClaseAtrBerdinak() {
-		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna,
-				eguna);
+		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
 		assertTrue(f1.equals(f2));
 	}
 
