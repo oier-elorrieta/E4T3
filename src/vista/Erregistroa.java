@@ -166,8 +166,6 @@ public class Erregistroa extends JFrame {
 
 				int indexHizkuntza = comboBoxHizkuntza.getSelectedIndex();
 				String hizkuntza =  hizkuntzakFinal.get(indexHizkuntza).getID_Hizkuntza();
-				
-
 
 				String erabiltzailea = textFieldErabiltzailea.getText();
 				@SuppressWarnings("deprecation")
