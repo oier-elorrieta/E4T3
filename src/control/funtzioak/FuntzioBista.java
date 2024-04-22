@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import model.Aldagaiak;
 import vista.*;
-import vista.bezero.BezeroMenu;
+import vista.menu.BezeroMenu;
 
 /**
  * Kontrolatzaileak bistaren konfigurazioa kudeatzen duen klasea.

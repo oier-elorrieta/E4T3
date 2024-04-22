@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ArrayList;
 
+import model.objektuak.bezero.Bezero;
+
 public class PlayList {
 
 	private int id;

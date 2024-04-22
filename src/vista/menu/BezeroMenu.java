@@ -1,4 +1,4 @@
-package vista.bezero;
+package vista.menu;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import vista.Login;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 // Bezeroaren menua bistaratzeko klasea
 public class BezeroMenu extends JFrame {
@@ -24,6 +27,7 @@ public class BezeroMenu extends JFrame {
 	// Frame-a sortzeko konstruktorea
 	public BezeroMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

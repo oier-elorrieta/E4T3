@@ -7,7 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import model.dao.BezeroDao;
 import model.db.DB_funtzioak;
+import model.objektuak.bezero.Bezero;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -17,6 +20,9 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 /**
  * Login bistaren definizioa.
@@ -33,10 +39,14 @@ public class Login extends JFrame {
 	private JButton btnLogin;
 	private JButton btnRegistrar;
 
+	BezeroDao bezerodao = new BezeroDao();
+	Bezero bezeroa = null;
+	
 	/**
 	 * Framea sortzen duen metodoa.
 	 */
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 450, 300);
 		setResizable(false);
@@ -56,6 +66,12 @@ public class Login extends JFrame {
 		lblUsuario.setBounds(70, 50, 80, 20); // Erabiltzailearen labelaren kokapena eta neurriak
 		panel.add(lblUsuario);
 		textFieldBezeroa = new JTextField();
+		textFieldBezeroa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) btnLogin.doClick();
+			}
+		});
 		textFieldBezeroa.setBounds(160, 50, 150, 20); // Erabiltzailearen testu eremua
 		panel.add(textFieldBezeroa);
 		lblContraseña = new JLabel("Contraseña:");
@@ -63,6 +79,12 @@ public class Login extends JFrame {
 		lblContraseña.setBounds(70, 80, 80, 20); // Pasahitzaren labelaren kokapena eta neurriak
 		panel.add(lblContraseña);
 		passwordFieldPasahitza = new JPasswordField();
+		passwordFieldPasahitza.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) btnLogin.doClick();
+			}
+		});
 		passwordFieldPasahitza.setBounds(160, 80, 150, 20); // Pasahitzaren testu eremua
 		panel.add(passwordFieldPasahitza);
 		comboBoxRoles = new JComboBox<String>();
@@ -79,15 +101,16 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String bezeroa = textFieldBezeroa.getText();
+				@SuppressWarnings("deprecation")
 				String pasahitza = passwordFieldPasahitza.getText();
 				String rola = (String) comboBoxRoles.getSelectedItem();
 				try {
-					if (DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
+					if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
 						System.out.println("TrueBezero");
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiBezeroMenu();
 						dispose();
-					} else if (DB_funtzioak.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
+					} else if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
 						System.out.println("TrueAdmin");
 					} else {
 						System.out.println("Erabiltzailea edo pasahitza okerrak");
@@ -96,7 +119,6 @@ public class Login extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
 			}
 		});
 		btnLogin.setBounds(120, 150, 90, 30); // Login botoiaren kokapena eta neurriak
@@ -112,4 +134,5 @@ public class Login extends JFrame {
 		btnRegistrar.setBounds(240, 150, 90, 30); // Erregistro botoiaren kokapena eta neurriak
 		panel.add(btnRegistrar);
 	}
+	
 }
