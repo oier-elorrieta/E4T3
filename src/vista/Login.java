@@ -9,6 +9,8 @@ import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.BezeroDao;
 import model.db.DB_funtzioak;
+import model.objektuak.bezero.Bezero;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -38,6 +40,7 @@ public class Login extends JFrame {
 	private JButton btnRegistrar;
 
 	BezeroDao bezerodao = new BezeroDao();
+	Bezero bezeroa = null;
 	
 	/**
 	 * Framea sortzen duen metodoa.

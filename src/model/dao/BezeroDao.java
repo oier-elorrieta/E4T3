@@ -12,6 +12,7 @@ import model.Aldagaiak;
 import model.db.DB_Konexioa;
 import model.objektuak.bezero.Bezero;
 import model.objektuak.bezero.Free;
+import model.objektuak.bezero.Premium;
 
 public class BezeroDao {
 	
@@ -33,13 +34,20 @@ public class BezeroDao {
 		ResultSet erabiltzaileak = sentencia.executeQuery(kontsulta);
 
 		erabiltzaileak.next();
-
+		
 		if (BCrypt.checkpw(pasahitza, erabiltzaileak.getString("Pasahitza"))) {
 			String pass = erabiltzaileak.getString("Pasahitza");
 			pass = Funtzioak.enkriptatzailea(pass);
-			Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
-					erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
-					erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
+			if(erabiltzaileak.getString("Mota").equals("Free")) {
+				Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
+						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
+						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
+			} else {
+				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
+						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pass,
+						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"), null);
+			}
+			
 			DB_Konexioa.itxi();
 			return true;
 		}

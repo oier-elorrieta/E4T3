@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
@@ -53,6 +55,7 @@ public class Erregistroa extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })*/
 	public Erregistroa() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Erregistroa.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 550, 400);
 		setResizable(false);
 		contentPane = new JPanel();

@@ -38,4 +38,13 @@ public class Premium extends Bezero {
 		Premium other = (Premium) obj;
 		return Objects.equals(iraungitzeData, other.iraungitzeData);
 	}
+	
+	@SuppressWarnings("deprecation")
+	public Date premiumErosi() {
+		int year = iraungitzeData.getYear();
+		year++;
+		iraungitzeData.setYear(year);
+		return iraungitzeData;
+	}
+	
 }
