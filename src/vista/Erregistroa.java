@@ -6,11 +6,13 @@ import javax.swing.border.EmptyBorder;
 import control.funtzioak.FuntzioBista;
 import control.funtzioak.Funtzioak;
 import model.*;
-import model.db.*;
-import model.objektuak.Bezero;
-import model.objektuak.Free;
+import model.dao.BezeroDao;
+import model.dao.HizkuntzaDao;
 import model.objektuak.Hizkuntza;
-import model.objektuak.Premium;
+import model.objektuak.bezero.Bezero;
+import model.objektuak.bezero.Free;
+import model.objektuak.bezero.Premium;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,7 +42,9 @@ public class Erregistroa extends JFrame {
 	private JPasswordField passwordFieldPasahitza;
 	private JPasswordField passwordFieldKonfirmatu;
 	private boolean prime = false;
-
+	
+	BezeroDao bezerodao = new BezeroDao();
+	HizkuntzaDao hizkuntzadao = new HizkuntzaDao();
 	
 	/**
 	 * Framea sortzen duen metodoa.
@@ -132,10 +136,11 @@ public class Erregistroa extends JFrame {
 		
 
 		ArrayList<Hizkuntza> hizkuntzak = new ArrayList<Hizkuntza>();
-		hizkuntzak = DB_funtzioak.getHizkuntzak();
+		hizkuntzak = hizkuntzadao.getHizkuntzak();
 		
 		
-		JComboBox comboBoxHizkuntza = new JComboBox();
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		JComboBox<String> comboBoxHizkuntza = new JComboBox();
 		
 		DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
 		for (int i = 0; i<= hizkuntzak.size()-1; i++) {
@@ -160,6 +165,7 @@ public class Erregistroa extends JFrame {
 
 		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
 		btnGordeAldaketa.addActionListener(new ActionListener() {
+			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
@@ -189,7 +195,7 @@ public class Erregistroa extends JFrame {
 							bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData);
 						}
 						try {
-							DB_funtzioak.erregistratuErabiltzailea(bezeroa);
+							bezerodao.erregistratuErabiltzailea(bezeroa);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 						}
@@ -208,6 +214,8 @@ public class Erregistroa extends JFrame {
 		btnPrime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				prime = true;
+				JOptionPane.showMessageDialog(null, "Premium erosi duzu!", "", JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 		});
 		btnPrime.setBounds(388, 309, 120, 41);

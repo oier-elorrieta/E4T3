@@ -1,4 +1,4 @@
-package model.objektuak;
+package model.objektuak.bezero;
 
 import java.util.Date;
 import java.util.Objects;

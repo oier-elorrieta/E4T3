@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.*;
+import model.objektuak.bezero.Free;
 
 public class TFree {
 	private static Free f1;

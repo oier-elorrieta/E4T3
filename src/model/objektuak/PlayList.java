@@ -3,6 +3,8 @@ package model.objektuak;
 import java.util.Date;
 import java.util.Objects;
 
+import model.objektuak.bezero.Bezero;
+
 public class PlayList {
 
 	private int id;

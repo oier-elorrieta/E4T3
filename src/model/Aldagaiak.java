@@ -3,7 +3,7 @@ package model;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
-import model.objektuak.Bezero;
+import model.objektuak.bezero.Bezero;
 
 // Klase hau erabiltzen da aldagai globalak gordetzeko
 public class Aldagaiak {
@@ -29,4 +29,7 @@ public class Aldagaiak {
 	// Erabiltzailea.
 	public static Bezero erabiltzailea;
 
+	//Logoa
+	public final static String logo = "/model/img/Logo.PNG";
+	
 }

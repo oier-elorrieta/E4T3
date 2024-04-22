@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.objektuak.Premium;
+import model.objektuak.bezero.Premium;
 
 
 public class TPremium {
@@ -17,7 +17,7 @@ public class TPremium {
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 18);
-		p1 = new model.objektuak.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
+		p1 = new model.objektuak.bezero.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 	}
 
 	// ********************** IRAUNGITZE DATA **********************
