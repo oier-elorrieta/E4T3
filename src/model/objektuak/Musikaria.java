@@ -2,7 +2,7 @@ package model.objektuak;
 
 import java.util.Objects;
 
-public class Musikaria extends Artistak {
+public class Musikaria extends Artista {
 	private String ezaugarria;
 
 	public Musikaria(String id, String izen_Artistikoa, String irudia, String deskribapena, String ezaugarria) {

@@ -2,13 +2,13 @@ package model.objektuak;
 
 import java.util.Objects;
 
-public abstract class Artistak {
+public abstract class Artista {
 	protected String id;
 	protected String izen_Artistikoa;
 	protected String irudia;
 	protected String deskribapena;
 	
-	public Artistak(String id, String izen_Artistikoa, String irudia, String deskribapena) {
+	public Artista(String id, String izen_Artistikoa, String irudia, String deskribapena) {
 		this.id = id;
 		this.izen_Artistikoa = izen_Artistikoa;
 		this.irudia = irudia;
@@ -55,7 +55,7 @@ public abstract class Artistak {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Artistak other = (Artistak) obj;
+		Artista other = (Artista) obj;
 		return Objects.equals(deskribapena, other.deskribapena) && id == other.id
 				&& Objects.equals(irudia, other.irudia) && Objects.equals(izen_Artistikoa, other.izen_Artistikoa);
 	}

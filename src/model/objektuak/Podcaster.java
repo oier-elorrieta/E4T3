@@ -1,6 +1,6 @@
 package model.objektuak;
 
-public class Podcaster extends Artistak {
+public class Podcaster extends Artista {
 
 	public Podcaster(String id, String izen_Artistikoa, String irudia, String deskribapena) {
 		super(id, izen_Artistikoa, irudia, deskribapena);
