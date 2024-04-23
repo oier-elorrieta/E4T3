@@ -13,6 +13,7 @@ import model.objektuak.bezero.Bezero;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -106,14 +107,13 @@ public class Login extends JFrame {
 				String rola = (String) comboBoxRoles.getSelectedItem();
 				try {
 					if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
-						System.out.println("TrueBezero");
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiBezeroMenu();
 						dispose();
 					} else if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
 						System.out.println("TrueAdmin");
 					} else {
-						System.out.println("Erabiltzailea edo pasahitza okerrak");
+						JOptionPane.showMessageDialog(null, "Erabiltzailea edo pasahitza ez dira zuzenak", "", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

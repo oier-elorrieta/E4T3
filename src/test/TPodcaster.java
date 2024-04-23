@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import model.objektuak.Podcaster;
 
+import model.objektuak.bezero.Premium;
+
+
 public class TPodcaster {
 
 	private static Podcaster pd1;

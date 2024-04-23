@@ -22,10 +22,6 @@ public class Header extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTitulua = new JLabel("Menu");
-		lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		panel_1.add(lblTitulua, BorderLayout.CENTER);
 		
 		JButton btnPerfil = new JButton((String) null);
 		panel_1.add(btnPerfil, BorderLayout.EAST);
