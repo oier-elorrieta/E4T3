@@ -6,11 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Podcaster;
-import model.objektuak.Premium;
 
 public class TPodcaster {
 
-	private Podcaster pd1;
+	private static Podcaster pd1;
 
 	@Before
 	public void setUp() throws Exception {

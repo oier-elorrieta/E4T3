@@ -16,27 +16,29 @@ public class TPlayList {
 	private static PlayList pl1;
 	private static Free f1;
 	private static Date eguna;
+	private static Date eguna2;
 	private static ArrayList<Abestia> abestiak;
 
 	@Before
 	public void setUp() throws Exception {
-		eguna = new Date(2024, 04, 19);
+		eguna = new Date(2024 / 04 / 19);
+		eguna2 = new Date(2024 / 05 / 19);
 		abestiak = new ArrayList<Abestia>();
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
-		pl1 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
+		pl1 = new PlayList("1", "Rock lista", eguna, f1, abestiak);
 	}
 
 	// ********************** ID **********************
 
 	@Test
 	public void TestGetId() {
-		assertEquals(1, pl1.getId());
+		assertEquals("1", pl1.getId());
 	}
 
 	@Test
 	public void TestSetId() {
-		pl1.setId(2);
-		assertEquals(2, pl1.getId());
+		pl1.setId("2");
+		assertEquals("2", pl1.getId());
 	}
 
 	@Test
@@ -46,8 +48,8 @@ public class TPlayList {
 
 	@Test
 	public void TestSetIdTxarto() {
-		pl1.setId(2);
-		assertNotEquals(1, pl1.getId());
+		pl1.setId("2");
+		assertNotEquals("1", pl1.getId());
 	}
 
 	// ********************** IZENA **********************
@@ -83,20 +85,17 @@ public class TPlayList {
 
 	@Test
 	public void TestSetSorreraData() {
-		Date eguna2 = new Date(2024, 05, 19);
 		pl1.setSorreraData(eguna2);
 		assertEquals(eguna2, pl1.getSorreraData());
 	}
 
 	@Test
 	public void TestGetSorreraDataTxarto() {
-		Date eguna2 = new Date(2024, 05, 19);
 		assertNotEquals(eguna2, pl1.getSorreraData());
 	}
 
 	@Test
 	public void TestSetSorreraDataTxarto() {
-		Date eguna2 = new Date(2024, 05, 19);
 		pl1.setSorreraData(eguna2);
 		assertNotEquals(eguna, pl1.getSorreraData());
 	}
@@ -189,7 +188,7 @@ public class TPlayList {
 
 	@Test
 	public void TestEqualsClaseAtrBerdinak() {
-		PlayList pl2 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
+		PlayList pl2 = new PlayList("1", "Rock lista", eguna, f1, abestiak);
 		assertTrue(pl1.equals(pl2));
 	}
 }

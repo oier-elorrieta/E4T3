@@ -85,7 +85,7 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [id=" + id + ", izenburua=" + izenburua + ", urtea=" + urtea + ", generoa=" + generoa
-				+ ", irudia=" + irudia + ", musikaria=" + musikaria + "]";
+				+ ", irudia=" + irudia + ", musikaria=" + musikaria + ", abestiak=" + abestiak + "]";
 	}
 
 	@Override
@@ -97,9 +97,10 @@ public class Album {
 		if (getClass() != obj.getClass())
 			return false;
 		Album other = (Album) obj;
-		return Objects.equals(generoa, other.generoa) && Objects.equals(id, other.id)
-				&& Objects.equals(irudia, other.irudia) && Objects.equals(izenburua, other.izenburua)
-				&& Objects.equals(musikaria, other.musikaria) && Objects.equals(urtea, other.urtea);
+		return Objects.equals(abestiak, other.abestiak) && Objects.equals(generoa, other.generoa)
+				&& Objects.equals(id, other.id) && Objects.equals(irudia, other.irudia)
+				&& Objects.equals(izenburua, other.izenburua) && Objects.equals(musikaria, other.musikaria)
+				&& Objects.equals(urtea, other.urtea);
 	}
 
 }
