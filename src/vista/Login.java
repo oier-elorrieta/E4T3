@@ -107,8 +107,6 @@ public class Login extends JFrame {
 				String rola = (String) comboBoxRoles.getSelectedItem();
 				try {
 					if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Bezeroa")) {
-						System.out.println("TrueBezero");
-						/* TO DELETE */ System.out.println(Aldagaiak.erabiltzailea.toString());
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiBezeroMenu();
 						dispose();
