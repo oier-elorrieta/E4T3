@@ -39,6 +39,11 @@ public class Menu extends JFrame {
 		contentPane.add(panel1, BorderLayout.NORTH);
 		panel1.setLayout(new BorderLayout(0, 0));
 		
+		JLabel lblTitulua = new JLabel("Menu");
+		lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		panel1.add(lblTitulua, BorderLayout.CENTER);
+		
 		// Erdiko panela
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.CENTER);
