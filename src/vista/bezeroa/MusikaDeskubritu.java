@@ -16,15 +16,19 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MusikaDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("serial")
 	public MusikaDeskubritu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
@@ -70,6 +74,36 @@ public class MusikaDeskubritu extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Musikaria", "", "Entzunaldia"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Object.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		panel_1.add(table);
+		
+		JLabel lblNewLabel_1 = new JLabel("          ");
+		panel_1.add(lblNewLabel_1, BorderLayout.WEST);
+		
+		JLabel lblNewLabel_2 = new JLabel("          ");
+		panel_1.add(lblNewLabel_2, BorderLayout.EAST);
+		
+		JLabel lblNewLabel_3 = new JLabel("  ");
+		panel_1.add(lblNewLabel_3, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel_4 = new JLabel(" ");
+		panel_1.add(lblNewLabel_4, BorderLayout.SOUTH);
 
 	}
 
