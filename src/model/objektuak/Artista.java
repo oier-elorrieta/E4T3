@@ -7,6 +7,12 @@ public abstract class Artista {
 	protected String izen_Artistikoa;
 	protected String irudia;
 	protected String deskribapena;
+	protected int erreprodukzioak;
+	
+	public Artista(String izen_Artistikoa, int erreprodukzioak) {
+		this.izen_Artistikoa = izen_Artistikoa;
+		this.erreprodukzioak = erreprodukzioak;
+	}
 	
 	public Artista(String id, String izen_Artistikoa, String irudia, String deskribapena) {
 		this.id = id;
@@ -25,6 +31,10 @@ public abstract class Artista {
 
 	public String getIzen_Artistikoa() {
 		return izen_Artistikoa;
+	}
+	
+	public int geterreprodukzioak() {
+		return erreprodukzioak;
 	}
 
 	public void setIzen_Artistikoa(String izen_Artistikoa) {
@@ -46,6 +56,9 @@ public abstract class Artista {
 	public void setDeskribapena(String deskribapena) {
 		this.deskribapena = deskribapena;
 	}
+	
+	
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -58,5 +71,11 @@ public abstract class Artista {
 		Artista other = (Artista) obj;
 		return Objects.equals(deskribapena, other.deskribapena) && id == other.id
 				&& Objects.equals(irudia, other.irudia) && Objects.equals(izen_Artistikoa, other.izen_Artistikoa);
+	}
+
+	@Override
+	public String toString() {
+		return "Artista [id=" + id + ", izen_Artistikoa=" + izen_Artistikoa + ", irudia=" + irudia + ", deskribapena="
+				+ deskribapena + ", erreprodukzioak=" + erreprodukzioak + "]";
 	}
 }

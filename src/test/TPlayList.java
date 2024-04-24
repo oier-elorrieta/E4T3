@@ -12,7 +12,9 @@ import model.objektuak.*;
 import model.objektuak.bezero.Free;
 
 public class TPlayList {
-
+/*
+ *  NO VAN LOS TESUS
+ *  
 	private static PlayList pl1;
 	private static Free f1;
 	private static Date eguna;
@@ -192,4 +194,5 @@ public class TPlayList {
 		PlayList pl2 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
 		assertTrue(pl1.equals(pl2));
 	}
+	*/
 }

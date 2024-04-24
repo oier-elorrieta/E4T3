@@ -8,26 +8,32 @@ import model.objektuak.bezero.Bezero;
 
 public class PlayList {
 
-	private int id;
+	private String id;
 	private String izena;
 	private Date sorreraData;
 	private Bezero bezeroa;
 	private ArrayList<Abestia> abestiak;
 
-	public PlayList(int id, String izena, Date sorreraData, Bezero bezeroa, ArrayList<Abestia> abestiak) {
-		super();
+	public PlayList(String id, String izena, Date sorreraData, Bezero bezeroa, ArrayList<Abestia> abestiak) {
 		this.id = id;
 		this.izena = izena;
 		this.sorreraData = sorreraData;
 		this.bezeroa = bezeroa;
 		this.abestiak = abestiak;
 	}
+	
+	public PlayList(String id, String izena, Date sorreraData, Bezero bezeroa) {
+		this.id = id;
+		this.izena = izena;
+		this.sorreraData = sorreraData;
+		this.bezeroa = bezeroa;
+	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
