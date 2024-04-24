@@ -6,11 +6,14 @@ public class Podcaster extends Artista {
 		super(id, izen_Artistikoa, irudia, deskribapena);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Podcaster(String izena,int entzunaldi) {
+		super(izena,entzunaldi);
+	}
 
 	@Override
 	public String toString() {
-		return "Podcaster [id=" + id + ", izen_Artistikoa=" + izen_Artistikoa + ", irudia=" + irudia + ", deskribapena="
-				+ deskribapena + "]";
+		return super.toString();
 	}
 
 }

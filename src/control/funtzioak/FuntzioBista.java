@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import model.Aldagaiak;
 import vista.*;
 import vista.bezeroa.*;
-import vista.admin.*;
+
 
 /**
  * Kontrolatzaileak bistaren konfigurazioa kudeatzen duen klasea.

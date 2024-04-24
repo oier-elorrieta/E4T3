@@ -9,6 +9,9 @@ public class Musikaria extends Artista {
 		super(id, izen_Artistikoa, irudia, deskribapena);
 		this.ezaugarria = ezaugarria;
 	}
+	public Musikaria(String izen_Artistikoa,int entzunaldi) {
+		super(izen_Artistikoa,entzunaldi);
+	}
 
 	public String getEzaugarria() {
 		return ezaugarria;
@@ -17,13 +20,15 @@ public class Musikaria extends Artista {
 	public void setEzaugarria(String ezaugarria) {
 		this.ezaugarria = ezaugarria;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "Musikaria [Id=" + id + ", izen_Artistikoa=" + izen_Artistikoa + ", irudia=" + irudia + ", deskribapena="
-				+ deskribapena + ", ezaugarria=" + ezaugarria + "]";
+		String txt = "";
+		txt = super.toString();
+		return txt + "Musikaria [ezaugarria=" + ezaugarria + "]";
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

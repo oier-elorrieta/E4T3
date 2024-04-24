@@ -3,6 +3,10 @@ package vista.bezeroa;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import model.dao.BezeroDao;
+import model.dao.MusikariaDao;
+import model.objektuak.*;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -18,18 +25,27 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JComboBox;
+
 
 public class MusikaDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private DefaultTableModel model;
+	
+	MusikariaDao musikariadao = new MusikariaDao();
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
 	@SuppressWarnings("serial")
-	public MusikaDeskubritu() {
+	public MusikaDeskubritu() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -42,6 +58,15 @@ public class MusikaDeskubritu extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
+		
+		ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
+		
+		/* 	ARRAY DE MUSIKARIAK PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
+		musikariak = musikariadao.getMusikariak();
+		
+		/* TO DELETE */ System.out.println(musikariak);
+		
+		
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -76,22 +101,6 @@ public class MusikaDeskubritu extends JFrame {
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Musikaria", "", "Entzunaldia"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		panel_1.add(table);
 		
 		JLabel lblNewLabel_1 = new JLabel("          ");
 		panel_1.add(lblNewLabel_1, BorderLayout.WEST);
@@ -105,6 +114,28 @@ public class MusikaDeskubritu extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel(" ");
 		panel_1.add(lblNewLabel_4, BorderLayout.SOUTH);
 
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		panel_1.add(scrollPane, BorderLayout.CENTER);
+		
+		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		model.setColumnIdentifiers(stringAux);
+			
+		scrollPane.setViewportView(table);
+		Object[] aux = new Object[3];
+		for (int i = 0 ; i < musikariak.size(); i++) {
+			JRadioButton btnEntzun = new JRadioButton("Entzun");
+			aux[0] = musikariak.get(i).getIzen_Artistikoa();
+			aux[1] = musikariak.get(i).geterreprodukzioak();
+			aux[2] = "Entzun";
+			
+            model.addRow(aux);
+        }
+		
 	}
 
 }
