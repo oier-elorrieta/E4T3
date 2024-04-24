@@ -3,6 +3,8 @@ package vista.bezeroa;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,12 +23,20 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JComboBox;
+
 
 public class MusikaDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
+	private DefaultTableModel model;
 	
 	MusikariaDao musikariadao = new MusikariaDao();
 
@@ -34,6 +44,7 @@ public class MusikaDeskubritu extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
+	@SuppressWarnings("serial")
 	public MusikaDeskubritu() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
@@ -49,7 +60,6 @@ public class MusikaDeskubritu extends JFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
-	
 		
 		/* 	ARRAY DE MUSIKARIAK PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
 		musikariak = musikariadao.getMusikariak();
@@ -89,10 +99,43 @@ public class MusikaDeskubritu extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
-		panel_1.add(rdbtnNewRadioButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("          ");
+		panel_1.add(lblNewLabel_1, BorderLayout.WEST);
+		
+		JLabel lblNewLabel_2 = new JLabel("          ");
+		panel_1.add(lblNewLabel_2, BorderLayout.EAST);
+		
+		JLabel lblNewLabel_3 = new JLabel("  ");
+		panel_1.add(lblNewLabel_3, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel_4 = new JLabel(" ");
+		panel_1.add(lblNewLabel_4, BorderLayout.SOUTH);
 
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		panel_1.add(scrollPane, BorderLayout.CENTER);
+		
+		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		model.setColumnIdentifiers(stringAux);
+			
+		scrollPane.setViewportView(table);
+		Object[] aux = new Object[3];
+		for (int i = 0 ; i < musikariak.size(); i++) {
+			JRadioButton btnEntzun = new JRadioButton("Entzun");
+			aux[0] = musikariak.get(i).getIzen_Artistikoa();
+			aux[1] = musikariak.get(i).geterreprodukzioak();
+			aux[2] = "Entzun";
+			
+            model.addRow(aux);
+        }
+		
 	}
 
 }
