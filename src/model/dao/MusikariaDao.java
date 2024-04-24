@@ -29,4 +29,24 @@ public class MusikariaDao {
 		DB_Konexioa.itxi();
 		return retArray;
 	}
+	
+	public Musikaria getMusikariaByIzena(String izena) throws SQLException{
+		Musikaria musikariaRet;
+		
+		Connection conex = DB_Konexioa.bezeroa();
+
+		Statement sentencia = conex.createStatement();
+
+		String kontsulta = "select * from Musikaria";
+		ResultSet musikaria = sentencia.executeQuery(kontsulta);
+		
+		musikaria.next();
+		
+		musikariaRet = new Musikaria(musikaria.getString("ID_Musikaria"), musikaria.getString("Izen_Artistikoa"), musikaria.getString("Irudia"), musikaria.getString("Deskribapena"), musikaria.getString("Ezaugarria"));
+		
+		DB_Konexioa.itxi();
+		
+		return musikariaRet;
+		
+	}
 }
