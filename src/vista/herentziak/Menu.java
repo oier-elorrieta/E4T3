@@ -1,12 +1,10 @@
-package vista.menu;
+package vista.herentziak;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import vista.Header;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;

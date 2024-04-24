@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.BezeroDao;
-import model.db.DB_funtzioak;
 import model.objektuak.bezero.Bezero;
 
 import java.awt.BorderLayout;

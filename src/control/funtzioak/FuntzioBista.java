@@ -4,7 +4,8 @@ import java.awt.Rectangle;
 
 import model.Aldagaiak;
 import vista.*;
-import vista.menu.BezeroMenu;
+import vista.bezeroa.*;
+import vista.admin.*;
 
 /**
  * Kontrolatzaileak bistaren konfigurazioa kudeatzen duen klasea.
@@ -77,4 +78,40 @@ public class FuntzioBista {
 		}
 	}
 
+	/**
+	 * BezeroMenu bista irekitzen duen metodoa.
+	 */
+	public static void irekiMusikaDeskubritu() {
+		try {
+			MusikaDeskubritu frame = new MusikaDeskubritu();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * BezeroMenu bista irekitzen duen metodoa.
+	 */
+	public static void irekiPodcastDeskubritu() {
+		try {
+			PodcastDeskubritu frame = new PodcastDeskubritu();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * BezeroMenu bista irekitzen duen metodoa.
+	 */
+	public static void irekiNirePlaylist() {
+		try {
+			NirePlaylist frame = new NirePlaylist();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

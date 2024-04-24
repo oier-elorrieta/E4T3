@@ -1,4 +1,4 @@
-package vista.menu;
+package vista.bezeroa;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import vista.Login;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -83,6 +82,9 @@ public class BezeroMenu extends JFrame {
 		JButton btnDeskubritu = new JButton("Musika deskubritu");
 		btnDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiMusikaDeskubritu();
+				dispose();
 			}
 		});
 		panel.add(btnDeskubritu);
@@ -91,6 +93,9 @@ public class BezeroMenu extends JFrame {
 		JButton btnPodcastDeskubritu = new JButton("Podcast dekubritu");
 		btnPodcastDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiPodcastDeskubritu();
+				dispose();
 			}
 		});
 		panel.add(btnPodcastDeskubritu);
@@ -99,6 +104,9 @@ public class BezeroMenu extends JFrame {
 		JButton btnPlayList = new JButton("Nire PlayList-ak");
 		btnPlayList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiNirePlaylist();
+				dispose();
 			}
 		});
 		panel.add(btnPlayList);
