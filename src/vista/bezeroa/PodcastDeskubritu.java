@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
@@ -27,6 +32,8 @@ public class PodcastDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
+	private DefaultTableModel model;
 	PodcasterDao podcasterdao = new PodcasterDao();
 
 	/**
@@ -86,6 +93,45 @@ public class PodcastDeskubritu extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("          ");
+		panel_2.add(lblNewLabel_1, BorderLayout.WEST);
+		
+		JLabel lblNewLabel_2 = new JLabel("          ");
+		panel_2.add(lblNewLabel_2, BorderLayout.EAST);
+		
+		JLabel lblNewLabel_3 = new JLabel("  ");
+		panel_2.add(lblNewLabel_3, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel_4 = new JLabel(" ");
+		panel_2.add(lblNewLabel_4, BorderLayout.SOUTH);
+
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		panel_2.add(scrollPane, BorderLayout.CENTER);
+		
+		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		model.setColumnIdentifiers(stringAux);
+			
+		scrollPane.setViewportView(table);
+		Object[] aux = new Object[3];
+		for (int i = 0 ; i < podcasters.size(); i++) {
+			JRadioButton btnEntzun = new JRadioButton("Entzun");
+			aux[0] = podcasters.get(i).getIzen_Artistikoa();
+			aux[1] = podcasters.get(i).geterreprodukzioak();
+			aux[2] = "Entzun";
+			
+            model.addRow(aux);
+        }
 
 	}
 
