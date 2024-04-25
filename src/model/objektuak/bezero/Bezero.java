@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public abstract class Bezero {
+	protected int id;
 	protected String izena;
 	protected String abizena;
 	protected String hizkuntza;
@@ -12,6 +13,18 @@ public abstract class Bezero {
 	protected Date jaioteguna;
 	protected Date erregistroEguna;
 
+	public Bezero(int id, String izena, String abizena, String hizkuntza, String erabiltzaileIzena, String pasahitza,
+			Date jaioteguna, Date erregistroEguna) {
+		this.id = id;
+		this.izena = izena;
+		this.abizena = abizena;
+		this.hizkuntza = hizkuntza;
+		this.erabiltzaileIzena = erabiltzaileIzena;
+		this.pasahitza = pasahitza;
+		this.jaioteguna = jaioteguna;
+		this.erregistroEguna = erregistroEguna;
+	}
+	
 	public Bezero(String izena, String abizena, String hizkuntza, String erabiltzaileIzena, String pasahitza,
 			Date jaioteguna, Date erregistroEguna) {
 		this.izena = izena;
@@ -23,6 +36,14 @@ public abstract class Bezero {
 		this.erregistroEguna = erregistroEguna;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getIzena() {
 		return izena;
 	}

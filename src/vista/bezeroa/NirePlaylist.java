@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
@@ -22,12 +24,19 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.GridLayout;
+import javax.swing.JTable;
 
 public class NirePlaylist extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	PlayListDao playlistdao = new PlayListDao();
+	private JTable table;
+	private DefaultTableModel model;
 
 	/**
 	 * Create the frame.
@@ -43,9 +52,9 @@ public class NirePlaylist extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel panelHeader = new JPanel();
+		contentPane.add(panelHeader, BorderLayout.NORTH);
+		panelHeader.setLayout(new BorderLayout(0, 0));
 		
 		ArrayList<PlayList> playlistak = new ArrayList<PlayList>();
 	
@@ -65,7 +74,7 @@ public class NirePlaylist extends JFrame {
 			}
 		});
 		btnPerfil.setSize(325, 20);
-		panel.add(btnPerfil, BorderLayout.EAST);
+		panelHeader.add(btnPerfil, BorderLayout.EAST);
 
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
@@ -77,15 +86,50 @@ public class NirePlaylist extends JFrame {
 				dispose();
 			}
 		});
-		panel.add(btnAtzera, BorderLayout.WEST);
+		panelHeader.add(btnAtzera, BorderLayout.WEST);
 
 		JLabel lblNewLabel = new JLabel("Nire Playlist");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel, BorderLayout.CENTER);
+		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
 
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
+		JPanel panelKontenidoa = new JPanel();
+		contentPane.add(panelKontenidoa, BorderLayout.CENTER);
+		panelKontenidoa.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelBotoiak = new JPanel();
+		panelKontenidoa.add(panelBotoiak, BorderLayout.EAST);
+		panelBotoiak.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton btnBerriaSortu = new JButton("Berria Sortu");
+		panelBotoiak.add(btnBerriaSortu);
+		
+		JButton btnEzabatu = new JButton("Ezabatu");
+		panelBotoiak.add(btnEzabatu);
+		
+		JButton btnImportatu = new JButton("Importatu");
+		panelBotoiak.add(btnImportatu);
+		
+		JButton btnExportatu = new JButton("Exportatu");
+		panelBotoiak.add(btnExportatu);
+		
+		table = new JTable();
+		
+		String[] stringAux = {"Izena", ""};
+		
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		model.setColumnIdentifiers(stringAux);
+			
+		panelKontenidoa.add(table, BorderLayout.CENTER);
+		Object[] aux = new Object[2];
+		for (int i = 0 ; i < playlistak.size(); i++) {
+			JRadioButton btnEntzun = new JRadioButton("Entzun");
+			aux[0] = playlistak.get(i).getIzena();
+			aux[1] = "Entzun";
+			
+            model.addRow(aux);
+		}
 
 	}
 
