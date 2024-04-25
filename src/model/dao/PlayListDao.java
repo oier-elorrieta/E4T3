@@ -17,13 +17,13 @@ public class PlayListDao {
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from Playlist where ID_Bezeroa = " + Aldagaiak.erabiltzailea.getId();
+		String kontsulta = "select * from playListView where ID_Bezeroa = " + Aldagaiak.erabiltzailea.getId();
 		ResultSet playlistak = sentencia.executeQuery(kontsulta);
 
 		PlayList playlistAux;
 
 		while (playlistak.next()) {
-			playlistAux = new PlayList(playlistak.getString("ID_List"), playlistak.getString("Izenburua"), playlistak.getDate("Sorrera_data"), Aldagaiak.erabiltzailea );
+			playlistAux = new PlayList(playlistak.getString("ID_List"), playlistak.getString("Izena"), playlistak.getInt("Abestiak"));
 			retArray.add(playlistAux);
 		}
 

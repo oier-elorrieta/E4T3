@@ -12,6 +12,7 @@ public class PlayList {
 	private String izena;
 	private Date sorreraData;
 	private Bezero bezeroa;
+	private int abestiKont;
 	private ArrayList<Abestia> abestiak;
 
 	public PlayList(String id, String izena, Date sorreraData, Bezero bezeroa, ArrayList<Abestia> abestiak) {
@@ -28,7 +29,14 @@ public class PlayList {
 		this.sorreraData = sorreraData;
 		this.bezeroa = bezeroa;
 	}
+	
+	public PlayList(String id, String izena,int abestiKont ) {
+		this.id = id;
+		this.izena = izena;
+		this.abestiKont = abestiKont;
+	}
 
+	
 	public String getId() {
 		return id;
 	}
@@ -59,6 +67,14 @@ public class PlayList {
 
 	public void setBezeroa(Bezero bezeroa) {
 		this.bezeroa = bezeroa;
+	}
+
+	public int getAbestiKont() {
+		return abestiKont;
+	}
+
+	public void setAbestiKont(int abestiKont) {
+		this.abestiKont = abestiKont;
 	}
 
 	public ArrayList<Abestia> getAbestiak() {
