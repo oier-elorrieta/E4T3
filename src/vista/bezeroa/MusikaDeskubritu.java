@@ -114,6 +114,7 @@ public class MusikaDeskubritu extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Musikaria musikaria = new Musikaria("Hola", 2);
 				System.out.println(table.getSelectedRow());
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiAlbumDeskubritu(musikaria);
