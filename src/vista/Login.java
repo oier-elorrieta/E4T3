@@ -40,12 +40,12 @@ public class Login extends JFrame {
 	private JButton btnRegistrar;
 
 	BezeroDao bezerodao = new BezeroDao();
-	Bezero bezeroa = null;
 	
 	/**
 	 * Framea sortzen duen metodoa.
 	 */
 	public Login() {
+		Aldagaiak.erabiltzailea = null;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 450, 300);
