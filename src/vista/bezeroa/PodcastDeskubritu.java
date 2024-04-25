@@ -1,32 +1,19 @@
 package vista.bezeroa;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import model.dao.MusikariaDao;
 import model.dao.PodcasterDao;
-import model.objektuak.Musikaria;
-import model.objektuak.Podcaster;
-
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import model.objektuak.*;
 
 public class PodcastDeskubritu extends JFrame {
 
@@ -116,19 +103,25 @@ public class PodcastDeskubritu extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		panel_2.add(scrollPane, BorderLayout.CENTER);
 		
-		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		String[] stringAux = {"Musikaria", "Erreprodukzioa"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(table.getSelectedRow());
+			}
+		});
 		model.setColumnIdentifiers(stringAux);
 			
 		scrollPane.setViewportView(table);
-		Object[] aux = new Object[3];
+		Object[] aux = new Object[2];
 		for (int i = 0 ; i < podcasters.size(); i++) {
-			JRadioButton btnEntzun = new JRadioButton("Entzun");
 			aux[0] = podcasters.get(i).getIzen_Artistikoa();
 			aux[1] = podcasters.get(i).geterreprodukzioak();
-			aux[2] = "Entzun";
 			
             model.addRow(aux);
         }

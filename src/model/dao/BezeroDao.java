@@ -1,9 +1,6 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,9 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.db.DB_Konexioa;
-import model.objektuak.bezero.Bezero;
-import model.objektuak.bezero.Free;
-import model.objektuak.bezero.Premium;
+import model.objektuak.bezero.*;
 
 public class BezeroDao {
 	

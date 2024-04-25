@@ -1,35 +1,18 @@
 package vista;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import control.funtzioak.FuntzioBista;
-import control.funtzioak.Funtzioak;
+import control.funtzioak.*;
 import model.*;
-import model.dao.BezeroDao;
-import model.dao.HizkuntzaDao;
+import model.dao.*;
 import model.objektuak.Hizkuntza;
-import model.objektuak.bezero.Bezero;
-import model.objektuak.bezero.Free;
-import model.objektuak.bezero.Premium;
+import model.objektuak.bezero.*;
 
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.*;
 
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextPane;
+import java.util.*;
 
 /**
  * Erregistroaren ikuspegia erakusten duen klasea.
@@ -40,7 +23,7 @@ public class Erregistroa extends JFrame {
 	private JTextField textFieldAbizena;
 	private JTextField textFieldJaioData;
 	private JTextField textFieldIzena;
-	private JTextField textFieldErabiltzailea;
+	private JTextField textFieldErabiltzailea; 
 	private JPasswordField passwordFieldPasahitza;
 	private JPasswordField passwordFieldKonfirmatu;
 	private boolean prime = false;

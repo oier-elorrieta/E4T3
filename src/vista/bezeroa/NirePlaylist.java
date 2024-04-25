@@ -1,33 +1,19 @@
 package vista.bezeroa;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import model.dao.MusikariaDao;
 import model.dao.PlayListDao;
-import model.objektuak.Musikaria;
 import model.objektuak.PlayList;
 
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.JTable;
 
 public class NirePlaylist extends JFrame {
@@ -115,18 +101,25 @@ public class NirePlaylist extends JFrame {
 		
 		table = new JTable();
 		
-		String[] stringAux = {"Izena", ""};
+		String[] stringAux = {"Izena"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(table.getSelectedRow());
+			}
+		});
 		model.setColumnIdentifiers(stringAux);
 			
 		panelKontenidoa.add(table, BorderLayout.CENTER);
-		Object[] aux = new Object[2];
+		Object[] aux = new Object[1];
+		
 		for (int i = 0 ; i < playlistak.size(); i++) {
-			JRadioButton btnEntzun = new JRadioButton("Entzun");
-			aux[0] = playlistak.get(i).getIzena();
-			aux[1] = "Entzun";
+			aux[0] = playlistak.get(i).getIzena(); 
 			
             model.addRow(aux);
 		}

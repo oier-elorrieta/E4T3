@@ -1,15 +1,13 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 import model.db.DB_Konexioa;
-import model.objektuak.Album;
-import model.objektuak.Hizkuntza;
-import model.objektuak.Musikaria;
+
+
+import model.objektuak.*;
+
 
 public class AlbumDao {
 	public ArrayList<Album> getAlbumak(Musikaria musikaria) throws SQLException {

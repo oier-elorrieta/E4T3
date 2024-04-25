@@ -1,10 +1,8 @@
 package vista.interfaseak;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 
 public class Header extends JFrame {
 

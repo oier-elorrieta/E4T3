@@ -1,34 +1,21 @@
 package vista.bezeroa;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import model.dao.BezeroDao;
-import model.dao.MusikariaDao;
+import model.dao.*;
 import model.objektuak.*;
 
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;;
 
 
 public class MusikaDeskubritu extends JFrame {
@@ -44,7 +31,6 @@ public class MusikaDeskubritu extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	@SuppressWarnings("serial")
 	public MusikaDeskubritu() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
@@ -119,10 +105,12 @@ public class MusikaDeskubritu extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
-		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		String[] stringAux = {"Musikaria", "Erreprodukzioa"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -132,12 +120,10 @@ public class MusikaDeskubritu extends JFrame {
 		model.setColumnIdentifiers(stringAux);
 			
 		scrollPane.setViewportView(table);
-		Object[] aux = new Object[3];
+		Object[] aux = new Object[2];
 		for (int i = 0 ; i < musikariak.size(); i++) {
-			JRadioButton btnEntzun = new JRadioButton("Entzun");
 			aux[0] = musikariak.get(i).getIzen_Artistikoa();
 			aux[1] = musikariak.get(i).geterreprodukzioak();
-			aux[2] = "Entzun";
 			
             model.addRow(aux);
         }

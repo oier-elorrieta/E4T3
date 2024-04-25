@@ -1,8 +1,6 @@
 package model.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Klasea datu-basearekin konexioa ezartzeko erabiltzen da.
