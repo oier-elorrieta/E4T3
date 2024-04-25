@@ -119,10 +119,12 @@ public class MusikaDeskubritu extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
-		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		String[] stringAux = {"Musikaria", "Erreprodukzioa"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -132,12 +134,11 @@ public class MusikaDeskubritu extends JFrame {
 		model.setColumnIdentifiers(stringAux);
 			
 		scrollPane.setViewportView(table);
-		Object[] aux = new Object[3];
+		Object[] aux = new Object[2];
 		for (int i = 0 ; i < musikariak.size(); i++) {
 			JRadioButton btnEntzun = new JRadioButton("Entzun");
 			aux[0] = musikariak.get(i).getIzen_Artistikoa();
 			aux[1] = musikariak.get(i).geterreprodukzioak();
-			aux[2] = "Entzun";
 			
             model.addRow(aux);
         }

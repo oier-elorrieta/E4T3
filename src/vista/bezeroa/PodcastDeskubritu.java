@@ -3,6 +3,8 @@ package vista.bezeroa;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -116,19 +118,25 @@ public class PodcastDeskubritu extends JFrame {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		panel_2.add(scrollPane, BorderLayout.CENTER);
 		
-		String[] stringAux = {"Musikaria", "Erreprodukzioa", "" };
+		String[] stringAux = {"Musikaria", "Erreprodukzioa"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(table.getSelectedRow());
+			}
+		});
 		model.setColumnIdentifiers(stringAux);
 			
 		scrollPane.setViewportView(table);
-		Object[] aux = new Object[3];
+		Object[] aux = new Object[2];
 		for (int i = 0 ; i < podcasters.size(); i++) {
-			JRadioButton btnEntzun = new JRadioButton("Entzun");
 			aux[0] = podcasters.get(i).getIzen_Artistikoa();
 			aux[1] = podcasters.get(i).geterreprodukzioak();
-			aux[2] = "Entzun";
 			
             model.addRow(aux);
         }

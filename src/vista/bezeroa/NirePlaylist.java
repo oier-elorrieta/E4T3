@@ -3,6 +3,8 @@ package vista.bezeroa;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -115,18 +117,24 @@ public class NirePlaylist extends JFrame {
 		
 		table = new JTable();
 		
-		String[] stringAux = {"Izena", ""};
+		String[] stringAux = {"Izena"};
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(table.getSelectedRow());
+			}
+		});
 		model.setColumnIdentifiers(stringAux);
 			
 		panelKontenidoa.add(table, BorderLayout.CENTER);
-		Object[] aux = new Object[2];
+		Object[] aux = new Object[1];
 		for (int i = 0 ; i < playlistak.size(); i++) {
-			JRadioButton btnEntzun = new JRadioButton("Entzun");
-			aux[0] = playlistak.get(i).getIzena();
-			aux[1] = "Entzun";
+			aux[0] = playlistak.get(i).getIzena(); 
 			
             model.addRow(aux);
 		}
