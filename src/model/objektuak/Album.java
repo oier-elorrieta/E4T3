@@ -11,6 +11,7 @@ public class Album {
 	private Date urtea;
 	private String generoa;
 	private String irudia;
+	private int kontAbestiak;
 	private Musikaria musikaria;
 	private ArrayList<Abestia> abestiak;
 
@@ -25,12 +26,10 @@ public class Album {
 		this.abestiak = abestiak;
 	}
 	
-	public Album(String id, String izenburua, Date urtea, String generoa, String irudia) {
+	public Album(String id, String izenburua,int kontAbestiak) {
 		this.id = id;
 		this.izenburua = izenburua;
-		this.urtea = urtea;
-		this.generoa = generoa;
-		this.irudia = irudia;
+		this.kontAbestiak = kontAbestiak;
 	}
 
 	public String getId() {
@@ -59,6 +58,14 @@ public class Album {
 
 	public String getGeneroa() {
 		return generoa;
+	}
+	
+	public int getKontAbestiak() {
+		return kontAbestiak;
+	}
+
+	public void setKontAbestiak(int kontAbestiak) {
+		this.kontAbestiak = kontAbestiak;
 	}
 
 	public void setGeneroa(String generoa) {

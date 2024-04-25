@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,18 +17,23 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import model.dao.AlbumDao;
+import model.dao.MusikariaDao;
 import model.objektuak.Musikaria;
+import model.objektuak.*;
 
 public class AlbumDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	AlbumDao albumdao = new AlbumDao();
 
 	
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public AlbumDeskubritu(Musikaria musikaria) {
+	public AlbumDeskubritu(Musikaria musikaria) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -35,6 +42,14 @@ public class AlbumDeskubritu extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		ArrayList<Album> albumak = albumdao.getAlbumakByMusikaria(musikaria);
+		
+		/* ARRAYLIST DE ALBUMES FILTRADOS POR MUSIKARIA PARA RELLENAR EL VIEW
+		 * albumak.getizenburua -> nombre
+		 * albumak.getkontAbestiak -> canciones 
+		 */
+		
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);

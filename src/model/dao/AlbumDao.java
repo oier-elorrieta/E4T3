@@ -10,7 +10,7 @@ import model.objektuak.*;
 
 
 public class AlbumDao {
-	public ArrayList<Album> getAlbumak(Musikaria musikaria) throws SQLException {
+	public ArrayList<Album> getAlbumakByMusikaria(Musikaria musikaria) throws SQLException {
 		ArrayList<Album> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
 
@@ -22,7 +22,7 @@ public class AlbumDao {
 		Album AlbumAux;
 
 		while (albumak.next()) {
-			AlbumAux = new Album(albumak.getString("ID_Album"), albumak.getString("Izenburua"), albumak.getDate("Urtea"), albumak.getString("Generoa"), albumak.getString("Irudia"));
+			AlbumAux = new Album(albumak.getString("ID_Album"), albumak.getString("Izenburua"), albumak.getInt("Abestiak"));
 			retArray.add(AlbumAux);
 		}
 
