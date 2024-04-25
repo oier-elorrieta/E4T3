@@ -34,7 +34,7 @@ public class MusikariaDao {
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from Musikaria";
+		String kontsulta = "select * from Musikaria where Izen_Artistikoa = '" + izena + "';";
 		ResultSet musikaria = sentencia.executeQuery(kontsulta);
 		
 		musikaria.next();
