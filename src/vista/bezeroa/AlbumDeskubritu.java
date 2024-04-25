@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -106,6 +108,7 @@ public class AlbumDeskubritu extends JFrame {
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JTextPane textPaneDeskripzioa = new JTextPane();
+		textPaneDeskripzioa.setEditable(false);
 		textPaneDeskripzioa.setText("Mota: " + musikaria.getEzaugarria() + "\n" + musikaria.getDeskribapena());
 		panel_4.add(textPaneDeskripzioa, BorderLayout.CENTER);
 		
@@ -125,7 +128,16 @@ public class AlbumDeskubritu extends JFrame {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
+		ImageIcon icon = null;
+		try {
+			icon = new ImageIcon(musikaria.getIrudia().getBytes(1, (int) musikaria.getIrudia().length()));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		JLabel lblIrudia = new JLabel("");
+		lblIrudia.setIcon(icon);
 		panel_5.add(lblIrudia, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_10 = new JLabel(" ");
