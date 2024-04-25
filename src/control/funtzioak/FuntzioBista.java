@@ -3,6 +3,7 @@ package control.funtzioak;
 import java.awt.Rectangle;
 
 import model.Aldagaiak;
+import model.objektuak.Musikaria;
 import vista.*;
 import vista.bezeroa.*;
 
@@ -114,4 +115,15 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * BezeroMenu bista irekitzen duen metodoa.
+	 */
+	public static void irekiAlbumDeskubritu(Musikaria musikaria) {
+		try {
+			AlbumDeskubritu frame = new AlbumDeskubritu(musikaria);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

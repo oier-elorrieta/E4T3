@@ -115,6 +115,9 @@ public class MusikaDeskubritu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(table.getSelectedRow());
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiAlbumDeskubritu(musikaria);
+				dispose();
 			}
 		});
 		model.setColumnIdentifiers(stringAux);
