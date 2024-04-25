@@ -17,6 +17,7 @@ import java.util.*;
 /**
  * Erregistroaren ikuspegia erakusten duen klasea.
  */
+@SuppressWarnings("deprecation")
 public class Erregistroa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -155,7 +156,11 @@ public class Erregistroa extends JFrame {
 			passwordFieldPasahitza.setText(Aldagaiak.erabiltzailea.getPasahitza());
 			passwordFieldKonfirmatu.setText(Aldagaiak.erabiltzailea.getPasahitza());
 			
-			comboBoxHizkuntza.setSelectedItem(Aldagaiak.erabiltzailea.getHizkuntza());;
+			int index = Funtzioak.getIndexFromHizkuntzak(hizkuntzak,Aldagaiak.erabiltzailea.getHizkuntza());
+			
+			comboBoxHizkuntza.setSelectedIndex(index);
+			
+
 		
 
 		}
@@ -164,36 +169,52 @@ public class Erregistroa extends JFrame {
 		btnGordeAldaketa.addActionListener(new ActionListener() {
 			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
+				
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
-
 				int indexHizkuntza = comboBoxHizkuntza.getSelectedIndex();
 				String hizkuntza =  hizkuntzakFinal.get(indexHizkuntza).getID_Hizkuntza();
-
 				String erabiltzailea = textFieldErabiltzailea.getText();
-				@SuppressWarnings("deprecation")
 				String pasahitza = passwordFieldPasahitza.getText();
-				@SuppressWarnings("deprecation")
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
+				
+				Date jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
+				
+		
 				Date noizData = new Date();
 				
 				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("")) {
 					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (pasahitza.equals(konfirmazioa)) {
-						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
 						pasahitza = Funtzioak.enkriptatzailea(pasahitza);
 						Bezero bezeroa;
-						if (prime) {
-							bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData, noizData);
-						} else {
-							bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData);
+						if (Aldagaiak.erabiltzailea != null) {
+							if (prime) {
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, noizData);
+							} else {
+								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
+							}
+							try {
+								
+								bezerodao.updateErabiltzailea(bezeroa);
+								
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+							}
+						}else {
+							if (prime) {
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, noizData);
+							} else {
+								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
+							}
+							try {
+								bezerodao.erregistratuErabiltzailea(bezeroa);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+							}
 						}
-						try {
-							bezerodao.erregistratuErabiltzailea(bezeroa);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-						}
+						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
 					}

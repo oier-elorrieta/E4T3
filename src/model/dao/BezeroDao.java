@@ -129,4 +129,25 @@ public class BezeroDao {
 		statement.executeUpdate(konsulta);
 	}
 	
+	public boolean updateErabiltzailea(Bezero update) throws SQLException {
+		Connection conex = DB_Konexioa.bezeroa();
+
+		Statement statement = conex.createStatement();
+
+		java.sql.Date sqlDateJaioteguna = new java.sql.Date(update.getJaioteguna().getTime());
+		
+		
+		String kontsulta = "UPDATE Bezeroa SET Izen ='"+update.getIzena()+"', Abizena ='"+update.getAbizena()+"',Hizkuntza ='"+update.getHizkuntza()+"',Erabiltzailea ='"+update.getErabiltzaileIzena()+"',Pasahitza = '"+update.getPasahitza()+"',Jaiotze_data ='"+sqlDateJaioteguna+"'where ID_Bezeroa = "+Aldagaiak.erabiltzailea.getId()+";";
+		
+		statement.executeUpdate(kontsulta);
+	
+		if(update.getClass().getSimpleName().equalsIgnoreCase("Premium")){
+			Premium aux = (Premium) update; 
+			erregistratuPremium(conex,update.getErabiltzaileIzena(),aux.getIraungitzeData());
+		}
+
+		DB_Konexioa.itxi();
+		return true;
+	}
+	
 }	
