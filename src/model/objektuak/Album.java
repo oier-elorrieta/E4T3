@@ -16,7 +16,6 @@ public class Album {
 
 	public Album(String id, String izenburua, Date urtea, String generoa, String irudia, Musikaria musikaria,
 			ArrayList<Abestia> abestiak) {
-		super();
 		this.id = id;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
@@ -24,6 +23,14 @@ public class Album {
 		this.irudia = irudia;
 		this.musikaria = musikaria;
 		this.abestiak = abestiak;
+	}
+	
+	public Album(String id, String izenburua, Date urtea, String generoa, String irudia) {
+		this.id = id;
+		this.izenburua = izenburua;
+		this.urtea = urtea;
+		this.generoa = generoa;
+		this.irudia = irudia;
 	}
 
 	public String getId() {
