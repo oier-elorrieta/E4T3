@@ -107,6 +107,8 @@ public class MusikaDeskubritu extends JFrame {
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		table.setRowHeight(25);
 		table.setDefaultEditor(Object.class, null);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.addMouseListener(new MouseAdapter() {
