@@ -1,8 +1,6 @@
 package model.objektuak;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.ArrayList;
+import java.util.*;
 
 import model.objektuak.bezero.Bezero;
 

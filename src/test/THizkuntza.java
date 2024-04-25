@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Hizkuntza;
-import model.objektuak.PlayList;
 
 public class THizkuntza {
 

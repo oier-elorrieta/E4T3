@@ -1,7 +1,6 @@
 package model.objektuak.bezero;
 
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Bezero {
 	protected int id;

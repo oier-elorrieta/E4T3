@@ -7,13 +7,13 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.objektuak.*;
 import model.objektuak.bezero.Free;
 
 public class TFree {
 	private static Free f1;
 	private static Date eguna;
 
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 18);
@@ -148,6 +148,7 @@ public class TFree {
 
 	@Test
 	public void TestSetJaioteguna() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setJaioteguna(eguna2);
 		assertEquals(eguna2, f1.getJaioteguna());
@@ -155,12 +156,14 @@ public class TFree {
 
 	@Test
 	public void TestGetJaiotegunaTxarto() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		assertNotEquals(eguna2, f1.getJaioteguna());
 	}
 
 	@Test
 	public void TestSetJaiotegunaTxarto() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setJaioteguna(eguna2);
 		assertNotEquals(eguna, f1.getJaioteguna());
@@ -175,6 +178,7 @@ public class TFree {
 
 	@Test
 	public void TestSetErreGuna() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setErregistroEguna(eguna2);
 		assertEquals(eguna2, f1.getErregistroEguna());
@@ -182,12 +186,14 @@ public class TFree {
 
 	@Test
 	public void TestGetErreGunaTxarto() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		assertNotEquals(eguna2, f1.getErregistroEguna());
 	}
 
 	@Test
 	public void TestSetErreGunaTxarto() {
+		@SuppressWarnings("deprecation")
 		Date eguna2 = new Date(2024, 04, 20);
 		f1.setErregistroEguna(eguna2);
 		assertNotEquals(eguna, f1.getErregistroEguna());

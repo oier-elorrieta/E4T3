@@ -1,35 +1,19 @@
 package vista.bezeroa;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import model.dao.MusikariaDao;
 import model.dao.PlayListDao;
-import model.objektuak.Musikaria;
 import model.objektuak.PlayList;
 
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.JTable;
 
 public class NirePlaylist extends JFrame {
@@ -133,6 +117,7 @@ public class NirePlaylist extends JFrame {
 			
 		panelKontenidoa.add(table, BorderLayout.CENTER);
 		Object[] aux = new Object[1];
+		
 		for (int i = 0 ; i < playlistak.size(); i++) {
 			aux[0] = playlistak.get(i).getIzena(); 
 			
