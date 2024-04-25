@@ -6,6 +6,12 @@ import java.util.Objects;
 public class Premium extends Bezero {
 	private Date iraungitzeData;
 
+	public Premium(int id, String izena, String abizena, String hizkuntza, String erabiltzaileIzena, String pasahitza,
+			Date jaioteguna, Date erregistroEguna, Date iraungitzeData) {
+		super(id, izena, abizena, hizkuntza, erabiltzaileIzena, pasahitza, jaioteguna, erregistroEguna);
+		this.iraungitzeData = iraungitzeData;
+	}
+	
 	public Premium(String izena, String abizena, String hizkuntza, String erabiltzaileIzena, String pasahitza,
 			Date jaioteguna, Date erregistroEguna, Date iraungitzeData) {
 		super(izena, abizena, hizkuntza, erabiltzaileIzena, pasahitza, jaioteguna, erregistroEguna);

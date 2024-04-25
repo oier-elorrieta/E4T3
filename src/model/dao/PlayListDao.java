@@ -17,7 +17,7 @@ public class PlayListDao {
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from Playlist";
+		String kontsulta = "select * from Playlist where ID_Bezeroa = " + Aldagaiak.erabiltzailea.getId();
 		ResultSet playlistak = sentencia.executeQuery(kontsulta);
 
 		PlayList playlistAux;

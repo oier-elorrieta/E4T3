@@ -123,6 +123,12 @@ public class MusikaDeskubritu extends JFrame {
 		
 		model = new DefaultTableModel();
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(table.getSelectedRow());
+			}
+		});
 		model.setColumnIdentifiers(stringAux);
 			
 		scrollPane.setViewportView(table);

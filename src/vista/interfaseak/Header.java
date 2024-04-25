@@ -1,4 +1,4 @@
-package vista.herentziak;
+package vista.interfaseak;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
