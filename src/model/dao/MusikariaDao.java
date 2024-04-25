@@ -39,7 +39,7 @@ public class MusikariaDao {
 		
 		musikaria.next();
 		
-		musikariaRet = new Musikaria(musikaria.getString("ID_Musikaria"), musikaria.getString("Izen_Artistikoa"), musikaria.getString("Irudia"), musikaria.getString("Deskribapena"), musikaria.getString("Ezaugarria"));
+		musikariaRet = new Musikaria(musikaria.getString("ID_Musikaria"), musikaria.getString("Izen_Artistikoa"), musikaria.getBlob("Irudia"), musikaria.getString("Deskribapena"), musikaria.getString("Ezaugarria"));
 		
 		DB_Konexioa.itxi();
 		

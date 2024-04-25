@@ -44,7 +44,6 @@ public class AlbumDeskubritu extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		System.out.println(musikaria);
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());

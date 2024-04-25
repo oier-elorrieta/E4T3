@@ -1,11 +1,12 @@
 package model.objektuak;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 public class Musikaria extends Artista {
 	private String ezaugarria;
 
-	public Musikaria(String id, String izen_Artistikoa, String irudia, String deskribapena, String ezaugarria) {
+	public Musikaria(String id, String izen_Artistikoa, Blob irudia, String deskribapena, String ezaugarria) {
 		super(id, izen_Artistikoa, irudia, deskribapena);
 		this.ezaugarria = ezaugarria;
 	}

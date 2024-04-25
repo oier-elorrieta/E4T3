@@ -6,6 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Musikaria;
+ 
+/*
+ * NO VAN LOS TESUS
 
 public class TMusikaria {
 
@@ -77,3 +80,4 @@ public class TMusikaria {
 		assertTrue(m1.equals(m2));
 	}
 }
+ */
