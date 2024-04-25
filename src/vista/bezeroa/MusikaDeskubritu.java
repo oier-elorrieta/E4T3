@@ -26,6 +26,7 @@ public class MusikaDeskubritu extends JFrame {
 	private DefaultTableModel model;
 	
 	MusikariaDao musikariadao = new MusikariaDao();
+	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
 
 	/**
 	 * Create the frame.
@@ -45,15 +46,12 @@ public class MusikaDeskubritu extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
+		musikariak = new ArrayList<Musikaria>();
 		
 		/* 	ARRAY DE MUSIKARIAK PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
 		musikariak = musikariadao.getMusikariak();
 		
-		/* TO DELETE */ System.out.println(musikariak);
 		
-		
-
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
 		btnPerfil.addActionListener(new ActionListener() {
@@ -114,7 +112,16 @@ public class MusikaDeskubritu extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(table.getSelectedRow());
+				int index = table.getSelectedRow();
+				String musikariIzena = musikariak.get(index).getIzen_Artistikoa();
+				
+				Musikaria musikaria = null;
+				try {
+					musikaria = musikariadao.getMusikariaByIzena(musikariIzena);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiAlbumDeskubritu(musikaria);
 				dispose();
