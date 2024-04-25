@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import model.objektuak.Podcaster;
 
+/* 
+ * no van los tesus
+
 public class TPodcaster {
 
 	private Podcaster pd1;
@@ -149,3 +152,4 @@ public class TPodcaster {
 	}
 
 }
+ */

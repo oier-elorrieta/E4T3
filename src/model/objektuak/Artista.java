@@ -1,11 +1,12 @@
 package model.objektuak;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 public abstract class Artista {
 	protected String id;
 	protected String izen_Artistikoa;
-	protected String irudia;
+	protected Blob irudia;
 	protected String deskribapena;
 	protected int erreprodukzioak;
 	
@@ -14,7 +15,7 @@ public abstract class Artista {
 		this.erreprodukzioak = erreprodukzioak;
 	}
 	
-	public Artista(String id, String izen_Artistikoa, String irudia, String deskribapena) {
+	public Artista(String id, String izen_Artistikoa, Blob irudia, String deskribapena) {
 		this.id = id;
 		this.izen_Artistikoa = izen_Artistikoa;
 		this.irudia = irudia;
@@ -41,11 +42,11 @@ public abstract class Artista {
 		this.izen_Artistikoa = izen_Artistikoa;
 	}
 	
-	public String getIrudia() {
+	public Blob getIrudia() {
 		return irudia;
 	}
 
-	public void setIrudia(String irudia) {
+	public void setIrudia(Blob irudia) {
 		this.irudia = irudia;
 	}
 
