@@ -123,7 +123,7 @@ public class PodcastDeskubritu extends JFrame {
 		Object[] aux = new Object[2];
 		for (int i = 0 ; i < podcasters.size(); i++) {
 			aux[0] = podcasters.get(i).getIzen_Artistikoa();
-			aux[1] = podcasters.get(i).geterreprodukzioak();
+			aux[1] = podcasters.get(i).getErreprodukzioak();
 			
             model.addRow(aux);
         }

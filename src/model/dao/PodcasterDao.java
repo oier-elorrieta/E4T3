@@ -7,6 +7,14 @@ import model.db.DB_Konexioa;
 import model.objektuak.Podcaster;
 
 public class PodcasterDao {
+	
+	/**
+	 * Podcaster guztiak bilatzen dituen metodo bat da.
+	 * 
+	 * @param Podcaster objetua
+	 * @return ArrayList podcaster
+	 * @throws SQLException
+	 */
 	public ArrayList<Podcaster> getPodcaster() throws SQLException{
 		ArrayList<Podcaster> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();

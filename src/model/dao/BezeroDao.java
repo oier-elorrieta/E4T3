@@ -112,6 +112,7 @@ public class BezeroDao {
 		DB_Konexioa.itxi();
 		return true;
 	}
+	
 	/**
 	 * Premium den erabiltzailearen iraungitze data 
 	 * 
@@ -119,7 +120,6 @@ public class BezeroDao {
 	 * @return True bada erabiltzailea erregistratuta dagoen eta False bestela
 	 * @throws SQLException
 	 */
-	
 	private void erregistratuPremium(Connection conex, String erabiltzailea, Date iraungitzeData) throws SQLException {
 		Statement statement = conex.createStatement();
 		
@@ -129,6 +129,13 @@ public class BezeroDao {
 		statement.executeUpdate(konsulta);
 	}
 	
+	/**
+	 * Erabiltzailea null ez bada, erabiltzaile duplikatu arren update egiteko.
+	 * 
+	 * @param update Bezero objektua
+	 * @return True badaude datu-basean eta pasahitza egokia bada 
+	 * @throws SQLException
+	 */
 	public boolean updateErabiltzailea(Bezero update) throws SQLException {
 		Connection conex = DB_Konexioa.bezeroa();
 

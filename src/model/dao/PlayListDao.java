@@ -8,6 +8,14 @@ import model.db.DB_Konexioa;
 import model.objektuak.PlayList;
 
 public class PlayListDao {
+	
+	/**
+	 * Bezero baten playlist dituen bilatzen dituen metodo bat da.
+	 * 
+	 * @param Playlist objetua
+	 * @return ArrayList playlist
+	 * @throws SQLException
+	 */
 	public ArrayList<PlayList> getPlayListak() throws SQLException{
 		ArrayList<PlayList> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();

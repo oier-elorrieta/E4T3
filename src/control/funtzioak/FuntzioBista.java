@@ -80,7 +80,7 @@ public class FuntzioBista {
 	}
 
 	/**
-	 * BezeroMenu bista irekitzen duen metodoa.
+	 * MusikaDeskubritu bista irekitzen duen metodoa.
 	 */
 	public static void irekiMusikaDeskubritu() {
 		try {
@@ -92,7 +92,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * BezeroMenu bista irekitzen duen metodoa.
+	 * PodcastDeskubritu bista irekitzen duen metodoa.
 	 */
 	public static void irekiPodcastDeskubritu() {
 		try {
@@ -104,7 +104,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * BezeroMenu bista irekitzen duen metodoa.
+	 * NirePlaylist bista irekitzen duen metodoa.
 	 */
 	public static void irekiNirePlaylist() {
 		try {
@@ -116,7 +116,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * BezeroMenu bista irekitzen duen metodoa.
+	 * AlbumDeskubritu bista irekitzen duen metodoa.
 	 */
 	public static void irekiAlbumDeskubritu(Musikaria musikaria) {
 		try {

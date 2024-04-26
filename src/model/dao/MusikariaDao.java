@@ -7,6 +7,14 @@ import model.db.DB_Konexioa;
 import model.objektuak.Musikaria;
 
 public class MusikariaDao {
+	
+	/**
+	 * Musikari guztiak bilatzen dituen metodoa da.
+	 * 
+	 * @param Musikaria objetua
+	 * @return ArrayList musikaria-koa
+	 * @throws SQLException
+	 */
 	public ArrayList<Musikaria> getMusikariak() throws SQLException{
 		ArrayList<Musikaria> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
@@ -27,6 +35,13 @@ public class MusikariaDao {
 		return retArray;
 	}
 	
+	/**
+	 * Musikari konkretu bat izenarekin bilatzen duen metodoa da.
+	 * 
+	 * @param Musikaria objetua
+	 * @return Musikaria objetua
+	 * @throws SQLException
+	 */
 	public Musikaria getMusikariaByIzena(String izena) throws SQLException{
 		Musikaria musikariaRet;
 		
