@@ -1,5 +1,6 @@
 package model.objektuak;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 public abstract class Audio {
@@ -7,7 +8,7 @@ public abstract class Audio {
 	protected String idAudio;
 	protected String izena;
 	protected int iraupena;
-	protected String irudia;
+	protected Blob irudia;
 
 	/**
      * Audio objektu bat sortzen du bere identifikadorearekin, izenarekin,
@@ -16,9 +17,9 @@ public abstract class Audio {
      * @param idAudio Audioaren identifikadorea
      * @param izena Audioaren izena
      * @param iraupena Audioaren iraupena segundoetan
-     * @param irudia Audioaren irudia
+     * @param irudia2 Audioaren irudia
      */
-    public Audio(String idAudio, String izena, int iraupena, String irudia) {
+    public Audio(String idAudio, String izena, int iraupena, Blob irudia) {
         this.idAudio = idAudio;
         this.izena = izena;
         this.iraupena = iraupena;
@@ -84,7 +85,7 @@ public abstract class Audio {
      * 
      * @return Audioaren irudia
      */
-    public String getIrudia() {
+    public Blob getIrudia() {
         return irudia;
     }
 
@@ -93,7 +94,7 @@ public abstract class Audio {
      * 
      * @param irudia Audioaren irudia
      */
-    public void setIrudia(String irudia) {
+    public void setIrudia(Blob irudia) {
         this.irudia = irudia;
     }
 

@@ -1,5 +1,7 @@
 package model.objektuak;
 
+import java.sql.Blob;
+
 public class Podcast extends Audio {
 
 	private String kolaboratzaileak;
@@ -16,7 +18,7 @@ public class Podcast extends Audio {
      * @param kolaboratzaileak Podcast-eko kolaboratzaileen izenak
      * @param podcaster Podcast-eko podcasterra
      */
-    public Podcast(String idAudio, String izena, int iraupena, String irudia, String kolaboratzaileak, Podcaster podcaster) {
+    public Podcast(String idAudio, String izena, int iraupena, Blob irudia, String kolaboratzaileak, Podcaster podcaster) {
         super(idAudio, izena, iraupena, irudia);
         this.kolaboratzaileak = kolaboratzaileak;
         this.podcaster = podcaster;
