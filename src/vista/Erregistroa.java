@@ -159,9 +159,6 @@ public class Erregistroa extends JFrame {
 			int index = Funtzioak.getIndexFromHizkuntzak(hizkuntzak,Aldagaiak.erabiltzailea.getHizkuntza());
 			
 			comboBoxHizkuntza.setSelectedIndex(index);
-			
-
-		
 
 		}
 

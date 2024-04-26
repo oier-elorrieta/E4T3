@@ -116,8 +116,7 @@ public class MusikaDeskubritu extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
 				String musikariIzena = musikariak.get(index).getIzen_Artistikoa();
-				System.out.println(musikariak.get(index).getIzen_Artistikoa());
-				System.out.println(musikariak);
+				
 				
 				Musikaria musikaria = null;
 				try {

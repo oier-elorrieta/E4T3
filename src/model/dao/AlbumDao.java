@@ -39,4 +39,25 @@ public class AlbumDao {
 		DB_Konexioa.itxi();
 		return retArray;
 	}
+	
+	public Album getAlbumById(String id) throws SQLException{
+		Album albumRet;
+		
+		Connection conex = DB_Konexioa.bezeroa();
+
+		Statement sentencia = conex.createStatement();
+
+		String kontsulta = "select * from AlbumInfo where ID_Album = '" + id + "';";
+		ResultSet albuma = sentencia.executeQuery(kontsulta);
+		
+		albuma.next();
+		
+		albumRet = new Album(albuma.getString("ID_Album"), albuma.getString("Izenburua"), albuma.getDate("Urtea"), albuma.getInt("AbestiKop"), albuma.getInt("Iraupena"), albuma.getBlob("Irudia"));
+		
+		DB_Konexioa.itxi();
+		
+		return albumRet;
+		
+	}
 }
+
