@@ -10,6 +10,16 @@ import model.objektuak.*;
 
 
 public class AlbumDao {
+	
+	/**
+	 * Albumen ID_Album, Izenburua eta abesti kopuru kontzultatzen duen metodoa da.
+	 * 
+	 * @param ID_Album -> ID_Album 
+	 * @param Izenburua -> Albumanen izena
+	 * @param abesti_kopuru -> Album horrek zenbat abesti dituen
+	 * @return ArrayList albumekoa y datu ditu bakoitzak ID_Album, Izenburua eta Abestiak
+	 * @throws SQLException
+	 */
 	public ArrayList<Album> getAlbumakByMusikaria(Musikaria musikaria) throws SQLException {
 		ArrayList<Album> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();

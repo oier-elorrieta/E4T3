@@ -136,7 +136,7 @@ public class MusikaDeskubritu extends JFrame {
 		Object[] aux = new Object[2];
 		for (int i = 0 ; i < musikariak.size(); i++) {
 			aux[0] = musikariak.get(i).getIzen_Artistikoa();
-			aux[1] = musikariak.get(i).geterreprodukzioak();
+			aux[1] = musikariak.get(i).getErreprodukzioak();
 			
             model.addRow(aux);
         }
