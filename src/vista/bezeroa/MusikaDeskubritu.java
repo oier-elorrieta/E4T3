@@ -33,6 +33,7 @@ public class MusikaDeskubritu extends JFrame {
 	 * @throws SQLException 
 	 */
 	public MusikaDeskubritu() throws SQLException {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);

@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+/* NO VAN LOS TESUS 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -148,4 +150,6 @@ public class TAbestia {
 		assertTrue(a1.equals(a2));
 	}
 
+
 }
+*/

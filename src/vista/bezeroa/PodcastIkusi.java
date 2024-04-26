@@ -173,17 +173,19 @@ public class PodcastIkusi extends JFrame {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
+		/*
 		ImageIcon icon = null;
 		try {
-			//icon = new ImageIcon(podcasts.getIrudia().getBytes(1, (int) podcasts.getIrudia().length()));
+			icon = new ImageIcon(podcasts.getIrudia().getBytes(1, (int) podcasts.getIrudia().length()));
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			 TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		*/
 		
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIrudia.setIcon(icon);
+		// lblIrudia.setIcon(icon);
 		panel_5.add(lblIrudia, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_10 = new JLabel(" ");

@@ -31,8 +31,11 @@ public class PodcastDao {
 		Podcast PodcastAux;
 
 		while (podcasts.next()) {
+			/*
+			 * --TO CHANGE-- 
 			PodcastAux = new Podcast(podcasts.getString("ID_Audio"), podcasts.getString("Kolaboratzailea"), podcasts.getString("ID_Podcaster"));
 			retArray.add(PodcastAux);
+			*/
 		}
 
 		DB_Konexioa.itxi();

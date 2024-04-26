@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.Aldagaiak;
 import model.objektuak.Abestia;
+import model.objektuak.Album;
 import model.objektuak.Musikaria;
 import model.objektuak.Podcast;
 import vista.*;
