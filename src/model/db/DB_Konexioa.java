@@ -8,8 +8,11 @@ import java.sql.*;
 public class DB_Konexioa {
 
 	private static final String url = "jdbc:mysql://10.5.6.220:3306/DB_Sprotify"; // Datu-basearen URL-a
-	private static final String user = "username"; // Datu-basearen erabiltzailea
-	private static final String pass = "password"; // Datu-basearen pasahitza
+	private static final String userBezero = "username"; // Datu-basearen erabiltzailea
+	private static final String passBezero = "password"; // Datu-basearen pasahitza
+
+	private static final String userAdmin = "Admin"; // Datu-basearen erabiltzailea
+	private static final String passAdmin = "Admin12345."; // Datu-basearen pasahitza
 
 	private static Connection conexioa; // Konexioa gordetzeko aldagaia
 
@@ -22,7 +25,7 @@ public class DB_Konexioa {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			conexioa = DriverManager.getConnection(url, user, pass);
+			conexioa = DriverManager.getConnection(url, userBezero, passBezero);
 
 			return conexioa;
 
@@ -43,7 +46,9 @@ public class DB_Konexioa {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			conexioa = DriverManager.getConnection(url, user, pass);
+			conexioa = DriverManager.getConnection(url, userAdmin, passAdmin);
+			
+			return conexioa;
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

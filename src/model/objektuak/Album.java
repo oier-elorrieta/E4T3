@@ -1,5 +1,6 @@
 package model.objektuak;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -10,20 +11,20 @@ public class Album {
 	private String izenburua;
 	private Date urtea;
 	private String generoa;
-	private String irudia;
+	private Blob irudia;
 	private int kontAbestiak;
+	private int iraupena;
 	private Musikaria musikaria;
 	private ArrayList<Abestia> abestiak;
+	
 
-	public Album(String id, String izenburua, Date urtea, String generoa, String irudia, Musikaria musikaria,
-			ArrayList<Abestia> abestiak) {
+	public Album(String id, String izenburua, Date urtea, int kontAbestiak, int iraupena ,Blob irudia) {
 		this.id = id;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
-		this.generoa = generoa;
+		this.kontAbestiak = kontAbestiak;
+		this.iraupena = iraupena;
 		this.irudia = irudia;
-		this.musikaria = musikaria;
-		this.abestiak = abestiak;
 	}
 	
 	public Album(String id, String izenburua,int kontAbestiak) {
@@ -72,11 +73,11 @@ public class Album {
 		this.generoa = generoa;
 	}
 
-	public String getIrudia() {
+	public Blob getIrudia() {
 		return irudia;
 	}
 
-	public void setIrudia(String irudia) {
+	public void setIrudia(Blob irudia) {
 		this.irudia = irudia;
 	}
 

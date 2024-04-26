@@ -36,13 +36,14 @@ public class BezeroDao {
 			return false;
 		}
 		if (BCrypt.checkpw(pasahitza, erabiltzaileak.getString("Pasahitza"))) {
-			String pass = erabiltzaileak.getString("Pasahitza");
-			pass = Funtzioak.enkriptatzailea(pass);
+			
+			
 			if(erabiltzaileak.getString("Mota").equals("Free")) {
 				Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getInt("ID_Bezeroa"), erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
 						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
 			} else {
+				
 				Date iraungitzeData = premiumOrdua(conex,erabiltzaileak.getInt("ID_Bezeroa"));
 				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getInt("ID_Bezeroa"), erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
 						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,

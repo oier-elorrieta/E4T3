@@ -110,24 +110,28 @@ public class AlbumDeskubritu extends JFrame {
 		table.setRowHeight(25);
 		panelAlbumTabla.add(table, BorderLayout.CENTER);
 		table.getTableHeader().setReorderingAllowed(false);
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
+		
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-				String albumIzena = albumak.get(index).getIzenburua();
+				String albumID = albumak.get(index).getId();
 				
-//				Musikaria musikaria = null;
-//				try {
-//					musikaria = albumak.getMusikariaByIzena(musikariIzena);
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				Album album = null;
+				try {
+					album = albumdao.getAlbumById(albumID);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiAlbumDeskubritu(musikaria);
 				dispose();
+			
 			}
 		});
+			
 		model.setColumnIdentifiers(stringAux);
 		
 		Object[] aux = new Object[2];
@@ -182,6 +186,7 @@ public class AlbumDeskubritu extends JFrame {
 		ImageIcon icon = null;
 		try {
 			icon = new ImageIcon(musikaria.getIrudia().getBytes(1, (int) musikaria.getIrudia().length()));
+			System.out.println(musikaria.getIrudia());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
