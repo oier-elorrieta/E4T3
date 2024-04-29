@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import model.Aldagaiak;
 import model.objektuak.Abestia;
-import model.objektuak.Album;
 import model.objektuak.Musikaria;
 import model.objektuak.Podcast;
+import model.objektuak.Podcaster;
 import vista.*;
 import vista.bezeroa.*;
 
@@ -45,6 +45,10 @@ public class FuntzioBista {
 	public static void resoluzioa(int x, int y) {
 		Aldagaiak.resolucionX = x;
 		Aldagaiak.resolucionY = y;
+		if (x < 1000 || y < 650) {
+			Aldagaiak.resolucionX = 1000;
+			Aldagaiak.resolucionY = 650;
+		}
 	}
 
 	/**
@@ -134,7 +138,7 @@ public class FuntzioBista {
 	/**
 	 * AlbumDeskubritu bista irekitzen duen metodoa.
 	 */
-	public static void irekiPodcastIkusi(ArrayList<Podcast> podcasts) {
+	public static void irekiPodcastIkusi(Podcaster podcasts) {
 		try {
 			PodcastIkusi frame = new PodcastIkusi(podcasts);
 			frame.setVisible(true);

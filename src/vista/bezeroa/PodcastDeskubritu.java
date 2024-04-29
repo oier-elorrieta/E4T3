@@ -22,6 +22,7 @@ public class PodcastDeskubritu extends JFrame {
 	private JTable table;
 	private DefaultTableModel model;
 	PodcasterDao podcasterdao = new PodcasterDao();
+	ArrayList<Podcaster> podcasters;
 
 	/**
 	 * Create the frame.
@@ -41,7 +42,7 @@ public class PodcastDeskubritu extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		ArrayList<Podcaster> podcasters = new ArrayList<Podcaster>();
+		podcasters = new ArrayList<Podcaster>();
 	
 		
 		/* 	ARRAY DE PODCASTERS PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
@@ -115,6 +116,20 @@ public class PodcastDeskubritu extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println(table.getSelectedRow());
+				int index = table.getSelectedRow();
+				String podcasterIzena = podcasters.get(index).getIzen_Artistikoa();
+				System.out.println(podcasterIzena);
+				
+				Podcaster podcast = null;
+				try {
+					podcast = podcasterdao.getPodcasterByIzena(podcasterIzena);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiPodcastIkusi(podcast);
+				dispose();
 			}
 		});
 		model.setColumnIdentifiers(stringAux);

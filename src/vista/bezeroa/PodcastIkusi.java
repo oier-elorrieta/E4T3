@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
+import model.dao.PodcastDao;
 import model.objektuak.Musikaria;
 import java.awt.GridLayout;
 import javax.swing.JTable;
@@ -34,14 +35,14 @@ public class PodcastIkusi extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model;
-	AlbumDao albumdao = new AlbumDao();
-
+	PodcastDao podcastDao = new PodcastDao();
+	ArrayList <Podcast> podcastList;
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public PodcastIkusi(ArrayList<Podcast> podcasts) throws SQLException {
+	public PodcastIkusi(Podcaster podcasts) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -50,6 +51,9 @@ public class PodcastIkusi extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		podcastList = new ArrayList<Podcast>();
+		podcastList = podcastDao.getPodcastById(podcasts);
 		
 		
 		JPanel panelHeader = new JPanel();
@@ -107,8 +111,8 @@ public class PodcastIkusi extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-				@SuppressWarnings("unused")
-				String albumIzena = podcasts.get(index) + "";
+//				@SuppressWarnings("unused")
+//				String albumIzena = podcasts.get(index) + "";
 				
 //				Musikaria musikaria = null;
 //				try {
@@ -125,8 +129,8 @@ public class PodcastIkusi extends JFrame {
 		model.setColumnIdentifiers(stringAux);
 		
 		Object[] aux = new Object[2];
-		for (int i = 0 ; i < podcasts.size(); i++) {
-			//aux[0] = podcasts.get(i).getIzenburua() + " (" + podcasts.get(i).getKontAbestiak() + ")";
+		for (int i = 0 ; i < podcastList.size(); i++) {
+			aux[0] = podcastList.get(i).getIzena() + " (" + podcastList.get(i).getIraupena() + ")";
 			System.out.println(aux);
             model.addRow(aux);
         }

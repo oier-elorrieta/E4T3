@@ -4,7 +4,7 @@ import java.sql.Blob;
 
 public class Podcast extends Audio {
 
-	private String kolaboratzaileak;
+	private String kolaboratzaileak; 
 	private Podcaster podcaster;
 
 	/**
@@ -22,6 +22,11 @@ public class Podcast extends Audio {
         super(idAudio, izena, iraupena, irudia);
         this.kolaboratzaileak = kolaboratzaileak;
         this.podcaster = podcaster;
+    }
+    
+    public Podcast(String idAudio, String kolaboratzaileak) {
+    	super(idAudio);
+    	this.kolaboratzaileak = kolaboratzaileak;
     }
 
     /**

@@ -26,7 +26,7 @@ public class MusikaDeskubritu extends JFrame {
 	private DefaultTableModel model;
 	
 	MusikariaDao musikariadao = new MusikariaDao();
-	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
+	ArrayList<Musikaria> musikariak;
 
 	/**
 	 * Create the frame.
