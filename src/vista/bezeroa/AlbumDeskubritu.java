@@ -131,7 +131,7 @@ public class AlbumDeskubritu extends JFrame {
 					e1.printStackTrace();
 				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiAlbumDeskubritu(musikaria);
+				FuntzioBista.irekiMusikaIkusi(musikaria, album);
 				dispose();
 			
 			}

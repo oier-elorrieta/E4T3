@@ -1,6 +1,9 @@
 package model.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.db.DB_Konexioa;
@@ -8,8 +11,7 @@ import model.objektuak.Abestia;
 import model.objektuak.Album;
 import model.objektuak.Audio;
 
-public class AudioDao {
-	
+public class AbestiaDao {
 	
 	/**
 	 * Albumen ID_Album, Izenburua eta abesti kopuru kontzultatzen duen metodoa da.
@@ -20,7 +22,7 @@ public class AudioDao {
 	 * @return ArrayList albumekoa y datu ditu bakoitzak ID_Album, Izenburua eta Abestiak
 	 * @throws SQLException
 	 */
-	public ArrayList<Audio> getAudio(Album album) throws SQLException {
+	public ArrayList<Audio> getAbestiaByAlbumId(Album album) throws SQLException {
 		ArrayList<Audio> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
 
@@ -40,4 +42,3 @@ public class AudioDao {
 		return retArray;
 	}
 }
-

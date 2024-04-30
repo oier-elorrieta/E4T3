@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import model.dao.AbestiaDao;
 import model.dao.AlbumDao;
 import model.dao.PodcastDao;
 import model.objektuak.Musikaria;
@@ -35,14 +36,14 @@ public class MusikaIkusi extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model;
-	PodcastDao podcastDao = new PodcastDao();
-	ArrayList <Audio> audioList;
+	AbestiaDao abestiDao = new AbestiaDao();
+	ArrayList <Audio> abestiList;
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public MusikaIkusi(Podcaster podcasts) throws SQLException {
+	public MusikaIkusi(Musikaria musikaria, Album album) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -52,8 +53,8 @@ public class MusikaIkusi extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		audioList = new ArrayList<Audio>();
-		audioList = podcastDao.getPodcastByPodcasterId(podcasts);
+		abestiList = new ArrayList<Audio>();
+		abestiList = abestiDao.getAbestiaByAlbumId(album);
 		
 		
 		JPanel panelHeader = new JPanel();
@@ -79,13 +80,13 @@ public class MusikaIkusi extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiAlbumDeskubritu(null);
+				FuntzioBista.irekiAlbumDeskubritu(musikaria);
 				dispose();
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 		
-		JLabel lblNewLabel = new JLabel(podcasts.getIzen_Artistikoa() + "-aren musika");
+		JLabel lblNewLabel = new JLabel(album.getIzenburua() + "-aren musika");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
@@ -110,17 +111,17 @@ public class MusikaIkusi extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int index = table.getSelectedRow();
-				@SuppressWarnings("unused")
-				String podcastIzena = podcasts.get(index) + "";
-				
-				Podcast podcast = null;
-				try {
-					podcast = podcasts.getIzen_Artistikoa(podcastIzena);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				int index = table.getSelectedRow();
+//				@SuppressWarnings("unused")
+//				String podcastIzena = album.get(index) + "";
+//				
+//				Podcast podcast = null;
+//				try {
+//					podcast = album.getIzenburua(podcastIzena);
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErreprodukzioa(null);
 				dispose();
@@ -129,12 +130,12 @@ public class MusikaIkusi extends JFrame {
 		model.setColumnIdentifiers(stringAux);
 		
 		Object[] aux = new Object[2];
-		for (int i = 0 ; i < podcastList.size(); i++) {
-			aux[0] = podcastList.get(i).getIzena() + " (" + podcastList.get(i).getIraupena() + ")";
-			System.out.println(podcastList);
+		for (int i = 0 ; i < abestiList.size(); i++) {
+			aux[0] = abestiList.get(i).getIzena() + " (" + abestiList.get(i).getIraupena() + ")";
+			System.out.println(abestiList);
             model.addRow(aux);
         }
-		System.out.println(podcasts);
+		System.out.println(abestiList);
 		
 		JLabel lblNewLabel_1 = new JLabel(" ");
 		panelPodcastTabla.add(lblNewLabel_1, BorderLayout.NORTH);
@@ -177,15 +178,12 @@ public class MusikaIkusi extends JFrame {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		/*
 		ImageIcon icon = null;
 		try {
-			icon = new ImageIcon(podcasts.getIrudia().getBytes(1, (int) podcasts.getIrudia().length()));
+			icon = new ImageIcon(album.getIrudia().getBytes(1, (int) album.getIrudia().length()));
 		} catch (SQLException e1) {
-			 TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		*/
 		
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
