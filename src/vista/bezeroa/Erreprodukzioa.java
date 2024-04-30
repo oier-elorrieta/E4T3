@@ -13,8 +13,6 @@ import model.Aldagaiak;
 import model.dao.*;
 import model.objektuak.*;
 
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;;
 
 
@@ -31,7 +29,7 @@ public class Erreprodukzioa extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public Erreprodukzioa(Abestia abestia) throws SQLException {
+	public Erreprodukzioa(Audio audio) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Erreprodukzioa.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -44,11 +42,6 @@ public class Erreprodukzioa extends JFrame {
 		JPanel panelHeader = new JPanel();
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
-		
-		musikariak = new ArrayList<Musikaria>();
-		
-		/* 	ARRAY DE MUSIKARIAK PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
-		musikariak = musikariadao.getMusikariak();
 		
 		
 		// Erabiltzailearen izena bistaratzeko botoia
@@ -130,6 +123,14 @@ public class Erreprodukzioa extends JFrame {
 		JTextPane textPaneInformazioa = new JTextPane();
 		panelInformazioa.add(textPaneInformazioa);
 		
+		ImageIcon icon = null;
+		try {
+			icon = new ImageIcon(audio.getIrudia().getBytes(1, (int) audio.getIrudia().length()));
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		JPanel panelIrudia = new JPanel();
 		panelKontenidoa.add(panelIrudia, BorderLayout.CENTER);
 		panelIrudia.setLayout(new BorderLayout(0, 0));
@@ -164,7 +165,7 @@ public class Erreprodukzioa extends JFrame {
 		
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIrudia.setIcon(new ImageIcon(Erreprodukzioa.class.getResource("/model/img/Logo.PNG")));
+		lblIrudia.setIcon(icon);
 		panelIrudia.add(lblIrudia, BorderLayout.CENTER);
 		
 		String[] stringAux = {"Musikaria", "Erreprodukzioa"};

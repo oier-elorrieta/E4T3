@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.Aldagaiak;
 import model.objektuak.Abestia;
+import model.objektuak.Audio;
 import model.objektuak.Musikaria;
 import model.objektuak.Podcast;
 import model.objektuak.Podcaster;
@@ -150,9 +151,9 @@ public class FuntzioBista {
 	/**
 	 * AlbumDeskubritu bista irekitzen duen metodoa.
 	 */
-	public static void irekiErreprodukzioa(Abestia abestia) {
+	public static void irekiErreprodukzioa(Audio audio) {
 		try {
-			Erreprodukzioa frame = new Erreprodukzioa(abestia);
+			Erreprodukzioa frame = new Erreprodukzioa(audio);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
