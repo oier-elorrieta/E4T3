@@ -40,12 +40,14 @@ public class PodcasterDao {
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from podcastDeskubritu where Podcasterra = '" + izena + "';";
+		String kontsulta = "select * from Podcaster where Izen_Artistikoa = '" + izena + "';";
 		ResultSet podcaster = sentencia.executeQuery(kontsulta);
+		
+		podcaster.next();
 
 		Podcaster podcasterAux;
 
-		podcasterAux = new Podcaster(podcaster.getString("Podcasterra"), podcaster.getInt("Erreprodukzioak"));
+		podcasterAux = new Podcaster(podcaster.getString("ID_Podcaster"), podcaster.getString("Izen_Artistikoa"), podcaster.getBlob("Irudia"), podcaster.getString("Deskribapena"));
 
 		DB_Konexioa.itxi();
 		return podcasterAux;

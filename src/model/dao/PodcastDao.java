@@ -19,19 +19,19 @@ public class PodcastDao {
 	 * @return ArrayList albumekoa y datu ditu bakoitzak ID_Album, Izenburua eta Abestiak
 	 * @throws SQLException
 	 */
-	public ArrayList<Podcast> getPodcastById(Podcaster podcaster) throws SQLException {
+	public ArrayList<Podcast> getPodcastByPodcasterId(Podcaster podcaster) throws SQLException {
 		ArrayList<Podcast> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from Podcast where ID_Podcaster ='" + podcaster.getId() + "'";
+		String kontsulta = "select * from PodcastIkusi where ID_Podcaster ='" + podcaster.getId() + "'";
 		ResultSet podcasts = sentencia.executeQuery(kontsulta);
 
 		Podcast PodcastAux;
 
 		while (podcasts.next()) {
-			PodcastAux = new Podcast(podcasts.getString("ID_Audio"), podcasts.getString("Kolaboratzailea"));
+			PodcastAux = new Podcast(podcasts.getString("ID_Audio"), podcasts.getString("Izena"), podcasts.getInt("Iraupena"), podcasts.getString("Kolaboratzaileak"));
 			retArray.add(PodcastAux);
 		}
 

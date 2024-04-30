@@ -53,7 +53,7 @@ public class PodcastIkusi extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		podcastList = new ArrayList<Podcast>();
-		podcastList = podcastDao.getPodcastById(podcasts);
+		podcastList = podcastDao.getPodcastByPodcasterId(podcasts);
 		
 		
 		JPanel panelHeader = new JPanel();
@@ -79,13 +79,13 @@ public class PodcastIkusi extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiMusikaDeskubritu();
+				FuntzioBista.irekiPodcastDeskubritu();
 				dispose();
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 		
-		JLabel lblNewLabel = new JLabel(podcasts.toString() + "-aren Albumak");
+		JLabel lblNewLabel = new JLabel(podcasts.getIzen_Artistikoa() + "-aren podcastak");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
@@ -111,16 +111,16 @@ public class PodcastIkusi extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-//				@SuppressWarnings("unused")
-//				String albumIzena = podcasts.get(index) + "";
+				@SuppressWarnings("unused")
+				String podcastIzena = podcasts.get(index) + "";
 				
-//				Musikaria musikaria = null;
-//				try {
-//					musikaria = albumak.getMusikariaByIzena(musikariIzena);
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				Podcast podcast = null;
+				try {
+					podcast = podcasts.getIzen_Artistikoa(podcastIzena);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErreprodukzioa(null);
 				dispose();
@@ -131,7 +131,7 @@ public class PodcastIkusi extends JFrame {
 		Object[] aux = new Object[2];
 		for (int i = 0 ; i < podcastList.size(); i++) {
 			aux[0] = podcastList.get(i).getIzena() + " (" + podcastList.get(i).getIraupena() + ")";
-			System.out.println(aux);
+			System.out.println(podcastList);
             model.addRow(aux);
         }
 		System.out.println(podcasts);

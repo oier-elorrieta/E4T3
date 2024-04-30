@@ -30,7 +30,13 @@ public abstract class Audio {
         this.idAudio = idAudio;
     }
 
-    /**
+    public Audio(String idAudio, String izena, int iraupena) {
+    	this.idAudio = idAudio;
+        this.izena = izena;
+        this.iraupena = iraupena;
+	}
+
+	/**
      * Audioaren identifikadorea itzultzen du.
      * 
      * @return Audioaren identifikadorea

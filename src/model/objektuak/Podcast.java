@@ -24,9 +24,9 @@ public class Podcast extends Audio {
         this.podcaster = podcaster;
     }
     
-    public Podcast(String idAudio, String kolaboratzaileak) {
-    	super(idAudio);
-    	this.kolaboratzaileak = kolaboratzaileak;
+    public Podcast(String idAudio, String izena, int iraupena, String kolaboratzaileak) {
+        super(idAudio, izena, iraupena);
+        this.kolaboratzaileak = kolaboratzaileak;
     }
 
     /**
