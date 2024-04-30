@@ -11,6 +11,7 @@ import model.objektuak.bezero.Free;
 
 public class TFree {
 	private static Free f1;
+	private static Free f2;
 	private static Date eguna;
 
 	@SuppressWarnings("deprecation")
@@ -18,8 +19,32 @@ public class TFree {
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 18);
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+		f2 = new Free(1, "unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
+	}
+	// ********************** ID **********************
+
+	@Test
+	public void TestGetID() {
+		assertEquals(1, f2.getId());
 	}
 
+	@Test
+	public void TestSetID() {
+		f2.setId(2);
+		assertEquals(2, f2.getId());
+	}
+
+	@Test
+	public void TestGetIDTxarto() {
+		assertNotEquals(2, f2.getId());
+	}
+
+	@Test
+	public void TestSetIDTxarto() {
+		f2.setId(2);
+		assertNotEquals(1, f2.getId());
+	}
+	
 	// ********************** IZENA **********************
 
 	@Test
