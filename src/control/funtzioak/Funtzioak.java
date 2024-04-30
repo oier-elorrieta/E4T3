@@ -75,11 +75,11 @@ public class Funtzioak {
     	if(time >= 3600) {
     		hor = time/ 3600;
     		min = (time % 3600) / 60;
-    		return hor+":"+min;
+    		return hor+"h-"+min+"m";
     	}else {
     		min = time / 60;
     		seg = time % 60;
-    		return min+":"+seg;
+    		return min+"m-"+seg+"s";
     	}
     }
 }

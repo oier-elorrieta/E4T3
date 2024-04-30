@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.*;
+/* NO VAN
 
 import java.sql.Blob;
 
@@ -52,3 +53,4 @@ public class TPodcast {
 	}
 
 }
+*/

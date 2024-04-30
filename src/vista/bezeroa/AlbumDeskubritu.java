@@ -191,7 +191,6 @@ public class AlbumDeskubritu extends JFrame {
 		ImageIcon icon = null;
 		try {
 			icon = new ImageIcon(musikaria.getIrudia().getBytes(1, (int) musikaria.getIrudia().length()));
-			System.out.println(musikaria.getIrudia());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

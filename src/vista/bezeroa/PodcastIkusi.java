@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
+import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
 import model.dao.PodcastDao;
@@ -111,18 +112,13 @@ public class PodcastIkusi extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-				@SuppressWarnings("unused")
-				String podcastIzena = podcasts.get(index) + "";
 				
-				Podcast podcast = null;
-				try {
-					podcast = podcasts.getIzen_Artistikoa(podcastIzena);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				System.out.println(index);
+				
+				Audio audioAux = podcastList.get(index);
+			
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErreprodukzioa(null);
+				FuntzioBista.irekiErreprodukzioa(audioAux);
 				dispose();
 			}
 		});
@@ -130,7 +126,8 @@ public class PodcastIkusi extends JFrame {
 		
 		Object[] aux = new Object[2];
 		for (int i = 0 ; i < podcastList.size(); i++) {
-			aux[0] = podcastList.get(i).getIzena() + " (" + podcastList.get(i).getIraupena() + ")";
+			String iraupena = Funtzioak.secondsToString(podcastList.get(i).getIraupena());
+			aux[0] = podcastList.get(i).getIzena() + " (" + iraupena + ")";
 			System.out.println(podcastList);
             model.addRow(aux);
         }
