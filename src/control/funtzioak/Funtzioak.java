@@ -66,4 +66,20 @@ public class Funtzioak {
         return -1; // Hizkuntza ez bada aurkitu
     }
 
+    
+    public static String secondsToString(int time) {
+    	int hor;
+    	int min;
+    	int seg;
+    	
+    	if(time >= 3600) {
+    		hor = time/ 3600;
+    		min = (time % 3600) / 60;
+    		return hor+":"+min;
+    	}else {
+    		min = time / 60;
+    		seg = time % 60;
+    		return min+":"+seg;
+    	}
+    }
 }
