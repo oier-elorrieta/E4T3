@@ -25,8 +25,18 @@ public abstract class Audio {
         this.iraupena = iraupena;
         this.irudia = irudia;
     }
+    
+    public Audio(String idAudio) {
+        this.idAudio = idAudio;
+    }
 
-    /**
+    public Audio(String idAudio, String izena, int iraupena) {
+    	this.idAudio = idAudio;
+        this.izena = izena;
+        this.iraupena = iraupena;
+	}
+
+	/**
      * Audioaren identifikadorea itzultzen du.
      * 
      * @return Audioaren identifikadorea

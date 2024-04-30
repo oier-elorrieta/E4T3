@@ -27,6 +27,8 @@ public class Podcaster extends Artista {
         super(izena, entzunaldi);
     }
 
+    
+    
     /**
      * Podcaster objektuaren informazio laburra itzultzen du.
      * 

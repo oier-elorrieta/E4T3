@@ -35,23 +35,21 @@ public class PodcasterDao {
 		return retArray;
 	}
 	
-	public ArrayList<Podcaster> getPodcasterByIzena(String izena) throws SQLException{
-		ArrayList<Podcaster> retArray = new ArrayList<>();
+	public Podcaster getPodcasterByIzena(String izena) throws SQLException{
 		Connection conex = DB_Konexioa.bezeroa();
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from podcastDeskubritu where Izen_Artistikoa = '" + izena + "';";
+		String kontsulta = "select * from Podcaster where Izen_Artistikoa = '" + izena + "';";
 		ResultSet podcaster = sentencia.executeQuery(kontsulta);
+		
+		podcaster.next();
 
 		Podcaster podcasterAux;
 
-		while (podcaster.next()) {
-			podcasterAux = new Podcaster(podcaster.getString("Podcasterra"), podcaster.getInt("Erreprodukzioak"));
-			retArray.add(podcasterAux);
-		}
+		podcasterAux = new Podcaster(podcaster.getString("ID_Podcaster"), podcaster.getString("Izen_Artistikoa"), podcaster.getBlob("Irudia"), podcaster.getString("Deskribapena"));
 
 		DB_Konexioa.itxi();
-		return retArray;
+		return podcasterAux;
 	}
 }

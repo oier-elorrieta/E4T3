@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
+import model.dao.PodcastDao;
 import model.objektuak.Musikaria;
 import java.awt.GridLayout;
 import javax.swing.JTable;
@@ -34,14 +35,14 @@ public class PodcastIkusi extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model;
-	AlbumDao albumdao = new AlbumDao();
-
+	PodcastDao podcastDao = new PodcastDao();
+	ArrayList <Podcast> podcastList;
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public PodcastIkusi(ArrayList<Podcast> podcasts) throws SQLException {
+	public PodcastIkusi(Podcaster podcasts) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -50,6 +51,9 @@ public class PodcastIkusi extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		podcastList = new ArrayList<Podcast>();
+		podcastList = podcastDao.getPodcastByPodcasterId(podcasts);
 		
 		
 		JPanel panelHeader = new JPanel();
@@ -75,13 +79,13 @@ public class PodcastIkusi extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiMusikaDeskubritu();
+				FuntzioBista.irekiPodcastDeskubritu();
 				dispose();
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 		
-		JLabel lblNewLabel = new JLabel(podcasts.toString() + "-aren Albumak");
+		JLabel lblNewLabel = new JLabel(podcasts.getIzen_Artistikoa() + "-aren podcastak");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
@@ -108,15 +112,15 @@ public class PodcastIkusi extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
 				@SuppressWarnings("unused")
-				String albumIzena = podcasts.get(index) + "";
+				String podcastIzena = podcasts.get(index) + "";
 				
-//				Musikaria musikaria = null;
-//				try {
-//					musikaria = albumak.getMusikariaByIzena(musikariIzena);
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				Podcast podcast = null;
+				try {
+					podcast = podcasts.getIzen_Artistikoa(podcastIzena);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErreprodukzioa(null);
 				dispose();
@@ -125,9 +129,9 @@ public class PodcastIkusi extends JFrame {
 		model.setColumnIdentifiers(stringAux);
 		
 		Object[] aux = new Object[2];
-		for (int i = 0 ; i < podcasts.size(); i++) {
-			//aux[0] = podcasts.get(i).getIzenburua() + " (" + podcasts.get(i).getKontAbestiak() + ")";
-			System.out.println(aux);
+		for (int i = 0 ; i < podcastList.size(); i++) {
+			aux[0] = podcastList.get(i).getIzena() + " (" + podcastList.get(i).getIraupena() + ")";
+			System.out.println(podcastList);
             model.addRow(aux);
         }
 		System.out.println(podcasts);
