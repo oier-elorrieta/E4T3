@@ -151,9 +151,9 @@ public class FuntzioBista {
 	/**
 	 * AlbumDeskubritu bista irekitzen duen metodoa.
 	 */
-	public static void irekiErreprodukzioa(Audio audio) {
+	public static void irekiErreprodukzioa(ArrayList<Audio> audioList, int index) {
 		try {
-			Erreprodukzioa frame = new Erreprodukzioa(audio);
+			Erreprodukzioa frame = new Erreprodukzioa(audioList, index);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

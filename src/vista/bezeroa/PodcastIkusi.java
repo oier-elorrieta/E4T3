@@ -112,13 +112,18 @@ public class PodcastIkusi extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-				
-				System.out.println(index);
-				
-				Audio audioAux = podcastList.get(index);
 			
+				
+				ArrayList<Audio> audioAux = null;
+				try {
+					audioAux = podcastDao.getPodcastByIzena(podcastList.get(index), podcasts.getId());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErreprodukzioa(audioAux);
+				
+				FuntzioBista.irekiErreprodukzioa(audioAux, index);
 				dispose();
 			}
 		});
