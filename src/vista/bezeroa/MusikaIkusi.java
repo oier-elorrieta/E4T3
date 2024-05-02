@@ -15,11 +15,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
+import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
 import model.dao.AlbumDao;
@@ -28,6 +30,8 @@ import model.objektuak.Musikaria;
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+
 import model.objektuak.*;
 
 public class MusikaIkusi extends JFrame {
@@ -37,11 +41,12 @@ public class MusikaIkusi extends JFrame {
 	private JTable table;
 	private DefaultTableModel model;
 	AbestiaDao abestiDao = new AbestiaDao();
-	ArrayList <Audio> abestiList;
-	
+	ArrayList<Audio> abestiList;
+
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public MusikaIkusi(Musikaria musikaria, Album album) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,15 +57,13 @@ public class MusikaIkusi extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		abestiList = new ArrayList<Audio>();
 		abestiList = abestiDao.getAbestiaByAlbumId(album);
-		
-		
+
 		JPanel panelHeader = new JPanel();
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
-		
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -85,121 +88,126 @@ public class MusikaIkusi extends JFrame {
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
-		
-		JLabel lblNewLabel = new JLabel(album.getIzenburua() + "-aren musika");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
-		
+
+		JLabel lblAlbumIzena = new JLabel(album.getIzenburua() + "-aren musika");
+		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
+
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JPanel panelPodcastTabla = new JPanel();
 		panel_1.add(panelPodcastTabla);
 		panelPodcastTabla.setLayout(new BorderLayout(0, 0));
-		
-		
-		String[] stringAux = {""};
-		
-		model = new DefaultTableModel();
-		table = new JTable(model);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		table.setRowHeight(25);
-		panelPodcastTabla.add(table, BorderLayout.CENTER);
-		table.getTableHeader().setReorderingAllowed(false);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-//				int index = table.getSelectedRow();
-//				@SuppressWarnings("unused")
-//				String podcastIzena = album.get(index) + "";
-//				
-//				Podcast podcast = null;
-//				try {
-//					podcast = album.getIzenburua(podcastIzena);
-//				} catch (SQLException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErreprodukzioa(null);
-				dispose();
-			}
-		});
-		model.setColumnIdentifiers(stringAux);
-		
-		Object[] aux = new Object[2];
-		for (int i = 0 ; i < abestiList.size(); i++) {
-			aux[0] = abestiList.get(i).getIzena() + " (" + abestiList.get(i).getIraupena() + ")";
-			System.out.println(abestiList);
-            model.addRow(aux);
-        }
+
 		System.out.println(abestiList);
-		
+
 		JLabel lblNewLabel_1 = new JLabel(" ");
 		panelPodcastTabla.add(lblNewLabel_1, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel_2 = new JLabel(" ");
 		panelPodcastTabla.add(lblNewLabel_2, BorderLayout.SOUTH);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("      ");
 		panelPodcastTabla.add(lblNewLabel_3, BorderLayout.WEST);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("      ");
 		panelPodcastTabla.add(lblNewLabel_4, BorderLayout.EAST);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JPanel panel_4 = new JPanel();
 		panel_3.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
-		
+
 		JTextPane textPaneDeskripzioa = new JTextPane();
 		textPaneDeskripzioa.setEditable(false);
-		//textPaneDeskripzioa.setText("Mota: " + podcasts.getEzaugarria() + "\n" + podcasts.getDeskribapena());
+		textPaneDeskripzioa.setFocusable(false);
+
+		textPaneDeskripzioa.setText("Deskribapena: " + album.getDeskripzioa());
+
 		panel_4.add(textPaneDeskripzioa, BorderLayout.CENTER);
-		
+
 		JLabel lblNewLabel_5 = new JLabel(" ");
 		panel_4.add(lblNewLabel_5, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel_6 = new JLabel(" ");
 		panel_4.add(lblNewLabel_6, BorderLayout.SOUTH);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("      ");
 		panel_4.add(lblNewLabel_7, BorderLayout.WEST);
-		
+
 		JLabel lblNewLabel_8 = new JLabel("      ");
 		panel_4.add(lblNewLabel_8, BorderLayout.EAST);
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
-		
+
 		ImageIcon icon = null;
-		try {
+		
+		//FALTA FOTO DE ALBUM
+		/*try {
 			icon = new ImageIcon(album.getIrudia().getBytes(1, (int) album.getIrudia().length()));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
-		
+		}*/
+
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
 		// lblIrudia.setIcon(icon);
 		panel_5.add(lblIrudia, BorderLayout.CENTER);
-		
+
 		JLabel lblNewLabel_10 = new JLabel(" ");
 		panel_5.add(lblNewLabel_10, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel_11 = new JLabel("      ");
 		panel_5.add(lblNewLabel_11, BorderLayout.WEST);
-		
+
 		JLabel lblNewLabel_12 = new JLabel(" ");
 		panel_5.add(lblNewLabel_12, BorderLayout.SOUTH);
-		
+
 		JLabel lblNewLabel_13 = new JLabel("      ");
 		panel_5.add(lblNewLabel_13, BorderLayout.EAST);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		panelPodcastTabla.add(scrollPane, BorderLayout.CENTER);
+
+		String[] stringAux = { "ABESTIAK" };
+
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		table.setRowHeight(25);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+
+			public void mouseClicked(MouseEvent e) {
+				int index = table.getSelectedRow();
+
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+
+				FuntzioBista.irekiErreprodukzioa(abestiList, index);
+				dispose();
+			}
+
+		});
+		model.setColumnIdentifiers(stringAux);
+
+		scrollPane.setViewportView(table);
+		Object[] aux = new Object[1];
+		for (int i = 0; i < abestiList.size(); i++) {
+			String iraupena = Funtzioak.secondsToString(abestiList.get(i).getIraupena());
+			aux[0] = abestiList.get(i).getIzena() + " (" + iraupena + ")";
+
+			model.addRow(aux);
+		}
 	}
 }

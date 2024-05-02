@@ -90,10 +90,10 @@ public class PodcastIkusi extends JFrame {
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 		
-		JLabel lblNewLabel = new JLabel(podcaster.getIzen_Artistikoa() + "-aren podcastak");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
+		JLabel lblPodcastIzena = new JLabel(podcaster.getIzen_Artistikoa() + "-aren podcastak");
+		lblPodcastIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblPodcastIzena.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHeader.add(lblPodcastIzena, BorderLayout.CENTER);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -121,11 +121,14 @@ public class PodcastIkusi extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_3.add(panel_4);
+		
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JTextPane textPaneDeskripzioa = new JTextPane();
 		textPaneDeskripzioa.setEditable(false);
-		textPaneDeskripzioa.setText("Deskribapena" + podcaster.getDeskribapena());
+		textPaneDeskripzioa.setFocusable(false);
+		
+		textPaneDeskripzioa.setText("Deskribapena: " + podcaster.getDeskribapena());
 		panel_4.add(textPaneDeskripzioa, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_5 = new JLabel(" ");

@@ -52,7 +52,8 @@ public class AlbumDao {
 		
 		albuma.next();
 		
-		albumRet = new Album(albuma.getString("ID_Album"), albuma.getString("Izenburua"), albuma.getDate("Urtea"), albuma.getInt("AbestiKop"), albuma.getInt("Iraupena"), albuma.getBlob("Irudia"));
+		albumRet = new Album(albuma.getString("ID_Album"), albuma.getString("Izenburua"), albuma.getDate("Urtea"), albuma.getInt("AbestiKop"), 
+				albuma.getInt("Iraupena"), albuma.getBlob("Irudia"), albuma.getString("Deskribapena"));
 		
 		DB_Konexioa.itxi();
 		
