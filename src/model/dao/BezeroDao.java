@@ -69,18 +69,17 @@ public class BezeroDao {
 	
 	private Date premiumOrdua(Connection conex, int idBezero) throws SQLException {
 		Statement statement = conex.createStatement();
-				
-		String kontsulta = "SELECT Iraungitze_data from Premium where ID_bezeroa ="+idBezero+"";
+
+		String kontsulta = "SELECT Iraungitze_data from Premium where ID_bezeroa =" + idBezero + "";
 		ResultSet iraungitzeData = statement.executeQuery(kontsulta);
-		
+
 		iraungitzeData.next();
-		
+
 		Date returnDate = new Date();
 		returnDate = iraungitzeData.getDate("Iraungitze_data");
-		
+
 		return returnDate;
-		
-		
+
 	}
 	
 	/**

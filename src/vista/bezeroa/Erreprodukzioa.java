@@ -36,6 +36,7 @@ public class Erreprodukzioa extends JFrame {
 	File file = null;
 
 	MusikariaDao musikariadao = new MusikariaDao();
+	GustokoaDao gustokoadao = new GustokoaDao();
 	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
 	int indexx = -1;
 	ImageIcon icon = null;
@@ -65,12 +66,12 @@ public class Erreprodukzioa extends JFrame {
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		// ***************************
 		System.out.println(index);
-		 filepath ="\\\\10.5.6.220\\music\\"+ audioList.get(index).getIzena() +".wav";
-		 file = new File(filepath); 
-		 aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile()); 
-		 clip = AudioSystem.getClip(); 
-		 clip.open(aui);
-		 
+		filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
+		file = new File(filepath);
+		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+		clip = AudioSystem.getClip();
+		clip.open(aui);
+
 		
 		
 		// ***************************
@@ -140,7 +141,7 @@ public class Erreprodukzioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int nextIndex = index - 1;
 				if (nextIndex < 0) {
-					nextIndex = audioList.size()-1;
+					nextIndex = audioList.size() - 1;
 				}
 				dispose();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
@@ -171,7 +172,7 @@ public class Erreprodukzioa extends JFrame {
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int nextIndex = index + 1;
-				if(nextIndex > audioList.size()-1) {
+				if (nextIndex > audioList.size() - 1) {
 					nextIndex = 0;
 				}
 				System.out.println(audioList.size());
@@ -182,8 +183,49 @@ public class Erreprodukzioa extends JFrame {
 			}
 		});
 
-		JButton btnGustokoa = new JButton("Gustokoak");
-		panelBotoiak.add(btnGustokoa);
+		if (audioList.get(0).getClass().getSimpleName().equals("Abestia")) {
+			Gustokoa gustokoAux = new Gustokoa(Aldagaiak.erabiltzailea, audioList.get(index));
+			JButton btnGustokoa = new JButton();
+			if (gustokoadao.gustokoaKonprobatu(gustokoAux)) {
+				btnGustokoa.setText("✅");
+			} else {
+				btnGustokoa.setText("❎");
+			}
+
+			panelBotoiak.add(btnGustokoa);
+			btnGustokoa.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					try {
+						if (gustokoadao.gustokoaGehiKen(gustokoAux)) {
+							btnGustokoa.setText("❎");
+							JOptionPane.showMessageDialog(null, "Gustokoetara gehituta", "",
+									JOptionPane.INFORMATION_MESSAGE);
+						} else {
+							btnGustokoa.setText("✅");
+							JOptionPane.showMessageDialog(null, "Gustokoetara kenduta", "",
+									JOptionPane.INFORMATION_MESSAGE);
+
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+			});
+		} else {
+			JButton btnArindu = new JButton("x1");
+			panelBotoiak.add(btnArindu);
+			btnArindu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					
+				}
+			});
+			
+			
+		}
 
 		JPanel panelInformazioa = new JPanel();
 		panelFooter.add(panelInformazioa, BorderLayout.SOUTH);
