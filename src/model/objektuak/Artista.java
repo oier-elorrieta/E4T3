@@ -125,6 +125,8 @@ public abstract class Artista {
     public void setErreprodukzioak(int erreprodukzioak) {
         this.erreprodukzioak = erreprodukzioak;
     }
+    
+    
 
     /**
      * Artista edo taldearen berdintasuna konparatzen du.

@@ -115,10 +115,8 @@ public class PodcastDeskubritu extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(table.getSelectedRow());
 				int index = table.getSelectedRow();
 				String podcasterIzena = podcasters.get(index).getIzen_Artistikoa();
-				System.out.println(podcasterIzena);
 				
 				Podcaster podcast = null;
 				try {

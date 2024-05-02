@@ -20,8 +20,8 @@ public class PodcastDao {
 	 *         Abestiak
 	 * @throws SQLException
 	 */
-	public ArrayList<Podcast> getPodcastByPodcasterId(Podcaster podcaster) throws SQLException {
-		ArrayList<Podcast> retArray = new ArrayList<>();
+	public ArrayList<Audio> getPodcastByPodcasterId(Podcaster podcaster) throws SQLException {
+		ArrayList<Audio> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
 
 		Statement sentencia = conex.createStatement();
@@ -33,7 +33,7 @@ public class PodcastDao {
 
 		while (podcasts.next()) {
 			PodcastAux = new Podcast(podcasts.getString("ID_Audio"), podcasts.getString("Izena"),
-					podcasts.getInt("Iraupena"), podcasts.getString("Kolaboratzaileak"));
+					podcasts.getInt("Iraupena"), podcasts.getString("Kolaboratzaileak"), podcasts.getBlob("Irudia"));
 			retArray.add(PodcastAux);
 		}
 
@@ -41,6 +41,7 @@ public class PodcastDao {
 		return retArray;
 	}
 
+	/*
 	public ArrayList<Audio> getPodcastByIzena(Podcast podcast, String id) throws SQLException {
 		ArrayList<Audio> retArray = new ArrayList<>();
 		Connection conex = DB_Konexioa.bezeroa();
@@ -59,5 +60,6 @@ public class PodcastDao {
 		DB_Konexioa.itxi();
 		return retArray;
 	}
+	*/
 
 }

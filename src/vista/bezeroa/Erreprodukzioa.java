@@ -64,14 +64,14 @@ public class Erreprodukzioa extends JFrame {
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		// ***************************
-		System.out.println(audioList);
-		 filepath ="C:\\Users\\in1dm3-d\\Desktop\\music\\"+ audioList.get(index).getIzena() +".wav";
+		System.out.println(index);
+		 filepath ="\\\\10.5.6.220\\music\\"+ audioList.get(index).getIzena() +".wav";
 		 file = new File(filepath); 
 		 aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile()); 
 		 clip = AudioSystem.getClip(); 
 		 clip.open(aui);
 		 
-		System.out.println(index);
+		
 		
 		// ***************************
 

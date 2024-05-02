@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -24,10 +25,12 @@ import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
 import model.dao.PodcastDao;
-import model.objektuak.Musikaria;
+
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
+
 import model.objektuak.*;
 
 public class PodcastIkusi extends JFrame {
@@ -37,13 +40,13 @@ public class PodcastIkusi extends JFrame {
 	private JTable table;
 	private DefaultTableModel model;
 	PodcastDao podcastDao = new PodcastDao();
-	ArrayList <Podcast> podcastList;
+	ArrayList <Audio> podcastList;
 	
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public PodcastIkusi(Podcaster podcasts) throws SQLException {
+	public PodcastIkusi(Podcaster podcaster) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -53,9 +56,10 @@ public class PodcastIkusi extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		podcastList = new ArrayList<Podcast>();
-		podcastList = podcastDao.getPodcastByPodcasterId(podcasts);
+		podcastList = new ArrayList<Audio>();
+		podcastList = podcastDao.getPodcastByPodcasterId(podcaster);
 		
+
 		
 		JPanel panelHeader = new JPanel();
 		contentPane.add(panelHeader, BorderLayout.NORTH);
@@ -86,7 +90,7 @@ public class PodcastIkusi extends JFrame {
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 		
-		JLabel lblNewLabel = new JLabel(podcasts.getIzen_Artistikoa() + "-aren podcastak");
+		JLabel lblNewLabel = new JLabel(podcaster.getIzen_Artistikoa() + "-aren podcastak");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
@@ -98,45 +102,6 @@ public class PodcastIkusi extends JFrame {
 		JPanel panelPodcastTabla = new JPanel();
 		panel_1.add(panelPodcastTabla);
 		panelPodcastTabla.setLayout(new BorderLayout(0, 0));
-		
-		
-		String[] stringAux = {""};
-		
-		model = new DefaultTableModel();
-		table = new JTable(model);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		table.setRowHeight(25);
-		panelPodcastTabla.add(table, BorderLayout.CENTER);
-		table.getTableHeader().setReorderingAllowed(false);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int index = table.getSelectedRow();
-			
-				
-				ArrayList<Audio> audioAux = null;
-				try {
-					audioAux = podcastDao.getPodcastByIzena(podcastList.get(index), podcasts.getId());
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				
-				FuntzioBista.irekiErreprodukzioa(audioAux, index);
-				dispose();
-			}
-		});
-		model.setColumnIdentifiers(stringAux);
-		
-		Object[] aux = new Object[2];
-		for (int i = 0 ; i < podcastList.size(); i++) {
-			String iraupena = Funtzioak.secondsToString(podcastList.get(i).getIraupena());
-			aux[0] = podcastList.get(i).getIzena() + " (" + iraupena + ")";
-			System.out.println(podcastList);
-            model.addRow(aux);
-        }
-		System.out.println(podcasts);
 		
 		JLabel lblNewLabel_1 = new JLabel(" ");
 		panelPodcastTabla.add(lblNewLabel_1, BorderLayout.NORTH);
@@ -160,7 +125,7 @@ public class PodcastIkusi extends JFrame {
 		
 		JTextPane textPaneDeskripzioa = new JTextPane();
 		textPaneDeskripzioa.setEditable(false);
-		//textPaneDeskripzioa.setText("Mota: " + podcasts.getEzaugarria() + "\n" + podcasts.getDeskribapena());
+		textPaneDeskripzioa.setText("Deskribapena" + podcaster.getDeskribapena());
 		panel_4.add(textPaneDeskripzioa, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_5 = new JLabel(" ");
@@ -179,15 +144,15 @@ public class PodcastIkusi extends JFrame {
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		/*
+		
 		ImageIcon icon = null;
 		try {
-			icon = new ImageIcon(podcasts.getIrudia().getBytes(1, (int) podcasts.getIrudia().length()));
+			icon = new ImageIcon(podcaster.getIrudia().getBytes(1, (int) podcaster.getIrudia().length()));
 		} catch (SQLException e1) {
-			 TODO Auto-generated catch block
+		
 			e1.printStackTrace();
 		}
-		*/
+		
 		
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
@@ -205,5 +170,43 @@ public class PodcastIkusi extends JFrame {
 		
 		JLabel lblNewLabel_13 = new JLabel("      ");
 		panel_5.add(lblNewLabel_13, BorderLayout.EAST);
+		
+		/*----------------------------------------------------------------------------------------------------------------*/
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		panelPodcastTabla.add(scrollPane, BorderLayout.CENTER);
+		
+		String[] stringAux = {"PODCAST"};
+		
+		model = new DefaultTableModel();
+		table = new JTable(model);
+		table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		table.setRowHeight(25);
+		table.setDefaultEditor(Object.class, null);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			
+			public void mouseClicked(MouseEvent e) {
+				int index = table.getSelectedRow();
+				
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				
+				FuntzioBista.irekiErreprodukzioa(podcastList, index);
+				dispose();
+			}
+			
+		});
+		model.setColumnIdentifiers(stringAux);
+			
+		scrollPane.setViewportView(table);
+		Object[] aux = new Object[1];
+		for (int i = 0 ; i < podcastList.size(); i++) {
+			String iraupena = Funtzioak.secondsToString(podcastList.get(i).getIraupena());
+			aux[0] = podcastList.get(i).getIzena() + " (" + iraupena + ")";
+			
+            model.addRow(aux);
+        }
 	}
 }
