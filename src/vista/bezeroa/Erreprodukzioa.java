@@ -143,6 +143,7 @@ public class Erreprodukzioa extends JFrame {
 				if (nextIndex < 0) {
 					nextIndex = audioList.size() - 1;
 				}
+				clip.close();
 				dispose();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 
@@ -175,7 +176,7 @@ public class Erreprodukzioa extends JFrame {
 				if (nextIndex > audioList.size() - 1) {
 					nextIndex = 0;
 				}
-				System.out.println(audioList.size());
+				clip.close();
 				dispose();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 
