@@ -1,6 +1,7 @@
 package vista.interfaseak;
 
 import javax.swing.*;
+import vista.bezeroa.Erreprodukzioa;
 
 import java.awt.BorderLayout;
 
@@ -24,5 +25,7 @@ public class Header extends JFrame {
 		
 		return panel_1;
 	}
+	
+
 
 }

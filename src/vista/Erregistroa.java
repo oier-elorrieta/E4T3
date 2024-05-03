@@ -72,6 +72,7 @@ public class Erregistroa extends JFrame {
 		
 		textFieldJaioData = new JTextField();
 		textFieldJaioData.setColumns(10);
+		textFieldJaioData.setToolTipText("YYYY-MM-DD");
 		textFieldJaioData.setBounds(155, 187, 274, 20);
 		contentPane.add(textFieldJaioData);
 		
