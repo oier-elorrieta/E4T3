@@ -12,6 +12,7 @@ import java.util.TimerTask;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -28,6 +29,7 @@ import javax.swing.table.DefaultTableModel;;
 public class Erreprodukzioa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static final String LineListener = null;
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private boolean entzuten = false;
@@ -74,7 +76,6 @@ public class Erreprodukzioa extends JFrame {
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		// ***************************
-		System.out.println(index);
 		filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
 		file = new File(filepath);
 		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
@@ -92,6 +93,20 @@ public class Erreprodukzioa extends JFrame {
 		});
 		btnPerfil.setSize(325, 20);
 		panelHeader.add(btnPerfil, BorderLayout.EAST);
+
+		if (Aldagaiak.iragarkia) {
+			filepath = "\\\\10.5.6.220\\music\\iragarkiak\\Terranator.wav";
+			Aldagaiak.iragarkia = false;
+
+		} else {
+			filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
+			Aldagaiak.iragarkia = true;
+		}
+		
+		file = new File(filepath);
+		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+		clip = AudioSystem.getClip();
+		clip.open(aui);
 
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
@@ -198,7 +213,7 @@ public class Erreprodukzioa extends JFrame {
 			panelBotoiak.add(btnArindu);
 			btnArindu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (abiaduraKont < abiadura.length-1) {
+					if (abiaduraKont < abiadura.length - 1) {
 						abiaduraKont++;
 
 					} else {
@@ -276,7 +291,7 @@ public class Erreprodukzioa extends JFrame {
 
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.skipSong) {
+				if (Aldagaiak.skipSong && Aldagaiak.iragarkia) {
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					int nextIndex = index + 1;
@@ -295,7 +310,7 @@ public class Erreprodukzioa extends JFrame {
 		});
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.skipSong) {
+				if (Aldagaiak.skipSong && Aldagaiak.iragarkia) {
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					int nextIndex = index - 1;

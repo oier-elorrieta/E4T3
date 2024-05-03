@@ -26,4 +26,5 @@ public class Aldagaiak {
 	
 	public static boolean skipSong = true;
 	
+	public static boolean iragarkia = false;
 }
