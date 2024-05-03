@@ -181,4 +181,13 @@ public class FuntzioBista {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void irekiMenuErreprodukzioa() {
+		try {
+			menuErreprodukzioa frame = new menuErreprodukzioa();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
