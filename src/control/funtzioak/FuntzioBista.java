@@ -172,4 +172,13 @@ public class FuntzioBista {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void irekiIragarkia(ArrayList<Audio> audioList, int index) {
+		try {
+			Iragarkia frame = new Iragarkia(audioList, index);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

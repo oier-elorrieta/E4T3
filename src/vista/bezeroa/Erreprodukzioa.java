@@ -94,20 +94,6 @@ public class Erreprodukzioa extends JFrame {
 		btnPerfil.setSize(325, 20);
 		panelHeader.add(btnPerfil, BorderLayout.EAST);
 
-		if (Aldagaiak.iragarkia) {
-			filepath = "\\\\10.5.6.220\\music\\iragarkiak\\Terranator.wav";
-			Aldagaiak.iragarkia = false;
-
-		} else {
-			filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
-			Aldagaiak.iragarkia = true;
-		}
-		
-		file = new File(filepath);
-		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
-		clip = AudioSystem.getClip();
-		clip.open(aui);
-
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setSize(325, 20);
@@ -291,7 +277,7 @@ public class Erreprodukzioa extends JFrame {
 
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.skipSong && Aldagaiak.iragarkia) {
+				if (Aldagaiak.skipSong) {
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					int nextIndex = index + 1;
@@ -310,23 +296,35 @@ public class Erreprodukzioa extends JFrame {
 		});
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.skipSong && Aldagaiak.iragarkia) {
-					Aldagaiak.skipSong = false;
-					Funtzioak.skipBaimendu();
-					int nextIndex = index - 1;
-					if (nextIndex < 0) {
-						nextIndex = audioList.size() - 1;
-					}
-					clip.close();
+				if (Aldagaiak.iragarkia) {
+					Aldagaiak.iragarkia = false;
 					dispose();
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
-					FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+					FuntzioBista.irekiIragarkia(audioList, index);
+					
+					
 				} else {
-					JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
-				}
+					
+					if (Aldagaiak.skipSong) {
+						Aldagaiak.iragarkia = true;
+						Aldagaiak.skipSong = false;
+						Funtzioak.skipBaimendu();
+						int nextIndex = index - 1;
+						if (nextIndex < 0) {
+							nextIndex = audioList.size() - 1;
+						}
+						clip.close();
+						dispose();
+						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 
+						FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+					} else {
+						JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
+					}
+
+				}
 			}
+
 		});
 
 	}
