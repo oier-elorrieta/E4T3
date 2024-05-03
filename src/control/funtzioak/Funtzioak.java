@@ -2,9 +2,14 @@ package control.funtzioak;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import model.Aldagaiak;
 import model.objektuak.*;
+import vista.bezeroa.*;
 
 /**
  * Erabilgarritasun funtzioak gordetzen dituen klasea.
@@ -75,11 +80,25 @@ public class Funtzioak {
     	if(time >= 3600) {
     		hor = time/ 3600;
     		min = (time % 3600) / 60;
-    		return hor+"h-"+min+"m";
+    		return hor+"h:"+min+"m";
     	}else {
     		min = time / 60;
     		seg = time % 60;
-    		return min+"m-"+seg+"s";
+    		return min+"m:"+seg+"s";
     	}
+    }
+    
+    public static void skipBaimendu() {
+    	
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask() {
+			public void run() {
+				Aldagaiak.skipSong = true;
+				System.out.println("skip");
+			}
+		};
+		
+		timer.schedule(task, 10000);
     }
 }

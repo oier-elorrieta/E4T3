@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -16,6 +18,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
+import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.*;
 import model.objektuak.*;
@@ -40,6 +43,11 @@ public class Erreprodukzioa extends JFrame {
 	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
 	int indexx = -1;
 	ImageIcon icon = null;
+	
+	private JButton btnAurrekoa= new JButton("<");
+	private JButton btnHurrengoa = new JButton(">");
+	private JPanel panelBotoiak = new JPanel();
+	
 
 	/**
 	 * Create the frame.
@@ -72,9 +80,6 @@ public class Erreprodukzioa extends JFrame {
 		clip = AudioSystem.getClip();
 		clip.open(aui);
 
-		
-		
-		// ***************************
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -129,27 +134,11 @@ public class Erreprodukzioa extends JFrame {
 		panelKontenidoa.add(panelFooter, BorderLayout.SOUTH);
 		panelFooter.setLayout(new BorderLayout(0, 0));
 
-		JPanel panelBotoiak = new JPanel();
+		
 		panelFooter.add(panelBotoiak, BorderLayout.CENTER);
 
 		JButton btnMenu = new JButton("Menu");
 		panelBotoiak.add(btnMenu);
-
-		JButton btnAurrekoa = new JButton("<");
-		panelBotoiak.add(btnAurrekoa);
-		btnAurrekoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int nextIndex = index - 1;
-				if (nextIndex < 0) {
-					nextIndex = audioList.size() - 1;
-				}
-				clip.close();
-				dispose();
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
-				FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
-			}
-		});
 
 		JButton btnStartStop = new JButton("Play");
 		panelBotoiak.add(btnStartStop);
@@ -168,21 +157,7 @@ public class Erreprodukzioa extends JFrame {
 			}
 		});
 
-		JButton btnHurrengoa = new JButton(">");
-		panelBotoiak.add(btnHurrengoa);
-		btnHurrengoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int nextIndex = index + 1;
-				if (nextIndex > audioList.size() - 1) {
-					nextIndex = 0;
-				}
-				clip.close();
-				dispose();
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
-				FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
-			}
-		});
+		
 
 		if (audioList.get(0).getClass().getSimpleName().equals("Abestia")) {
 			Gustokoa gustokoAux = new Gustokoa(Aldagaiak.erabiltzailea, audioList.get(index));
@@ -291,6 +266,57 @@ public class Erreprodukzioa extends JFrame {
 			model.addRow(aux);
 		}
 
+			panelBotoiak.add(btnAurrekoa);
+			
+			panelBotoiak.add(btnHurrengoa);
+		
+		
+		btnHurrengoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (Aldagaiak.skipSong) {
+					Aldagaiak.skipSong = false;
+					Funtzioak.skipBaimendu();
+					int nextIndex = index + 1;
+					if (nextIndex > audioList.size() - 1) {
+						nextIndex = 0;
+					}
+					clip.close();
+					dispose();
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+	
+					FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+				}else {
+					JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAurrekoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (Aldagaiak.skipSong) {
+				Aldagaiak.skipSong = false;
+				Funtzioak.skipBaimendu();
+				int nextIndex = index - 1;
+				if (nextIndex < 0) {
+					nextIndex = audioList.size() - 1;
+				}
+				clip.close();
+				dispose();
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+
+				FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+			}else {
+				JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
+			}
+
+			
+			}
+		});
+
+	}
+	
+	public static void gehituSkip(){
+	
+	
 	}
 
 }

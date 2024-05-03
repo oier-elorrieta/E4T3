@@ -24,4 +24,6 @@ public class Aldagaiak {
 	//Logoa
 	public final static String logo = "/model/img/Logo.PNG";
 	
+	public static boolean skipSong = true;
+	
 }

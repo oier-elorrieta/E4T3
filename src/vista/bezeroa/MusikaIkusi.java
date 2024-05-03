@@ -150,16 +150,15 @@ public class MusikaIkusi extends JFrame {
 
 		ImageIcon icon = null;
 		
-		//FALTA FOTO DE ALBUM
-		/*try {
+		try {
 			icon = new ImageIcon(album.getIrudia().getBytes(1, (int) album.getIrudia().length()));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}*/
+		}
 
 		JLabel lblIrudia = new JLabel("");
 		lblIrudia.setHorizontalAlignment(SwingConstants.CENTER);
-		// lblIrudia.setIcon(icon);
+		lblIrudia.setIcon(icon);
 		panel_5.add(lblIrudia, BorderLayout.CENTER);
 
 		JLabel lblNewLabel_10 = new JLabel(" ");
