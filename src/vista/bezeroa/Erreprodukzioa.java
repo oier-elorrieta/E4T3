@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import control.funtzioak.Funtzioak;
+import control.funtzioak.FuntzioakFitxategia;
 import model.Aldagaiak;
 import model.dao.*;
 import model.objektuak.*;
@@ -148,7 +149,14 @@ public class Erreprodukzioa extends JFrame {
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiMenuErreprodukzioa();
 				 } else {
-					 System.out.println("Konpartituta");
+					 try {
+						FuntzioakFitxategia.audioKompartitu(audioList.get(index));
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					 JOptionPane.showMessageDialog(null, "Fitxategia sortuta", "",
+								JOptionPane.INFORMATION_MESSAGE);
 				 }
 			}
 		});
@@ -289,9 +297,12 @@ public class Erreprodukzioa extends JFrame {
 			model.addRow(aux);
 		}
 
+		
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.iragarkia) {
+				if (Aldagaiak.iragarkia && Aldagaiak.skipSong) {
+					Aldagaiak.skipSong = false;
+					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
 					int nextIndex = index + 1;
 					if (nextIndex > audioList.size() - 1) {
@@ -326,7 +337,9 @@ public class Erreprodukzioa extends JFrame {
 		});
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.iragarkia) {
+				if (Aldagaiak.iragarkia && Aldagaiak.skipSong) {
+					Aldagaiak.skipSong = false;
+					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
 					int nextIndex = index - 1;
 					if (nextIndex < 0) {

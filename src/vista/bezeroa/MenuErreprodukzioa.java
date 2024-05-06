@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
 
-public class menuErreprodukzioa extends JFrame {
+public class MenuErreprodukzioa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -29,7 +29,7 @@ public class menuErreprodukzioa extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					menuErreprodukzioa frame = new menuErreprodukzioa();
+					MenuErreprodukzioa frame = new MenuErreprodukzioa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class menuErreprodukzioa extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public menuErreprodukzioa() {
+	public MenuErreprodukzioa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
