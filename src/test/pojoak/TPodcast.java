@@ -1,7 +1,6 @@
 package test.pojoak;
 
 import static org.junit.Assert.*;
-/* NO VAN
 
 import java.sql.Blob;
 
@@ -25,7 +24,7 @@ public class TPodcast {
 		byte[] blobData2 = "Datos de ejemplo2".getBytes();
 		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
 		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
-		pc1 = new Abestia("1", "izena", 120, blob, "kolab", );
+		//pc1 = new Podcast("1", "izena", 120, blob, "kolab", );
 	}
 
 	// ********************** KOLABORATZAILEAK **********************
@@ -53,4 +52,4 @@ public class TPodcast {
 	}
 
 }
-*/
+
