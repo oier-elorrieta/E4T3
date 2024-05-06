@@ -6,13 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -30,7 +27,6 @@ import javax.swing.table.DefaultTableModel;;
 public class Erreprodukzioa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String LineListener = null;
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private boolean entzuten = false;
@@ -52,7 +48,7 @@ public class Erreprodukzioa extends JFrame {
 	private JPanel panelBotoiak = new JPanel();
 	private String[] abiadura = { "x0.5", "x1", "x1.5", "x2" };
 	private int abiaduraKont = 1;
-	private JProgressBar progressBar;
+//	private JProgressBar progressBar;
 	private int entzunda = 0;
 	private int entzundaAux = 0;
 
@@ -258,6 +254,7 @@ public class Erreprodukzioa extends JFrame {
 		panelInformazioa.setLayout(new BorderLayout(0, 0));
 
 		JTextPane textPaneInformazioa = new JTextPane();
+		textPaneInformazioa.setText("Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + audioList.get(index).getIraupena());
 		panelInformazioa.add(textPaneInformazioa);
 
 		try {
