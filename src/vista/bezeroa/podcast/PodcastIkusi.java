@@ -1,35 +1,19 @@
 package vista.bezeroa.podcast;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.funtzioak.FuntzioBista;
-import control.funtzioak.Funtzioak;
+import control.funtzioak.*;
 import model.Aldagaiak;
-import model.dao.AlbumDao;
 import model.dao.PodcastDao;
 
 import java.awt.GridLayout;
-import javax.swing.JTable;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
 
 import model.objektuak.*;
 import vista.bezeroa.musika.MusikaDeskubritu;
@@ -149,6 +133,7 @@ public class PodcastIkusi extends JFrame {
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
 		
+		@SuppressWarnings("unused")
 		ImageIcon icon = null;
 		try {
 			icon = new ImageIcon(podcaster.getIrudia().getBytes(1, (int) podcaster.getIrudia().length()));
@@ -194,9 +179,7 @@ public class PodcastIkusi extends JFrame {
 			
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-				
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				
 				FuntzioBista.irekiErreprodukzioa(podcastList, index);
 				dispose();
 			}

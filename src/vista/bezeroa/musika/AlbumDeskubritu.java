@@ -21,7 +21,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
-import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
 import model.objektuak.Musikaria;
@@ -183,12 +182,9 @@ public class AlbumDeskubritu extends JFrame {
 
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-
 				String albumID = albumak.get(index).getId();
-
 				@SuppressWarnings("unused")
 				String albumIzena = albumak.get(index).getIzenburua();
-
 				Album album = null;
 				try {
 					album = albumdao.getAlbumById(albumID);
@@ -200,7 +196,6 @@ public class AlbumDeskubritu extends JFrame {
 				FuntzioBista.irekiMusikaIkusi(musikaria, album);
 				dispose();
 			}
-
 		});
 		model.setColumnIdentifiers(stringAux);
 

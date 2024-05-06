@@ -1,7 +1,6 @@
 package vista.interfaseak;
 
 import javax.swing.*;
-import vista.bezeroa.Erreprodukzioa;
 
 import java.awt.BorderLayout;
 

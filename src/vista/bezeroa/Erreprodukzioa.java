@@ -144,22 +144,19 @@ public class Erreprodukzioa extends JFrame {
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] options = { "Playlist", "Konpartitu" };
-					int opcion = JOptionPane.showOptionDialog(null, "Zer egin nahi duzu", "", 
-				             JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-				             null, options, options[0]);
-				 if (opcion == 0) {
-						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiMenuErreprodukzioa(audioList.get(index));
-				 } else {
-					 try {
+				int opcion = JOptionPane.showOptionDialog(null, "Zer egin nahi duzu", "", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				if (opcion == 0) {
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+					FuntzioBista.irekiMenuErreprodukzioa(audioList.get(index));
+				} else {
+					try {
 						FuntzioakFitxategia.audioKompartitu(audioList.get(index));
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					 JOptionPane.showMessageDialog(null, "Fitxategia sortuta", "",
-								JOptionPane.INFORMATION_MESSAGE);
-				 }
+					JOptionPane.showMessageDialog(null, "Fitxategia sortuta", "", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		panelBotoiak.add(btnMenu);
@@ -176,32 +173,24 @@ public class Erreprodukzioa extends JFrame {
 					clip.start();
 					btnStartStop.setText("Stop");
 					entzuten = true;
-					
 					Timer timer = new Timer();
-					
-					
 					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
 						entzundaAux = i;
 						System.out.println("Esta pasando " + i);
-						
+
 						final int value = i;
 						TimerTask task = new TimerTask() {
 							public void run() {
 								lblTimer.setText("a" + value);
 							}
 						};
-						
 						timer.schedule(task, 1000);
 						try {
-							//timer.wait(1000);
 							Thread.sleep(1000);
 						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						
-                        
-                    }
+					}
 				} else {
 					clip.stop();
 					btnStartStop.setText("Play");
@@ -268,7 +257,8 @@ public class Erreprodukzioa extends JFrame {
 		panelInformazioa.setLayout(new BorderLayout(0, 0));
 
 		JTextPane textPaneInformazioa = new JTextPane();
-		textPaneInformazioa.setText("Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + audioList.get(index).getIraupena());
+		textPaneInformazioa.setText(
+				"Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + audioList.get(index).getIraupena());
 		panelInformazioa.add(textPaneInformazioa);
 
 		try {
@@ -295,7 +285,7 @@ public class Erreprodukzioa extends JFrame {
 		JPanel panelProgress = new JPanel();
 		panelIrudia.add(panelProgress, BorderLayout.SOUTH);
 		panelProgress.setLayout(new BorderLayout(0, 0));
-		
+
 		lblTimer = new JLabel("a");
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		panelProgress.add(lblTimer, BorderLayout.CENTER);
@@ -332,7 +322,6 @@ public class Erreprodukzioa extends JFrame {
 			model.addRow(aux);
 		}
 
-		
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Aldagaiak.iragarkia && Aldagaiak.skipSong) {
@@ -346,10 +335,9 @@ public class Erreprodukzioa extends JFrame {
 					dispose();
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 					FuntzioBista.irekiIragarkia(audioList, index);
-					
-					
+
 				} else {
-					
+
 					if (Aldagaiak.skipSong) {
 						Aldagaiak.iragarkia = true;
 						Aldagaiak.skipSong = false;
@@ -380,13 +368,10 @@ public class Erreprodukzioa extends JFrame {
 					if (nextIndex < 0) {
 						nextIndex = audioList.size() - 1;
 					}
-					dispose();
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 					FuntzioBista.irekiIragarkia(audioList, index);
-					
-					
+					dispose();
 				} else {
-					
 					if (Aldagaiak.skipSong) {
 						Aldagaiak.iragarkia = true;
 						Aldagaiak.skipSong = false;
@@ -396,19 +381,15 @@ public class Erreprodukzioa extends JFrame {
 							nextIndex = audioList.size() - 1;
 						}
 						clip.close();
-						dispose();
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
 						FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
 					}
-
 				}
 			}
-
 		});
-
 	}
 
 }

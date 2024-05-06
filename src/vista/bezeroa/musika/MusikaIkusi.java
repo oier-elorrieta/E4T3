@@ -24,8 +24,6 @@ import control.funtzioak.FuntzioBista;
 import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
-import model.dao.AlbumDao;
-import model.dao.PodcastDao;
 import model.objektuak.Musikaria;
 
 import java.awt.GridLayout;
@@ -191,9 +189,7 @@ public class MusikaIkusi extends JFrame {
 
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
 				FuntzioBista.irekiErreprodukzioa(abestiList, index);
 				dispose();
 			}
@@ -206,7 +202,6 @@ public class MusikaIkusi extends JFrame {
 		for (int i = 0; i < abestiList.size(); i++) {
 			String iraupena = Funtzioak.secondsToString(abestiList.get(i).getIraupena());
 			aux[0] = abestiList.get(i).getIzena() + " (" + iraupena + ")";
-
 			model.addRow(aux);
 		}
 	}
