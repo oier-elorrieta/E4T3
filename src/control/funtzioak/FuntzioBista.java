@@ -182,9 +182,9 @@ public class FuntzioBista {
 		}
 	}
 	
-	public static void irekiMenuErreprodukzioa() {
+	public static void irekiMenuErreprodukzioa(Audio abestia) {
 		try {
-			MenuErreprodukzioa frame = new MenuErreprodukzioa();
+			MenuErreprodukzioa frame = new MenuErreprodukzioa(abestia);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
