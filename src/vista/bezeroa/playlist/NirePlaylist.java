@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.playlist;
 
 import java.awt.event.*;
 import java.sql.SQLException;

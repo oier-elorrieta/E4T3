@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.musika;
 
 import java.awt.*;
 import java.awt.event.*;

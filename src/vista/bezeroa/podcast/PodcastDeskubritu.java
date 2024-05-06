@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.podcast;
 
 import java.awt.*;
 import java.awt.event.*;

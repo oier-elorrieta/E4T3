@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.musika;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -25,6 +25,7 @@ import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
 import model.objektuak.Musikaria;
+
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
