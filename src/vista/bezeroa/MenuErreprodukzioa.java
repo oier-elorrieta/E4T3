@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.PlayListDao;
 import model.objektuak.*;
@@ -31,7 +32,7 @@ public class MenuErreprodukzioa extends JFrame {
 	 * 
 	 * @throws SQLException
 	 */
-	public MenuErreprodukzioa(Audio abestia) throws SQLException {
+	public MenuErreprodukzioa(ArrayList<Audio> audioList, int index) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Erreprodukzioa.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 650, 400);
@@ -88,12 +89,22 @@ public class MenuErreprodukzioa extends JFrame {
 					JOptionPane.showMessageDialog(null, "Aukeratu Playlist bat mesedez", "", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						playlistDao.insertAbestiaIntoPlayList(playlistList.get(index), abestia);
+						playlistDao.insertAbestiaIntoPlayList(playlistList.get(index), audioList.get(index));
 						JOptionPane.showMessageDialog(null, "Sartuta", "", JOptionPane.INFORMATION_MESSAGE);
 					} catch (SQLException e1) {
 						JOptionPane.showMessageDialog(null, "Musika honek sartuta daukazu", "", JOptionPane.ERROR_MESSAGE);
 					}
 				}
+			}
+		});
+		
+		JButton btnAtzera = new JButton("Atzera");
+		panelBotoia.add(btnAtzera, BorderLayout.EAST);
+		btnAtzera.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			
 			}
 		});
 

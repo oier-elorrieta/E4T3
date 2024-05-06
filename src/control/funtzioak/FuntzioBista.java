@@ -180,9 +180,9 @@ public class FuntzioBista {
 		}
 	}
 	
-	public static void irekiMenuErreprodukzioa(Audio abestia) {
+	public static void irekiMenuErreprodukzioa(ArrayList<Audio> audioList, int index) {
 		try {
-			MenuErreprodukzioa frame = new MenuErreprodukzioa(abestia);
+			MenuErreprodukzioa frame = new MenuErreprodukzioa(audioList, index);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

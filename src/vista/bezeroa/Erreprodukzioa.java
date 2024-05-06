@@ -45,8 +45,8 @@ public class Erreprodukzioa extends JFrame {
 	int indexx = -1;
 	ImageIcon icon = null;
 
-	private JButton btnAurrekoa = new JButton("<");
-	private JButton btnHurrengoa = new JButton(">");
+	private JButton btnAurrekoa = new JButton("⏮");
+	private JButton btnHurrengoa = new JButton("⏭");
 	private JPanel panelBotoiak = new JPanel();
 	private String[] abiadura = { "x0.5", "x1", "x1.5", "x2" };
 	private int abiaduraKont = 1;
@@ -148,8 +148,8 @@ public class Erreprodukzioa extends JFrame {
 						JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 				if (opcion == 0) {
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiMenuErreprodukzioa(audioList.get(index));
-				} else {
+					FuntzioBista.irekiMenuErreprodukzioa(audioList,index);
+				} else if(opcion == 1) {
 					try {
 						FuntzioakFitxategia.audioKompartitu(audioList.get(index));
 					} catch (IOException e1) {
@@ -162,7 +162,7 @@ public class Erreprodukzioa extends JFrame {
 		panelBotoiak.add(btnMenu);
 
 		panelBotoiak.add(btnAurrekoa);
-		JButton btnStartStop = new JButton("Play");
+		JButton btnStartStop = new JButton("▶");
 
 		panelBotoiak.add(btnStartStop);
 		panelBotoiak.add(btnHurrengoa);
@@ -171,8 +171,9 @@ public class Erreprodukzioa extends JFrame {
 
 				if (!entzuten) {
 					clip.start();
-					btnStartStop.setText("Stop");
+					btnStartStop.setText("⏸");
 					entzuten = true;
+					/*
 					Timer timer = new Timer();
 					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
 						entzundaAux = i;
@@ -190,10 +191,12 @@ public class Erreprodukzioa extends JFrame {
 						} catch (InterruptedException e1) {
 							e1.printStackTrace();
 						}
+					
 					}
+					*/
 				} else {
 					clip.stop();
-					btnStartStop.setText("Play");
+					btnStartStop.setText("▶");
 					entzuten = false;
 					entzunda = entzundaAux;
 				}
@@ -258,7 +261,7 @@ public class Erreprodukzioa extends JFrame {
 
 		JTextPane textPaneInformazioa = new JTextPane();
 		textPaneInformazioa.setText(
-				"Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + audioList.get(index).getIraupena());
+				"Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + Funtzioak.secondsToString(audioList.get(index).getIraupena()));
 		panelInformazioa.add(textPaneInformazioa);
 
 		try {
