@@ -147,7 +147,7 @@ public class Erreprodukzioa extends JFrame {
 				             null, options, options[0]);
 				 if (opcion == 0) {
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiMenuErreprodukzioa();
+						FuntzioBista.irekiMenuErreprodukzioa(audioList.get(index));
 				 } else {
 					 try {
 						FuntzioakFitxategia.audioKompartitu(audioList.get(index));
