@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -51,6 +53,7 @@ public class Erreprodukzioa extends JFrame {
 //	private JProgressBar progressBar;
 	private int entzunda = 0;
 	private int entzundaAux = 0;
+	private JLabel lblTimer;
 
 	/**
 	 * Create the frame.
@@ -173,21 +176,32 @@ public class Erreprodukzioa extends JFrame {
 					clip.start();
 					btnStartStop.setText("Stop");
 					entzuten = true;
-//					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
-//						entzundaAux = i;
-//						System.out.println("Esta pasando " + i);
-//                        final int value = i;
-//                        EventQueue.invokeLater(new Runnable() {
-//                            public void run() {
-//                                progressBar.setValue(value);
-//                            }
-//                        });
-//                        try {
-//                            Thread.sleep(1000);
-//                        } catch (Exception p) {
-//                            System.out.println("Algo va mal");
-//                        }
-//                    }
+					
+					Timer timer = new Timer();
+					
+					
+					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
+						entzundaAux = i;
+						System.out.println("Esta pasando " + i);
+						
+						final int value = i;
+						TimerTask task = new TimerTask() {
+							public void run() {
+								lblTimer.setText("a" + value);
+							}
+						};
+						
+						timer.schedule(task, 1000);
+						try {
+							//timer.wait(1000);
+							Thread.sleep(1000);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+                        
+                    }
 				} else {
 					clip.stop();
 					btnStartStop.setText("Play");
@@ -282,7 +296,7 @@ public class Erreprodukzioa extends JFrame {
 		panelIrudia.add(panelProgress, BorderLayout.SOUTH);
 		panelProgress.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTimer = new JLabel("a");
+		lblTimer = new JLabel("a");
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		panelProgress.add(lblTimer, BorderLayout.CENTER);
 

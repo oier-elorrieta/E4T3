@@ -101,4 +101,17 @@ public class Funtzioak {
 		
 		timer.schedule(task, 10000);
     }
+    
+    
+    public static int audioTimer(int zbk) {
+		Timer timer = new Timer();
+		
+		TimerTask task = new TimerTask() {
+			public void run() {
+			}
+		};
+		
+		timer.schedule(task, 1000);
+		return zbk;
+    }
 }
