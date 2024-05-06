@@ -6,13 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -30,7 +27,6 @@ import javax.swing.table.DefaultTableModel;;
 public class Erreprodukzioa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String LineListener = null;
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private boolean entzuten = false;
@@ -52,6 +48,9 @@ public class Erreprodukzioa extends JFrame {
 	private JPanel panelBotoiak = new JPanel();
 	private String[] abiadura = { "x0.5", "x1", "x1.5", "x2" };
 	private int abiaduraKont = 1;
+//	private JProgressBar progressBar;
+	private int entzunda = 0;
+	private int entzundaAux = 0;
 
 	/**
 	 * Create the frame.
@@ -174,10 +173,26 @@ public class Erreprodukzioa extends JFrame {
 					clip.start();
 					btnStartStop.setText("Stop");
 					entzuten = true;
+//					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
+//						entzundaAux = i;
+//						System.out.println("Esta pasando " + i);
+//                        final int value = i;
+//                        EventQueue.invokeLater(new Runnable() {
+//                            public void run() {
+//                                progressBar.setValue(value);
+//                            }
+//                        });
+//                        try {
+//                            Thread.sleep(1000);
+//                        } catch (Exception p) {
+//                            System.out.println("Algo va mal");
+//                        }
+//                    }
 				} else {
 					clip.stop();
 					btnStartStop.setText("Play");
 					entzuten = false;
+					entzunda = entzundaAux;
 				}
 			}
 		});
@@ -239,6 +254,7 @@ public class Erreprodukzioa extends JFrame {
 		panelInformazioa.setLayout(new BorderLayout(0, 0));
 
 		JTextPane textPaneInformazioa = new JTextPane();
+		textPaneInformazioa.setText("Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + audioList.get(index).getIraupena());
 		panelInformazioa.add(textPaneInformazioa);
 
 		try {
@@ -265,9 +281,14 @@ public class Erreprodukzioa extends JFrame {
 		JPanel panelProgress = new JPanel();
 		panelIrudia.add(panelProgress, BorderLayout.SOUTH);
 		panelProgress.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblTimer = new JLabel("a");
+		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
+		panelProgress.add(lblTimer, BorderLayout.CENTER);
 
-		JProgressBar progressBar = new JProgressBar();
-		panelProgress.add(progressBar, BorderLayout.CENTER);
+//		progressBar = new JProgressBar();
+//		progressBar.setMaximum(audioList.get(index).getIraupena());
+//		panelProgress.add(progressBar, BorderLayout.CENTER);
 
 		JLabel lblProgressNorth = new JLabel(" ");
 		panelProgress.add(lblProgressNorth, BorderLayout.NORTH);
