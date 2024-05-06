@@ -218,24 +218,4 @@ public abstract class Bezero {
 				+ erregistroEguna + "]";
 	}
 
-	/**
-	 * Bezero objektuaren berdintasuna konparatzen du.
-	 * 
-	 * @param obj Konparatzen den objektua
-	 * @return Berdina bada, egia; bestela, gezurra itzultzen du
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null || getClass() != obj.getClass())
-			return false;
-		Bezero other = (Bezero) obj;
-		return Objects.equals(izena, other.izena) && Objects.equals(abizena, other.abizena)
-				&& Objects.equals(hizkuntza, other.hizkuntza)
-				&& Objects.equals(erabiltzaileIzena, other.erabiltzaileIzena)
-				&& Objects.equals(pasahitza, other.pasahitza) && Objects.equals(jaioteguna, other.jaioteguna)
-				&& Objects.equals(erregistroEguna, other.erregistroEguna);
-	}
-
 }

@@ -14,14 +14,13 @@ import org.junit.Test;
 import model.dao.PlayListDao;
 import model.db.DB_Konexioa;
 import model.objektuak.PlayList;
-import model.objektuak.bezero.Free;
 
 public class TPlayListDao {
 	private static PlayListDao playlistdao;
 	private static ArrayList<PlayList> testArray;
 
 	//FALLA EL PLAYLIST DAO
-	/*
+	
 	@Before
 	public void setUp() throws Exception {
 		playlistdao = new PlayListDao();
@@ -47,6 +46,6 @@ public class TPlayListDao {
 
 		DB_Konexioa.itxi();
 		assertEquals(retArray.get(0).getId(), testArray.get(0).getId());
-	}*/
+	}
 
 }

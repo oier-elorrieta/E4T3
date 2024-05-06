@@ -19,7 +19,6 @@ public class TMusikariaDao {
 
 	private static ArrayList<Musikaria> testArray;
 	private static MusikariaDao musikaridao;
-	private static Musikaria musikaria;
 
 	@Before
 	public void setUp() throws Exception {

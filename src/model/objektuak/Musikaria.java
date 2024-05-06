@@ -1,7 +1,6 @@
 package model.objektuak;
 
 import java.sql.Blob;
-import java.util.Objects;
 
 public class Musikaria extends Artista {
 	private String ezaugarria;
@@ -61,21 +60,4 @@ public class Musikaria extends Artista {
         return txt + " Musikaria [ezaugarria=" + ezaugarria + "]";
     }
 
-    /**
-     * Musikaria objektuaren berdintasuna konparatzen du.
-     * 
-     * @param obj Konparatzen den objektua
-     * @return Berdina bada, egia itzultzen du; bestela, gezurra
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Musikaria other = (Musikaria) obj;
-        return Objects.equals(ezaugarria, other.ezaugarria);
-    }
 }

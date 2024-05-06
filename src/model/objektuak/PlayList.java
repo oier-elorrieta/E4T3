@@ -180,23 +180,4 @@ public class PlayList {
                + ", bezeroa=" + bezeroa + ", abestiak=" + abestiak + "]";
     }
 
-    /**
-     * PlayList objektuaren berdintasuna konparatzen du.
-     * 
-     * @param obj Konparatzen den objektua
-     * @return Berdina bada, egia; bestela, gezurra itzultzen du
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-        PlayList other = (PlayList) obj;
-        return Objects.equals(bezeroa, other.bezeroa) 
-               && Objects.equals(id, other.id) 
-               && Objects.equals(izena, other.izena) 
-               && Objects.equals(sorreraData, other.sorreraData);
-    }
-
 }

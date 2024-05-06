@@ -6,14 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -51,6 +45,7 @@ public class Erreprodukzioa extends JFrame {
 	private String[] abiadura = { "x0.5", "x1", "x1.5", "x2" };
 	private int abiaduraKont = 1;
 //	private JProgressBar progressBar;
+	@SuppressWarnings("unused")
 	private int entzunda = 0;
 	private int entzundaAux = 0;
 	private JLabel lblTimer;

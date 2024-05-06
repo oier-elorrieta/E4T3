@@ -117,24 +117,4 @@ public abstract class Audio {
 		return "Audio [idAudio=" + idAudio + ", izena=" + izena + ", iraupena=" + iraupena + ", irudia=" + irudia + "]";
 	}
 
-	/**
-	 * Audio objektuaren berdintasuna konparatzen du.
-	 * 
-	 * @param obj Konparatzen den objektua
-	 * @return Berdina bada egia, bestela gezurra itzultzen du
-	 */
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj)
-	        return true;
-	    if (obj == null)
-	        return false;
-	    if (getClass() != obj.getClass())
-	        return false;
-	    Audio other = (Audio) obj;
-	    return Objects.equals(idAudio, other.idAudio) && iraupena == other.iraupena
-	            && Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
-	}
-
-
 }

@@ -1,7 +1,6 @@
 package model.objektuak;
 
 import java.sql.Blob;
-import java.util.Objects;
 
 public abstract class Artista {
 	protected String id;
@@ -127,26 +126,6 @@ public abstract class Artista {
 		this.erreprodukzioak = erreprodukzioak;
 	}
 
-	/**
-	 * Artista edo taldearen berdintasuna konparatzen du.
-	 * 
-	 * @param obj Konparatzen den objektua
-	 * @return Berdina bada egia itzultzen du, bestela gezurra
-	 */
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Artista other = (Artista) obj;
-		return Objects.equals(deskribapena, other.deskribapena) && erreprodukzioak == other.erreprodukzioak
-				&& Objects.equals(id, other.id) && Objects.equals(irudia, other.irudia)
-				&& Objects.equals(izen_Artistikoa, other.izen_Artistikoa);
-	}
 
 	/**
 	 * Artista edo taldearen informazio laburra itzultzen du.

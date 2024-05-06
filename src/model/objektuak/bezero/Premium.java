@@ -1,7 +1,6 @@
 package model.objektuak.bezero;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Premium extends Bezero {
 	private Date iraungitzeData;
@@ -86,24 +85,6 @@ public class Premium extends Bezero {
 	@Override
 	public String toString() {
 		return super.toString() + " Premium [iraungitzeData=" + iraungitzeData + "]";
-	}
-
-	/**
-	 * Premium objektuaren berdintasuna konparatzen du.
-	 * 
-	 * @param obj Konparatzen den objektua
-	 * @return Berdina bada, egia; bestela, gezurra itzultzen du
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Premium other = (Premium) obj;
-		return Objects.equals(iraungitzeData, other.iraungitzeData);
 	}
 
 }

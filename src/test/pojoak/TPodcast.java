@@ -8,13 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Abestia;
-import model.objektuak.Podcast;
 
 public class TPodcast {
 
-	private Podcast pc1;
 	private Abestia a1;
+	@SuppressWarnings("unused")
 	private Blob blob;
+	@SuppressWarnings("unused")
 	private Blob blob2;
 	
 
