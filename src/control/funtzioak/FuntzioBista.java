@@ -184,7 +184,7 @@ public class FuntzioBista {
 	
 	public static void irekiMenuErreprodukzioa() {
 		try {
-			menuErreprodukzioa frame = new menuErreprodukzioa();
+			MenuErreprodukzioa frame = new MenuErreprodukzioa();
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
