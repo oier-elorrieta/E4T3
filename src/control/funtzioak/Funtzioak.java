@@ -9,7 +9,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import model.Aldagaiak;
 import model.objektuak.*;
-import vista.bezeroa.*;
 
 /**
  * Erabilgarritasun funtzioak gordetzen dituen klasea.
@@ -31,9 +30,7 @@ public class Funtzioak {
 	 */
 	public static String enkriptatzailea(String txt) {
 		String enkriptatuta;
-
 		enkriptatuta = BCrypt.hashpw(txt, BCrypt.gensalt());
-
 		return enkriptatuta;
 	}
 	
@@ -51,7 +48,6 @@ public class Funtzioak {
         int day = Integer.parseInt(dateArray[2]); // Eguna 1-31 bitartean
         @SuppressWarnings("deprecation")
         Date returnDate = new Date(year, month, day);
-
         return returnDate;
     }
 
@@ -89,9 +85,7 @@ public class Funtzioak {
     }
     
     public static void skipBaimendu() {
-    	
 		Timer timer = new Timer();
-		
 		TimerTask task = new TimerTask() {
 			public void run() {
 				Aldagaiak.skipSong = true;
@@ -101,4 +95,7 @@ public class Funtzioak {
 		
 		timer.schedule(task, 10000);
     }
+    
+    
+    
 }

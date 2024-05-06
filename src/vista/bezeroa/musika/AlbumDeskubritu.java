@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.musika;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -21,12 +21,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import control.funtzioak.FuntzioBista;
-import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
-import model.dao.AbestiaDao;
 import model.dao.AlbumDao;
-import model.dao.PodcastDao;
 import model.objektuak.Musikaria;
+
 import java.awt.GridLayout;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
@@ -34,21 +32,20 @@ import javax.swing.ScrollPaneConstants;
 
 import model.objektuak.*;
 
-public class MusikaIkusi extends JFrame {
+public class AlbumDeskubritu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	private DefaultTableModel model;
-	AbestiaDao abestiDao = new AbestiaDao();
-	ArrayList<Audio> abestiList;
+	AlbumDao albumdao = new AlbumDao();
 
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws SQLException
 	 */
-	public MusikaIkusi(Musikaria musikaria, Album album) throws SQLException {
+	public AlbumDeskubritu(Musikaria musikaria) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaDeskubritu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -58,12 +55,11 @@ public class MusikaIkusi extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		abestiList = new ArrayList<Audio>();
-		abestiList = abestiDao.getAbestiaByAlbumId(album);
+		ArrayList<Album> albumak = albumdao.getAlbumakByMusikaria(musikaria);
 
-		JPanel panelHeader = new JPanel();
-		contentPane.add(panelHeader, BorderLayout.NORTH);
-		panelHeader.setLayout(new BorderLayout(0, 0));
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new BorderLayout(0, 0));
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -75,7 +71,7 @@ public class MusikaIkusi extends JFrame {
 			}
 		});
 		btnPerfil.setSize(325, 20);
-		panelHeader.add(btnPerfil, BorderLayout.EAST);
+		panel.add(btnPerfil, BorderLayout.EAST);
 
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
@@ -83,38 +79,36 @@ public class MusikaIkusi extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiAlbumDeskubritu(musikaria);
+				FuntzioBista.irekiMusikaDeskubritu();
 				dispose();
 			}
 		});
-		panelHeader.add(btnAtzera, BorderLayout.WEST);
+		panel.add(btnAtzera, BorderLayout.WEST);
 
-		JLabel lblAlbumIzena = new JLabel(album.getIzenburua() + "-aren musika");
-		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
+		JLabel lblIzenArtistikoa = new JLabel(musikaria.getIzen_Artistikoa() + "-aren Albumak");
+		lblIzenArtistikoa.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblIzenArtistikoa.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblIzenArtistikoa, BorderLayout.CENTER);
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panelPodcastTabla = new JPanel();
-		panel_1.add(panelPodcastTabla);
-		panelPodcastTabla.setLayout(new BorderLayout(0, 0));
-
-		System.out.println(abestiList);
+		JPanel panelAlbumTabla = new JPanel();
+		panel_1.add(panelAlbumTabla);
+		panelAlbumTabla.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel(" ");
-		panelPodcastTabla.add(lblNewLabel_1, BorderLayout.NORTH);
+		panelAlbumTabla.add(lblNewLabel_1, BorderLayout.NORTH);
 
 		JLabel lblNewLabel_2 = new JLabel(" ");
-		panelPodcastTabla.add(lblNewLabel_2, BorderLayout.SOUTH);
+		panelAlbumTabla.add(lblNewLabel_2, BorderLayout.SOUTH);
 
 		JLabel lblNewLabel_3 = new JLabel("      ");
-		panelPodcastTabla.add(lblNewLabel_3, BorderLayout.WEST);
+		panelAlbumTabla.add(lblNewLabel_3, BorderLayout.WEST);
 
 		JLabel lblNewLabel_4 = new JLabel("      ");
-		panelPodcastTabla.add(lblNewLabel_4, BorderLayout.EAST);
+		panelAlbumTabla.add(lblNewLabel_4, BorderLayout.EAST);
 
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3);
@@ -127,9 +121,7 @@ public class MusikaIkusi extends JFrame {
 		JTextPane textPaneDeskripzioa = new JTextPane();
 		textPaneDeskripzioa.setEditable(false);
 		textPaneDeskripzioa.setFocusable(false);
-
-		textPaneDeskripzioa.setText("Deskribapena: " + album.getDeskripzioa());
-
+		textPaneDeskripzioa.setText("Mota: " + musikaria.getEzaugarria() + "\n" + musikaria.getDeskribapena());
 		panel_4.add(textPaneDeskripzioa, BorderLayout.CENTER);
 
 		JLabel lblNewLabel_5 = new JLabel(" ");
@@ -147,12 +139,11 @@ public class MusikaIkusi extends JFrame {
 		JPanel panel_5 = new JPanel();
 		panel_3.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
-
 		ImageIcon icon = null;
-		
 		try {
-			icon = new ImageIcon(album.getIrudia().getBytes(1, (int) album.getIrudia().length()));
+			icon = new ImageIcon(musikaria.getIrudia().getBytes(1, (int) musikaria.getIrudia().length()));
 		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -175,8 +166,9 @@ public class MusikaIkusi extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		panelPodcastTabla.add(scrollPane, BorderLayout.CENTER);
+		panelAlbumTabla.add(scrollPane, BorderLayout.CENTER);
 
+		// **************************************************************************
 		String[] stringAux = { "ABESTIAK" };
 
 		model = new DefaultTableModel();
@@ -190,23 +182,29 @@ public class MusikaIkusi extends JFrame {
 
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
-
+				String albumID = albumak.get(index).getId();
+				@SuppressWarnings("unused")
+				String albumIzena = albumak.get(index).getIzenburua();
+				Album album = null;
+				try {
+					album = albumdao.getAlbumById(albumID);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
-				FuntzioBista.irekiErreprodukzioa(abestiList, index);
+				FuntzioBista.irekiMusikaIkusi(musikaria, album);
 				dispose();
 			}
-
 		});
 		model.setColumnIdentifiers(stringAux);
 
 		scrollPane.setViewportView(table);
 		Object[] aux = new Object[1];
-		for (int i = 0; i < abestiList.size(); i++) {
-			String iraupena = Funtzioak.secondsToString(abestiList.get(i).getIraupena());
-			aux[0] = abestiList.get(i).getIzena() + " (" + iraupena + ")";
-
+		for (int i = 0; i < albumak.size(); i++) {
+			aux[0] = albumak.get(i).getIzenburua() + " (" + albumak.get(i).getKontAbestiak() + ")";
 			model.addRow(aux);
+
 		}
 	}
 }

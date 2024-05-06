@@ -1,7 +1,6 @@
 package model.objektuak;
 
 import java.sql.Blob;
-import java.util.Objects;
 
 public abstract class Audio {
 

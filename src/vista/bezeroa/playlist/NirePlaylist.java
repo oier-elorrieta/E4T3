@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.playlist;
 
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -120,7 +120,6 @@ public class NirePlaylist extends JFrame {
 		
 		for (int i = 0 ; i < playlistak.size(); i++) {
 			aux[0] = playlistak.get(i).getIzena(); 
-			
             model.addRow(aux);
 		}
 

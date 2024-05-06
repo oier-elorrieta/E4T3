@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.db.DB_Konexioa;
 import model.objektuak.bezero.*;

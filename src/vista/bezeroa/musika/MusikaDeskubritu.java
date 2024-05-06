@@ -1,4 +1,4 @@
-package vista.bezeroa;
+package vista.bezeroa.musika;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -117,8 +117,6 @@ public class MusikaDeskubritu extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
 				String musikariIzena = musikariak.get(index).getIzen_Artistikoa();
-				
-				
 				Musikaria musikaria = null;
 				try {
 					musikaria = musikariadao.getMusikariaByIzena(musikariIzena);
@@ -138,7 +136,6 @@ public class MusikaDeskubritu extends JFrame {
 		for (int i = 0 ; i < musikariak.size(); i++) {
 			aux[0] = musikariak.get(i).getIzen_Artistikoa();
 			aux[1] = musikariak.get(i).getErreprodukzioak();
-			
             model.addRow(aux);
         }
 		

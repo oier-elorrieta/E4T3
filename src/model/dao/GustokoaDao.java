@@ -1,14 +1,9 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import model.db.DB_Konexioa;
 import model.objektuak.Gustokoa;
-import model.objektuak.bezero.Bezero;
-import model.objektuak.bezero.Premium;
 
 public class GustokoaDao {
 

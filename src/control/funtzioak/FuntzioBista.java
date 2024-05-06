@@ -4,14 +4,12 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import model.Aldagaiak;
-import model.objektuak.Abestia;
-import model.objektuak.Album;
-import model.objektuak.Audio;
-import model.objektuak.Musikaria;
-import model.objektuak.Podcast;
-import model.objektuak.Podcaster;
+import model.objektuak.*;
 import vista.*;
 import vista.bezeroa.*;
+import vista.bezeroa.musika.*;
+import vista.bezeroa.playlist.NirePlaylist;
+import vista.bezeroa.podcast.*;
 
 
 /**
@@ -182,9 +180,9 @@ public class FuntzioBista {
 		}
 	}
 	
-	public static void irekiMenuErreprodukzioa() {
+	public static void irekiMenuErreprodukzioa(ArrayList<Audio> audioList, int index) {
 		try {
-			menuErreprodukzioa frame = new menuErreprodukzioa();
+			MenuErreprodukzioa frame = new MenuErreprodukzioa(audioList, index);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
