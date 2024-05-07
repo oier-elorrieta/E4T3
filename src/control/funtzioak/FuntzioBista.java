@@ -136,7 +136,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * AlbumDeskubritu bista irekitzen duen metodoa.
+	 * MusikaIkusi bista irekitzen duen metodoa.
 	 */
 	public static void irekiMusikaIkusi(Musikaria musikaria, Album album) {
 		try {
@@ -148,7 +148,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * AlbumDeskubritu bista irekitzen duen metodoa.
+	 * PodcastIkusi bista irekitzen duen metodoa.
 	 */
 	public static void irekiPodcastIkusi(Podcaster podcasts) {
 		try {
@@ -160,7 +160,7 @@ public class FuntzioBista {
 	}
 	
 	/**
-	 * AlbumDeskubritu bista irekitzen duen metodoa.
+	 * Erreprodukzioa bista irekitzen duen metodoa.
 	 */
 	public static void irekiErreprodukzioa(ArrayList<Audio> audioList, int index) {
 		try {
@@ -171,6 +171,9 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * Iragarkia bista irekitzen duen metodoa.
+	 */
 	public static void irekiIragarkia(ArrayList<Audio> audioList, int index) {
 		try {
 			Iragarkia frame = new Iragarkia(audioList, index);
@@ -180,6 +183,9 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * MenuErreprodukzioa bista irekitzen duen metodoa.
+	 */
 	public static void irekiMenuErreprodukzioa(ArrayList<Audio> audioList, int index) {
 		try {
 			MenuErreprodukzioa frame = new MenuErreprodukzioa(audioList, index);

@@ -11,91 +11,95 @@ import model.Aldagaiak;
 import model.objektuak.*;
 
 /**
- * Erabilgarritasun funtzioak gordetzen dituen klasea.
+ * Clase que contiene funciones de utilidad para la aplicación.
  */
 public class Funtzioak {
 
-	/**
-	 * Aplikazioa hasieratzeko metodoa.
-	 */
-	public static void hasieratu() {
-		FuntzioBista.irekiLogin();
-	}
+    /**
+     * Aplikazioa hasteko motodoa.
+     * Login lehioa irekitzen du
+     */
+    public static void hasieratu() {
+        FuntzioBista.irekiLogin();
+    }
 
-	/**
-	 * Testu kate bat BCrypt algoritmoa erabiliz enkriptatzeko metodoa.
-	 * 
-	 * @param txt enkriptatu beharreko testu katea.
-	 * @return enkriptatutako katea.
-	 */
-	public static String enkriptatzailea(String txt) {
-		String enkriptatuta;
-		enkriptatuta = BCrypt.hashpw(txt, BCrypt.gensalt());
-		return enkriptatuta;
-	}
-	
-	/**
-     * Testu bat (String) data bihurtzen du, urtea, hilabetea, eta eguna
-     * adierazten dituzten zatiak erabiltzen ditu.
+    /**
+     * String batek enkriptatzen duen metodoa
      * 
-     * @param dateTXT Testu formatuan dagoen data, "YYYY-MM-DD" formatua erabiliz
-     * @return Data objektua
+     * @param txt enkriptatzen den metodoa
+     * @return txt enkriptatuta
+     */
+    public static String enkriptatzailea(String txt) {
+        return BCrypt.hashpw(txt, BCrypt.gensalt());
+    }
+
+    /**
+     * String batetik Date batera pasatzen duen metodoa
+     * Formatua "YYYY-MM-DD" da.
+     * 
+     * @param dateTXT data string moduan jasotzen duena "YYYY-MM-DD".
+     * @return Date objetu bat.
      */
     public static Date StringToDate(String dateTXT) {
         String[] dateArray = dateTXT.split("-");
-        int year = (Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
-        int month = Integer.parseInt(dateArray[1]); // Hilabetea 1-12 bitartean
-        int day = Integer.parseInt(dateArray[2]); // Eguna 1-31 bitartean
+        int year = (Integer.parseInt(dateArray[0]) - 1900);
+        int month = Integer.parseInt(dateArray[1]);
+        int day = Integer.parseInt(dateArray[2]);
         @SuppressWarnings("deprecation")
         Date returnDate = new Date(year, month, day);
         return returnDate;
     }
 
     /**
-     * Hizkuntzen zerrenda batean hizkuntza baten indizea aurkitzen du.
+     * Hitzkuntza baten indizea bilatzen duen metodoa.
      * 
-     * @param hizkuntzak Hizkuntzen zerrenda
-     * @param hiz Bilatu nahi den hizkuntza
-     * @return Hizkuntza aurkitu den indizea, edo -1 ez bada aurkitu
+     * @param hizkuntzak Hizkuntza lista.
+     * @param hiz Hitzkuntzaren ID-a.
+     * @return Hitzkuntzaren indizea, ez badu aurkitzen -1.
      */
     public static int getIndexFromHizkuntzak(ArrayList<Hizkuntza> hizkuntzak, String hiz) {
         for (int i = 0; i < hizkuntzak.size(); i++) {
             if (hizkuntzak.get(i).getID_Hizkuntza().equals(hiz)) {
-                return i; // Hizkuntza aurkitu den indizea
+                return i;
             }
         }
-        return -1; // Hizkuntza ez bada aurkitu
+        return -1;
     }
 
-    
+    /**
+     * Int batekin denborara konbertitzen duen metodoa formato honeri "h:m:s".
+     * 
+     * @param time denbora segundutan.
+     * @return denbora kadena formato honekin "h:m:s".
+     */
     public static String secondsToString(int time) {
-    	int hor;
-    	int min;
-    	int seg;
-    	
-    	if(time >= 3600) {
-    		hor = time/ 3600;
-    		min = (time % 3600) / 60;
-    		return hor+"h:"+min+"m";
-    	}else {
-    		min = time / 60;
-    		seg = time % 60;
-    		return min+"m:"+seg+"s";
-    	}
+        int hor;
+        int min;
+        int seg;
+        
+        if (time >= 3600) { 
+            hor = time / 3600;
+            min = (time % 3600) / 60;
+            return hor + "h:" + min + "m";
+        } else { 
+            min = time / 60;
+            seg = time % 60;
+            return min + "m:" + seg + "s";
+        }
     }
-    
+
+    /**
+     * 10 minuturo permititzen duen metodoa (10 segundu orain).
+     */
     public static void skipBaimendu() {
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			public void run() {
-				Aldagaiak.skipSong = true;
-				System.out.println("skip");
-			}
-		};
-		
-		timer.schedule(task, 10000);
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                Aldagaiak.skipSong = true;
+                System.out.println("skip");
+            }
+        };
+        
+        timer.schedule(task, 10000);
     }
-    
-    
-    
 }
