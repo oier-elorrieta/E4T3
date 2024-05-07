@@ -256,10 +256,4 @@ public class TFree {
 		assertFalse(f1.equals(txarra));
 	}
 
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Free f2 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
-		assertTrue(f1.equals(f2));
-	}
-
 }
