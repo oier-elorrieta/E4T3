@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -39,7 +37,6 @@ public class Erreprodukzioa extends JFrame {
 	GustokoaDao gustokoadao = new GustokoaDao();
 	ErreprodukzioaDao erreprodukzioadao = new ErreprodukzioaDao();
 	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
-	int indexx = -1;
 	ImageIcon icon = null;
 
 	private JButton btnAurrekoa = new JButton("⏮");
@@ -48,11 +45,9 @@ public class Erreprodukzioa extends JFrame {
 	private String[] abiadura = { "x0.5", "x1", "x1.5", "x2" };
 	private int abiaduraKont = 1;
 //	private JProgressBar progressBar;
-	@SuppressWarnings("unused")
-	private int entzunda = 0;
 	private int entzundaAux = 0;
 	private JLabel lblTimer;
-	
+	private int entzunda;
 	private String userType = Aldagaiak.erabiltzailea.getClass().getSimpleName();
 	private String time = "0:00";
 	private String maxTime = "";
@@ -325,10 +320,9 @@ public class Erreprodukzioa extends JFrame {
 					if (nextIndex > audioList.size() - 1) {
 						nextIndex = 0;
 					}
-					dispose();
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 					FuntzioBista.irekiIragarkia(audioList, index);
-
+					dispose();
 				} else {
 
 					if (Aldagaiak.skipSong) {
@@ -344,10 +338,9 @@ public class Erreprodukzioa extends JFrame {
 							nextIndex = 0;
 						}
 						clip.close();
-						dispose();
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-
 						FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Ez dira 10min pasatu", "", JOptionPane.ERROR_MESSAGE);
 					}

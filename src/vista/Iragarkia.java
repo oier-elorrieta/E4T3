@@ -70,10 +70,9 @@ public class Iragarkia extends JFrame {
 
 		TimerTask task = new TimerTask() {
 			public void run() {
-				dispose();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErreprodukzioa(audioList, index);
-				System.out.println("aldatu bista");
+				dispose();
 			}
 		};
 		

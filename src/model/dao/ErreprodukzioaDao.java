@@ -8,7 +8,6 @@ import java.util.Date;
 import model.Aldagaiak;
 import model.db.DB_Konexioa;
 import model.objektuak.Audio;
-import model.objektuak.Gustokoa;
 
 public class ErreprodukzioaDao {
 	public boolean erreprodukzioaGehitu(Audio audio) throws SQLException {

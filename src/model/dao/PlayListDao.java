@@ -48,8 +48,6 @@ public class PlayListDao {
 		Connection conex = DB_Konexioa.bezeroa();
 		
 		Statement sentencia = conex.createStatement();
-		System.out.println(playlist.getId());
-		System.out.println(abestia.getIdAudio());
 		
 		String kontsulta = "INSERT INTO Playlist_Abestiak (ID_List, ID_Audio) VALUES ('"+ playlist.getId() + "', '" + abestia.getIdAudio() + "');";
 		sentencia.executeUpdate(kontsulta);

@@ -101,7 +101,6 @@ public class Funtzioak {
         TimerTask task = new TimerTask() {
             public void run() {
                 Aldagaiak.skipSong = true;
-                System.out.println("skip");
             }
         };
         

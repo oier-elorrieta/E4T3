@@ -101,8 +101,6 @@ public class MusikaIkusi extends JFrame {
 		panel_1.add(panelPodcastTabla);
 		panelPodcastTabla.setLayout(new BorderLayout(0, 0));
 
-		System.out.println(abestiList);
-
 		JLabel lblNewLabel_1 = new JLabel(" ");
 		panelPodcastTabla.add(lblNewLabel_1, BorderLayout.NORTH);
 

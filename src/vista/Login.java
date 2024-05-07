@@ -96,7 +96,6 @@ public class Login extends JFrame {
 						FuntzioBista.irekiBezeroMenu();
 						dispose();
 					} else if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
-						System.out.println("TrueAdmin");
 					} else {
 						JOptionPane.showMessageDialog(null, "Erabiltzailea edo pasahitza ez dira zuzenak", "", JOptionPane.ERROR_MESSAGE);
 					}
