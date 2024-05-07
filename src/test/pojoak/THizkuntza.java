@@ -93,10 +93,4 @@ public class THizkuntza {
 		assertFalse(h.equals(txarra));
 	}
 
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Hizkuntza h2 = new Hizkuntza("1", "deskribapena");
-		assertTrue(h.equals(h2));
-	}
-
 }

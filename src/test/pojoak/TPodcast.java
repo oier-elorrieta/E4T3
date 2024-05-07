@@ -10,10 +10,10 @@ import org.junit.Test;
 import model.objektuak.Abestia;
 import model.objektuak.Podcast;
 import model.objektuak.Podcaster;
-
+/*
 public class TPodcast {
 
-	/*
+	
 	private Podcast pc1;
 	private Podcaster podcaster;
 
@@ -34,7 +34,8 @@ public class TPodcast {
 		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
 		pc1 = new Podcast("1", "izena", 120, blob, "kolab", null);
 
-	}*/
+	}
 
 }
+*/
 

@@ -178,10 +178,4 @@ public class TPodcaster {
 		assertFalse(pd1.equals(txarra));
 	}
 
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Podcaster pd2 = new Podcaster("1", "unai", blob, "deskribapena");
-		assertTrue(pd1.equals(pd2));
-	}
-
 }

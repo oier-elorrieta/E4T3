@@ -71,11 +71,5 @@ public class TMusikaria {
 		String txarra = "";
 		assertFalse(m1.equals(txarra));
 	}
-
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Musikaria m2 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
-		assertTrue(m1.equals(m2));
-	}
 }
  

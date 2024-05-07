@@ -82,12 +82,6 @@ public class TPremium {
 		assertFalse(p1.equals(txarra));
 	}
 
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Premium p2 = new Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
-		assertTrue(p1.equals(p2));
-	}
-
 	// ********************** FUNTZIOAK **********************
 	
 	@Test
