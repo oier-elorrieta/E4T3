@@ -35,6 +35,7 @@ public class Erreprodukzioa extends JFrame {
 
 	MusikariaDao musikariadao = new MusikariaDao();
 	GustokoaDao gustokoadao = new GustokoaDao();
+	ErreprodukzioaDao erreprodukzioadao = new ErreprodukzioaDao();
 	ArrayList<Musikaria> musikariak = new ArrayList<Musikaria>();
 	int indexx = -1;
 	ImageIcon icon = null;
@@ -165,6 +166,14 @@ public class Erreprodukzioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!entzuten) {
+					if(clip.getFramePosition() == 0) {
+						try {
+							erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
 					clip.start();
 					btnStartStop.setText("⏸");
 					entzuten = true;
