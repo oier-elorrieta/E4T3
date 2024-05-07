@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -50,6 +52,8 @@ public class Erreprodukzioa extends JFrame {
 	private int entzunda = 0;
 	private int entzundaAux = 0;
 	private JLabel lblTimer;
+	
+	private String userType = Aldagaiak.erabiltzailea.getClass().getSimpleName();
 
 	/**
 	 * Create the frame.
@@ -177,27 +181,7 @@ public class Erreprodukzioa extends JFrame {
 					clip.start();
 					btnStartStop.setText("⏸");
 					entzuten = true;
-					/*
-					Timer timer = new Timer();
-					for (int i = entzunda; i <= audioList.get(index).getIraupena(); i++) {
-						entzundaAux = i;
-						System.out.println("Esta pasando " + i);
-
-						final int value = i;
-						TimerTask task = new TimerTask() {
-							public void run() {
-								lblTimer.setText("a" + value);
-							}
-						};
-						timer.schedule(task, 1000);
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-					
-					}
-					*/
+				
 				} else {
 					clip.stop();
 					btnStartStop.setText("▶");
@@ -296,11 +280,7 @@ public class Erreprodukzioa extends JFrame {
 		lblTimer = new JLabel("a");
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		panelProgress.add(lblTimer, BorderLayout.CENTER);
-
-//		progressBar = new JProgressBar();
-//		progressBar.setMaximum(audioList.get(index).getIraupena());
-//		panelProgress.add(progressBar, BorderLayout.CENTER);
-
+		
 		JLabel lblProgressNorth = new JLabel(" ");
 		panelProgress.add(lblProgressNorth, BorderLayout.NORTH);
 
@@ -331,7 +311,7 @@ public class Erreprodukzioa extends JFrame {
 
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.iragarkia && Aldagaiak.skipSong) {
+				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
@@ -346,9 +326,13 @@ public class Erreprodukzioa extends JFrame {
 				} else {
 
 					if (Aldagaiak.skipSong) {
-						Aldagaiak.iragarkia = true;
-						Aldagaiak.skipSong = false;
-						Funtzioak.skipBaimendu();
+			
+						if(userType.equals("Free")) {
+							Aldagaiak.iragarkia = true;
+							Aldagaiak.skipSong = false;
+							Funtzioak.skipBaimendu();
+						}
+						
 						int nextIndex = index + 1;
 						if (nextIndex > audioList.size() - 1) {
 							nextIndex = 0;
@@ -367,7 +351,7 @@ public class Erreprodukzioa extends JFrame {
 		});
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Aldagaiak.iragarkia && Aldagaiak.skipSong) {
+				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
@@ -380,9 +364,13 @@ public class Erreprodukzioa extends JFrame {
 					dispose();
 				} else {
 					if (Aldagaiak.skipSong) {
-						Aldagaiak.iragarkia = true;
-						Aldagaiak.skipSong = false;
-						Funtzioak.skipBaimendu();
+						
+						if(userType.equals("Free")) {
+							Aldagaiak.iragarkia = true;
+							Aldagaiak.skipSong = false;
+							Funtzioak.skipBaimendu();
+						}
+			
 						int nextIndex = index - 1;
 						if (nextIndex < 0) {
 							nextIndex = audioList.size() - 1;
