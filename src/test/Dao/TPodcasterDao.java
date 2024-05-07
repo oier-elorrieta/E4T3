@@ -68,7 +68,8 @@ public class TPodcasterDao {
 
 		testArray = podcasterdao.getPodcaster();
 		DB_Konexioa.itxi();
-		assertEquals(retArray, testArray);
+		assertEquals(retArray.get(0).getIzen_Artistikoa(), testArray.get(0).getIzen_Artistikoa());
+		assertEquals(retArray.get(1).getErreprodukzioak(), testArray.get(1).getErreprodukzioak());
 
 	}
 

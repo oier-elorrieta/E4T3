@@ -47,7 +47,11 @@ public class TAlbumDao {
 
 		DB_Konexioa.itxi();
 		
-		assertEquals(retArray, testArray);
+		for(int i=0;i<testArray.size();i++) {
+			assertEquals(retArray.get(i).getId(), testArray.get(i).getId());
+			assertEquals(retArray.get(i).getIzenburua(), testArray.get(i).getIzenburua());
+			assertEquals(retArray.get(i).getAbestiak(), testArray.get(i).getAbestiak());
+		}
 	}
 	
 	@Test

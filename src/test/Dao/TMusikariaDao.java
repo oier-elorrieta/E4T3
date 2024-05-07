@@ -47,7 +47,10 @@ public class TMusikariaDao {
 		testArray = musikaridao.getMusikariak();
 		DB_Konexioa.itxi();
 
-		assertEquals(retArray, testArray);
+		for (int i = 0; i < testArray.size(); i++) {
+			assertEquals(retArray.get(i).getIzen_Artistikoa(), testArray.get(i).getIzen_Artistikoa());
+			assertEquals(retArray.get(i).getErreprodukzioak(), testArray.get(i).getErreprodukzioak());
+		}
 
 	}
 

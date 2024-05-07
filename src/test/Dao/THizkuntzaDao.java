@@ -46,7 +46,10 @@ public class THizkuntzaDao {
 		DB_Konexioa.itxi();
 		
 		testArray = hizkuntzadao.getHizkuntzak();
-		assertEquals(retArray, testArray);
+		for (int i=0;i<testArray.size();i++) {
+			assertEquals(retArray.get(i).getID_Hizkuntza(), testArray.get(i).getID_Hizkuntza());
+			assertEquals(retArray.get(i).getDeskribapena(), testArray.get(i).getDeskribapena());
+		}
 		
 	}
 

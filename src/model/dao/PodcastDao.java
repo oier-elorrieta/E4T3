@@ -41,6 +41,7 @@ public class PodcastDao {
 		return retArray;
 	}
 
+	//SE USA??
 	/*
 	public ArrayList<Audio> getPodcastByIzena(Podcast podcast, String id) throws SQLException {
 		ArrayList<Audio> retArray = new ArrayList<>();
