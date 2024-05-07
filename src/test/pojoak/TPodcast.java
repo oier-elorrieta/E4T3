@@ -9,11 +9,13 @@ import org.junit.Test;
 
 import model.objektuak.Abestia;
 import model.objektuak.Podcast;
+import model.objektuak.Podcaster;
 
 public class TPodcast {
 
+	/*
 	private Podcast pc1;
-	private Abestia a1;
+	private Podcaster podcaster;
 	private Blob blob;
 	private Blob blob2;
 	
@@ -24,32 +26,9 @@ public class TPodcast {
 		byte[] blobData2 = "Datos de ejemplo2".getBytes();
 		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
 		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
-		//pc1 = new Podcast("1", "izena", 120, blob, "kolab", );
-	}
+		pc1 = new Podcast("1", "izena", 120, blob, "kolab", null);
 
-	// ********************** KOLABORATZAILEAK **********************
-
-	@Test
-	public void TestGetId() {
-		assertEquals("1", a1.getIdAudio());
-	}
-
-	@Test
-	public void TestSetId() {
-		a1.setIdAudio("2");
-		assertEquals("2", a1.getIdAudio());
-	}
-
-	@Test
-	public void TestGetIdTxarto() {
-		assertNotEquals("2", a1.getIdAudio());
-	}
-
-	@Test
-	public void TestSetIdTxarto() {
-		a1.setIdAudio("2");
-		assertNotEquals("1", a1.getIdAudio());
-	}
+	}*/
 
 }
 

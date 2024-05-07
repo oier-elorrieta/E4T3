@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Aldagaiak;
 import model.dao.PlayListDao;
 import model.db.DB_Konexioa;
 import model.objektuak.PlayList;
@@ -19,13 +20,15 @@ import model.objektuak.bezero.Free;
 public class TPlayListDao {
 	private static PlayListDao playlistdao;
 	private static ArrayList<PlayList> testArray;
+	private static Free free;
 
 	//FALLA EL PLAYLIST DAO
 	/*
 	@Before
 	public void setUp() throws Exception {
 		playlistdao = new PlayListDao();
-		testArray = new ArrayList<>(playlistdao.getPlayListak());
+		testArray = new ArrayList<>();
+		free = new Free(1, "unai", "souto", "euskera", "unaisouto", "1234", null, null);
 	}
 
 	@Test
@@ -35,7 +38,7 @@ public class TPlayListDao {
 
 		Statement sentencia = conex.createStatement();
 
-		String kontsulta = "select * from playListView where ID_Bezeroa = 1";
+		String kontsulta = "select * from playListView where ID_Bezeroa =" + free.getId() +";";
 		ResultSet playlistak = sentencia.executeQuery(kontsulta);
 
 		PlayList playlistAux;
@@ -45,6 +48,7 @@ public class TPlayListDao {
 			retArray.add(playlistAux);
 		}
 
+		testArray = playlistdao.getPlayListak();
 		DB_Konexioa.itxi();
 		assertEquals(retArray.get(0).getId(), testArray.get(0).getId());
 	}*/

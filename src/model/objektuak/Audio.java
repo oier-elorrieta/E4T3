@@ -1,6 +1,7 @@
 package model.objektuak;
 
 import java.sql.Blob;
+import java.util.Objects;
 
 public abstract class Audio {
 
@@ -117,6 +118,11 @@ public abstract class Audio {
 		return "Audio [idAudio=" + idAudio + ", izena=" + izena + ", iraupena=" + iraupena + ", irudia=" + irudia + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(idAudio, iraupena, irudia, izena);
+	}
+
 	/**
 	 * Audio objektuaren berdintasuna konparatzen du.
 	 * 
@@ -125,16 +131,19 @@ public abstract class Audio {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-	    if (this == obj)
-	        return true;
-	    if (obj == null)
-	        return false;
-	    if (getClass() != obj.getClass())
-	        return false;
-	    Audio other = (Audio) obj;
-	    return Objects.equals(idAudio, other.idAudio) && iraupena == other.iraupena
-	            && Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Audio other = (Audio) obj;
+		return Objects.equals(idAudio, other.idAudio) && iraupena == other.iraupena
+				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
 	}
+
+
+	
 
 
 }

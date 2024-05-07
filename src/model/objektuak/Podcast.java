@@ -30,7 +30,7 @@ public class Podcast extends Audio {
         this.irudia = irudia;
     }
     
- 
+    
 
     /**
      * Podcast objektuaren informazio laburra itzultzen du.
