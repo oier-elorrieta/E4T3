@@ -1,15 +1,15 @@
 package test.pojoak;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import model.objektuak.*;
-import model.objektuak.bezero.Free;
+//import static org.junit.Assert.*;
+//
+//import java.util.ArrayList;
+//import java.util.Date;
+//
+//import org.junit.Before;
+//import org.junit.Test;
+//
+//import model.objektuak.*;
+//import model.objektuak.bezero.Free;
 
 public class TPlayList {
 /*

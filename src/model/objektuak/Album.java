@@ -3,7 +3,6 @@ package model.objektuak;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public class Album {
 
@@ -141,29 +140,6 @@ public class Album {
 
 	public void setAbestiak(ArrayList<Abestia> abestiak) {
 		this.abestiak = abestiak;
-	}
-
-	/**
-	 * Albumaren berdintasuna egiaztatzeko.
-	 * 
-	 * @param obj Konparatzeko objektua.
-	 * @return Albumak berdinak diren ala ez.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Album other = (Album) obj;
-		return Objects.equals(generoa, other.generoa) && Objects.equals(id, other.id)
-				&& Objects.equals(irudia, other.irudia) && Objects.equals(izenburua, other.izenburua)
-				&& Objects.equals(musikaria, other.musikaria) && Objects.equals(urtea, other.urtea);
 	}
 
 	@Override

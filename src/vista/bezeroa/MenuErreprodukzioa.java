@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.PlayListDao;
 import model.objektuak.*;

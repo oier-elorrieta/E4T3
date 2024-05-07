@@ -16,7 +16,13 @@ public class TPodcast {
 	/*
 	private Podcast pc1;
 	private Podcaster podcaster;
+
+public class TPodcast {
+
+	private Abestia a1;
+	@SuppressWarnings("unused")
 	private Blob blob;
+	@SuppressWarnings("unused")
 	private Blob blob2;
 	
 

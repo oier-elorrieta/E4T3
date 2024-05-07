@@ -12,6 +12,7 @@ import model.objektuak.bezero.Premium;
 @SuppressWarnings("deprecation")
 public class TPremium {
 	private static Premium p1;
+	@SuppressWarnings("unused")
 	private static Premium p2;
 	private static Date eguna;
 

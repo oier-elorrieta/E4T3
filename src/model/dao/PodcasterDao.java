@@ -35,6 +35,13 @@ public class PodcasterDao {
 		return retArray;
 	}
 	
+	/**
+	 * Podcaster bat izen artistikoaren arabera lortzen duen metodoa.
+	 * 
+	 * @param izena Podcasterraren izen artistikoa.
+	 * @return Podcaster objektua, bilatutako podcasterra ordezkatzen duena.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	public Podcaster getPodcasterByIzena(String izena) throws SQLException{
 		Connection conex = DB_Konexioa.bezeroa();
 

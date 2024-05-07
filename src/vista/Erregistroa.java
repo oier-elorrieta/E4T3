@@ -176,13 +176,15 @@ public class Erregistroa extends JFrame {
 				String pasahitza = passwordFieldPasahitza.getText();
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
 				
-				Date jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
-				
-		
 				Date noizData = new Date();
+				Date jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
+				int jaioDataInt = jaioData.compareTo(noizData);
+
+		
 				
-				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("")) {
-					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
+				
+				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt == 0 || jaioDataInt > 0) {
+					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak ondo beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (pasahitza.equals(konfirmazioa)) {
 						pasahitza = Funtzioak.enkriptatzailea(pasahitza);

@@ -2,20 +2,13 @@ package test.Dao;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import model.dao.AbestiaDao;
 import model.db.DB_Konexioa;
-import model.objektuak.Abestia;
-import model.objektuak.Album;
-import model.objektuak.Audio;
+import model.objektuak.*;
 
 public class TAbestiaDao {
 
