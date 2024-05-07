@@ -41,13 +41,19 @@ public class Funtzioak {
      * @param dateTXT Testu formatuan dagoen data, "YYYY-MM-DD" formatua erabiliz
      * @return Data objektua
      */
-    public static Date StringToDate(String dateTXT) {
+    @SuppressWarnings("deprecation")
+	public static Date StringToDate(String dateTXT) {
         String[] dateArray = dateTXT.split("-");
-        int year = (Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
-        int month = Integer.parseInt(dateArray[1]); // Hilabetea 1-12 bitartean
-        int day = Integer.parseInt(dateArray[2]); // Eguna 1-31 bitartean
-        @SuppressWarnings("deprecation")
-        Date returnDate = new Date(year, month, day);
+        Date returnDate = new Date();
+        try {
+        	returnDate.setYear(Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
+        	returnDate.setMonth(Integer.parseInt(dateArray[1])); // Hilabetea 1-12 bitartean
+        	returnDate.setDate(Integer.parseInt(dateArray[2])); // Eguna 1-31 bitartean
+	        
+        }catch (Exception ex) {
+        	
+        }
+        
         return returnDate;
     }
 
