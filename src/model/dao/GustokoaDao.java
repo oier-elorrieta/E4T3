@@ -9,6 +9,15 @@ public class GustokoaDao {
 
 	private Connection conex = null;
 
+	/**
+	 * Bezeroak gustokoak zerrendan abesti bat gehitzen edo kentzen duen metodoa. 
+	 * Gustokoa dagoen konprobatu eta, hala badago, abestia gehitzen du. Bestela, 
+	 * kentzen du.
+	 *
+	 * @param gustokoa Gustokoa objektua, ID_Bezeroa eta ID_Audioarekin.
+	 * @return true gustokoak zerrendan sartu bada, bestela false.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	public boolean gustokoaGehiKen(Gustokoa gustokoa) throws SQLException {
 		boolean sartuta = gustokoaKonprobatu(gustokoa);
 
@@ -23,6 +32,13 @@ public class GustokoaDao {
 		}
 	}
 
+	/**
+	 * Gustokoa dagoen konprobatzeko metodoa.
+	 *
+	 * @param gustokoa Gustokoa objektua, ID_Bezeroa eta ID_Audioarekin.
+	 * @return true gustokoak zerrendan ez badago, bestela false.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	public boolean gustokoaKonprobatu(Gustokoa gustokoa) throws SQLException {
 		conex = DB_Konexioa.bezeroa();
 
@@ -38,6 +54,13 @@ public class GustokoaDao {
 		}
 	}
 
+	/**
+	 * Gustokoak zerrendan abesti bat gehitzeko metodoa.
+	 *
+	 * @param gustokoa Gustokoa objektua, ID_Bezeroa eta ID_Audioarekin.
+	 * @return true abestia gehitu bada.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	private boolean gustokoaGehitu(Gustokoa gustokoa) throws SQLException {
 
 		Statement sentencia = conex.createStatement();
@@ -49,6 +72,13 @@ public class GustokoaDao {
 
 	}
 
+	/**
+	 * Gustokoak zerrendatik abesti bat kentzeko metodoa.
+	 *
+	 * @param gustokoa Gustokoa objektua, ID_Bezeroa eta ID_Audioarekin.
+	 * @return true abestia kendu bada.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	private boolean gustokoaKendu(Gustokoa gustokoa) throws SQLException {
 
 		Statement sentencia = conex.createStatement();

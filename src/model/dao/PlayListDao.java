@@ -37,6 +37,13 @@ public class PlayListDao {
 		return retArray;
 	}
 	
+	/**
+	 * Abesti bat playlist batean txertatzeko metodoa.
+	 * 
+	 * @param playlist PlayList objektua, zeina abestia gehituko duen.
+	 * @param abestia Audio objektua, gehitu nahi dena.
+	 * @throws SQLException SQL errore bat gertatzen bada.
+	 */
 	public void insertAbestiaIntoPlayList(PlayList playlist, Audio abestia) throws SQLException {
 		Connection conex = DB_Konexioa.bezeroa();
 		

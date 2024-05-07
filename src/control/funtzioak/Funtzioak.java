@@ -10,9 +10,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import model.Aldagaiak;
 import model.objektuak.*;
 
-/**
- * Clase que contiene funciones de utilidad para la aplicación.
- */
 public class Funtzioak {
 
     /**

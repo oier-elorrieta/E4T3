@@ -140,7 +140,7 @@ public class Erreprodukzioa extends JFrame {
 
 		panelFooter.add(panelBotoiak, BorderLayout.CENTER);
 
-		JButton btnMenu = new JButton("Menu");
+		JButton btnMenu = new JButton("≡");
 		btnMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] options = { "Playlist", "Konpartitu" };
