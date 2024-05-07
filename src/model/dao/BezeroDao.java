@@ -89,28 +89,35 @@ public class BezeroDao {
 	 * @throws SQLException
 	 */
 	public boolean erregistratuErabiltzailea(Bezero erregistratu) throws SQLException {
-		Connection conex = DB_Konexioa.bezeroa();
+        Connection conex = DB_Konexioa.bezeroa();
 
-		Statement sentencia = conex.createStatement();
+        Statement sentencia = conex.createStatement();
+        
+        try {
 
-		java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
-		java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
-
-		String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('"
-				+ erregistratu.getIzena() + "', '" + erregistratu.getAbizena() + "', '" + erregistratu.getHizkuntza()
-				+ "', '" + erregistratu.getErabiltzaileIzena() + "', '" + erregistratu.getPasahitza() + "', '"
-				+ sqlDateJaioteguna + "', '" + erregistroDateJaioteguna + "', '"
-				+ erregistratu.getClass().getSimpleName() + "')";
-		sentencia.executeUpdate(kontsulta);
-		
-		if(erregistratu.getClass().getSimpleName().equalsIgnoreCase("Premium")){
-			Premium aux = (Premium) erregistratu; 
-			erregistratuPremium(conex,erregistratu.getErabiltzaileIzena(),aux.getIraungitzeData());
-		}
-
-		DB_Konexioa.itxi();
-		return true;
-	}
+            java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
+            java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
+    
+            String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('"
+                    + erregistratu.getIzena() + "', '" + erregistratu.getAbizena() + "', '" + erregistratu.getHizkuntza()
+                    + "', '" + erregistratu.getErabiltzaileIzena() + "', '" + erregistratu.getPasahitza() + "', '"
+                    + sqlDateJaioteguna + "', '" + erregistroDateJaioteguna + "', '"
+                    + erregistratu.getClass().getSimpleName() + "')";
+            sentencia.executeUpdate(kontsulta);
+            
+            if(erregistratu.getClass().getSimpleName().equalsIgnoreCase("Premium")){
+                Premium aux = (Premium) erregistratu; 
+                erregistratuPremium(conex,erregistratu.getErabiltzaileIzena(),aux.getIraungitzeData());
+            }
+    
+            DB_Konexioa.itxi();
+            return true;
+        }catch (Exception ex) {
+            DB_Konexioa.itxi();
+            return false;
+        }
+        
+    }
 	
 	/**
 	 * Premium den erabiltzailearen iraungitze data 

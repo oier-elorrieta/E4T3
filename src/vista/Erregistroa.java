@@ -84,12 +84,12 @@ public class Erregistroa extends JFrame {
 		
 		// Abizena label
 		JLabel lblAbizena = new JLabel("Abizena:");
-		lblAbizena.setBounds(251, 66, 46, 14);
+		lblAbizena.setBounds(251, 66, 63, 14);
 		contentPane.add(lblAbizena);
 
 		// Erabiltzailearen label
 		JLabel lblErabiltzailea = new JLabel("Erabiltzailea:");
-		lblErabiltzailea.setBounds(72, 97, 61, 14);
+		lblErabiltzailea.setBounds(72, 97, 73, 14);
 		contentPane.add(lblErabiltzailea);
 
 		// Pasahitzaren label
@@ -99,7 +99,7 @@ public class Erregistroa extends JFrame {
 
 		// Konfirmatzeko label
 		JLabel lblKonfirmatu = new JLabel("Konfirmatu:");
-		lblKonfirmatu.setBounds(72, 159, 61, 14);
+		lblKonfirmatu.setBounds(72, 159, 73, 14);
 		contentPane.add(lblKonfirmatu);
 
 		// JaioData label
@@ -177,8 +177,12 @@ public class Erregistroa extends JFrame {
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
 				
 				Date noizData = new Date();
-				Date jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
-				int jaioDataInt = jaioData.compareTo(noizData);
+                int jaioDataInt = 0;
+                Date jaioData = new Date();
+                if (!textFieldJaioData.getText().equals("")) {
+                    jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
+                    jaioDataInt = jaioData.compareTo(noizData);
+                }
 
 		
 				
@@ -210,11 +214,17 @@ public class Erregistroa extends JFrame {
 							}
 							try {
 								bezerodao.erregistratuErabiltzailea(bezeroa);
+								if(!bezerodao.erregistratuErabiltzailea(bezeroa)) {
+									System.out.println("Es igual gilipollas");
+								}
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 							}
 						}
 						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+						FuntzioBista.irekiLogin();
+						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
 					}
