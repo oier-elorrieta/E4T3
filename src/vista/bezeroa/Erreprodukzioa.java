@@ -54,6 +54,8 @@ public class Erreprodukzioa extends JFrame {
 	private JLabel lblTimer;
 	
 	private String userType = Aldagaiak.erabiltzailea.getClass().getSimpleName();
+	private String time = "0:00";
+	private String maxTime = "";
 
 	/**
 	 * Create the frame.
@@ -84,6 +86,8 @@ public class Erreprodukzioa extends JFrame {
 		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
 		clip = AudioSystem.getClip();
 		clip.open(aui);
+		
+		maxTime = Funtzioak.longToString(clip.getMicrosecondLength());
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -185,6 +189,8 @@ public class Erreprodukzioa extends JFrame {
 				} else {
 					clip.stop();
 					btnStartStop.setText("▶");
+					time = Funtzioak.longToString(clip.getMicrosecondPosition());
+					lblTimer.setText(time + "<----->" + maxTime);
 					entzuten = false;
 					entzunda = entzundaAux;
 				}
@@ -277,7 +283,7 @@ public class Erreprodukzioa extends JFrame {
 		panelIrudia.add(panelProgress, BorderLayout.SOUTH);
 		panelProgress.setLayout(new BorderLayout(0, 0));
 
-		lblTimer = new JLabel("a");
+		lblTimer = new JLabel(time + "<----->" + maxTime);
 		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
 		panelProgress.add(lblTimer, BorderLayout.CENTER);
 		
