@@ -134,7 +134,7 @@ public class Funtzioak {
             }
         };
         
-        timer.schedule(task, 10000);
+        timer.schedule(task, 10);
     }
     public static String longToString(long time) {
     	int miliseconds = 0;
