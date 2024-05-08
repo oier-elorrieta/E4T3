@@ -91,13 +91,24 @@ public class BezeroDao {
 	public boolean erregistratuErabiltzailea(Bezero erregistratu) throws SQLException {
         Connection conex = DB_Konexioa.bezeroa();
 
-        Statement sentencia = conex.createStatement();
+       
         
-        try {
-
+        Statement checkUser = conex.createStatement();
+        
+        String kontsultaUser = "SELECT * from Bezeroa where Erabiltzailea ='" + erregistratu.getErabiltzaileIzena() + "'";
+		ResultSet user = checkUser.executeQuery(kontsultaUser);
+		
+		if (user.next()) {
+			System.out.println("no registra");
+			DB_Konexioa.itxi();
+			return false;
+		}else {
+			System.out.println("registra");
+			checkUser.close();
             java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
             java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
-    
+            Statement sentencia = conex.createStatement();
+            
             String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('"
                     + erregistratu.getIzena() + "', '" + erregistratu.getAbizena() + "', '" + erregistratu.getHizkuntza()
                     + "', '" + erregistratu.getErabiltzaileIzena() + "', '" + erregistratu.getPasahitza() + "', '"
@@ -112,10 +123,10 @@ public class BezeroDao {
     
             DB_Konexioa.itxi();
             return true;
-        }catch (Exception ex) {
-            DB_Konexioa.itxi();
-            return false;
-        }
+      
+
+		}
+        
         
     }
 	
