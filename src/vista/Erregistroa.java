@@ -213,18 +213,20 @@ public class Erregistroa extends JFrame {
 								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
 							}
 							try {
-								bezerodao.erregistratuErabiltzailea(bezeroa);
+							
 								if(!bezerodao.erregistratuErabiltzailea(bezeroa)) {
-									System.out.println("Es igual gilipollas");
+									JOptionPane.showMessageDialog(null, "Erabiltzailea existitzen da", "", JOptionPane.ERROR_MESSAGE);
+								}else {
+									JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+									FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+									FuntzioBista.irekiLogin();
+									dispose();
 								}
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 							}
 						}
-						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
-						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiLogin();
-						dispose();
+						
 					} else {
 						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
 					}

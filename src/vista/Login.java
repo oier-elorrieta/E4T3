@@ -32,7 +32,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		Aldagaiak.erabiltzailea = null;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
+		// setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 450, 300);
 		setResizable(false);
