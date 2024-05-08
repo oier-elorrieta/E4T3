@@ -98,6 +98,9 @@ public class Erreprodukzioa extends JFrame {
 		task = new TimerTask() {
 			public void run() {
 				int nextIndex = index + 1;
+				if (nextIndex > audioList.size() - 1) {
+					nextIndex = 0;
+				}
 				if (Aldagaiak.iragarkia) {
 					Aldagaiak.iragarkia = false;
 				}else {
@@ -115,6 +118,7 @@ public class Erreprodukzioa extends JFrame {
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clip.close();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErregistroa();
 				dispose();
@@ -128,6 +132,7 @@ public class Erreprodukzioa extends JFrame {
 		btnAtzera.setSize(325, 20);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				clip.close();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiBezeroMenu();
 				dispose();
@@ -212,6 +217,9 @@ public class Erreprodukzioa extends JFrame {
 					task = new TimerTask() {
 						public void run() {
 							int nextIndex = index + 1;
+							if (nextIndex > audioList.size() - 1) {
+								nextIndex = 0;
+							}
 							if (Aldagaiak.iragarkia) {
 								Aldagaiak.iragarkia = false;
 							}else {
@@ -361,6 +369,7 @@ public class Erreprodukzioa extends JFrame {
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
+					clip.close();
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
@@ -399,6 +408,7 @@ public class Erreprodukzioa extends JFrame {
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
+					clip.close();
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
