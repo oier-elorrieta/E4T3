@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -51,6 +53,10 @@ public class Erreprodukzioa extends JFrame {
 	private String userType = Aldagaiak.erabiltzailea.getClass().getSimpleName();
 	private String time = "0:00";
 	private String maxTime = "";
+	
+	private Timer timer;
+	private TimerTask task;
+	
 
 	/**
 	 * Create the frame.
@@ -84,6 +90,26 @@ public class Erreprodukzioa extends JFrame {
 		clip.start();
 		
 		maxTime = Funtzioak.longToString(clip.getMicrosecondLength());
+		long tiempo = clip.getMicrosecondLength();
+		tiempo = tiempo / 1000;
+		
+		timer = new Timer();
+
+		task = new TimerTask() {
+			public void run() {
+				int nextIndex = index + 1;
+				if (Aldagaiak.iragarkia) {
+					Aldagaiak.iragarkia = false;
+				}else {
+					Aldagaiak.iragarkia = true;
+				}
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+				dispose();
+			}
+		};
+		
+		timer.schedule(task, tiempo);
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
@@ -179,11 +205,32 @@ public class Erreprodukzioa extends JFrame {
 						}
 					}
 					clip.start();
+					long tiempo = clip.getMicrosecondLength() - clip.getMicrosecondPosition();
+					tiempo = tiempo / 1000;
+					timer = new Timer();
+
+					task = new TimerTask() {
+						public void run() {
+							int nextIndex = index + 1;
+							if (Aldagaiak.iragarkia) {
+								Aldagaiak.iragarkia = false;
+							}else {
+								Aldagaiak.iragarkia = true;
+							}
+							FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+							FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
+							dispose();
+						}
+					};
+					
+					timer.schedule(task, tiempo);
+					
 					btnStartStop.setText("⏸");
 					entzuten = true;
 				
 				} else {
 					clip.stop();
+					task.cancel();
 					btnStartStop.setText("▶");
 					time = Funtzioak.longToString(clip.getMicrosecondPosition());
 					lblTimer.setText(time + "<----->" + maxTime);
