@@ -241,7 +241,7 @@ public class Erregistroa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				prime = true;
 				JOptionPane.showMessageDialog(null, "Premium erosi duzu!", "", JOptionPane.INFORMATION_MESSAGE);
-				
+				btnPrime.setEnabled(false);
 			}
 		});
 		btnPrime.setBounds(388, 309, 120, 41);
