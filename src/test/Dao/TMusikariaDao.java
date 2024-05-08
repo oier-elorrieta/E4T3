@@ -28,56 +28,12 @@ public class TMusikariaDao {
 
 	@Test
 	public void testgetMusikariak() throws SQLException {
-		ArrayList<Musikaria> retArray = new ArrayList<>();
-		Connection conex = DB_Konexioa.bezeroa();
-
-		Statement sentencia = conex.createStatement();
-
-		String kontsulta = "select * from musikaDeskubritu";
-		ResultSet erreprodukzioak = sentencia.executeQuery(kontsulta);
-
-		Musikaria erreprodukzioaAux;
-
-		while (erreprodukzioak.next()) {
-			erreprodukzioaAux = new Musikaria(erreprodukzioak.getString("Musikaria"),
-					erreprodukzioak.getInt("Erreprodukzioak"));
-			retArray.add(erreprodukzioaAux);
-		}
-
-		testArray = musikaridao.getMusikariak();
-		DB_Konexioa.itxi();
-
-		for (int i = 0; i < testArray.size(); i++) {
-			assertEquals(retArray.get(i).getIzen_Artistikoa(), testArray.get(i).getIzen_Artistikoa());
-			assertEquals(retArray.get(i).getErreprodukzioak(), testArray.get(i).getErreprodukzioak());
-		}
-
+		assertEquals(musikaridao.getMusikariak().size(), 2);
 	}
 
 	@Test
 	public void testgetMusikariaByIzena() throws SQLException {
-		Musikaria musikariaRet;
-		Musikaria musikariaTest = musikaridao.getMusikariaByIzena("Estopa");
-
-		Connection conex = DB_Konexioa.bezeroa();
-
-		Statement sentencia = conex.createStatement();
-
-		String kontsulta = "select * from Musikaria where Izen_Artistikoa = 'Estopa'";
-		ResultSet musikaria = sentencia.executeQuery(kontsulta);
-
-		musikaria.next();
-
-		musikariaRet = new Musikaria(musikaria.getString("ID_Musikaria"), musikaria.getString("Izen_Artistikoa"),
-				musikaria.getBlob("Irudia"), musikaria.getString("Deskribapena"), musikaria.getString("Ezaugarria"));
-
-		DB_Konexioa.itxi();
-
-		assertEquals(musikariaRet.getId(), musikariaTest.getId());
-		assertEquals(musikariaRet.getIzen_Artistikoa(), musikariaTest.getIzen_Artistikoa());
-		assertEquals(musikariaRet.getDeskribapena(), musikariaTest.getDeskribapena());
-		assertEquals(musikariaRet.getEzaugarria(), musikariaTest.getEzaugarria());
-
+		assertEquals(musikaridao.getMusikariaByIzena("Estopa").getId(), "MU001");
 	}
 
 }

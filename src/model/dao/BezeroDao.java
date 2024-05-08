@@ -100,11 +100,9 @@ public class BezeroDao {
 		ResultSet user = checkUser.executeQuery(kontsultaUser);
 		
 		if (user.next()) {
-			System.out.println("no registra");
 			DB_Konexioa.itxi();
 			return false;
 		}else {
-			System.out.println("registra");
 			checkUser.close();
             java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
             java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
