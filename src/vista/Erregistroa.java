@@ -28,6 +28,7 @@ public class Erregistroa extends JFrame {
 	private JPasswordField passwordFieldPasahitza;
 	private JPasswordField passwordFieldKonfirmatu;
 	private boolean prime = false;
+	private Date premiumData;
 	
 	BezeroDao bezerodao = new BezeroDao();
 	HizkuntzaDao hizkuntzadao = new HizkuntzaDao();
@@ -76,6 +77,17 @@ public class Erregistroa extends JFrame {
 		textFieldJaioData.setBounds(155, 187, 274, 20);
 		contentPane.add(textFieldJaioData);
 		
+		JTextPane textPanePremium = new JTextPane();
+		textPanePremium.setEditable(false);
+		textPanePremium.setBounds(155, 215, 274, 20);
+		contentPane.add(textPanePremium);
+		
+		
+		if (Aldagaiak.erabiltzailea != null && Aldagaiak.erabiltzailea.getClass().getSimpleName().equals("Premium")) {
+			prime = true;
+			Premium premiumAux = (Premium) Aldagaiak.erabiltzailea;
+			textPanePremium.setText(Funtzioak.dateToString(premiumAux.getIraungitzeData()));
+		}
 
 		// Izenaren label
 		JLabel lblIzena = new JLabel("Izena:");
@@ -163,6 +175,8 @@ public class Erregistroa extends JFrame {
 
 		}
 
+		premiumData = new Date();
+		
 		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
 		btnGordeAldaketa.addActionListener(new ActionListener() {
 			@SuppressWarnings("unlikely-arg-type")
@@ -180,12 +194,9 @@ public class Erregistroa extends JFrame {
                 int jaioDataInt = 0;
                 Date jaioData = new Date();
                 if (!textFieldJaioData.getText().equals("")) {
-                    jaioData = Funtzioak.StringToDate(textFieldJaioData.getText());
+                    jaioData = Funtzioak.stringToDate(textFieldJaioData.getText());
                     jaioDataInt = jaioData.compareTo(noizData);
                 }
-
-		
-				
 				
 				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt == 0 || jaioDataInt > 0) {
 					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak ondo beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
@@ -195,7 +206,8 @@ public class Erregistroa extends JFrame {
 						Bezero bezeroa;
 						if (Aldagaiak.erabiltzailea != null) {
 							if (prime) {
-								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, noizData);
+								System.out.println(premiumData.toString());
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
 							} else {
 								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
 							}
@@ -208,7 +220,8 @@ public class Erregistroa extends JFrame {
 							}
 						}else {
 							if (prime) {
-								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, noizData);
+								System.out.println(premiumData.toString());
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
 							} else {
 								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
 							}
@@ -239,11 +252,14 @@ public class Erregistroa extends JFrame {
 		contentPane.add(btnGordeAldaketa);
 
 		JButton btnPrime = new JButton("Erosi Premium");
+		if (prime) btnPrime.setEnabled(false);
 		btnPrime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				prime = true;
 				JOptionPane.showMessageDialog(null, "Premium erosi duzu!", "", JOptionPane.INFORMATION_MESSAGE);
 				btnPrime.setEnabled(false);
+				textPanePremium.setText(Funtzioak.dateToString(Funtzioak.date1YearMore(premiumData)));
+				premiumData = Funtzioak.date1YearMore(premiumData);
 			}
 		});
 		btnPrime.setBounds(388, 309, 120, 41);
@@ -267,12 +283,6 @@ public class Erregistroa extends JFrame {
 		});
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-
-
-		JTextPane textPanePremium = new JTextPane();
-		textPanePremium.setEditable(false);
-		textPanePremium.setBounds(155, 215, 274, 20);
-		contentPane.add(textPanePremium);
 
 		// Muga label
 		JLabel lblMuga = new JLabel("Muga");

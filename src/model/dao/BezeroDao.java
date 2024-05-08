@@ -44,6 +44,7 @@ public class BezeroDao {
 			} else {
 				
 				Date iraungitzeData = premiumOrdua(conex,erabiltzaileak.getInt("ID_Bezeroa"));
+				System.out.println(iraungitzeData);
 				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getInt("ID_Bezeroa"), erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
 						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"), iraungitzeData);

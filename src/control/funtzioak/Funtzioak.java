@@ -38,7 +38,7 @@ public class Funtzioak {
      * @return Date objetu bat.
      */
     @SuppressWarnings("deprecation")
-	public static Date StringToDate(String dateTXT) {
+	public static Date stringToDate(String dateTXT) {
         String[] dateArray = dateTXT.split("-");
         int year = (Integer.parseInt(dateArray[0]) - 1900);
         int month = Integer.parseInt(dateArray[1]);
@@ -53,6 +53,36 @@ public class Funtzioak {
         	
         }
         return returnDate;
+    }
+    
+    /**
+     * String batetik Date batera pasatzen duen metodoa
+     * Formatua "YYYY-MM-DD" da.
+     * 
+     * @param dateTXT data string moduan jasotzen duena "YYYY-MM-DD".
+     * @return Date objetu bat.
+     */
+    @SuppressWarnings("deprecation")
+	public static String dateToString(Date date) {
+        String dataTXT = "";
+        int year = date.getYear() + 1900;
+        int month = date.getMonth() + 1;
+        dataTXT = year + "-" + month + "-" + date.getDate();
+        return dataTXT;
+    }
+    
+    /**
+     * String batetik Date batera pasatzen duen metodoa
+     * Formatua "YYYY-MM-DD" da.
+     * 
+     * @param dateTXT data string moduan jasotzen duena "YYYY-MM-DD".
+     * @return Date objetu bat.
+     */
+    @SuppressWarnings("deprecation")
+	public static Date date1YearMore(Date date) {
+    	int year = date.getYear() + 1;
+    	date.setYear(year);
+        return date;
     }
 
     /**

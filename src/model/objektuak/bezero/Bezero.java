@@ -205,6 +205,8 @@ public abstract class Bezero {
 	public void setErregistroEguna(Date erregistroEguna) {
 		this.erregistroEguna = erregistroEguna;
 	}
+	
+	
 
 	/**
 	 * Bezero objektuaren informazio laburra itzultzen du.
