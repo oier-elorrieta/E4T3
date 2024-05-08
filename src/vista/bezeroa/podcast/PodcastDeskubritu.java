@@ -47,8 +47,6 @@ public class PodcastDeskubritu extends JFrame {
 		
 		/* 	ARRAY DE PODCASTERS PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
 		podcasters = podcasterdao.getPodcaster();
-		
-		/* TO DELETE */ System.out.println(podcasters);
 
 		// Erabiltzailearen izena bistaratzeko botoia
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());

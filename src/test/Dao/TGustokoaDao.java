@@ -28,14 +28,14 @@ public class TGustokoaDao {
 	}
 
 	@Test
-	public void testgustokoaKonprobatuDago() throws SQLException {
+	public void testgustokoaKonprobatuSartu() throws SQLException {
 		Gustokoa gustokoa = new Gustokoa(bezeroa, abestia);
 		gustokoadao.gustokoaGehiKen(gustokoa);
 		assertTrue(gustokoadao.gustokoaKonprobatu(gustokoa));
 	}
 	
 	@Test
-	public void testgustokoaKonprobatuEZDago() throws SQLException {
+	public void testgustokoaKonprobatuKendu() throws SQLException {
 		Gustokoa gustokoa = new Gustokoa(bezeroa, abestia);
 		gustokoadao.gustokoaGehiKen(gustokoa);
 		assertFalse(gustokoadao.gustokoaKonprobatu(gustokoa));
