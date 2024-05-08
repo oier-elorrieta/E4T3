@@ -17,7 +17,7 @@ import model.db.DB_Konexioa;
 import model.objektuak.bezero.Free;
 import model.objektuak.bezero.Premium;
 
-public class TBezero {
+public class TBezeroDao {
 
 	private static BezeroDao bezerodao;
 	private static Free free;

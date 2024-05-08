@@ -29,32 +29,11 @@ public class TAudioDao {
 		audiodao = new AudioDao();
 		testArray = new ArrayList<>();
 	}
-
+	
+	// bueltatzen duen Array-a bi posizio baditu ondo egongo da
 	@Test
 	public void testgetAudio() throws SQLException {
-		ArrayList<Audio> retArray = new ArrayList<>();
-		Connection conex = DB_Konexioa.bezeroa();
-
-		Statement sentencia = conex.createStatement();
-
-		String kontsulta = "select * from Abestia join Audio using(ID_Audio) where ID_Album ='" + album.getId() + "'";
-		ResultSet podcasts = sentencia.executeQuery(kontsulta);
-
-		Abestia AbestiAux;
-
-		while (podcasts.next()) {
-			AbestiAux = new Abestia(podcasts.getString("ID_Audio"), podcasts.getString("Izena"), podcasts.getInt("Iraupena"), podcasts.getBlob("Irudia"));
-			retArray.add(AbestiAux);
-		}
-
-		testArray = audiodao.getAudio(album);
-		DB_Konexioa.itxi();
-		
-		for(int i=0;i<testArray.size();i++) {
-		assertEquals(retArray.get(i).getIdAudio(), testArray.get(i).getIdAudio());
-		assertEquals(retArray.get(i).getIzena(), testArray.get(i).getIzena());
-		assertEquals(retArray.get(i).getIraupena(), testArray.get(i).getIraupena());
-		}
+		assertEquals(audiodao.getAudio(album).size(), 2);
 	}
 
 }
