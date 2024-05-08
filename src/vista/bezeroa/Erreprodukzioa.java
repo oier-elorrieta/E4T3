@@ -25,7 +25,7 @@ public class Erreprodukzioa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private DefaultTableModel model;
-	private boolean entzuten = false;
+	private boolean entzuten = true;
 	JLabel lblIrudia = new JLabel("");
 	/* audio variables */
 	String filepath = "";
@@ -81,6 +81,7 @@ public class Erreprodukzioa extends JFrame {
 		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
 		clip = AudioSystem.getClip();
 		clip.open(aui);
+		clip.start();
 		
 		maxTime = Funtzioak.longToString(clip.getMicrosecondLength());
 
@@ -161,7 +162,7 @@ public class Erreprodukzioa extends JFrame {
 		panelBotoiak.add(btnMenu);
 
 		panelBotoiak.add(btnAurrekoa);
-		JButton btnStartStop = new JButton("▶");
+		JButton btnStartStop = new JButton("⏸");
 
 		panelBotoiak.add(btnStartStop);
 		panelBotoiak.add(btnHurrengoa);
