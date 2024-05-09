@@ -87,6 +87,7 @@ public class Erreprodukzioa extends JFrame {
 		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
 		clip = AudioSystem.getClip();
 		clip.open(aui);
+		erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));
 		clip.start();
 		
 		maxTime = Funtzioak.longToString(clip.getMicrosecondLength());
@@ -201,14 +202,6 @@ public class Erreprodukzioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!entzuten) {
-					if(clip.getFramePosition() == 0) {
-						try {
-							erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
 					clip.start();
 					long tiempo = clip.getMicrosecondLength() - clip.getMicrosecondPosition();
 					tiempo = tiempo / 1000;
