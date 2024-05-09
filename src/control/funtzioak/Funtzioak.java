@@ -40,17 +40,19 @@ public class Funtzioak {
     @SuppressWarnings("deprecation")
 	public static Date stringToDate(String dateTXT) {
         String[] dateArray = dateTXT.split("-");
-        int year = (Integer.parseInt(dateArray[0]) - 1900);
-        int month = Integer.parseInt(dateArray[1]);
-        int day = Integer.parseInt(dateArray[2]);
-        Date returnDate = new Date(year, month, day);
+        Date returnDate;
         try {
+        	int year = (Integer.parseInt(dateArray[0]) - 1900);
+            int month = Integer.parseInt(dateArray[1]);
+            int day = Integer.parseInt(dateArray[2]);
+            returnDate = new Date(year, month, day);
         	returnDate.setYear(Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
         	returnDate.setMonth(Integer.parseInt(dateArray[1])); // Hilabetea 1-12 bitartean
         	returnDate.setDate(Integer.parseInt(dateArray[2])); // Eguna 1-31 bitartean
 	        
         }catch (Exception ex) {
-        	
+        	returnDate = new Date();
+
         }
         return returnDate;
     }

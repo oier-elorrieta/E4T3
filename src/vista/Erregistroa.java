@@ -224,6 +224,7 @@ public class Erregistroa extends JFrame {
 									FuntzioBista.irekiLogin();
 									dispose();
 								} catch (SQLException e1) {
+									
 									e1.printStackTrace();
 								}
 							}
