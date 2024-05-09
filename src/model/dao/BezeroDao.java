@@ -160,7 +160,7 @@ public class BezeroDao {
 		java.sql.Date sqlDateJaioteguna = new java.sql.Date(update.getJaioteguna().getTime());
 		
 		
-		String kontsulta = "UPDATE Bezeroa SET Izen ='"+update.getIzena()+"', Abizena ='"+update.getAbizena()+"',Hizkuntza ='"+update.getHizkuntza()+"',Erabiltzailea ='"+update.getErabiltzaileIzena()+"',Pasahitza = '"+update.getPasahitza()+"',Jaiotze_data ='"+sqlDateJaioteguna+"'where ID_Bezeroa = "+Aldagaiak.erabiltzailea.getId()+";";
+		String kontsulta = "UPDATE Bezeroa SET Izen ='"+update.getIzena()+"', Abizena ='"+update.getAbizena()+"',Hizkuntza ='"+update.getHizkuntza()+"',Erabiltzailea ='"+update.getErabiltzaileIzena()+"',Pasahitza = '"+update.getPasahitza()+"',Jaiotze_data ='"+sqlDateJaioteguna+"', Mota ='"+update.getClass().getSimpleName()+"'where ID_Bezeroa = "+Aldagaiak.erabiltzailea.getId()+";";
 		
 		statement.executeUpdate(kontsulta);
 	

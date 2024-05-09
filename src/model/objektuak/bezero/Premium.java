@@ -1,6 +1,9 @@
 package model.objektuak.bezero;
 
 import java.util.Date;
+import java.util.Objects;
+
+import control.funtzioak.Funtzioak;
 
 public class Premium extends Bezero {
 	private Date iraungitzeData;
@@ -86,5 +89,25 @@ public class Premium extends Bezero {
 	public String toString() {
 		return super.toString() + " Premium [iraungitzeData=" + iraungitzeData + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(iraungitzeData);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Premium other = (Premium) obj;
+		return Objects.equals(Funtzioak.dateToString(iraungitzeData), other.iraungitzeData);
+	}
+	
+	
+	
 
 }
