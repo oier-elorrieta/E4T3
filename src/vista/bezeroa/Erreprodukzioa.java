@@ -122,7 +122,7 @@ public class Erreprodukzioa extends JFrame {
 				timer.cancel();
 				clip.close();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
+				FuntzioBista.irekiErregistroa("Log Out");
 				dispose();
 			}
 		});

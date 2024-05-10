@@ -58,7 +58,7 @@ public class MusikaDeskubritu extends JFrame {
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
+				FuntzioBista.irekiErregistroa("Log Out");
 				dispose();
 			}
 		});
