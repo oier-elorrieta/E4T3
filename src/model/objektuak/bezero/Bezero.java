@@ -2,6 +2,10 @@ package model.objektuak.bezero;
 
 import java.util.*;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+import control.funtzioak.Funtzioak;
+
 public abstract class Bezero {
 	protected int id;
 	protected String izena;
@@ -219,5 +223,29 @@ public abstract class Bezero {
 				+ erabiltzaileIzena + ", pasahitza=" + pasahitza + ", jaioteguna=" + jaioteguna + ", erregistroEguna="
 				+ erregistroEguna + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bezero other = (Bezero) obj;
+	
+		return Objects.equals(abizena, other.abizena) && Objects.equals(erabiltzaileIzena, other.erabiltzaileIzena)
+				&& Objects.equals(hizkuntza, other.hizkuntza)
+				&& Objects.equals(izena, other.izena) && jaioteguna.getYear() == other.jaioteguna.getYear()
+				&& jaioteguna.getMonth()-1 == other.jaioteguna.getMonth() && jaioteguna.getDate() == other.jaioteguna.getDate()
+				&& BCrypt.checkpw(other.pasahitza, pasahitza);
+		
+		
+		
+		
+	}
+	
+	
+	
 
 }

@@ -87,6 +87,7 @@ public class Erreprodukzioa extends JFrame {
 		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
 		clip = AudioSystem.getClip();
 		clip.open(aui);
+		erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));
 		clip.start();
 		
 		maxTime = Funtzioak.longToString(clip.getMicrosecondLength());
@@ -98,6 +99,9 @@ public class Erreprodukzioa extends JFrame {
 		task = new TimerTask() {
 			public void run() {
 				int nextIndex = index + 1;
+				if (nextIndex > audioList.size() - 1) {
+					nextIndex = 0;
+				}
 				if (Aldagaiak.iragarkia) {
 					Aldagaiak.iragarkia = false;
 				}else {
@@ -115,6 +119,8 @@ public class Erreprodukzioa extends JFrame {
 		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
 		btnPerfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				timer.cancel();
+				clip.close();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiErregistroa();
 				dispose();
@@ -128,6 +134,8 @@ public class Erreprodukzioa extends JFrame {
 		btnAtzera.setSize(325, 20);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				timer.cancel();
+				clip.close();
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 				FuntzioBista.irekiBezeroMenu();
 				dispose();
@@ -196,14 +204,6 @@ public class Erreprodukzioa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!entzuten) {
-					if(clip.getFramePosition() == 0) {
-						try {
-							erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
 					clip.start();
 					long tiempo = clip.getMicrosecondLength() - clip.getMicrosecondPosition();
 					tiempo = tiempo / 1000;
@@ -212,6 +212,9 @@ public class Erreprodukzioa extends JFrame {
 					task = new TimerTask() {
 						public void run() {
 							int nextIndex = index + 1;
+							if (nextIndex > audioList.size() - 1) {
+								nextIndex = 0;
+							}
 							if (Aldagaiak.iragarkia) {
 								Aldagaiak.iragarkia = false;
 							}else {
@@ -230,7 +233,7 @@ public class Erreprodukzioa extends JFrame {
 				
 				} else {
 					clip.stop();
-					task.cancel();
+					timer.cancel();
 					btnStartStop.setText("▶");
 					time = Funtzioak.longToString(clip.getMicrosecondPosition());
 					lblTimer.setText(time + "<----->" + maxTime);
@@ -297,6 +300,7 @@ public class Erreprodukzioa extends JFrame {
 		panelInformazioa.setLayout(new BorderLayout(0, 0));
 
 		JTextPane textPaneInformazioa = new JTextPane();
+		textPaneInformazioa.setEditable(false);
 		textPaneInformazioa.setText(
 				"Izena: " + audioList.get(index).getIzena() + "\r\nIraupena: " + Funtzioak.secondsToString(audioList.get(index).getIraupena()));
 		panelInformazioa.add(textPaneInformazioa);
@@ -361,6 +365,8 @@ public class Erreprodukzioa extends JFrame {
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
+					clip.close();
+					timer.cancel();
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
@@ -386,6 +392,7 @@ public class Erreprodukzioa extends JFrame {
 							nextIndex = 0;
 						}
 						clip.close();
+						timer.cancel();
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
 						dispose();
@@ -399,6 +406,8 @@ public class Erreprodukzioa extends JFrame {
 		btnAurrekoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Aldagaiak.iragarkia && Aldagaiak.skipSong && userType.equals("Free")) {
+					clip.close();
+					timer.cancel();
 					Aldagaiak.skipSong = false;
 					Funtzioak.skipBaimendu();
 					Aldagaiak.iragarkia = false;
@@ -423,6 +432,7 @@ public class Erreprodukzioa extends JFrame {
 							nextIndex = audioList.size() - 1;
 						}
 						clip.close();
+						timer.cancel();
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiErreprodukzioa(audioList, nextIndex);
 						dispose();

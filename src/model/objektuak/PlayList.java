@@ -168,6 +168,13 @@ public class PlayList {
     public void setAbestiak(ArrayList<Abestia> abestiak) {
         this.abestiak = abestiak;
     }
+    
+    public void gehituAbestiKont() {
+    	this.abestiKont++;
+    }
+    public void kenduAbestiKont() {
+    	this.abestiKont--;
+    }
 
     /**
      * PlayList objektuaren informazio laburra itzultzen du.

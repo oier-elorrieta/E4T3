@@ -206,21 +206,30 @@ public class Erregistroa extends JFrame {
 						Bezero bezeroa;
 						if (Aldagaiak.erabiltzailea != null) {
 							if (prime) {
-								System.out.println(premiumData.toString());
 								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
 							} else {
 								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
 							}
-							try {
-								
-								bezerodao.updateErabiltzailea(bezeroa);
-								
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
+							
+							if(bezeroa.equals(Aldagaiak.erabiltzailea)) {
+								JOptionPane.showMessageDialog(null, "Ez dira aldaketarik egon", "", JOptionPane.INFORMATION_MESSAGE);
+								FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+								FuntzioBista.irekiBezeroMenu();
+								dispose();
+							}else {
+								try {
+									bezerodao.updateErabiltzailea(bezeroa);
+									JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+									FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+									FuntzioBista.irekiLogin();
+									dispose();
+								} catch (SQLException e1) {
+									
+									e1.printStackTrace();
+								}
 							}
 						}else {
 							if (prime) {
-								System.out.println(premiumData.toString());
 								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
 							} else {
 								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
