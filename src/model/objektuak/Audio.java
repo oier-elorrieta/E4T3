@@ -17,7 +17,7 @@ public abstract class Audio {
 	 * @param idAudio  Audioaren identifikadorea
 	 * @param izena    Audioaren izena
 	 * @param iraupena Audioaren iraupena segundoetan
-	 * @param irudia  Audioaren irudia
+	 * @param irudia   Audioaren irudia
 	 */
 	public Audio(String idAudio, String izena, int iraupena, Blob irudia) {
 		this.idAudio = idAudio;
@@ -117,6 +117,7 @@ public abstract class Audio {
 	public String toString() {
 		return "Audio [idAudio=" + idAudio + ", izena=" + izena + ", iraupena=" + iraupena + ", irudia=" + irudia + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(idAudio, iraupena, irudia, izena);
@@ -138,7 +139,7 @@ public abstract class Audio {
 			return false;
 		Audio other = (Audio) obj;
 		return Objects.equals(idAudio, other.idAudio) && iraupena == other.iraupena
-				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
+				&& Objects.equals(izena, other.izena);
 	}
 
 }

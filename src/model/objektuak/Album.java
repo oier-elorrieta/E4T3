@@ -3,6 +3,7 @@ package model.objektuak;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Album {
 
@@ -17,7 +18,8 @@ public class Album {
 	private Musikaria musikaria;
 	private ArrayList<Abestia> abestiak;
 
-	public Album(String id, String izenburua, Date urtea, int kontAbestiak, int iraupena, Blob irudia, String deskripzioa) {
+	public Album(String id, String izenburua, Date urtea, int kontAbestiak, int iraupena, Blob irudia,
+			String deskripzioa) {
 		this.id = id;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
@@ -146,6 +148,27 @@ public class Album {
 	public String toString() {
 		return "Album [id=" + id + ", izenburua=" + izenburua + ", urtea=" + urtea + ", generoa=" + generoa
 				+ ", irudia=" + irudia + ", musikaria=" + musikaria + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(abestiak, deskripzioa, generoa, id, iraupena, irudia, izenburua, kontAbestiak, musikaria,
+				urtea);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Album other = (Album) obj;
+		return Objects.equals(abestiak, other.abestiak) && Objects.equals(deskripzioa, other.deskripzioa)
+				&& Objects.equals(generoa, other.generoa) && Objects.equals(id, other.id) && iraupena == other.iraupena
+				&& Objects.equals(izenburua, other.izenburua) && kontAbestiak == other.kontAbestiak
+				&& Objects.equals(musikaria, other.musikaria) && Objects.equals(urtea, other.urtea);
 	}
 
 }

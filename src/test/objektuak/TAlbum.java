@@ -1,4 +1,4 @@
-package test.pojoak;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
