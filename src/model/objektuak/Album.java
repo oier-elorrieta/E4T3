@@ -151,12 +151,6 @@ public class Album {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(abestiak, deskripzioa, generoa, id, iraupena, irudia, izenburua, kontAbestiak, musikaria,
-				urtea);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

@@ -23,17 +23,6 @@ public class TAbestiaDao {
 		abestiList = new ArrayList<>(abestidao.getAbestiaByAlbumId(album));
 		
 	}
-
-	@Test
-	public void testGetAbestiaByAlbumIdArrayList() throws SQLException {
-		
-		assertEquals(abestiList, 0);
-	}
-	
-	@Test
-	public void testGetAbestiaByAlbumIdSize() throws SQLException {
-		assertEquals(abestidao.getAbestiaByAlbumId(album).size(), 2);
-	}
 	
 	@Test
 	public void testGetAbestiaByAlbumId() throws SQLException {

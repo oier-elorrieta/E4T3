@@ -17,18 +17,19 @@ import model.objektuak.Musikaria;
 
 public class TMusikariaDao {
 
-	private static ArrayList<Musikaria> testArray;
+	private static Musikaria m1;
 	private static MusikariaDao musikaridao;
 
 	@Before
 	public void setUp() throws Exception {
 		musikaridao = new MusikariaDao();
-		testArray = new ArrayList<>();
+		m1 = new Musikaria("Estopa", 2);
+		
 	}
 
 	@Test
 	public void testgetMusikariak() throws SQLException {
-		assertEquals(musikaridao.getMusikariak().size(), 2);
+		assertEquals(musikaridao.getMusikariak().get(0), m1);
 	}
 
 	@Test

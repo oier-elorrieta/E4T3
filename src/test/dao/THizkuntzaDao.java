@@ -19,16 +19,18 @@ public class THizkuntzaDao {
 
 	private static ArrayList<Hizkuntza> testArray;
 	private static HizkuntzaDao hizkuntzadao;
-	
+	private static Hizkuntza hizkuntza;
+
 	@Before
 	public void setUp() throws Exception {
 		testArray = new ArrayList<>();
 		hizkuntzadao = new HizkuntzaDao();
+		hizkuntza = new Hizkuntza("ES", "Spanish");
 	}
 
 	@Test
 	public void testgetHizkuntzak() throws SQLException {
-		assertEquals(hizkuntzadao.getHizkuntzak().size(), 8);		
+		assertEquals(hizkuntzadao.getHizkuntzak().get(0), hizkuntza);
 	}
 
 }
