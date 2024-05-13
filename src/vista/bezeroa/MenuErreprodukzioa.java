@@ -87,12 +87,11 @@ public class MenuErreprodukzioa extends JFrame {
 				if (index == -1) {
 					JOptionPane.showMessageDialog(null, "Aukeratu Playlist bat mesedez", "", JOptionPane.ERROR_MESSAGE);
 				} else {
-					try {
-						playlistDao.insertAbestiaIntoPlayList(playlistList.get(index), audioList.get(index));
+					if(playlistDao.insertAbestiaIntoPlayList(playlistList.get(index), audioList.get(index))) {
 						JOptionPane.showMessageDialog(null, "Sartuta", "", JOptionPane.INFORMATION_MESSAGE);
-					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "Musika honek sartuta daukazu", "", JOptionPane.ERROR_MESSAGE);
 					}
+					
+					
 				}
 			}
 		});

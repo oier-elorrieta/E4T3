@@ -3,6 +3,7 @@ package vista;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import control.funtzioak.*;
+import control.salbuespenak.pasahitzaDiff;
 import model.*;
 import model.dao.*;
 import model.objektuak.Hizkuntza;
@@ -194,14 +195,18 @@ public class Erregistroa extends JFrame {
                 int jaioDataInt = 0;
                 Date jaioData = new Date();
                 if (!textFieldJaioData.getText().equals("")) {
-                    jaioData = Funtzioak.stringToDate(textFieldJaioData.getText());
+
+					jaioData = Funtzioak.stringToDate(textFieldJaioData.getText());
+				
                     jaioDataInt = jaioData.compareTo(noizData);
                 }
 				
-				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt == 0 || jaioDataInt > 0) {
+				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt > 0) {
 					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak ondo beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
 				} else {
+					try {
 					if (pasahitza.equals(konfirmazioa)) {
+						
 						pasahitza = Funtzioak.enkriptatzailea(pasahitza);
 						Bezero bezeroa;
 						if (Aldagaiak.erabiltzailea != null) {
@@ -250,7 +255,10 @@ public class Erregistroa extends JFrame {
 						}
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
+						throw new pasahitzaDiff();
+					}
+					}catch(pasahitzaDiff ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				

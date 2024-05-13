@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JOptionPane;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import model.Aldagaiak;
@@ -38,22 +40,22 @@ public class Funtzioak {
      * @return Date objetu bat.
      */
     @SuppressWarnings("deprecation")
-	public static Date stringToDate(String dateTXT) {
+	public static Date stringToDate(String dateTXT){
         String[] dateArray = dateTXT.split("-");
         Date returnDate;
         try {
-        	int year = (Integer.parseInt(dateArray[0]) - 1900);
-            int month = Integer.parseInt(dateArray[1]);
-            int day = Integer.parseInt(dateArray[2]);
-            returnDate = new Date(year, month, day);
-        	returnDate.setYear(Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
-        	returnDate.setMonth(Integer.parseInt(dateArray[1])); // Hilabetea 1-12 bitartean
-        	returnDate.setDate(Integer.parseInt(dateArray[2])); // Eguna 1-31 bitartean
-	        
-        }catch (Exception ex) {
+	        int year = (Integer.parseInt(dateArray[0]) - 1900);
+			int month = Integer.parseInt(dateArray[1]);
+			int day = Integer.parseInt(dateArray[2]);
+			returnDate = new Date(year, month, day);
+			returnDate.setYear(Integer.parseInt(dateArray[0]) - 1900); // Date klaseak 1900 urtetik zenbatzen du
+			returnDate.setMonth(Integer.parseInt(dateArray[1])); // Hilabetea 1-12 bitartean
+			returnDate.setDate(Integer.parseInt(dateArray[2])); // Eguna 1-31 bitartean
+        }catch(Exception e) {
         	returnDate = new Date();
-
+       
         }
+		
         return returnDate;
     }
     
