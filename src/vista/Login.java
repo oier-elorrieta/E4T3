@@ -111,7 +111,7 @@ public class Login extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
+				FuntzioBista.irekiErregistroa("Atzera");
 				dispose();
 			}
 		});

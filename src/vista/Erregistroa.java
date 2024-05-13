@@ -38,7 +38,7 @@ public class Erregistroa extends JFrame {
 	 * 
 	 * @throws SQLException
 	@SuppressWarnings({ "unchecked", "rawtypes" })*/
-	public Erregistroa() throws SQLException {
+	public Erregistroa(String botoiTextua) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Erregistroa.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 550, 400);
@@ -282,7 +282,7 @@ public class Erregistroa extends JFrame {
 		contentPane.add(lblTitulua);
 
 		// Atzera botoia. Aurreko pantailara joaten da.
-		JButton btnAtzera = new JButton("Atzera");
+		JButton btnAtzera = new JButton(botoiTextua);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());

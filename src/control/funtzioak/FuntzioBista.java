@@ -66,9 +66,9 @@ public class FuntzioBista {
 	/**
 	 * Erregistro bista irekitzen duen metodoa.
 	 */
-	public static void irekiErregistroa() {
+	public static void irekiErregistroa(String botoiTextua) {
 		try {
-			Erregistroa frame = new Erregistroa();
+			Erregistroa frame = new Erregistroa(botoiTextua);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
