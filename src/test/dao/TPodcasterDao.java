@@ -18,10 +18,12 @@ import model.objektuak.Podcaster;
 public class TPodcasterDao {
 	// private static final String = null;
 	private static PodcasterDao podcasterdao;
+	private static Podcaster podcaster;
 
 	@Before
 	public void setUp() throws Exception {
 		podcasterdao = new PodcasterDao();
+		podcaster = new Podcaster("The Wild Project", 4);
 	}
 
 	@Test
@@ -31,7 +33,7 @@ public class TPodcasterDao {
 
 	@Test
 	public void testGetPodcaster() throws SQLException {
-		assertEquals(podcasterdao.getPodcaster().size(), 2);
+		assertEquals(podcasterdao.getPodcaster().get(0), podcaster);
 	}
 
 }

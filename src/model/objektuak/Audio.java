@@ -118,10 +118,6 @@ public abstract class Audio {
 		return "Audio [idAudio=" + idAudio + ", izena=" + izena + ", iraupena=" + iraupena + ", irudia=" + irudia + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(idAudio, iraupena, irudia, izena);
-	}
 
 	/**
 	 * Audio objektuaren berdintasuna konparatzen du.

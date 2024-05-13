@@ -20,19 +20,19 @@ import model.objektuak.Podcaster;
 public class TPodcastDao {
 
 	private static PodcastDao podcastdao;
-	private static ArrayList<Audio> testArray;
 	private static Podcaster podcaster;
+	private static Podcast p1;
 	
 	@Before
 	public void setUp() throws Exception {
-		testArray = new ArrayList<>();
 		podcastdao = new PodcastDao();
 		podcaster = new Podcaster("PO001", "unai", null, "deskribapena");
+		p1 = new Podcast("AU001", "The Wild Project #1", 12840, "Guest 1, Guest 2", null);
 	}
 
 	@Test
 	public void testgetPodcastByPodcasterId() throws SQLException {
-		assertEquals(podcastdao.getPodcastByPodcasterId(podcaster).size(), 4);	
+		assertEquals(podcastdao.getPodcastByPodcasterId(podcaster).get(0), p1);	
 	}
 
 }

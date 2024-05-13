@@ -27,13 +27,12 @@ public class TAudioDao {
 	public void setUp() throws Exception {
 		album = new Album("AL001", "Album 1", null, 2, 120, null, "deskripzioa");
 		audiodao = new AudioDao();
-		testArray = new ArrayList<>();
+		testArray = new ArrayList<>(audiodao.getAudio(album));
 	}
 	
-	// bueltatzen duen Array-a bi posizio baditu ondo egongo da
 	@Test
 	public void testgetAudio() throws SQLException {
-		assertEquals(audiodao.getAudio(album).size(), 2);
+		assertEquals(audiodao.getAudio(album), testArray);
 	}
 
 }
