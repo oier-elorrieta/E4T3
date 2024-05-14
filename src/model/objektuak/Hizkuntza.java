@@ -62,7 +62,7 @@ public class Hizkuntza {
 	public String toString() {
 		return "Hizkuntza [ID_Hizkuntza=" + ID_Hizkuntza + ", Deskribapena=" + Deskribapena + "]";
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,5 +74,7 @@ public class Hizkuntza {
 		Hizkuntza other = (Hizkuntza) obj;
 		return Objects.equals(Deskribapena, other.Deskribapena) && Objects.equals(ID_Hizkuntza, other.ID_Hizkuntza);
 	}
+	
+	
 
 }

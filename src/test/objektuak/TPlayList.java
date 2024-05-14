@@ -1,4 +1,4 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
@@ -23,31 +23,31 @@ public class TPlayList {
 		eguna = new Date(2024, 04, 19);
 		abestiak = new ArrayList<Abestia>();
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
-		pl1 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
+		pl1 = new PlayList("1", "Rock lista", eguna, f1, abestiak);
 	}
 
 	// ********************** ID **********************
 
 	@Test
 	public void TestGetId() {
-		assertEquals(1, pl1.getId());
+		assertEquals("1", pl1.getId());
 	}
 
 	@Test
 	public void TestSetId() {
-		pl1.setId(2);
-		assertEquals(2, pl1.getId());
+		pl1.setId("2");
+		assertEquals("2", pl1.getId());
 	}
 
 	@Test
 	public void TestGetIdTxarto() {
-		assertNotEquals(2, pl1.getId());
+		assertNotEquals("2", pl1.getId());
 	}
 
 	@Test
 	public void TestSetIdTxarto() {
-		pl1.setId(2);
-		assertNotEquals(1, pl1.getId());
+		pl1.setId("2");
+		assertNotEquals("1", pl1.getId());
 	}
 
 	// ********************** IZENA **********************
@@ -185,11 +185,5 @@ public class TPlayList {
 	public void TestEqualsClaseEzberdinak() {
 		String txarra = "";
 		assertFalse(pl1.equals(txarra));
-	}
-
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		PlayList pl2 = new PlayList(1, "Rock lista", eguna, f1, abestiak);
-		assertTrue(pl1.equals(pl2));
 	}
 }

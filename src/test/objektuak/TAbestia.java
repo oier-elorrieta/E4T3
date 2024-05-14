@@ -1,20 +1,25 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+import java.sql.Blob;
 import model.objektuak.Abestia;
-import model.objektuak.bezero.Free;
 
 public class TAbestia {
 
 	private Abestia a1;
+	private Blob blob;
+	private Blob blob2;
 
 	@Before
 	public void setUp() throws Exception {
-		a1 = new Abestia("1", "izena", 120, "irudia");
+		byte[] blobData = "Datos de ejemplo".getBytes();
+		byte[] blobData2 = "Datos de ejemplo2".getBytes();
+		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
+		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
+		a1 = new Abestia("1", "izena", 120, blob);
 	}
 
 	// ********************** ID **********************
@@ -93,24 +98,24 @@ public class TAbestia {
 
 	@Test
 	public void TestGetIrudia() {
-		assertEquals("irudia", a1.getIrudia());
+		assertEquals(blob, a1.getIrudia());
 	}
 
 	@Test
 	public void TestSetIrudia() {
-		a1.setIrudia("irudi");
-		assertEquals("irudi", a1.getIrudia());
+		a1.setIrudia(blob2);
+		assertEquals(blob2, a1.getIrudia());
 	}
 
 	@Test
 	public void TestGetIrudiaTxarto() {
-		assertNotEquals("irudi", a1.getIrudia());
+		assertNotEquals(blob2, a1.getIrudia());
 	}
 
 	@Test
 	public void TestSetIrudiaTxarto() {
-		a1.setIrudia("irudi");
-		assertNotEquals("irudia", a1.getIrudia());
+		a1.setIrudia(blob2);
+		assertNotEquals(blob, a1.getIrudia());
 	}
 
 	// ********************** TO STRING **********************
@@ -145,8 +150,10 @@ public class TAbestia {
 
 	@Test
 	public void TestEqualsClaseAtrBerdinak() {
-		Abestia a2 = new Abestia("1", "izena", 120, "irudia");
+		Abestia a2 = new Abestia("1", "izena", 120, blob);
 		assertTrue(a1.equals(a2));
 	}
 
+
 }
+

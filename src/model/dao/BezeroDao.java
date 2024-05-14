@@ -1,19 +1,13 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.db.DB_Konexioa;
-import model.objektuak.bezero.Bezero;
-import model.objektuak.bezero.Free;
-import model.objektuak.bezero.Premium;
+import model.objektuak.bezero.*;
 
 public class BezeroDao {
 	
@@ -41,15 +35,17 @@ public class BezeroDao {
 			return false;
 		}
 		if (BCrypt.checkpw(pasahitza, erabiltzaileak.getString("Pasahitza"))) {
-			String pass = erabiltzaileak.getString("Pasahitza");
-			pass = Funtzioak.enkriptatzailea(pass);
+			
+			
 			if(erabiltzaileak.getString("Mota").equals("Free")) {
-				Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
+				Aldagaiak.erabiltzailea = new Free(erabiltzaileak.getInt("ID_Bezeroa"), erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
 						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"));
 			} else {
+				
 				Date iraungitzeData = premiumOrdua(conex,erabiltzaileak.getInt("ID_Bezeroa"));
-				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
+				System.out.println(iraungitzeData);
+				Aldagaiak.erabiltzailea = new Premium(erabiltzaileak.getInt("ID_Bezeroa"), erabiltzaileak.getString("Izen"), erabiltzaileak.getString("Abizena"),
 						erabiltzaileak.getString("Hizkuntza"), erabiltzaileak.getString("Erabiltzailea"), pasahitza,
 						erabiltzaileak.getDate("Jaiotze_data"), erabiltzaileak.getDate("Erregistro_data"), iraungitzeData);
 			}
@@ -73,18 +69,17 @@ public class BezeroDao {
 	
 	private Date premiumOrdua(Connection conex, int idBezero) throws SQLException {
 		Statement statement = conex.createStatement();
-				
-		String kontsulta = "SELECT Iraungitze_data from Premium where ID_bezeroa ="+idBezero+"";
+
+		String kontsulta = "SELECT Iraungitze_data from Premium where ID_bezeroa =" + idBezero + "";
 		ResultSet iraungitzeData = statement.executeQuery(kontsulta);
-		
+
 		iraungitzeData.next();
-		
+
 		Date returnDate = new Date();
 		returnDate = iraungitzeData.getDate("Iraungitze_data");
-		
+
 		return returnDate;
-		
-		
+
 	}
 	
 	/**
@@ -95,28 +90,45 @@ public class BezeroDao {
 	 * @throws SQLException
 	 */
 	public boolean erregistratuErabiltzailea(Bezero erregistratu) throws SQLException {
-		Connection conex = DB_Konexioa.bezeroa();
+        Connection conex = DB_Konexioa.bezeroa();
 
-		Statement sentencia = conex.createStatement();
-
-		java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
-		java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
-
-		String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('"
-				+ erregistratu.getIzena() + "', '" + erregistratu.getAbizena() + "', '" + erregistratu.getHizkuntza()
-				+ "', '" + erregistratu.getErabiltzaileIzena() + "', '" + erregistratu.getPasahitza() + "', '"
-				+ sqlDateJaioteguna + "', '" + erregistroDateJaioteguna + "', '"
-				+ erregistratu.getClass().getSimpleName() + "')";
-		sentencia.executeUpdate(kontsulta);
+       
+        
+        Statement checkUser = conex.createStatement();
+        
+        String kontsultaUser = "SELECT * from Bezeroa where Erabiltzailea ='" + erregistratu.getErabiltzaileIzena() + "'";
+		ResultSet user = checkUser.executeQuery(kontsultaUser);
 		
-		if(erregistratu.getClass().getSimpleName().equalsIgnoreCase("Premium")){
-			Premium aux = (Premium) erregistratu; 
-			erregistratuPremium(conex,erregistratu.getErabiltzaileIzena(),aux.getIraungitzeData());
-		}
+		if (user.next()) {
+			DB_Konexioa.itxi();
+			return false;
+		}else {
+			checkUser.close();
+            java.sql.Date sqlDateJaioteguna = new java.sql.Date(erregistratu.getJaioteguna().getTime());
+            java.sql.Date erregistroDateJaioteguna = new java.sql.Date(erregistratu.getErregistroEguna().getTime());
+            Statement sentencia = conex.createStatement();
+            
+            String kontsulta = "INSERT INTO Bezeroa (Izen, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data, Mota) VALUES ('"
+                    + erregistratu.getIzena() + "', '" + erregistratu.getAbizena() + "', '" + erregistratu.getHizkuntza()
+                    + "', '" + erregistratu.getErabiltzaileIzena() + "', '" + erregistratu.getPasahitza() + "', '"
+                    + sqlDateJaioteguna + "', '" + erregistroDateJaioteguna + "', '"
+                    + erregistratu.getClass().getSimpleName() + "')";
+            sentencia.executeUpdate(kontsulta);
+            
+            if(erregistratu.getClass().getSimpleName().equalsIgnoreCase("Premium")){
+                Premium aux = (Premium) erregistratu; 
+                erregistratuPremium(conex,erregistratu.getErabiltzaileIzena(),aux.getIraungitzeData());
+            }
+    
+            DB_Konexioa.itxi();
+            return true;
+      
 
-		DB_Konexioa.itxi();
-		return true;
-	}
+		}
+        
+        
+    }
+	
 	/**
 	 * Premium den erabiltzailearen iraungitze data 
 	 * 
@@ -124,7 +136,6 @@ public class BezeroDao {
 	 * @return True bada erabiltzailea erregistratuta dagoen eta False bestela
 	 * @throws SQLException
 	 */
-	
 	private void erregistratuPremium(Connection conex, String erabiltzailea, Date iraungitzeData) throws SQLException {
 		Statement statement = conex.createStatement();
 		
@@ -132,6 +143,34 @@ public class BezeroDao {
 		
 		String konsulta = "INSERT INTO Premium (ID_bezeroa, Iraungitze_data) VALUES ((SELECT ID_Bezeroa FROM Bezeroa WHERE Erabiltzailea='"+erabiltzailea+"'),'"+sqlDateIraungitze+"');"; 
 		statement.executeUpdate(konsulta);
+	}
+	
+	/**
+	 * Erabiltzailea null ez bada, erabiltzaile duplikatu arren update egiteko.
+	 * 
+	 * @param update Bezero objektua
+	 * @return True badaude datu-basean eta pasahitza egokia bada 
+	 * @throws SQLException
+	 */
+	public boolean updateErabiltzailea(Bezero update) throws SQLException {
+		Connection conex = DB_Konexioa.bezeroa();
+
+		Statement statement = conex.createStatement();
+
+		java.sql.Date sqlDateJaioteguna = new java.sql.Date(update.getJaioteguna().getTime());
+		
+		
+		String kontsulta = "UPDATE Bezeroa SET Izen ='"+update.getIzena()+"', Abizena ='"+update.getAbizena()+"',Hizkuntza ='"+update.getHizkuntza()+"',Erabiltzailea ='"+update.getErabiltzaileIzena()+"',Pasahitza = '"+update.getPasahitza()+"',Jaiotze_data ='"+sqlDateJaioteguna+"', Mota ='"+update.getClass().getSimpleName()+"'where ID_Bezeroa = "+Aldagaiak.erabiltzailea.getId()+";";
+		
+		statement.executeUpdate(kontsulta);
+	
+		if(update.getClass().getSimpleName().equalsIgnoreCase("Premium")){
+			Premium aux = (Premium) update; 
+			erregistratuPremium(conex,update.getErabiltzaileIzena(),aux.getIraungitzeData());
+		}
+
+		DB_Konexioa.itxi();
+		return true;
 	}
 	
 }	

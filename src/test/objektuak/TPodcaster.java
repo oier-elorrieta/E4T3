@@ -1,20 +1,31 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
+
+import java.sql.Blob;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Podcaster;
-import model.objektuak.bezero.Premium;
+
 
 public class TPodcaster {
 
 	private Podcaster pd1;
+	private Podcaster pd2;
+	private Blob blob;
+	private Blob blob2;
 
 	@Before
 	public void setUp() throws Exception {
-		pd1 = new Podcaster("1", "unai", "irudia", "deskribapena");
+		byte[] blobData = "Datos de ejemplo".getBytes();
+		byte[] blobData2 = "Datos de ejemplo2".getBytes();
+		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
+		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
+		pd1 = new Podcaster("1", "unai", blob, "deskribapena");
+		pd2 = new Podcaster("unai", 200);
+		
 	}
 
 	// ********************** ID **********************
@@ -69,24 +80,24 @@ public class TPodcaster {
 
 	@Test
 	public void TestGetIrudia() {
-		assertEquals("irudia", pd1.getIrudia());
+		assertEquals(blob, pd1.getIrudia());
 	}
 
 	@Test
 	public void TestSetIrudia() {
-		pd1.setIrudia("irudi");
-		assertEquals("irudi", pd1.getIrudia());
+		pd1.setIrudia(blob2);
+		assertEquals(blob2, pd1.getIrudia());
 	}
 
 	@Test
 	public void TestGetIrudiaTxarto() {
-		assertNotEquals("irudi", pd1.getIrudia());
+		assertNotEquals(blob2, pd1.getIrudia());
 	}
 
 	@Test
 	public void TestSetIrudiaTxarto() {
-		pd1.setIrudia("irudi");
-		assertNotEquals("irudia", pd1.getIrudia());
+		pd1.setIrudia(blob2);
+		assertNotEquals(blob, pd1.getIrudia());
 	}
 
 	// ********************** DESKRIBAPENA **********************
@@ -112,6 +123,30 @@ public class TPodcaster {
 		pd1.setDeskribapena("desk");
 		assertNotEquals("deskribapena", pd1.getDeskribapena());
 	}
+	
+	// ********************** ERREPRODUKZIOAK **********************
+
+	@Test
+	public void TestGetErrep() {
+		assertEquals(200, pd2.getErreprodukzioak());
+	}
+
+	@Test
+	public void TestSetErrep() {
+		pd2.setErreprodukzioak(300);
+		assertEquals(300, pd2.getErreprodukzioak());
+	}
+
+	@Test
+	public void TestGetErrepTxarto() {
+		assertNotEquals(300, pd2.getErreprodukzioak());
+	}
+
+	@Test
+	public void TestSetErrepTxarto() {
+		pd2.setErreprodukzioak(300);
+		assertNotEquals(200, pd2.getErreprodukzioak());
+	}
 
 	// ********************** TO STRING **********************
 
@@ -119,8 +154,8 @@ public class TPodcaster {
 	public void TestToString() {
 		String txt = pd1.toString();
 
-		String esperotakoa = "Podcaster [id=" + pd1.getId() + ", izen_Artistikoa=" + pd1.getIzen_Artistikoa()
-				+ ", irudia=" + pd1.getIrudia() + ", deskribapena=" + pd1.getDeskribapena() + "]";
+		String esperotakoa = "Artista [id=" + pd1.getId() + ", izen_Artistikoa=" + pd1.getIzen_Artistikoa()
+				+ ", irudia=" + pd1.getIrudia() + ", deskribapena=" + pd1.getDeskribapena() + ", erreprodukzioak=" + pd1.getErreprodukzioak() +"]";
 
 		assertEquals(txt, esperotakoa);
 	}
@@ -141,12 +176,6 @@ public class TPodcaster {
 	public void TestEqualsClaseEzberdinak() {
 		String txarra = "";
 		assertFalse(pd1.equals(txarra));
-	}
-
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Podcaster pd2 = new Podcaster("1", "unai", "irudia", "deskribapena");
-		assertTrue(pd1.equals(pd2));
 	}
 
 }

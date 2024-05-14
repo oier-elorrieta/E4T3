@@ -1,49 +1,35 @@
 package vista;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import control.funtzioak.FuntzioBista;
-import control.funtzioak.Funtzioak;
+import control.funtzioak.*;
+import control.salbuespenak.pasahitzaDiff;
 import model.*;
-import model.dao.BezeroDao;
-import model.dao.HizkuntzaDao;
+import model.dao.*;
 import model.objektuak.Hizkuntza;
-import model.objektuak.bezero.Bezero;
-import model.objektuak.bezero.Free;
-import model.objektuak.bezero.Premium;
+import model.objektuak.bezero.*;
 
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.*;
 
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextPane;
+import java.util.*;
 
 /**
  * Erregistroaren ikuspegia erakusten duen klasea.
  */
+@SuppressWarnings("deprecation")
 public class Erregistroa extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldAbizena;
 	private JTextField textFieldJaioData;
 	private JTextField textFieldIzena;
-	private JTextField textFieldErabiltzailea;
+	private JTextField textFieldErabiltzailea; 
 	private JPasswordField passwordFieldPasahitza;
 	private JPasswordField passwordFieldKonfirmatu;
 	private boolean prime = false;
+	private Date premiumData;
 	
 	BezeroDao bezerodao = new BezeroDao();
 	HizkuntzaDao hizkuntzadao = new HizkuntzaDao();
@@ -53,7 +39,7 @@ public class Erregistroa extends JFrame {
 	 * 
 	 * @throws SQLException
 	@SuppressWarnings({ "unchecked", "rawtypes" })*/
-	public Erregistroa() throws SQLException {
+	public Erregistroa(String botoiTextua) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Erregistroa.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 550, 400);
@@ -88,9 +74,21 @@ public class Erregistroa extends JFrame {
 		
 		textFieldJaioData = new JTextField();
 		textFieldJaioData.setColumns(10);
+		textFieldJaioData.setToolTipText("YYYY-MM-DD");
 		textFieldJaioData.setBounds(155, 187, 274, 20);
 		contentPane.add(textFieldJaioData);
 		
+		JTextPane textPanePremium = new JTextPane();
+		textPanePremium.setEditable(false);
+		textPanePremium.setBounds(155, 215, 274, 20);
+		contentPane.add(textPanePremium);
+		
+		
+		if (Aldagaiak.erabiltzailea != null && Aldagaiak.erabiltzailea.getClass().getSimpleName().equals("Premium")) {
+			prime = true;
+			Premium premiumAux = (Premium) Aldagaiak.erabiltzailea;
+			textPanePremium.setText(Funtzioak.dateToString(premiumAux.getIraungitzeData()));
+		}
 
 		// Izenaren label
 		JLabel lblIzena = new JLabel("Izena:");
@@ -99,12 +97,12 @@ public class Erregistroa extends JFrame {
 		
 		// Abizena label
 		JLabel lblAbizena = new JLabel("Abizena:");
-		lblAbizena.setBounds(251, 66, 46, 14);
+		lblAbizena.setBounds(251, 66, 63, 14);
 		contentPane.add(lblAbizena);
 
 		// Erabiltzailearen label
 		JLabel lblErabiltzailea = new JLabel("Erabiltzailea:");
-		lblErabiltzailea.setBounds(72, 97, 61, 14);
+		lblErabiltzailea.setBounds(72, 97, 73, 14);
 		contentPane.add(lblErabiltzailea);
 
 		// Pasahitzaren label
@@ -114,7 +112,7 @@ public class Erregistroa extends JFrame {
 
 		// Konfirmatzeko label
 		JLabel lblKonfirmatu = new JLabel("Konfirmatu:");
-		lblKonfirmatu.setBounds(72, 159, 61, 14);
+		lblKonfirmatu.setBounds(72, 159, 73, 14);
 		contentPane.add(lblKonfirmatu);
 
 		// JaioData label
@@ -172,47 +170,95 @@ public class Erregistroa extends JFrame {
 			passwordFieldPasahitza.setText(Aldagaiak.erabiltzailea.getPasahitza());
 			passwordFieldKonfirmatu.setText(Aldagaiak.erabiltzailea.getPasahitza());
 			
-			comboBoxHizkuntza.setSelectedItem(Aldagaiak.erabiltzailea.getHizkuntza());;
-		
+			int index = Funtzioak.getIndexFromHizkuntzak(hizkuntzak,Aldagaiak.erabiltzailea.getHizkuntza());
+			
+			comboBoxHizkuntza.setSelectedIndex(index);
 
 		}
 
+		premiumData = new Date();
+		
 		JButton btnGordeAldaketa = new JButton("Gorde aldaketa");
 		btnGordeAldaketa.addActionListener(new ActionListener() {
 			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
+				
 				String izena = textFieldIzena.getText();
 				String abizena = textFieldAbizena.getText();
-
 				int indexHizkuntza = comboBoxHizkuntza.getSelectedIndex();
 				String hizkuntza =  hizkuntzakFinal.get(indexHizkuntza).getID_Hizkuntza();
-
 				String erabiltzailea = textFieldErabiltzailea.getText();
-				@SuppressWarnings("deprecation")
 				String pasahitza = passwordFieldPasahitza.getText();
-				@SuppressWarnings("deprecation")
 				String konfirmazioa = passwordFieldKonfirmatu.getText();
-				Date noizData = new Date();
 				
-				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("")) {
-					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
+				Date noizData = new Date();
+                int jaioDataInt = 0;
+                Date jaioData = new Date();
+                if (!textFieldJaioData.getText().equals("")) {
+
+					jaioData = Funtzioak.stringToDate(textFieldJaioData.getText());
+				
+                    jaioDataInt = jaioData.compareTo(noizData);
+                }
+				
+				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt > 0) {
+					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak ondo beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
 				} else {
+					try {
 					if (pasahitza.equals(konfirmazioa)) {
-						JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+						
 						pasahitza = Funtzioak.enkriptatzailea(pasahitza);
 						Bezero bezeroa;
-						if (prime) {
-							bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData, noizData);
-						} else {
-							bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, noizData, noizData);
+						if (Aldagaiak.erabiltzailea != null) {
+							if (prime) {
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
+							} else {
+								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
+							}
+							
+							if(bezeroa.equals(Aldagaiak.erabiltzailea)) {
+								JOptionPane.showMessageDialog(null, "Ez dira aldaketarik egon", "", JOptionPane.INFORMATION_MESSAGE);
+								FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+								FuntzioBista.irekiBezeroMenu();
+								dispose();
+							}else {
+								try {
+									bezerodao.updateErabiltzailea(bezeroa);
+									JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+									FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+									FuntzioBista.irekiLogin();
+									dispose();
+								} catch (SQLException e1) {
+									
+									e1.printStackTrace();
+								}
+							}
+						}else {
+							if (prime) {
+								bezeroa = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData, premiumData);
+							} else {
+								bezeroa = new Free(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaioData, noizData);
+							}
+							try {
+							
+								if(!bezerodao.erregistratuErabiltzailea(bezeroa)) {
+									JOptionPane.showMessageDialog(null, "Erabiltzailea existitzen da", "", JOptionPane.ERROR_MESSAGE);
+								}else {
+									JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+									FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+									FuntzioBista.irekiLogin();
+									dispose();
+								}
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+							}
 						}
-						try {
-							bezerodao.erregistratuErabiltzailea(bezeroa);
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-						}
+						
 					} else {
-						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
+						throw new pasahitzaDiff();
+					}
+					}catch(pasahitzaDiff ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				
@@ -223,11 +269,14 @@ public class Erregistroa extends JFrame {
 		contentPane.add(btnGordeAldaketa);
 
 		JButton btnPrime = new JButton("Erosi Premium");
+		if (prime) btnPrime.setEnabled(false);
 		btnPrime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				prime = true;
 				JOptionPane.showMessageDialog(null, "Premium erosi duzu!", "", JOptionPane.INFORMATION_MESSAGE);
-				
+				btnPrime.setEnabled(false);
+				textPanePremium.setText(Funtzioak.dateToString(Funtzioak.date1YearMore(premiumData)));
+				premiumData = Funtzioak.date1YearMore(premiumData);
 			}
 		});
 		btnPrime.setBounds(388, 309, 120, 41);
@@ -241,7 +290,7 @@ public class Erregistroa extends JFrame {
 		contentPane.add(lblTitulua);
 
 		// Atzera botoia. Aurreko pantailara joaten da.
-		JButton btnAtzera = new JButton("Atzera");
+		JButton btnAtzera = new JButton(botoiTextua);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
@@ -251,12 +300,6 @@ public class Erregistroa extends JFrame {
 		});
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-
-
-		JTextPane textPanePremium = new JTextPane();
-		textPanePremium.setEditable(false);
-		textPanePremium.setBounds(155, 215, 274, 20);
-		contentPane.add(textPanePremium);
 
 		// Muga label
 		JLabel lblMuga = new JLabel("Muga");

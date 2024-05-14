@@ -1,5 +1,6 @@
 package model.objektuak;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -10,13 +11,37 @@ public class Album {
 	private String izenburua;
 	private Date urtea;
 	private String generoa;
-	private String irudia;
+	private Blob irudia;
+	private String deskripzioa;
+	private int kontAbestiak;
+	private int iraupena;
 	private Musikaria musikaria;
 	private ArrayList<Abestia> abestiak;
 
-	public Album(String id, String izenburua, Date urtea, String generoa, String irudia, Musikaria musikaria,
+	public Album(String id, String izenburua, Date urtea, int kontAbestiak, int iraupena, Blob irudia,
+			String deskripzioa) {
+		this.id = id;
+		this.izenburua = izenburua;
+		this.urtea = urtea;
+		this.kontAbestiak = kontAbestiak;
+		this.iraupena = iraupena;
+		this.irudia = irudia;
+		this.deskripzioa = deskripzioa;
+	}
+
+	/**
+	 * Albumaren eraikitzailea (konfiguratzaile osoa).
+	 * 
+	 * @param id        Albumaren identifikazioa.
+	 * @param izenburua Albumaren izenburua.
+	 * @param urtea     Albumaren argitalpen urtea.
+	 * @param generoa   Albumaren genero musikala.
+	 * @param irudia    Albumaren irudia.
+	 * @param musikaria Albumarekin lotutako musikaria.
+	 * @param abestiak  Albumak dituen abestien zerrenda.
+	 */
+	public Album(String id, String izenburua, Date urtea, String generoa, Blob irudia, Musikaria musikaria,
 			ArrayList<Abestia> abestiak) {
-		super();
 		this.id = id;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
@@ -24,6 +49,19 @@ public class Album {
 		this.irudia = irudia;
 		this.musikaria = musikaria;
 		this.abestiak = abestiak;
+	}
+
+	/**
+	 * Albumaren eraikitzailea (konfigurazio minimoa).
+	 * 
+	 * @param id           Albumaren identifikazioa.
+	 * @param izenburua    Albumaren izenburua.
+	 * @param kontAbestiak Albumak dituen abestien kopurua.
+	 */
+	public Album(String id, String izenburua, int kontAbestiak) {
+		this.id = id;
+		this.izenburua = izenburua;
+		this.kontAbestiak = kontAbestiak;
 	}
 
 	public String getId() {
@@ -58,12 +96,36 @@ public class Album {
 		this.generoa = generoa;
 	}
 
-	public String getIrudia() {
+	public Blob getIrudia() {
 		return irudia;
 	}
 
-	public void setIrudia(String irudia) {
+	public void setIrudia(Blob irudia) {
 		this.irudia = irudia;
+	}
+
+	public String getDeskripzioa() {
+		return deskripzioa;
+	}
+
+	public void setDeskripzioa(String deskripzioa) {
+		this.deskripzioa = deskripzioa;
+	}
+
+	public int getKontAbestiak() {
+		return kontAbestiak;
+	}
+
+	public void setKontAbestiak(int kontAbestiak) {
+		this.kontAbestiak = kontAbestiak;
+	}
+
+	public int getIraupena() {
+		return iraupena;
+	}
+
+	public void setIraupena(int iraupena) {
+		this.iraupena = iraupena;
 	}
 
 	public Musikaria getMusikaria() {
@@ -97,8 +159,9 @@ public class Album {
 		if (getClass() != obj.getClass())
 			return false;
 		Album other = (Album) obj;
-		return Objects.equals(generoa, other.generoa) && Objects.equals(id, other.id)
-				&& Objects.equals(irudia, other.irudia) && Objects.equals(izenburua, other.izenburua)
+		return Objects.equals(abestiak, other.abestiak) && Objects.equals(deskripzioa, other.deskripzioa)
+				&& Objects.equals(generoa, other.generoa) && Objects.equals(id, other.id) && iraupena == other.iraupena
+				&& Objects.equals(izenburua, other.izenburua) && kontAbestiak == other.kontAbestiak
 				&& Objects.equals(musikaria, other.musikaria) && Objects.equals(urtea, other.urtea);
 	}
 
