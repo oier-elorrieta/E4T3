@@ -1,15 +1,8 @@
-package vista;
+package vista.interfaseak;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
-import model.Aldagaiak;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 public class Header extends JFrame {
 
@@ -31,5 +24,7 @@ public class Header extends JFrame {
 		
 		return panel_1;
 	}
+	
+
 
 }

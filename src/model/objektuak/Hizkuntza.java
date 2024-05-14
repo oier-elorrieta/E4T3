@@ -1,6 +1,5 @@
 package model.objektuak;
 
-import java.util.Objects;
 
 /**
  * Klasea Hizkuntza objektuak kudeatzeko erabiltzen da.
@@ -61,18 +60,6 @@ public class Hizkuntza {
 	@Override
 	public String toString() {
 		return "Hizkuntza [ID_Hizkuntza=" + ID_Hizkuntza + ", Deskribapena=" + Deskribapena + "]";
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Hizkuntza other = (Hizkuntza) obj;
-		return Objects.equals(Deskribapena, other.Deskribapena) && Objects.equals(ID_Hizkuntza, other.ID_Hizkuntza);
 	}
 
 }

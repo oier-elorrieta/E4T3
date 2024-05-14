@@ -1,33 +1,24 @@
-package vista.menu;
+package vista.admin;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import vista.Login;
 
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.*;
 
 // Bezeroaren menua bistaratzeko klasea
-public class BezeroMenu extends JFrame {
+public class AdminMenu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	// Frame-a sortzeko konstruktorea
-	public BezeroMenu() {
+	public AdminMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AdminMenu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,25 +32,15 @@ public class BezeroMenu extends JFrame {
 		panel_1.setLayout(new BorderLayout(0, 0));
 
 		// Titulua
-		JLabel lblTitulua = new JLabel("Menu");
+		JLabel lblTitulua = new JLabel("Kudeaketa menua");
 		lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		panel_1.add(lblTitulua);
 
 		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panel_1.add(btnPerfil, BorderLayout.EAST);
 
 		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
+		JButton btnAtzera = new JButton("Log out");
 		btnAtzera.setSize(325, 20);
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,28 +61,19 @@ public class BezeroMenu extends JFrame {
 		panel.setLayout(new GridLayout(0, 1, 0, 20));
 
 		// Musika deskubritzeko botoia
-		JButton btnDeskubritu = new JButton("Musika deskubritu");
-		btnDeskubritu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.add(btnDeskubritu);
+		JButton btnMusKudeatu  = new JButton("Musika kudeatu");
+		
+
 
 		// Podcast deskubritzeko botoia
-		JButton btnPodcastDeskubritu = new JButton("Podcast dekubritu");
-		btnPodcastDeskubritu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.add(btnPodcastDeskubritu);
+		JButton btnPodKudeatu = new JButton("Podcast kudeatu");
+		
+		
 
 		// Nire PlayList-ak bistaratzeko botoia
-		JButton btnPlayList = new JButton("Nire PlayList-ak");
-		btnPlayList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.add(btnPlayList);
+		JButton btnEstatistikak = new JButton("Estatistikak");
+		
+		
 		panel_2.add(panel);
 
 		// Espazio hutsak menuaren inguruan
@@ -116,6 +88,34 @@ public class BezeroMenu extends JFrame {
 
 		JLabel lblSeparatzaileSouth = new JLabel(" ");
 		panel_2.add(lblSeparatzaileSouth, BorderLayout.SOUTH);
+		
+		btnMusKudeatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiMusikaKudeatu();
+				dispose();
+			}
+		});
+		
+		btnPodKudeatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiPodcastKudeatu();
+				dispose();
+			}
+		});
+		
+		btnEstatistikak.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiNireEstatistikak();
+				dispose();
+			}
+		});
+		
+		panel.add(btnMusKudeatu);
+		panel.add(btnPodKudeatu);
+		panel.add(btnEstatistikak);
 	}
 
 }

@@ -1,28 +1,15 @@
 package vista;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.BezeroDao;
-import model.objektuak.bezero.Bezero;
+import model.db.DB_Konexioa;
 
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.sql.SQLException;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
+import java.awt.event.*;
 
 /**
  * Login bistaren definizioa.
@@ -39,14 +26,15 @@ public class Login extends JFrame {
 	private JButton btnLogin;
 	private JButton btnRegistrar;
 
+
 	BezeroDao bezerodao = new BezeroDao();
-	Bezero bezeroa = null;
 	
 	/**
-	 * Framea sortzen duen metodoa.
+	 * Framea sortzen duen metodoa. 
 	 */
 	public Login() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
+		Aldagaiak.erabiltzailea = null;
+		//setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource(Aldagaiak.logo)));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, 450, 300);
 		setResizable(false);
@@ -109,8 +97,10 @@ public class Login extends JFrame {
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiBezeroMenu();
 						dispose();
-					} else if (bezerodao.komprobatuErabiltzailea(bezeroa, pasahitza) && rola.equals("Admin")) {
-						System.out.println("TrueAdmin");
+					} else if (DB_Konexioa.testAdmin(bezeroa, pasahitza) && rola.equals("Admin")) {
+						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+						FuntzioBista.irekiAdminMenu();
+						dispose();
 					} else {
 						JOptionPane.showMessageDialog(null, "Erabiltzailea edo pasahitza ez dira zuzenak", "", JOptionPane.ERROR_MESSAGE);
 					}
