@@ -242,5 +242,17 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * EditMusikaria bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditMusikaria(Musikaria musikaria) {
+		try {
+			EditMusikaria frame = new EditMusikaria(musikaria);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }

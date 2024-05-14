@@ -180,7 +180,18 @@ public class MusikaKudeatu extends JFrame {
 		
 		btnEditatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int index = table.getSelectedRow();
 				
+				if (index != -1) {
+					
+					Musikaria musikaria = (Musikaria) artistaList.get(index);
+					
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+					FuntzioBista.irekiEditMusikaria(musikaria);
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+				}
 				
 			}
 		});

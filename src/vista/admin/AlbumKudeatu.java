@@ -87,6 +87,8 @@ public class AlbumKudeatu extends JFrame {
 		
 		JButton btnEzabatu = new JButton("Ezabatu");
 		
+		JButton btnEditatu = new JButton("Editatu");
+		
 		
 		JButton btnIkusi = new JButton("Ikusi");
 
@@ -214,6 +216,7 @@ public class AlbumKudeatu extends JFrame {
 		
 		panelBotoiak.add(btnBerriaSortu);
 		panelBotoiak.add(btnEzabatu);
+		panelBotoiak.add(btnEditatu);
 		panelBotoiak.add(btnIkusi);
 
 
