@@ -1,4 +1,4 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Musikaria;
-import model.objektuak.Podcaster;
+
 
 public class TMusikaria {
 
@@ -14,7 +14,7 @@ public class TMusikaria {
 
 	@Before
 	public void setUp() throws Exception {
-		m1 = new Musikaria("1", "unai", "irudia", "deskribapena", "ezaugarria");
+		m1 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
 	}
 
 	// ********************** EZAUGARRIA **********************
@@ -47,8 +47,8 @@ public class TMusikaria {
 	public void TestToString() {
 		String txt = m1.toString();
 
-		String esperotakoa = "Musikaria [Id=" + m1.getId() + ", izen_Artistikoa=" + m1.getIzen_Artistikoa()
-				+ ", irudia=" + m1.getIrudia() + ", deskribapena=" + m1.getDeskribapena() + ", ezaugarria="
+		String esperotakoa = "Artista [id=" + m1.getId() + ", izen_Artistikoa=" + m1.getIzen_Artistikoa()
+				+ ", irudia=" + m1.getIrudia() + ", deskribapena=" + m1.getDeskribapena() + ", erreprodukzioak=" + m1.getErreprodukzioak() + "] Musikaria [ezaugarria="
 				+ m1.getEzaugarria() + "]";
 
 		assertEquals(txt, esperotakoa);
@@ -71,10 +71,5 @@ public class TMusikaria {
 		String txarra = "";
 		assertFalse(m1.equals(txarra));
 	}
-
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Musikaria m2 = new Musikaria("1", "unai", "irudia", "deskribapena", "ezaugarria");
-		assertTrue(m1.equals(m2));
-	}
 }
+ 

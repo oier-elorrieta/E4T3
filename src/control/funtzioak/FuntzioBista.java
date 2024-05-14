@@ -253,6 +253,28 @@ public class FuntzioBista {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * EditAlbum bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditAlbum(Album album) {
+		try {
+			EditAlbum frame = new EditAlbum(album);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * EditAlbum bista irekitzen duen metodoa.
+	 */
+	public static void irekiAbestiaKudeatu(Album album, Musikaria musikariAux) {
+		try {
+			AbestiaKudeatu frame = new AbestiaKudeatu(album,musikariAux);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

@@ -29,6 +29,11 @@ public abstract class Audio {
 	public Audio(String idAudio) {
 		this.idAudio = idAudio;
 	}
+	
+	public Audio(String idAudio,String izena) {
+		this.idAudio = idAudio;
+		this.izena = izena;
+	}
 
 	public Audio(String idAudio, String izena, int iraupena) {
 		this.idAudio = idAudio;

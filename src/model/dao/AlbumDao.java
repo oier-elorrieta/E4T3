@@ -109,6 +109,24 @@ public class AlbumDao {
 		DB_Konexioa.itxi();
 		
 		}
+	
+	public boolean deleteAlbumById(Album album) throws SQLException{
+		Connection conex = DB_Konexioa.admin();
+		
+		Statement sentencia = conex.createStatement();
+		
+		String kontsulta = "DELETE from Album where ID_Album='" + album.getId() +"';";
+		
+		try {
+			sentencia.executeUpdate(kontsulta);
+			DB_Konexioa.itxi();
+			return true;
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			DB_Konexioa.itxi();
+			return false;
+		}
+	}
 		
 	}
 

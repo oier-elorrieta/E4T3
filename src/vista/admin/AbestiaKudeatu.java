@@ -13,8 +13,8 @@ import control.funtzioak.FuntzioBista;
 import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
-import model.dao.AlbumDao;
 import model.dao.ArtistaDao;
+import model.dao.AudioDao;
 import model.dao.PlayListDao;
 import model.objektuak.Abestia;
 import model.objektuak.Album;
@@ -25,23 +25,24 @@ import model.objektuak.PlayList;
 
 import java.awt.*;
 
-public class AlbumKudeatu extends JFrame {
+public class AbestiaKudeatu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	AlbumDao albumdao = new AlbumDao();
+	AbestiaDao abestiadao = new AbestiaDao();
+	AudioDao audiodao = new AudioDao();
 	private JTable table;
 	private DefaultTableModel model;
 	
-	ArrayList<Album> albumList = new ArrayList<Album>();
+	ArrayList<Audio> audioList = new ArrayList<Audio>();
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public AlbumKudeatu(Musikaria musikaria) throws SQLException {
+	public AbestiaKudeatu(Album album, Musikaria musikariAux) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AlbumKudeatu.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaKudeatu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,9 +54,8 @@ public class AlbumKudeatu extends JFrame {
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		
-		albumList = albumdao.getAlbumakByMusikaria(musikaria);
 		
-		
+		audioList = abestiadao.getAbestiaByAlbumId(album);
 
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
@@ -63,13 +63,13 @@ public class AlbumKudeatu extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiMusikaKudeatu();
+				FuntzioBista.irekiAlbumKudeatu(musikariAux);
 				dispose();
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 
-		JLabel lblArtistak = new JLabel("Albumak kudeatu");
+		JLabel lblArtistak = new JLabel("Artistak kudeatu");
 		lblArtistak.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblArtistak.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblArtistak, BorderLayout.CENTER);
@@ -86,7 +86,6 @@ public class AlbumKudeatu extends JFrame {
 		
 		
 		JButton btnEzabatu = new JButton("Ezabatu");
-		
 		JButton btnEditatu = new JButton("Editatu");
 		
 		
@@ -106,8 +105,8 @@ public class AlbumKudeatu extends JFrame {
 		panelKontenidoa.add(table, BorderLayout.CENTER);
 		Object[] aux = new Object[1];
 
-		for (int i = 0 ; i < albumList.size(); i++) {
-			aux[0] = albumList.get(i).getIzenburua(); 
+		for (int i = 0 ; i < audioList.size(); i++) {
+			aux[0] = audioList.get(i).getIzena(); 
             model.addRow(aux);
 		}
 		
@@ -116,72 +115,53 @@ public class AlbumKudeatu extends JFrame {
 		btnBerriaSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String newIzena = null;
-				Date newUrtea = new Date();
-				String newUrteast = null;
-				String newGeneroa = null;
-				String newDeskripzioa = null;
-				
-
-				
+				String newDenborast = null;
+				int newDenbora = 0;
+			
+			
 				
 				newIzena = JOptionPane.showInputDialog("Sartu izena mesedez");
-				
 				if(newIzena != null) {
 					
-					do {
+					newDenborast = JOptionPane.showInputDialog("Sartu denbora (segundutan)");
+					
+					if(newDenborast != null) {
 						
-						if (newUrtea == null) {
-							JOptionPane.showMessageDialog(null, "Baliozko data bat sartu mesedez", "", JOptionPane.ERROR_MESSAGE);
-						}
-						newUrteast = JOptionPane.showInputDialog("Sartu urtea mesedez (YYYY-MM-DD)");
-						if (newUrtea != null) {
-							newUrtea = Funtzioak.stringToDate(newUrteast);
-							Date dateAux = new Date();
-							int dataTest = newUrtea.compareTo(dateAux);
-							if(dataTest == 0 || dataTest > 0) {
-								newUrtea = null;
+						newDenbora = Funtzioak.stringToInt(newDenborast);
+						if(newDenbora != -1) {
+							String newID = "";
+							try {
+								newID = audiodao.getLastId();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
-						}
-						newUrtea = new Date();
-					}while(newUrtea == null);
-					
-			
-					
-					if(newUrteast != null) {
-						newGeneroa = JOptionPane.showInputDialog("Sartu Generoa mesedez");
-						if(newGeneroa != null) {
-							newDeskripzioa = JOptionPane.showInputDialog("Sartu deskripzioa mesedez");
-							if (newDeskripzioa != null) {
-								String newID = "";
-								try {
-									newID = albumdao.getLastId();
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								newID = Funtzioak.gehituID(newID);
-								
-								Album albumAux = new Album(newID,newIzena,newUrtea,newGeneroa,newDeskripzioa);
-								
-								try {
-									albumdao.newAlbum(albumAux,musikaria);
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								try {
-									albumList = albumdao.getAlbumakByMusikaria(musikaria);
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-								FuntzioBista.irekiAlbumKudeatu(musikaria);
-								dispose();
+							newID = Funtzioak.gehituID(newID);
+							
+							Audio audioAux = new Abestia(newID,newIzena,newDenbora);
+							
+							try {
+								audiodao.audioGehitu(audioAux);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
+							
+							FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+							FuntzioBista.irekiAbestiaKudeatu(album,musikariAux);
+							dispose();
+						}else {
+							JOptionPane.showMessageDialog(null, "Denbora ondo sartu mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
+					
+					
 				}
+				
+			
+					
+					
+				
 				
 			}
 		});
@@ -192,16 +172,16 @@ public class AlbumKudeatu extends JFrame {
 				
 				if (index != -1) {
 					try {
-						albumdao.deleteAlbumById(albumList.get(index));
+						artistadao.deleteArtistaByIzena(artistaList.get(index));
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiAlbumKudeatu(musikaria);
+						FuntzioBista.irekiMusikaKudeatu();
 						dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu album bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Aukeratu artista bat ezabatzeko mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 			}
@@ -209,30 +189,32 @@ public class AlbumKudeatu extends JFrame {
 		
 		btnEditatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				int index = table.getSelectedRow();
 				
 				if (index != -1) {
-						
-					Album album = albumList.get(index);
+					
+					Musikaria musikaria = (Musikaria) artistaList.get(index);
+					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiEditAlbum(album);
+					FuntzioBista.irekiEditMusikaria(musikaria);
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 				}
+				
 			}
 		});
+		
 		btnIkusi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				
 				if (index != -1) {
-						
-					Album album = albumList.get(index);
+					
+					Musikaria musikaria = (Musikaria) artistaList.get(index);
 					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiAbestiaKudeatu(album,musikaria);
+					FuntzioBista.irekiAlbumKudeatu(musikaria);
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);

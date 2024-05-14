@@ -160,4 +160,14 @@ public class Funtzioak {
     	return st;
     	
     }
+    
+    public static int stringToInt(String timeTXT) {
+    	int ret = -1;
+    	try {
+    		ret = Integer.parseInt(timeTXT);
+    		return ret;
+    	}catch(Exception ex) {
+    		return ret;
+    	}
+    }
 }
