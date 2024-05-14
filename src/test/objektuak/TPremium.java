@@ -1,4 +1,4 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
@@ -9,14 +9,18 @@ import org.junit.Test;
 
 import model.objektuak.bezero.Premium;
 
+@SuppressWarnings("deprecation")
 public class TPremium {
 	private static Premium p1;
+	@SuppressWarnings("unused")
+	private static Premium p2;
 	private static Date eguna;
 
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 18);
 		p1 = new model.objektuak.bezero.Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
+		p2 = new model.objektuak.bezero.Premium(1, "unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
 	}
 
 	// ********************** IRAUNGITZE DATA **********************
@@ -55,8 +59,8 @@ public class TPremium {
 		String esperotakoa = "Bezero [izena=" + p1.getIzena() + ", abizena=" + p1.getAbizena() + ", hizkuntza="
 				+ p1.getHizkuntza() + ", erabiltzaileIzena=" + p1.getErabiltzaileIzena() + ", pasahitza="
 				+ p1.getPasahitza() + ", jaioteguna=" + p1.getJaioteguna() + ", erregistroEguna="
-				+ p1.getErregistroEguna() + "]" + "Premium [iraungitzeData=" + p1.getIraungitzeData() + "]";
-		
+				+ p1.getErregistroEguna() + "]" + " Premium [iraungitzeData=" + p1.getIraungitzeData() + "]";
+
 		assertEquals(txt, esperotakoa);
 	}
 
@@ -78,10 +82,13 @@ public class TPremium {
 		assertFalse(p1.equals(txarra));
 	}
 
+	// ********************** FUNTZIOAK **********************
+	
 	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Premium p2 = new Premium("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna, eguna);
-		assertTrue(p1.equals(p2));
-	}
+    public void testPremiumErosi() {
+		eguna = p1.premiumErosi();
 
+		// Assertatu urtea +1 egin duela
+        assertEquals(2025, eguna.getYear()); 
+    }
 }

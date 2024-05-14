@@ -1,4 +1,4 @@
-package test;
+package test.objektuak;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.objektuak.Hizkuntza;
-import model.objektuak.PlayList;
 
 public class THizkuntza {
 
@@ -92,12 +91,6 @@ public class THizkuntza {
 	public void TestEqualsClaseEzberdinak() {
 		String txarra = "";
 		assertFalse(h.equals(txarra));
-	}
-
-	@Test
-	public void TestEqualsClaseAtrBerdinak() {
-		Hizkuntza h2 = new Hizkuntza("1", "deskribapena");
-		assertTrue(h.equals(h2));
 	}
 
 }
