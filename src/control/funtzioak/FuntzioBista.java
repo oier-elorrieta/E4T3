@@ -275,6 +275,53 @@ public class FuntzioBista {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * EditAlbum bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditAbestia(Audio audio) {
+		try {
+			EditAbestia frame = new EditAbestia(audio);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * PodcasterKudeatu bista irekitzen duen metodoa.
+	 */
+	public static void irekiPodcasterKudeatu() {
+		try {
+			PodcasterKudeatu frame = new PodcasterKudeatu();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Editpodcaster bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditPodcaster(Podcaster podcaster) {
+		try {
+			EditPodcaster frame = new EditPodcaster(podcaster);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * PodcastKudeatu bista irekitzen duen metodoa.
+	 */
+	public static void irekiPodcastKudeatu(Podcaster podcaster) {
+		try {
+			PodcastKudeatu frame = new PodcastKudeatu(podcaster);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

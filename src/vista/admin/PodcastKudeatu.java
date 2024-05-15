@@ -16,21 +16,23 @@ import model.dao.AbestiaDao;
 import model.dao.ArtistaDao;
 import model.dao.AudioDao;
 import model.dao.PlayListDao;
+import model.dao.PodcastDao;
 import model.objektuak.Abestia;
 import model.objektuak.Album;
 import model.objektuak.Artista;
 import model.objektuak.Audio;
 import model.objektuak.Musikaria;
 import model.objektuak.PlayList;
+import model.objektuak.Podcaster;
 
 import java.awt.*;
 
-public class AbestiaKudeatu extends JFrame {
+public class PodcastKudeatu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	AbestiaDao abestiadao = new AbestiaDao();
 	AudioDao audiodao = new AudioDao();
+	PodcastDao podcastdao = new PodcastDao();
 	private JTable table;
 	private DefaultTableModel model;
 	
@@ -40,9 +42,9 @@ public class AbestiaKudeatu extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public AbestiaKudeatu(Album album, Musikaria musikariAux) throws SQLException {
+	public PodcastKudeatu(Podcaster podcaster) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MusikaKudeatu.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PodcastKudeatu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -55,7 +57,7 @@ public class AbestiaKudeatu extends JFrame {
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		
 		
-		audioList = abestiadao.getAbestiaByAlbumId(album);
+		audioList = podcastdao.getPodcastByPodcasterId(podcaster);
 
 		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
@@ -63,13 +65,13 @@ public class AbestiaKudeatu extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiAlbumKudeatu(musikariAux);
+				FuntzioBista.irekiPodcasterKudeatu();
 				dispose();
 			}
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 
-		JLabel lblArtistak = new JLabel("Abestiak kudeatu");
+		JLabel lblArtistak = new JLabel("Podcast kudeatu");
 		lblArtistak.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblArtistak.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblArtistak, BorderLayout.CENTER);
@@ -214,5 +216,4 @@ public class AbestiaKudeatu extends JFrame {
 
 
 	}
-
 }

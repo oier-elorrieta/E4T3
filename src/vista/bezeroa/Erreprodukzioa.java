@@ -82,9 +82,16 @@ public class Erreprodukzioa extends JFrame {
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 		panelHeader.setLayout(new BorderLayout(0, 0));
 		// ***************************
-		filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
-		file = new File(filepath);
-		aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+		
+		try {
+			filepath = "\\\\10.5.6.220\\music\\" + audioList.get(index).getIzena() + ".wav";
+			file = new File(filepath);
+			aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+		}catch(Exception e) {
+			filepath = "\\\\10.5.6.220\\music\\" + "Suerte" + ".wav";
+			file = new File(filepath);
+			aui = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+		}
 		clip = AudioSystem.getClip();
 		clip.open(aui);
 		erreprodukzioadao.erreprodukzioaGehitu(audioList.get(index));

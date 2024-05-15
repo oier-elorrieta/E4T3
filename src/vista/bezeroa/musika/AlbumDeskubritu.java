@@ -24,6 +24,7 @@ import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.AlbumDao;
 import model.objektuak.Musikaria;
+import vista.interfaseak.Header;
 
 import java.awt.GridLayout;
 import javax.swing.JTable;
@@ -32,7 +33,7 @@ import javax.swing.ScrollPaneConstants;
 
 import model.objektuak.*;
 
-public class AlbumDeskubritu extends JFrame {
+public class AlbumDeskubritu extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -54,41 +55,10 @@ public class AlbumDeskubritu extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
+		
 		ArrayList<Album> albumak = albumdao.getAlbumakByMusikaria(musikaria);
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
-
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panel.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiMusikaDeskubritu();
-				dispose();
-			}
-		});
-		panel.add(btnAtzera, BorderLayout.WEST);
-
-		JLabel lblIzenArtistikoa = new JLabel(musikaria.getIzen_Artistikoa() + "-aren Albumak");
-		lblIzenArtistikoa.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblIzenArtistikoa.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblIzenArtistikoa, BorderLayout.CENTER);
+		headerKokatu(musikaria.getIzen_Artistikoa() + "-aren Albumak");
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -206,5 +176,41 @@ public class AlbumDeskubritu extends JFrame {
 			model.addRow(aux);
 
 		}
+	}
+
+	@Override
+	public void headerKokatu(String text) {
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new BorderLayout(0, 0));
+
+		// Erabiltzailearen izena bistaratzeko botoia
+		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErregistroa();
+				dispose();
+			}
+		});
+		btnPerfil.setSize(325, 20);
+		panel.add(btnPerfil, BorderLayout.EAST);
+
+		// Atzera botoia
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setSize(325, 20);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiMusikaDeskubritu();
+				dispose();
+			}
+		});
+		panel.add(btnAtzera, BorderLayout.WEST);
+
+		JLabel lblIzenArtistikoa = new JLabel(text);
+		lblIzenArtistikoa.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblIzenArtistikoa.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblIzenArtistikoa, BorderLayout.CENTER);
 	}
 }

@@ -12,13 +12,14 @@ import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
 import model.dao.*;
 import model.objektuak.*;
+import vista.interfaseak.Header;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;;
 
 
-public class MusikaDeskubritu extends JFrame {
+public class MusikaDeskubritu extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -42,45 +43,13 @@ public class MusikaDeskubritu extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
 		
 		musikariak = new ArrayList<Musikaria>();
 		
 		/* 	ARRAY DE MUSIKARIAK PARA RELLENAR EL VIEW, NOMBRE Y REPODUCCIONES, STRING, INT */
 		musikariak = musikariadao.getMusikariak();
 		
-		
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panel.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiBezeroMenu();
-				dispose();
-			}
-		});
-		panel.add(btnAtzera, BorderLayout.WEST);
-
-		JLabel lblNewLabel = new JLabel("Musika deskubritu");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel, BorderLayout.CENTER);
+		headerKokatu("Musika deskubritu");
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -139,6 +108,42 @@ public class MusikaDeskubritu extends JFrame {
             model.addRow(aux);
         }
 		
+	}
+
+	@Override
+	public void headerKokatu(String text) {
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		// Erabiltzailearen izena bistaratzeko botoia
+		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErregistroa();
+				dispose();
+			}
+		});
+		btnPerfil.setSize(325, 20);
+		panel.add(btnPerfil, BorderLayout.EAST);
+
+		// Atzera botoia
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setSize(325, 20);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiBezeroMenu();
+				dispose();
+			}
+		});
+		panel.add(btnAtzera, BorderLayout.WEST);
+
+		JLabel lblNewLabel = new JLabel(text);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNewLabel, BorderLayout.CENTER);
 	}
 
 }

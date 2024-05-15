@@ -68,4 +68,16 @@ public class AbestiaDao {
 		DB_Konexioa.itxi();
 		return retArray;
 	}
+	
+	public boolean abestiaGehitu(Audio audio, Album album) throws SQLException{
+		Connection conex = DB_Konexioa.admin();
+		
+		Statement sentencia = conex.createStatement();
+		
+		String kontsulta = "INSERT INTO Abestia (ID_Audio, ID_Album) VALUES ('"+ audio.getIdAudio() + "', '" + album.getId() + "');";
+		sentencia.executeUpdate(kontsulta);
+		
+		DB_Konexioa.itxi();
+		return true;
+	}
 }

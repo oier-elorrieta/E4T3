@@ -1,35 +1,38 @@
 package vista.admin;
 
+
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
-import model.objektuak.Musikaria;
+import model.objektuak.Audio;
 import vista.bezeroa.playlist.NirePlaylist;
 import vista.interfaseak.Header;
-import javax.swing.JRadioButton;
 
-public class EditMusikaria extends JFrame implements Header {
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+
+public class EditAbestia extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
+	private JTextField textFieldDekribapena;
+	private JTextField textFieldIzena;
+	private JTextField textFieldIraupena;
 
-	public EditMusikaria(Musikaria musikaria) {
+	public EditAbestia(Audio audio) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NirePlaylist.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -40,7 +43,7 @@ public class EditMusikaria extends JFrame implements Header {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		headerKokatu("Albumak Editatu");
+		headerKokatu("Abestiak Editatu");
 		
 		JPanel panelKontenidoa = new JPanel();
 		contentPane.add(panelKontenidoa, BorderLayout.CENTER);
@@ -54,31 +57,25 @@ public class EditMusikaria extends JFrame implements Header {
 		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblIzena);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		panelLabel.add(textField);
+		textFieldIzena = new JTextField();
+		textFieldIzena.setColumns(10);
+		panelLabel.add(textFieldIzena);
 		
-		JLabel lblEzaugarria = new JLabel("Ezaugarria:  ");
-		lblEzaugarria.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelLabel.add(lblEzaugarria);
+		JLabel lblIraupena = new JLabel("Iraupena:  ");
+		lblIraupena.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelLabel.add(lblIraupena);
 		
-		JPanel panel_2 = new JPanel();
-		panelLabel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JRadioButton rdbtnBakarlaria = new JRadioButton("Bakarlaria");
-		panel_2.add(rdbtnBakarlaria);
-		
-		JRadioButton rdbtnTaldea = new JRadioButton("Taldea");
-		panel_2.add(rdbtnTaldea);
+		textFieldIraupena = new JTextField();
+		textFieldIraupena.setColumns(10);
+		panelLabel.add(textFieldIraupena);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
 		lblDeskribapena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblDeskribapena);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panelLabel.add(textField_1);
+		textFieldDekribapena = new JTextField();
+		textFieldDekribapena.setColumns(10);
+		panelLabel.add(textFieldDekribapena);
 		
 		JLabel lblNewLabel = new JLabel("                                                                                                 ");
 		panelKontenidoa.add(lblNewLabel, BorderLayout.EAST);
@@ -120,11 +117,13 @@ public class EditMusikaria extends JFrame implements Header {
 		
 		JLabel lblNewLabel_5_1 = new JLabel(" ");
 		panel_1.add(lblNewLabel_5_1);
+		
+		
 	}
 
 	@Override
 	public void headerKokatu(String text) {
-		JPanel panel_1 = new JPanel();
+        JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
         panel_1.setLayout(new BorderLayout(0, 0));
         
@@ -147,3 +146,4 @@ public class EditMusikaria extends JFrame implements Header {
         panel_1.add(btnAtzera, BorderLayout.WEST);
 	}
 }
+
