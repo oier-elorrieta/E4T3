@@ -53,6 +53,12 @@ public abstract class Artista {
 		this.deskribapena = deskribapena;
 	}
 
+	public Artista(String id, String izena, int entzunaldi) {
+		this.id = id;
+		this.izen_Artistikoa = izena;
+		this.erreprodukzioak = entzunaldi;
+	}
+
 	/**
 	 * Artista edo taldearen identifikadorea itzultzen du.
 	 * 

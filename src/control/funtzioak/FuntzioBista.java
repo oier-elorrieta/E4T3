@@ -299,5 +299,29 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * Editpodcaster bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditPodcaster(Podcaster podcaster) {
+		try {
+			EditPodcaster frame = new EditPodcaster(podcaster);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * PodcastKudeatu bista irekitzen duen metodoa.
+	 */
+	public static void irekiPodcastKudeatu(Podcaster podcaster) {
+		try {
+			PodcastKudeatu frame = new PodcastKudeatu(podcaster);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
