@@ -91,11 +91,6 @@ public class Premium extends Bezero {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(iraungitzeData);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

@@ -1,6 +1,7 @@
 package model.objektuak;
 
 import java.sql.Blob;
+import java.util.Objects;
 
 public class Musikaria extends Artista {
 	private String ezaugarria;
@@ -72,4 +73,17 @@ public class Musikaria extends Artista {
         return txt + " Musikaria [ezaugarria=" + ezaugarria + "]";
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Musikaria other = (Musikaria) obj;
+		return Objects.equals(ezaugarria, other.ezaugarria);
+	}
+
+    
 }

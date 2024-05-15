@@ -197,4 +197,17 @@ public class PlayList {
                + ", bezeroa=" + bezeroa + ", abestiak=" + abestiak + "]";
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlayList other = (PlayList) obj;
+		return abestiKont == other.abestiKont && Objects.equals(abestiak, other.abestiak)
+				&& Objects.equals(bezeroa, other.bezeroa) && Objects.equals(id, other.id)
+				&& Objects.equals(izena, other.izena) && Objects.equals(sorreraData, other.sorreraData);
+	}
 }

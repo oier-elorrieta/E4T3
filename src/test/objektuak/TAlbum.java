@@ -3,12 +3,15 @@ package test.objektuak;
 import static org.junit.Assert.*;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import model.objektuak.Abestia;
 import model.objektuak.Album;
+import model.objektuak.Musikaria;
 
 public class TAlbum {
 
@@ -17,7 +20,10 @@ public class TAlbum {
 	private static Album album;
 	private static Album album2;
 	private static Album album3;
+	private static Album album4;
 	private static Date eguna;
+	private static Musikaria m1;
+	private static ArrayList<Abestia> abestiak;
 
 	@Before
 	public void setUp() throws Exception {
@@ -26,8 +32,12 @@ public class TAlbum {
 		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
 		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
 		eguna = new Date(2024 / 04 / 18);
+		m1 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
+		abestiak = new ArrayList<>();
 		album = new Album("1", "izenburua", eguna, 2, 300, blob, "deskribapena");
 		album2 = new Album("1", "izenburua", 2);
+		album3 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
+		album4 = new Album("1", "izenburua", eguna, "generoa", "deskribapena");
 	}
 
 	// ********************** ID **********************
@@ -199,6 +209,78 @@ public class TAlbum {
 	public void TestSetDeskTxarto() {
 		album.setDeskripzioa("desk");
 		assertNotEquals("deskribapena", album.getDeskripzioa());
+	}
+
+	// ********************** GENEROA **********************
+
+	@Test
+	public void TestGetGeneroa() {
+		assertEquals("generoa", album3.getGeneroa());
+	}
+
+	@Test
+	public void TestSetGeneroa() {
+		album3.setGeneroa("g");
+		assertEquals("g", album3.getGeneroa());
+	}
+
+	@Test
+	public void TestGetGeneroaTxarto() {
+		assertNotEquals("g", album3.getGeneroa());
+	}
+
+	@Test
+	public void TestSetGeneroaTxarto() {
+		album3.setGeneroa("g");
+		assertNotEquals("generoa", album3.getGeneroa());
+	}
+
+	// ********************** MUSIKARIA **********************
+
+	@Test
+	public void TestGetMusikaria() {
+		assertEquals(m1, album3.getMusikaria());
+	}
+
+	@Test
+	public void TestSetMusikaria() {
+		album3.setMusikaria(null);
+		assertEquals(null, album3.getMusikaria());
+	}
+	
+	@Test
+	public void TestGetMusikariaTxarto() {
+		assertNotEquals(null, album3.getMusikaria());
+	}
+
+	@Test
+	public void TestSetMusikariaTxarto() {
+		album3.setMusikaria(null);
+		assertNotEquals(m1, album3.getMusikaria());
+	}
+	
+	// ********************** ABESTIAK **********************
+
+	@Test
+	public void TestGetAbestiak() {
+		assertEquals(abestiak, album3.getAbestiak());
+	}
+
+	@Test
+	public void TestSetAbestiak() {
+		album3.setAbestiak(null);
+		assertEquals(null, album3.getAbestiak());
+	}
+	
+	@Test
+	public void TestGetAbestiakTxarto() {
+		assertNotEquals(null, album3.getAbestiak());
+	}
+
+	@Test
+	public void TestSetAbestiakTxarto() {
+		album3.setAbestiak(null);
+		assertNotEquals(abestiak, album3.getAbestiak());
 	}
 
 	// ********************** TO STRING **********************

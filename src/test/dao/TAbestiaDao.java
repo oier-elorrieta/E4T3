@@ -14,19 +14,18 @@ public class TAbestiaDao {
 
 	private static Album album;
 	private static AbestiaDao abestidao;
-	private static ArrayList<Audio> abestiList;
+	private static Abestia abestia;
 
 	@Before
 	public void setUp() throws Exception {
-		album = new Album("AL001", "Album 1", null, 2, 120, null, "deskripzioa");
+		album = new Album("AL1", "Album 1", null, 2, 120, null, "deskripzioa");
 		abestidao = new AbestiaDao();
-		abestiList = new ArrayList<>(abestidao.getAbestiaByAlbumId(album));
-		
+		abestia = new Abestia("AU3", "Como Camaron", 218, null);
 	}
-	
+
 	@Test
 	public void testGetAbestiaByAlbumId() throws SQLException {
-		assertEquals(abestidao.getAbestiaByAlbumId(album), abestiList);
+		assertEquals(abestidao.getAbestiaByAlbumId(album).get(0), abestia);
 	}
 
 }
