@@ -275,6 +275,17 @@ public class FuntzioBista {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * EditAlbum bista irekitzen duen metodoa.
+	 */
+	public static void irekiEditAbestia(Audio audio) {
+		try {
+			EditAbestia frame = new EditAbestia(audio);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 }
