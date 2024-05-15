@@ -75,7 +75,7 @@ public class AudioDao {
 		
 		Abestia abestiAux = (Abestia) audio;
 		
-		String kontsulta = "INSERT INTO Audio (ID_Audio, Izena, Iraupena,Irudia, Deskribapena, Mota) VALUES ('"+ audio.getIdAudio() + "', '" + audio.getIzena() + "', '" + audio.getIraupena() + "', '" + defaultBlob + "', '" + abestiAux.getDeskribapena() + "', '" + "Abestia" + "');";
+		String kontsulta = "INSERT INTO Audio (ID_Audio, Izena, Iraupena,Irudia, Deskribapena, Mota) VALUES ('"+ audio.getIdAudio() + "', '" + audio.getIzena() + "', '" + audio.getIraupena() + "', FROM_BASE64('" + defaultBlob+ "'), '" + abestiAux.getDeskribapena() + "', '" + "Abestia" + "');";
 		sentencia.executeUpdate(kontsulta);
 		
 		erreprodukzioakInsert(audio);

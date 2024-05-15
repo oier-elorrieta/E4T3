@@ -69,7 +69,7 @@ public class ArtistaDao {
 		Musikaria musikariAux = (Musikaria) artista;
 		
 
-		String kontsulta = "INSERT INTO Musikaria (ID_Musikaria, Izen_Artistikoa,Irudia, Ezaugarria, Deskribapena) VALUES ('"+ artista.getId() + "', '" + artista.getIzen_Artistikoa() + "', '" + defaultBlob + "', '" + musikariAux.getEzaugarria() + "', '" + artista.getDeskribapena() + "');";
+		String kontsulta = "INSERT INTO Musikaria (ID_Musikaria, Izen_Artistikoa,Irudia, Ezaugarria, Deskribapena) VALUES ('"+ artista.getId() + "', '" + artista.getIzen_Artistikoa() + "', FROM_BASE64('" + defaultBlob+ "'), '" + musikariAux.getEzaugarria() + "', '" + artista.getDeskribapena() + "');";
 		sentencia.executeUpdate(kontsulta);
 		
 		DB_Konexioa.itxi();

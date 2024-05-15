@@ -32,7 +32,7 @@ public class PodcasterDao {
 		Podcaster podcasterAux;
 
 		while (podcaster.next()) {
-			podcasterAux = new Podcaster(podcaster.getString("Podcasterra"), podcaster.getInt("Erreprodukzioak"));
+			podcasterAux = new Podcaster(podcaster.getString("ID"),podcaster.getString("Podcasterra"), podcaster.getInt("Erreprodukzioak"));
 			retArray.add(podcasterAux);
 		}
 
@@ -92,11 +92,31 @@ public class PodcasterDao {
 		Statement sentencia = conex.createStatement();
 		
 
-		String kontsulta = "INSERT INTO Podcaster (ID_Podcaster, Izen_Artistikoa,Irudia, Deskribapena) VALUES ('"+ artista.getId() + "', '" + artista.getIzen_Artistikoa() + "', '" + defaultBlob + "', '" + artista.getDeskribapena() + "');";
+		String kontsulta = "INSERT INTO Podcaster (ID_Podcaster, Izen_Artistikoa,Irudia, Deskribapena) VALUES ('"+ artista.getId() + "', '" + artista.getIzen_Artistikoa() + "', FROM_BASE64('" + defaultBlob+ "'), '" + artista.getDeskribapena() + "');";
 		sentencia.executeUpdate(kontsulta);
 		
 		DB_Konexioa.itxi();
 		return true;
+
+	}
+	
+	public boolean deletePodcasterByIzena(Artista artista) throws SQLException{
+		Connection conex = DB_Konexioa.admin();
+		
+		Statement sentencia = conex.createStatement();
+		
+		String kontsulta = "DELETE from Podcaster where Izen_Artistikoa='" + artista.getIzen_Artistikoa() +"';";
+		
+		
+		try {
+			sentencia.executeUpdate(kontsulta);
+			DB_Konexioa.itxi();
+			return true;
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			DB_Konexioa.itxi();
+			return false;
+		}
 
 	}
 }

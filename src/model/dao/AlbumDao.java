@@ -105,7 +105,7 @@ public class AlbumDao {
 		System.out.println(musikaria.getId());
 		
 		
-		String kontsulta = "INSERT INTO Album (ID_Album, Izenburua, Urtea, Generoa,Irudia, Deskripzioa, ID_Musikaria) VALUES ('"+ newAlbum.getId() + "', '" + newAlbum.getIzenburua() + "', '" + sqlUrtea + "' , '" +newAlbum.getGeneroa() +"', '" +defaultBlob +"', '" +newAlbum.getDeskripzioa() +"', '" +musikaria.getId() +"');";
+		String kontsulta = "INSERT INTO Album (ID_Album, Izenburua, Urtea, Generoa,Irudia, Deskripzioa, ID_Musikaria) VALUES ('"+ newAlbum.getId() + "', '" + newAlbum.getIzenburua() + "', '" + sqlUrtea + "' , '" +newAlbum.getGeneroa() +"', FROM_BASE64('" + defaultBlob+ "'), '" +newAlbum.getDeskripzioa() +"', '" +musikaria.getId() +"');";
 	
 		sentencia.executeUpdate(kontsulta);
 		

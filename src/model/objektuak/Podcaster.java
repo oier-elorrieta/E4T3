@@ -27,8 +27,8 @@ public class Podcaster extends Artista {
      * @param izena Podcaster-aren izen artistikoa
      * @param entzunaldi Entzunaldi kopurua
      */
-    public Podcaster(String izena, int entzunaldi) {
-        super(izena, entzunaldi);
+    public Podcaster(String id,String izena, int entzunaldi) {
+        super(id,izena,entzunaldi);
     }
 
     
