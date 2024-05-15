@@ -26,8 +26,8 @@ public class TPodcastDao {
 	@Before
 	public void setUp() throws Exception {
 		podcastdao = new PodcastDao();
-		podcaster = new Podcaster("PO001", "unai", null, "deskribapena");
-		p1 = new Podcast("AU001", "The Wild Project #1", 12840, "Guest 1, Guest 2", null);
+		podcaster = new Podcaster("PO1", "unai", null, "deskribapena");
+		p1 = new Podcast("AU1", "The Wild Project #1", 12840, "Guest 1, Guest 2", null);
 	}
 
 	@Test

@@ -28,7 +28,7 @@ public class TPodcasterDao {
 
 	@Test
 	public void testGetPodcasterByIzena() throws SQLException {
-		assertEquals(podcasterdao.getPodcasterByIzena("The Wild Project").getId(), "PO001");
+		assertEquals(podcasterdao.getPodcasterByIzena("The Wild Project").getIzen_Artistikoa(), "The Wild Project");
 	}
 
 	@Test

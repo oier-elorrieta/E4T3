@@ -34,7 +34,7 @@ public class TMusikariaDao {
 
 	@Test
 	public void testgetMusikariaByIzena() throws SQLException {
-		assertEquals(musikaridao.getMusikariaByIzena("Estopa").getId(), "MU001");
+		assertEquals(musikaridao.getMusikariaByIzena("Estopa").getIzen_Artistikoa(), "Estopa");
 	}
 
 }

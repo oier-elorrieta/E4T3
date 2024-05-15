@@ -69,7 +69,7 @@ public class AbestiaKudeatu extends JFrame {
 		});
 		panelHeader.add(btnAtzera, BorderLayout.WEST);
 
-		JLabel lblArtistak = new JLabel("Artistak kudeatu");
+		JLabel lblArtistak = new JLabel("Abestiak kudeatu");
 		lblArtistak.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		lblArtistak.setHorizontalAlignment(SwingConstants.CENTER);
 		panelHeader.add(lblArtistak, BorderLayout.CENTER);
@@ -89,7 +89,6 @@ public class AbestiaKudeatu extends JFrame {
 		JButton btnEditatu = new JButton("Editatu");
 		
 		
-		JButton btnIkusi = new JButton("Ikusi");
 
 		
 		table = new JTable();
@@ -116,12 +115,16 @@ public class AbestiaKudeatu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String newIzena = null;
 				String newDenborast = null;
+				String newDeskribapena = null;
 				int newDenbora = 0;
 			
 			
 				
 				newIzena = JOptionPane.showInputDialog("Sartu izena mesedez");
 				if(newIzena != null) {
+					
+					newDeskribapena = JOptionPane.showInputDialog("Sartu deskribapena mesedez");
+					if (newDeskribapena != null) {
 					
 					newDenborast = JOptionPane.showInputDialog("Sartu denbora (segundutan)");
 					
@@ -138,10 +141,11 @@ public class AbestiaKudeatu extends JFrame {
 							}
 							newID = Funtzioak.gehituID(newID);
 							
-							Audio audioAux = new Abestia(newID,newIzena,newDenbora);
+							Audio audioAux = new Abestia(newID,newIzena,newDenbora,newDeskribapena);
 							
 							try {
 								audiodao.audioGehitu(audioAux);
+								abestiadao.abestiaGehitu(audioAux, album);
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -154,14 +158,10 @@ public class AbestiaKudeatu extends JFrame {
 							JOptionPane.showMessageDialog(null, "Denbora ondo sartu mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
+					}
 					
 					
 				}
-				
-			
-					
-					
-				
 				
 			}
 		});
@@ -172,16 +172,16 @@ public class AbestiaKudeatu extends JFrame {
 				
 				if (index != -1) {
 					try {
-						artistadao.deleteArtistaByIzena(artistaList.get(index));
+						audiodao.deleteAudioById(audioList.get(index));
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiMusikaKudeatu();
+						FuntzioBista.irekiAbestiaKudeatu(album, musikariAux);
 						dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu artista bat ezabatzeko mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Aukeratu abesti bat ezabatzeko mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 			}
@@ -193,41 +193,23 @@ public class AbestiaKudeatu extends JFrame {
 				
 				if (index != -1) {
 					
-					Musikaria musikaria = (Musikaria) artistaList.get(index);
-					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiEditMusikaria(musikaria);
+					FuntzioBista.irekiEditAbestia(audioList.get(index));
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Aukeratu abesti bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
 			}
 		});
 		
-		btnIkusi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int index = table.getSelectedRow();
-				
-				if (index != -1) {
-					
-					Musikaria musikaria = (Musikaria) artistaList.get(index);
-					
-					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiAlbumKudeatu(musikaria);
-					dispose();
-				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
-				}
-				
-			}
-		});
+	
 		
 		
 		panelBotoiak.add(btnBerriaSortu);
 		panelBotoiak.add(btnEzabatu);
 		panelBotoiak.add(btnEditatu);
-		panelBotoiak.add(btnIkusi);
+
 
 
 
