@@ -16,12 +16,12 @@ public class TPlayList {
 	private static PlayList pl1;
 	private static Free f1;
 	private static Date eguna;
-	private static ArrayList<Abestia> abestiak;
+	private static ArrayList<Audio> abestiak;
 
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 04, 19);
-		abestiak = new ArrayList<Abestia>();
+		abestiak = new ArrayList<Audio>();
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
 		pl1 = new PlayList("1", "Rock lista", eguna, f1, abestiak);
 	}
@@ -137,7 +137,7 @@ public class TPlayList {
 
 	@Test
 	public void TestSetAbestiak() {
-		ArrayList<Abestia> abestiak2 = new ArrayList<Abestia>();
+		ArrayList<Audio> abestiak2 = new ArrayList<Audio>();
 		pl1.setAbestiak(abestiak2);
 		assertEquals(abestiak2, pl1.getAbestiak());
 	}
@@ -151,7 +151,7 @@ public class TPlayList {
 
 	@Test
 	public void TestSetAbestiakTxarto() {
-		ArrayList<Abestia> abestiak2 = new ArrayList<Abestia>();
+		ArrayList<Audio> abestiak2 = new ArrayList<Audio>();
 		abestiak.add(null);
 		pl1.setAbestiak(abestiak2);
 		assertNotEquals(abestiak, pl1.getAbestiak());

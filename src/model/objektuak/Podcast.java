@@ -1,6 +1,7 @@
 package model.objektuak;
 
 import java.sql.Blob;
+import java.util.Objects;
 
 public class Podcast extends Audio {
 
@@ -57,4 +58,18 @@ public class Podcast extends Audio {
 		String txt = super.toString();
 		return txt + " Podcast [kolaboratzaileak=" + kolaboratzaileak + ", podcaster=" + podcaster + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Podcast other = (Podcast) obj;
+		return Objects.equals(kolaboratzaileak, other.kolaboratzaileak) && Objects.equals(podcaster, other.podcaster);
+	}
+	
+	
 }

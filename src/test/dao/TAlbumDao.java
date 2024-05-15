@@ -25,20 +25,20 @@ public class TAlbumDao {
 
 	@Before
 	public void setUp() throws Exception {
-		m1 = new Musikaria("MU001", "E", null, "deskribapena", "ezaugarria");
+		m1 = new Musikaria("MU1", "E", null, "deskribapena", "ezaugarria");
 		albumdao = new AlbumDao();
 		
 	}
 	
 	@Test
 	public void testgetAlbumakByMusikaria() throws SQLException {
-		Album a1 = new Album("AL001", "Album 1", null, 2, 0, null, null);
+		Album a1 = new Album("AL1", "Album 1", null, 2, 0, null, null);
 		assertEquals(albumdao.getAlbumakByMusikaria(m1).get(0), a1);
 	}
 	
 	@Test
 	public void testgetAlbumakByMusikariaArrayList() throws SQLException {
-		Album a1 = new Album("AL001", "Album 1", null, 2, 0, null, null);
+		Album a1 = new Album("AL1", "Album 1", null, 2, 0, null, null);
 		ArrayList<Album> albumList = new ArrayList<Album>();
 		albumList.add(a1);
 		assertEquals(albumdao.getAlbumakByMusikaria(m1), albumList);
@@ -48,6 +48,6 @@ public class TAlbumDao {
 	// dudanarekin. Horrela dakigu funtzioa ondo doala.
 	@Test
 	public void testgetAlbumById() throws SQLException {
-		assertEquals(albumdao.getAlbumById("AL001").getDeskripzioa(), "Estoparen lehen albuma");
+		assertEquals(albumdao.getAlbumById("AL1").getDeskripzioa(), "Estoparen lehen albuma");
 	}
 }
