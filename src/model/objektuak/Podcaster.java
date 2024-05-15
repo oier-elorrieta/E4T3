@@ -16,6 +16,10 @@ public class Podcaster extends Artista {
     public Podcaster(String id, String izen_Artistikoa, Blob irudia, String deskribapena) {
         super(id, izen_Artistikoa, irudia, deskribapena);
     }
+    
+    public Podcaster(String id, String izen_Artistikoa, String deskribapena) {
+        super(id, izen_Artistikoa, deskribapena);
+    }
 
     /**
      * Podcaster bat sortzen du izen artistikoarekin eta entzunaldi kopuruarekin.
