@@ -31,8 +31,9 @@ import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
 import model.objektuak.*;
+import vista.interfaseak.Header;
 
-public class AbestiakPlayList extends JFrame {
+public class AbestiakPlayList extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -56,38 +57,7 @@ public class AbestiakPlayList extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panelHeader = new JPanel();
-		contentPane.add(panelHeader, BorderLayout.NORTH);
-		panelHeader.setLayout(new BorderLayout(0, 0));
-
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panelHeader.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiNirePlaylist();
-				dispose();
-			}
-		});
-		panelHeader.add(btnAtzera, BorderLayout.WEST);
-
-		JLabel lblAlbumIzena = new JLabel(playlist.getIzena() + "");
-		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
+		headerKokatu(playlist.getIzena() + "");
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -144,5 +114,41 @@ public class AbestiakPlayList extends JFrame {
 			aux[0] = playlist.getAbestiak().get(i).getIzena() + " (" + iraupena + ")";
 			model.addRow(aux);
 		}
+	}
+
+	@Override
+	public void headerKokatu(String text) {
+		JPanel panelHeader = new JPanel();
+		contentPane.add(panelHeader, BorderLayout.NORTH);
+		panelHeader.setLayout(new BorderLayout(0, 0));
+
+		// Erabiltzailearen izena bistaratzeko botoia
+		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErregistroa();
+				dispose();
+			}
+		});
+		btnPerfil.setSize(325, 20);
+		panelHeader.add(btnPerfil, BorderLayout.EAST);
+
+		// Atzera botoia
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setSize(325, 20);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiNirePlaylist();
+				dispose();
+			}
+		});
+		panelHeader.add(btnAtzera, BorderLayout.WEST);
+
+		JLabel lblAlbumIzena = new JLabel(text);
+		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
 	}
 }

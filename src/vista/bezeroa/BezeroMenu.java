@@ -5,12 +5,13 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import vista.interfaseak.Header;
 
 import java.awt.*;
 import java.awt.event.*;
 
 // Bezeroaren menua bistaratzeko klasea
-public class BezeroMenu extends JFrame interface Header{
+public class BezeroMenu extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,49 +19,16 @@ public class BezeroMenu extends JFrame interface Header{
 	// Frame-a sortzeko konstruktorea
 	public BezeroMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
-		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
+        setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
 
-		// Goiko panela
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new BorderLayout(0, 0));
-
-		// Titulua
-		JLabel lblTitulua = new JLabel("Menu");
-		lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		panel_1.add(lblTitulua);
-
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panel_1.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiLogin();
-				dispose();
-			}
-		});
-		panel_1.add(btnAtzera, BorderLayout.WEST);
-
+        headerKokatu("Menu");
+		
 		// Erdiko panela
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.CENTER);
@@ -119,7 +87,7 @@ public class BezeroMenu extends JFrame interface Header{
 	}
 	
 	@Override
-    public void agregarBotones() {
+    public void headerKokatu(String text) {
         // Lógica para agregar botones al header
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
@@ -136,7 +104,13 @@ public class BezeroMenu extends JFrame interface Header{
         });
         btnPerfil.setSize(325, 20);
         panel_1.add(btnPerfil, BorderLayout.EAST);
-
+        
+        // Titulua
+        JLabel lblTitulua = new JLabel(text);
+        lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
+        panel_1.add(lblTitulua);
+        
         // Atzera botoia
         JButton btnAtzera = new JButton("Atzera");
         btnAtzera.setSize(325, 20);
@@ -148,20 +122,6 @@ public class BezeroMenu extends JFrame interface Header{
             }
         });
         panel_1.add(btnAtzera, BorderLayout.WEST);
-    }
-
-    @Override
-    public void configurarLabel(String texto) {
-        // Lógica para configurar el label en el header
-        JPanel panel_1 = new JPanel();
-        contentPane.add(panel_1, BorderLayout.NORTH);
-        panel_1.setLayout(new BorderLayout(0, 0));
-
-        // Titulua
-        JLabel lblTitulua = new JLabel(texto);
-        lblTitulua.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitulua.setFont(new Font("Tahoma", Font.PLAIN, 40));
-        panel_1.add(lblTitulua);
     }
 
 }

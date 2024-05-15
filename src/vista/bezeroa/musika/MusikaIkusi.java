@@ -25,6 +25,7 @@ import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
 import model.objektuak.Musikaria;
+import vista.interfaseak.Header;
 
 import java.awt.GridLayout;
 import javax.swing.JTable;
@@ -33,7 +34,7 @@ import javax.swing.ScrollPaneConstants;
 
 import model.objektuak.*;
 
-public class MusikaIkusi extends JFrame {
+public class MusikaIkusi extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,6 +42,7 @@ public class MusikaIkusi extends JFrame {
 	private DefaultTableModel model;
 	AbestiaDao abestiDao = new AbestiaDao();
 	ArrayList<Audio> abestiList;
+	Musikaria musikari;
 
 	/**
 	 * Create the frame.
@@ -60,38 +62,8 @@ public class MusikaIkusi extends JFrame {
 		abestiList = new ArrayList<Audio>();
 		abestiList = abestiDao.getAbestiaByAlbumId(album);
 
-		JPanel panelHeader = new JPanel();
-		contentPane.add(panelHeader, BorderLayout.NORTH);
-		panelHeader.setLayout(new BorderLayout(0, 0));
-
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panelHeader.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiAlbumDeskubritu(musikaria);
-				dispose();
-			}
-		});
-		panelHeader.add(btnAtzera, BorderLayout.WEST);
-
-		JLabel lblAlbumIzena = new JLabel(album.getIzenburua() + "-aren musika");
-		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
+		musikari = musikaria;
+		headerKokatu(album.getIzenburua() + "-aren musika");
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -202,5 +174,41 @@ public class MusikaIkusi extends JFrame {
 			aux[0] = abestiList.get(i).getIzena() + " (" + iraupena + ")";
 			model.addRow(aux);
 		}
+	}
+
+	@Override
+	public void headerKokatu(String text) {
+		JPanel panelHeader = new JPanel();
+		contentPane.add(panelHeader, BorderLayout.NORTH);
+		panelHeader.setLayout(new BorderLayout(0, 0));
+
+		// Erabiltzailearen izena bistaratzeko botoia
+		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErregistroa();
+				dispose();
+			}
+		});
+		btnPerfil.setSize(325, 20);
+		panelHeader.add(btnPerfil, BorderLayout.EAST);
+
+		// Atzera botoia
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setSize(325, 20);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiAlbumDeskubritu(musikari);
+				dispose();
+			}
+		});
+		panelHeader.add(btnAtzera, BorderLayout.WEST);
+
+		JLabel lblAlbumIzena = new JLabel(text);
+		lblAlbumIzena.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblAlbumIzena.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHeader.add(lblAlbumIzena, BorderLayout.CENTER);
 	}
 }
