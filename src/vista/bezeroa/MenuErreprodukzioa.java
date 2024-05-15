@@ -15,6 +15,14 @@ import model.objektuak.*;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.GridLayout;
 
 public class MenuErreprodukzioa extends JFrame {
 
@@ -77,28 +85,39 @@ public class MenuErreprodukzioa extends JFrame {
 			aux[0] = playlistList.get(i).getIzena();
 			model.addRow(aux);
 		}
-
-		JButton btnGehitu = new JButton("Gehitu");
-		panelBotoia.add(btnGehitu, BorderLayout.EAST);
-		btnGehitu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int indexTable = table.getSelectedRow();
-				if (indexTable == -1) {
-					JOptionPane.showMessageDialog(null, "Aukeratu Playlist bat mesedez", "", JOptionPane.ERROR_MESSAGE);
-				} else {
-					try {
-						playlistDao.insertAbestiaIntoPlayList(playlistList.get(indexTable), audioList.get(index));
-						JOptionPane.showMessageDialog(null, "Sartuta", "", JOptionPane.INFORMATION_MESSAGE);
-					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "Musika honek sartuta daukazu", "", JOptionPane.ERROR_MESSAGE);
+				panelBotoia.setLayout(new GridLayout(0, 1, 0, 0));
+				
+				JLabel lblNewLabel = new JLabel(" ");
+				panelBotoia.add(lblNewLabel);
+		
+				JButton btnGehitu = new JButton("Gehitu");
+				panelBotoia.add(btnGehitu);
+				btnGehitu.setSize(100, 10);
+				btnGehitu.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						int indexTable = table.getSelectedRow();
+						if (indexTable == -1) {
+							JOptionPane.showMessageDialog(null, "Aukeratu Playlist bat mesedez", "", JOptionPane.ERROR_MESSAGE);
+						} else {
+							try {
+								playlistDao.insertAbestiaIntoPlayList(playlistList.get(indexTable), audioList.get(index));
+								JOptionPane.showMessageDialog(null, "Sartuta", "", JOptionPane.INFORMATION_MESSAGE);
+							} catch (SQLException e1) {
+								JOptionPane.showMessageDialog(null, "Musika honek sartuta daukazu", "", JOptionPane.ERROR_MESSAGE);
+							}
+						}
 					}
-				}
-			}
-		});
+				});
+		
+		JLabel lblNewLabel_2 = new JLabel(" ");
+		panelBotoia.add(lblNewLabel_2);
 		
 		JButton btnAtzera = new JButton("Atzera");
-		panelBotoia.add(btnAtzera, BorderLayout.EAST);
+		panelBotoia.add(btnAtzera);
+		
+		JLabel lblNewLabel_1 = new JLabel(" ");
+		panelBotoia.add(lblNewLabel_1);
 		btnAtzera.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

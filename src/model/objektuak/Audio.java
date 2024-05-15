@@ -122,10 +122,6 @@ public abstract class Audio {
 	public String toString() {
 		return "Audio [idAudio=" + idAudio + ", izena=" + izena + ", iraupena=" + iraupena + ", irudia=" + irudia + "]";
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(idAudio, iraupena, irudia, izena);
-	}
 
 	/**
 	 * Audio objektuaren berdintasuna konparatzen du.
@@ -143,7 +139,7 @@ public abstract class Audio {
 			return false;
 		Audio other = (Audio) obj;
 		return Objects.equals(idAudio, other.idAudio) && iraupena == other.iraupena
-				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
+				&& Objects.equals(izena, other.izena);
 	}
 
 }
