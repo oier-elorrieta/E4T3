@@ -25,9 +25,9 @@ public class EditAlbum extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField textFieldDekribapena;
+	private JTextField textFieldIzena;
+	private JTextField textFieldUrtea;
 
 	public EditAlbum(Album album) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,25 +54,33 @@ public class EditAlbum extends JFrame implements Header {
 		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblIzena);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		panelLabel.add(textField);
+		textFieldIzena = new JTextField();
+		textFieldIzena.setColumns(10);
+		panelLabel.add(textFieldIzena);
 		
-		JLabel lblIraupena = new JLabel("Iraupena:  ");
-		lblIraupena.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelLabel.add(lblIraupena);
+		JLabel lblUrtea = new JLabel("Urtea:  ");
+		lblUrtea.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelLabel.add(lblUrtea);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panelLabel.add(textField_2);
+		textFieldUrtea = new JTextField();
+		textFieldUrtea.setColumns(10);
+		panelLabel.add(textFieldUrtea);
+		
+		JLabel lblGeneroa = new JLabel("Generoa:  ");
+		lblGeneroa.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelLabel.add(lblGeneroa);
+		
+		JTextField textFieldGeneroa = new JTextField();
+		textFieldGeneroa.setColumns(10);
+		panelLabel.add(textFieldGeneroa);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
 		lblDeskribapena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblDeskribapena);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panelLabel.add(textField_1);
+		textFieldDekribapena = new JTextField();
+		textFieldDekribapena.setColumns(10);
+		panelLabel.add(textFieldDekribapena);
 		
 		JLabel lblNewLabel = new JLabel("                                                                                                 ");
 		panelKontenidoa.add(lblNewLabel, BorderLayout.EAST);

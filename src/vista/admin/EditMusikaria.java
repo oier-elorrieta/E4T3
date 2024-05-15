@@ -20,6 +20,7 @@ import model.Aldagaiak;
 import model.objektuak.Musikaria;
 import vista.bezeroa.playlist.NirePlaylist;
 import vista.interfaseak.Header;
+import javax.swing.JRadioButton;
 
 public class EditMusikaria extends JFrame implements Header {
 
@@ -27,7 +28,6 @@ public class EditMusikaria extends JFrame implements Header {
 	private JPanel contentPane;
 	private JTextField textField_1;
 	private JTextField textField;
-	private JTextField textField_2;
 
 	public EditMusikaria(Musikaria musikaria) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,13 +58,19 @@ public class EditMusikaria extends JFrame implements Header {
 		textField.setColumns(10);
 		panelLabel.add(textField);
 		
-		JLabel lblIraupena = new JLabel("Iraupena:  ");
-		lblIraupena.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelLabel.add(lblIraupena);
+		JLabel lblEzaugarria = new JLabel("Ezaugarria:  ");
+		lblEzaugarria.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelLabel.add(lblEzaugarria);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panelLabel.add(textField_2);
+		JPanel panel_2 = new JPanel();
+		panelLabel.add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JRadioButton rdbtnBakarlaria = new JRadioButton("Bakarlaria");
+		panel_2.add(rdbtnBakarlaria);
+		
+		JRadioButton rdbtnTaldea = new JRadioButton("Taldea");
+		panel_2.add(rdbtnTaldea);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
 		lblDeskribapena.setHorizontalAlignment(SwingConstants.RIGHT);
