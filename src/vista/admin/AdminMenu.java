@@ -100,16 +100,14 @@ public class AdminMenu extends JFrame {
 		btnPodKudeatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiPodcastKudeatu();
+				FuntzioBista.irekiPodcasterKudeatu();
 				dispose();
 			}
 		});
 		
 		btnEstatistikak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiNireEstatistikak();
-				dispose();
+				JOptionPane.showMessageDialog(null, "😅", "", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		

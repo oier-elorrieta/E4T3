@@ -287,5 +287,17 @@ public class FuntzioBista {
 		}
 	}
 	
+	/**
+	 * PodcasterKudeatu bista irekitzen duen metodoa.
+	 */
+	public static void irekiPodcasterKudeatu() {
+		try {
+			PodcasterKudeatu frame = new PodcasterKudeatu();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
