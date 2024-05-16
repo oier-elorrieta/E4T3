@@ -3,12 +3,16 @@ package model.dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import model.Aldagaiak;
 import model.db.DB_Konexioa;
 import model.objektuak.Audio;
 import model.objektuak.PlayList;
+import model.salbuespenak.PlayListLimit;
+import vista.interfaseak.daoGetId;
 
-public class PlayListDao {
+public class PlayListDao implements daoGetId{
 	
 	Connection conex;
 	
@@ -74,17 +78,24 @@ public class PlayListDao {
 			maxPlaylist = getMaxPlaylist();
 		}
 		
-		if(maxPlaylist < 3) {
+		try {
+		
+			if(maxPlaylist < 3) {
+				throw new PlayListLimit();
+			}
 			sentencia.executeUpdate(kontsulta);
 			DB_Konexioa.itxi();
 			return true;
-		}else {
-			DB_Konexioa.itxi();
+			
+			
+		}catch(PlayListLimit pl){
+			JOptionPane.showMessageDialog(null, pl.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
 	}
 	
+	@Override
 	public String getLastId() throws SQLException {
 		String ret = "";
 		Connection conex = DB_Konexioa.bezeroa();

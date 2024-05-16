@@ -7,6 +7,7 @@ import model.*;
 import model.dao.*;
 import model.objektuak.Hizkuntza;
 import model.objektuak.bezero.*;
+import model.salbuespenak.SamePassword;
 
 import java.awt.*;
 
@@ -201,7 +202,11 @@ public class Erregistroa extends JFrame {
 				if (izena.equals("") || abizena.equals("") || hizkuntza.equals("") || pasahitza.equals("") || konfirmazioa.equals("") || noizData.equals("") || jaioDataInt == 0 || jaioDataInt > 0) {
 					JOptionPane.showMessageDialog(null, "¡Error! Eremu guztiak ondo beteta egon behar dira.", "", JOptionPane.ERROR_MESSAGE);
 				} else {
-					if (pasahitza.equals(konfirmazioa)) {
+					try {
+						
+					if (!pasahitza.equals(konfirmazioa)) {
+						throw new SamePassword();
+					}
 						pasahitza = Funtzioak.enkriptatzailea(pasahitza);
 						Bezero bezeroa;
 						if (Aldagaiak.erabiltzailea != null) {
@@ -248,10 +253,10 @@ public class Erregistroa extends JFrame {
 								// TODO Auto-generated catch block
 							}
 						}
-						
-					} else {
-						JOptionPane.showMessageDialog(null, "¡Error! Pasahitzek bat etorri behar dute.", "", JOptionPane.ERROR_MESSAGE);
+					}catch(SamePassword sp) {
+						JOptionPane.showMessageDialog(null, sp.getMessage(), "", JOptionPane.ERROR_MESSAGE);
 					}
+					
 				}
 				
 

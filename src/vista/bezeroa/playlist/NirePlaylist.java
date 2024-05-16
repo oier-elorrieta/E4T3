@@ -125,8 +125,6 @@ public class NirePlaylist extends JFrame implements Header {
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 						FuntzioBista.irekiNirePlaylist();
 						dispose();
-					}else {
-						JOptionPane.showMessageDialog(null, "Ezin dituzu playlist gehiago sortu premium izan gabe", "", JOptionPane.ERROR_MESSAGE);
 					}
 					
 				} catch (SQLException e1) {
