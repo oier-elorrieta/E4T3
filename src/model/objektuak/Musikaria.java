@@ -39,9 +39,6 @@ public class Musikaria extends Artista {
         super(izen_Artistikoa, entzunaldi);
     }
     
-    public Musikaria(String izen_Artistikoa) {
-        super(izen_Artistikoa);
-    }
 
     /**
      * Musikariaren ezaugarria itzultzen du.

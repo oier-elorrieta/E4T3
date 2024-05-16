@@ -25,15 +25,7 @@ public abstract class Audio {
 		this.iraupena = iraupena;
 		this.irudia = irudia;
 	}
-
-	public Audio(String idAudio) {
-		this.idAudio = idAudio;
-	}
 	
-	public Audio(String idAudio,String izena) {
-		this.idAudio = idAudio;
-		this.izena = izena;
-	}
 
 	public Audio(String idAudio, String izena, int iraupena) {
 		this.idAudio = idAudio;

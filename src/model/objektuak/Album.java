@@ -37,27 +37,6 @@ public class Album {
 		this.deskripzioa = deskripzioa;
 	}
 
-	/**
-	 * Albumaren eraikitzailea (konfiguratzaile osoa).
-	 * 
-	 * @param id        Albumaren identifikazioa.
-	 * @param izenburua Albumaren izenburua.
-	 * @param urtea     Albumaren argitalpen urtea.
-	 * @param generoa   Albumaren genero musikala.
-	 * @param irudia    Albumaren irudia.
-	 * @param musikaria Albumarekin lotutako musikaria.
-	 * @param abestiak  Albumak dituen abestien zerrenda.
-	 */
-	public Album(String id, String izenburua, Date urtea, String generoa, Blob irudia, Musikaria musikaria,
-			ArrayList<Abestia> abestiak) {
-		this.id = id;
-		this.izenburua = izenburua;
-		this.urtea = urtea;
-		this.generoa = generoa;
-		this.irudia = irudia;
-		this.musikaria = musikaria;
-		this.abestiak = abestiak;
-	}
 
 	/**
 	 * Albumaren eraikitzailea (konfigurazio minimoa).

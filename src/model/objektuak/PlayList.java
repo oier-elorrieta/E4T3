@@ -23,13 +23,6 @@ public class PlayList {
      * @param bezeroa PlayList-a sortu duen bezeroa
      * @param abestiak PlayList-eko abesti zerrenda
      */
-    public PlayList(String id, String izena, Date sorreraData, Bezero bezeroa, ArrayList<Audio> abestiak) {
-        this.id = id;
-        this.izena = izena;
-        this.sorreraData = sorreraData;
-        this.bezeroa = bezeroa;
-        this.abestiak = abestiak;
-    }
 
     /**
      * PlayList-a sortzen du identifikadorearekin, izenarekin, sorrera datarekin, 
@@ -66,7 +59,7 @@ public class PlayList {
     }
 
     public PlayList() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
