@@ -21,6 +21,7 @@ public class TAlbum {
 	private static Album album2;
 	private static Album album3;
 	private static Album album4;
+	private static Album album5;
 	private static Date eguna;
 	private static Musikaria m1;
 	private static ArrayList<Abestia> abestiak;
@@ -38,6 +39,8 @@ public class TAlbum {
 		album2 = new Album("1", "izenburua", 2);
 		album3 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
 		album4 = new Album("1", "izenburua", eguna, "generoa", "deskribapena");
+		album5 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
+		
 	}
 
 	// ********************** ID **********************
@@ -294,6 +297,29 @@ public class TAlbum {
 				+ ", musikaria=" + album.getMusikaria() + "]";
 
 		assertEquals(txt, esperotakoa);
+	}
+	
+	// ********************** EQUALS **********************
+
+	@Test
+	public void TestEqualsObjetuBerdina() {
+		assertTrue(album.equals(album));
+	}
+
+	@Test
+	public void TestEqualsNull() {
+		assertFalse(album.equals(null));
+	}
+
+	@Test
+	public void TestEqualsClaseEzberdinak() {
+		String txarra = "";
+		assertFalse(album.equals(txarra));
+	}
+	
+	@Test
+	public void TestEqualsBerdinak() {
+		assertEquals(album3, album5);
 	}
 
 }
