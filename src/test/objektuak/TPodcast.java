@@ -19,7 +19,7 @@ public class TPodcast {
 	@Before
 	public void setUp() throws Exception {
 		podcaster = new Podcaster("1", "unai", null, "deskribapena");
-		podcast = new Podcast("1", "izena", 120, null, "kolab", podcaster);
+		podcast = new Podcast("1", "izena", 120, "kolab",null);
 	}
 
 	// ********************** KOLABORATZAILEAK **********************
@@ -48,10 +48,7 @@ public class TPodcast {
 
 	// ********************** PODCASTER **********************
 
-	@Test
-	public void TestgetPodcaster() {
-		assertEquals(podcaster, podcast.getPodcaster());
-	}
+
 
 	@Test
 	public void TestsetPodcaster() {
@@ -59,16 +56,13 @@ public class TPodcast {
 		assertEquals(null, podcast.getPodcaster());
 	}
 
-	@Test
-	public void TestgetPodcasterTxarto() {
-		assertNotEquals(null, podcast.getPodcaster());
-	}
 
 	@Test
 	public void TestsetPodcasterTxarto() {
 		podcast.setPodcaster(null);
 		assertNotEquals(podcaster, podcast.getPodcaster());
 	}
+
 
 	// ********************** TO STRING **********************
 

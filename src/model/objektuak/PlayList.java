@@ -13,17 +13,6 @@ public class PlayList {
 	private int abestiKont;
 	private ArrayList<Audio> abestiak;
 
-	/**
-     * PlayList-a sortzen du identifikadorearekin, izenarekin, sorrera datarekin, 
-     * bezeroarekin, eta abesti zerrenda batekin.
-     * 
-     * @param id PlayList-aren identifikadorea
-     * @param izena PlayList-aren izena
-     * @param sorreraData PlayList-aren sorrera data
-     * @param bezeroa PlayList-a sortu duen bezeroa
-     * @param abestiak PlayList-eko abesti zerrenda
-     */
-
     /**
      * PlayList-a sortzen du identifikadorearekin, izenarekin, sorrera datarekin, 
      * eta bezeroarekin, abesti zerrendarik gabe.
