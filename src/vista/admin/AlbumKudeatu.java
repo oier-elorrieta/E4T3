@@ -213,13 +213,19 @@ public class AlbumKudeatu extends JFrame {
 				int index = table.getSelectedRow();
 				
 				if (index != -1) {
-						
-					Album album = albumList.get(index);
+					
+					Album album=null;
+					try {
+						album = albumdao.getAlbumById(albumList.get(index).getId());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiEditAlbum(album);
+					FuntzioBista.irekiEditAlbum(album,musikaria);
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu artista bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Aukeratu album bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

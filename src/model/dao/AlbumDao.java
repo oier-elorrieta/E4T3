@@ -65,6 +65,7 @@ public class AlbumDao {
 	        albuma.getString("ID_Album"),
 	        albuma.getString("Izenburua"),
 	        albuma.getDate("Urtea"),
+	        albuma.getString("Generoa"),
 	        albuma.getInt("AbestiKop"),
 	        albuma.getInt("Iraupena"),
 	        albuma.getBlob("Irudia"),
@@ -129,6 +130,22 @@ public class AlbumDao {
 			DB_Konexioa.itxi();
 			return false;
 		}
+	}
+	
+	public boolean updateAlbum(Album album) throws SQLException {
+		Connection conex = DB_Konexioa.admin();
+
+		Statement statement = conex.createStatement();
+		
+		java.sql.Date sqlUrtea = new java.sql.Date(album.getUrtea().getTime());
+		
+		String kontsulta = "UPDATE Album SET Izenburua ='"+album.getIzenburua()+"', Urtea ='"+sqlUrtea+"',Generoa ='"+album.getGeneroa()+"',Deskripzioa ='"+album.getDeskripzioa()+"' where ID_Album ='"+album.getId()+"';";
+		
+		statement.executeUpdate(kontsulta);
+	
+
+		DB_Konexioa.itxi();
+		return true;
 	}
 		
 	}

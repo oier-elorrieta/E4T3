@@ -256,9 +256,9 @@ public class FuntzioBista {
 	/**
 	 * EditAlbum bista irekitzen duen metodoa.
 	 */
-	public static void irekiEditAlbum(Album album) {
+	public static void irekiEditAlbum(Album album, Musikaria musikaria) {
 		try {
-			EditAlbum frame = new EditAlbum(album);
+			EditAlbum frame = new EditAlbum(album,musikaria);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -14,6 +14,7 @@ import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
 import model.dao.ArtistaDao;
+import model.dao.MusikariaDao;
 import model.dao.PlayListDao;
 import model.objektuak.Abestia;
 import model.objektuak.Artista;
@@ -28,6 +29,7 @@ public class MusikaKudeatu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	ArtistaDao artistadao = new ArtistaDao();
+	MusikariaDao musikariadao = new MusikariaDao();
 	private JTable table;
 	private DefaultTableModel model;
 	
@@ -184,7 +186,15 @@ public class MusikaKudeatu extends JFrame {
 				
 				if (index != -1) {
 					
-					Musikaria musikaria = (Musikaria) artistaList.get(index);
+					Musikaria musikaria = null;
+					
+					try {
+						musikaria = musikariadao.getMusikariaByIzena(artistaList.get(index).getIzen_Artistikoa());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 					FuntzioBista.irekiEditMusikaria(musikaria);
@@ -201,6 +211,7 @@ public class MusikaKudeatu extends JFrame {
 				int index = table.getSelectedRow();
 				
 				if (index != -1) {
+					
 					
 					Musikaria musikaria = (Musikaria) artistaList.get(index);
 					

@@ -7,9 +7,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -17,21 +19,27 @@ import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
 import model.Aldagaiak;
+import model.dao.MusikariaDao;
 import model.objektuak.Musikaria;
 import vista.bezeroa.playlist.NirePlaylist;
 import vista.interfaseak.Header;
 import javax.swing.JRadioButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class EditMusikaria extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
+	private JTextField textFieldDeskribapena;
+	private JTextField textFieldIzena;
+	
+	MusikariaDao musikariadao = new MusikariaDao();
 
 	public EditMusikaria(Musikaria musikaria) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(NirePlaylist.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Musikaria.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -54,9 +62,10 @@ public class EditMusikaria extends JFrame implements Header {
 		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblIzena);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		panelLabel.add(textField);
+		textFieldIzena = new JTextField();
+		textFieldIzena.setColumns(10);
+		textFieldIzena.setText(musikaria.getIzen_Artistikoa());
+		panelLabel.add(textFieldIzena);
 		
 		JLabel lblEzaugarria = new JLabel("Ezaugarria:  ");
 		lblEzaugarria.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -67,18 +76,33 @@ public class EditMusikaria extends JFrame implements Header {
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JRadioButton rdbtnBakarlaria = new JRadioButton("Bakarlaria");
+		rdbtnBakarlaria.setActionCommand("Bakarlaria");
 		panel_2.add(rdbtnBakarlaria);
 		
 		JRadioButton rdbtnTaldea = new JRadioButton("Taldea");
+		rdbtnTaldea.setActionCommand("Taldea");
 		panel_2.add(rdbtnTaldea);
+		
+		ButtonGroup rdbGroup = new ButtonGroup();
+		
+		rdbGroup.add(rdbtnBakarlaria);
+		rdbGroup.add(rdbtnTaldea);
+		
+		if(musikaria.getEzaugarria().equals("Bakarlaria")) {
+			rdbtnBakarlaria.setSelected(true);
+		}else {
+			rdbtnTaldea.setSelected(true);
+		}
+		
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
 		lblDeskribapena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblDeskribapena);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panelLabel.add(textField_1);
+		textFieldDeskribapena = new JTextField();
+		textFieldDeskribapena.setColumns(10);
+		textFieldDeskribapena.setText(musikaria.getDeskribapena());
+		panelLabel.add(textFieldDeskribapena);
 		
 		JLabel lblNewLabel = new JLabel("                                                                                                 ");
 		panelKontenidoa.add(lblNewLabel, BorderLayout.EAST);
@@ -125,10 +149,35 @@ public class EditMusikaria extends JFrame implements Header {
 		contentPane.add(panelBotoiak, BorderLayout.SOUTH);
 		
 		JButton btnApply = new JButton("Gorde");
+		btnApply.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String izena = textFieldIzena.getText();
+				String ezaugarria = rdbGroup.getSelection().getActionCommand();
+				String deskribapena = textFieldDeskribapena.getText();
+				
+				if(izena.equals("") || ezaugarria.equals("") || deskribapena.equals("")) {
+					JOptionPane.showMessageDialog(null, "Guztia bete mesedez!", "", JOptionPane.ERROR_MESSAGE);
+				}else {
+					Musikaria newMusikaria = new Musikaria(musikaria.getId(),izena,musikaria.getIrudia(),deskribapena,ezaugarria);
+					
+					try {
+						musikariadao.updateMusikaria(newMusikaria);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+	                FuntzioBista.irekiAdminMenu();
+	                dispose();
+				}
+				
+				
+			}
+		});
 		panelBotoiak.add(btnApply);
 		
-		JButton btnAtzera = new JButton("Atzera");
-		panelBotoiak.add(btnAtzera);
+
 	}
 
 	@Override
@@ -149,7 +198,7 @@ public class EditMusikaria extends JFrame implements Header {
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-                FuntzioBista.irekiLogin();
+                FuntzioBista.irekiMusikaKudeatu();
                 dispose();
             }
         });
