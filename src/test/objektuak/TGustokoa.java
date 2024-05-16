@@ -18,7 +18,7 @@ public class TGustokoa {
 	@Before
 	public void setUp() throws Exception {
 		free = new Free("unai", "souto", "euskera", "unaisouto", "1234", null, null);
-		abestia = new Abestia("1", "izena", 120, null);
+		abestia = new Abestia("1", "izena");
 		gustokoa = new Gustokoa(free, abestia);
 	}
 

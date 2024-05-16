@@ -1,5 +1,7 @@
 package model.objektuak;
 
+import java.util.Objects;
+
 public class Estadistikak {
 	
 	private String ID_Audio;
@@ -73,9 +75,19 @@ public class Estadistikak {
 				+ ", erreprodukzioKopHilabetea=" + erreprodukzioKopHilabetea + ", erreprodukzioKopUrtea="
 				+ erreprodukzioKopUrtea + "]";
 	}
-	
-	
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estadistikak other = (Estadistikak) obj;
+		return Objects.equals(ID_Audio, other.ID_Audio) && erreprodukzioKopEguna == other.erreprodukzioKopEguna
+				&& erreprodukzioKopHilabetea == other.erreprodukzioKopHilabetea
+				&& erreprodukzioKopUrtea == other.erreprodukzioKopUrtea && Objects.equals(izena, other.izena);
+	}
 	
 }

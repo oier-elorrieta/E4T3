@@ -34,7 +34,7 @@ public class TAlbum {
 		eguna = new Date(2024 / 04 / 18);
 		m1 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
 		abestiak = new ArrayList<>();
-		album = new Album("1", "izenburua", eguna, 2, 300, blob, "deskribapena");
+		album = new Album("1", "izenburua", eguna, "generoa", 2, 300, blob, "deskribapena");
 		album2 = new Album("1", "izenburua", 2);
 		album3 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
 		album4 = new Album("1", "izenburua", eguna, "generoa", "deskribapena");
