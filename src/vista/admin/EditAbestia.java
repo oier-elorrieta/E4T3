@@ -5,6 +5,10 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,13 +16,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import control.funtzioak.FuntzioBista;
+import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
+import model.dao.AbestiaDao;
+import model.objektuak.Abestia;
+import model.objektuak.Album;
 import model.objektuak.Audio;
+import model.objektuak.Musikaria;
 import vista.bezeroa.playlist.NirePlaylist;
 import vista.interfaseak.Header;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
@@ -31,8 +42,15 @@ public class EditAbestia extends JFrame implements Header {
 	private JTextField textFieldDekribapena;
 	private JTextField textFieldIzena;
 	private JTextField textFieldIraupena;
+	
+	AbestiaDao abestiadao = new AbestiaDao();
+	
+	Album albumRet;
+	Musikaria musikariaRet;
 
-	public EditAbestia(Audio audio) {
+	public EditAbestia(Audio audio,Album albumAux, Musikaria musikariAux) {
+		albumRet = albumAux;
+		musikariaRet = musikariAux;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NirePlaylist.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -55,18 +73,22 @@ public class EditAbestia extends JFrame implements Header {
 		
 		JLabel lblIzena = new JLabel("Izena: ");
 		lblIzena.setHorizontalAlignment(SwingConstants.RIGHT);
+	
 		panelLabel.add(lblIzena);
 		
 		textFieldIzena = new JTextField();
 		textFieldIzena.setColumns(10);
+		textFieldIzena.setText(audio.getIzena());
 		panelLabel.add(textFieldIzena);
 		
-		JLabel lblIraupena = new JLabel("Iraupena:  ");
+		JLabel lblIraupena = new JLabel("Iraupena:  (Segundutan)");
 		lblIraupena.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelLabel.add(lblIraupena);
 		
 		textFieldIraupena = new JTextField();
 		textFieldIraupena.setColumns(10);
+		String iraupena = Integer.toString(audio.getIraupena());
+		textFieldIraupena.setText(iraupena);
 		panelLabel.add(textFieldIraupena);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
@@ -75,6 +97,8 @@ public class EditAbestia extends JFrame implements Header {
 		
 		textFieldDekribapena = new JTextField();
 		textFieldDekribapena.setColumns(10);
+		Abestia abestiAux = (Abestia) audio;
+		textFieldDekribapena.setText(abestiAux.getDeskribapena());
 		panelLabel.add(textFieldDekribapena);
 		
 		JLabel lblNewLabel = new JLabel("                                                                                                 ");
@@ -118,6 +142,41 @@ public class EditAbestia extends JFrame implements Header {
 		JLabel lblNewLabel_5_1 = new JLabel(" ");
 		panel_1.add(lblNewLabel_5_1);
 		
+		JPanel panelBotoiak = new JPanel();
+		contentPane.add(panelBotoiak, BorderLayout.SOUTH);
+		
+		JButton btnApply = new JButton("Gorde");
+		btnApply.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String izena = textFieldIzena.getText();
+				String iraupenatxt = textFieldIraupena.getText();
+				int iraupena = Integer.parseInt(iraupenatxt);
+				String deskribapena = textFieldDekribapena.getText();
+				
+				
+				if (izena.equals("") || deskribapena.equals("") || iraupenatxt.equals("")) {
+					JOptionPane.showMessageDialog(null, "Guztia bete mesedez!", "", JOptionPane.ERROR_MESSAGE);
+					
+				}else {
+					
+				
+					Abestia newAudio = new Abestia(audio.getIdAudio(),izena,iraupena,deskribapena);
+					
+					try {
+						abestiadao.updateAbestia(newAudio);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+	                FuntzioBista.irekiAdminMenu();
+	                dispose();
+				}
+			}
+		});
+		panelBotoiak.add(btnApply);
+		
 		
 	}
 
@@ -139,7 +198,7 @@ public class EditAbestia extends JFrame implements Header {
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-                FuntzioBista.irekiLogin();
+                FuntzioBista.irekiAbestiaKudeatu(albumRet,musikariaRet);
                 dispose();
             }
         });

@@ -80,4 +80,38 @@ public class AbestiaDao {
 		DB_Konexioa.itxi();
 		return true;
 	}
+	
+	public Audio getAbestiaById(Audio audio) throws SQLException {
+		
+		Connection conex = DB_Konexioa.bezeroa();
+
+		Statement sentencia = conex.createStatement();
+
+		String kontsulta = "select * from Audio where ID_Audio='"+audio.getIdAudio()+"';";
+		ResultSet abestia = sentencia.executeQuery(kontsulta);
+
+		Abestia AbestiAux;
+
+		abestia.next();
+		
+		AbestiAux = new Abestia(abestia.getString("ID_Audio"), abestia.getString("Izena"), abestia.getInt("Iraupena"), abestia.getString("Deskribapena"));
+		
+		DB_Konexioa.itxi();
+		return AbestiAux;
+	}
+	
+	public boolean updateAbestia(Abestia abestia) throws SQLException {
+		Connection conex = DB_Konexioa.admin();
+
+		Statement statement = conex.createStatement();
+
+		
+		String kontsulta = "UPDATE Audio SET Izena ='"+abestia.getIzena()+"', Iraupena ='"+abestia.getIraupena()+"',Deskribapena ='"+abestia.getDeskribapena()+"' where ID_Audio ='"+abestia.getIdAudio()+"';";
+		
+		statement.executeUpdate(kontsulta);
+	
+
+		DB_Konexioa.itxi();
+		return true;
+	}
 }

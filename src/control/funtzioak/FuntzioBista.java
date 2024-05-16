@@ -278,9 +278,9 @@ public class FuntzioBista {
 	/**
 	 * EditAlbum bista irekitzen duen metodoa.
 	 */
-	public static void irekiEditAbestia(Audio audio) {
+	public static void irekiEditAbestia(Audio audio,Album albumAux, Musikaria musikariAux) {
 		try {
-			EditAbestia frame = new EditAbestia(audio);
+			EditAbestia frame = new EditAbestia(audio,albumAux,musikariAux);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -192,9 +192,16 @@ public class AbestiaKudeatu extends JFrame {
 				int index = table.getSelectedRow();
 				
 				if (index != -1) {
+					Audio audio = null;
+					try {
+						audio = abestiadao.getAbestiaById(audioList.get(index));
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiEditAbestia(audioList.get(index));
+					FuntzioBista.irekiEditAbestia(audio,album,musikariAux);
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "Aukeratu abesti bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
