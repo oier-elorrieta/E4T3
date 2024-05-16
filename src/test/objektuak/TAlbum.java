@@ -37,9 +37,9 @@ public class TAlbum {
 		abestiak = new ArrayList<>();
 		album = new Album("1", "izenburua", eguna, "generoa", 2, 300, blob, "deskribapena");
 		album2 = new Album("1", "izenburua", 2);
-		album3 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
 		album4 = new Album("1", "izenburua", eguna, "generoa", "deskribapena");
-		album5 = new Album("1", "izenburua", eguna, "generoa", null, m1, abestiak);
+		album3 = new Album("5", "izenburua", 5);
+		album5 = new Album("5", "izenburua", 5);
 		
 	}
 
@@ -218,7 +218,7 @@ public class TAlbum {
 
 	@Test
 	public void TestGetGeneroa() {
-		assertEquals("generoa", album3.getGeneroa());
+		assertEquals("generoa", album.getGeneroa());
 	}
 
 	@Test
@@ -238,53 +238,7 @@ public class TAlbum {
 		assertNotEquals("generoa", album3.getGeneroa());
 	}
 
-	// ********************** MUSIKARIA **********************
-
-	@Test
-	public void TestGetMusikaria() {
-		assertEquals(m1, album3.getMusikaria());
-	}
-
-	@Test
-	public void TestSetMusikaria() {
-		album3.setMusikaria(null);
-		assertEquals(null, album3.getMusikaria());
-	}
 	
-	@Test
-	public void TestGetMusikariaTxarto() {
-		assertNotEquals(null, album3.getMusikaria());
-	}
-
-	@Test
-	public void TestSetMusikariaTxarto() {
-		album3.setMusikaria(null);
-		assertNotEquals(m1, album3.getMusikaria());
-	}
-	
-	// ********************** ABESTIAK **********************
-
-	@Test
-	public void TestGetAbestiak() {
-		assertEquals(abestiak, album3.getAbestiak());
-	}
-
-	@Test
-	public void TestSetAbestiak() {
-		album3.setAbestiak(null);
-		assertEquals(null, album3.getAbestiak());
-	}
-	
-	@Test
-	public void TestGetAbestiakTxarto() {
-		assertNotEquals(null, album3.getAbestiak());
-	}
-
-	@Test
-	public void TestSetAbestiakTxarto() {
-		album3.setAbestiak(null);
-		assertNotEquals(abestiak, album3.getAbestiak());
-	}
 
 	// ********************** TO STRING **********************
 

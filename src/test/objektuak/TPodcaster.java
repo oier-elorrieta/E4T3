@@ -14,6 +14,7 @@ public class TPodcaster {
 
 	private Podcaster pd1;
 	private Podcaster pd2;
+	private Podcaster pd3;
 	private Blob blob;
 	private Blob blob2;
 
@@ -24,7 +25,8 @@ public class TPodcaster {
 		blob = new javax.sql.rowset.serial.SerialBlob(blobData);
 		blob2 = new javax.sql.rowset.serial.SerialBlob(blobData2);
 		pd1 = new Podcaster("1", "unai", blob, "deskribapena");
-		pd2 = new Podcaster("unai", 200);
+		pd2 = new Podcaster("3","unai", 200);
+		pd3 = new Podcaster("1", "unai" ,"deskribapena");
 		
 	}
 

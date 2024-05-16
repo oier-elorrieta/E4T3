@@ -20,7 +20,7 @@ public class TMusikaria {
 		m1 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
 		m2 = new Musikaria("1", "izena", "deskribapena", "ezaugarria");
 		m3 = new Musikaria("1", "izena");
-		m4 = new Musikaria("izena");
+		m4 = new Musikaria("izena",1000);
 	}
 
 	// ********************** EZAUGARRIA **********************
