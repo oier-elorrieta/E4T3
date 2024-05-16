@@ -28,8 +28,6 @@ public abstract class Artista {
 		this.id = id;
 		this.izen_Artistikoa = izen_Artistikoa;
 	}
-	
-	
 
 	/**
 	 * Artista identifikadorearekin, izen artistikoarekin, irudiarekin eta
