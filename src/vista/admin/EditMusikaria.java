@@ -174,6 +174,9 @@ public class EditMusikaria extends JFrame implements Header {
 		
 		
 		
+
+		panelBotoiak.add(btnApply);
+
 	}
 
 	@Override
