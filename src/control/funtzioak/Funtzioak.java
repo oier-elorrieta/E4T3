@@ -150,8 +150,6 @@ public class Funtzioak {
     	int number = 0;
     	st = lastID.substring(0, 2);
     	numberst = lastID.substring(2);
-    	System.out.println(st);
-    	System.out.println(numberst);
     	number = Integer.parseInt(numberst);
     	number++;
     	numberst = Integer.toString(number);
