@@ -29,8 +29,8 @@ public class TAbestiaDao {
 	}
 	
 	@Test
-	public void testGetAbestiaByAlbumIds() throws SQLException {
-		assertEquals(abestidao.getAbestiaByAlbumId(album).get(0), abestia);
+	public void testgetAbestiaById() throws SQLException {
+		assertEquals(abestidao.getAbestiaById(abestia), abestia);
 	}
 
 }

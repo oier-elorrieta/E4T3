@@ -23,7 +23,8 @@ public class TPodcasterDao {
 	@Before
 	public void setUp() throws Exception {
 		podcasterdao = new PodcasterDao();
-		podcaster = new Podcaster("The Wild Project", 4);
+		podcaster = new Podcaster("PO2", "Sin Miedo Al Exito", 2);
+		DB_Konexioa.testAdmin("a", "a");
 	}
 
 	@Test
@@ -34,6 +35,11 @@ public class TPodcasterDao {
 	@Test
 	public void testGetPodcaster() throws SQLException {
 		assertEquals(podcasterdao.getPodcaster().get(0), podcaster);
+	}
+	
+	@Test
+	public void testgetLastId() throws SQLException {
+		assertEquals(podcasterdao.getLastId(), "PO3");
 	}
 
 }

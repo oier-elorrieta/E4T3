@@ -79,26 +79,4 @@ public class PodcastDao {
 		DB_Konexioa.itxi();
 	}
 
-	//SE USA??
-	/*
-	public ArrayList<Audio> getPodcastByIzena(Podcast podcast, String id) throws SQLException {
-		ArrayList<Audio> retArray = new ArrayList<>();
-		Connection conex = DB_Konexioa.bezeroa();
-
-		Statement sentencia = conex.createStatement();
-
-		String kontsulta = "select * from PodcastIkusi where ID_Podcaster ='" + id + "'";
-		ResultSet podcasts = sentencia.executeQuery(kontsulta);
-
-		Podcast PodcastAux;
-		while (podcasts.next()) {
-			PodcastAux = new Podcast(podcasts.getString("ID_Audio"), podcasts.getString("Izena"),
-					podcasts.getInt("Iraupena"), podcasts.getBlob("Irudia"));
-			retArray.add(PodcastAux);
-		}
-		DB_Konexioa.itxi();
-		return retArray;
-	}
-	*/
-
 }

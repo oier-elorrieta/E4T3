@@ -31,7 +31,7 @@ public class TArtistaDao {
 	// SI SE AÑADE UNO HAY QUE CAMBIAR EL ID AL MÁS RECIENTE
 	@Test
 	public void testgetLastId() throws SQLException {
-		assertEquals(artistadao.getLastId(), "MU8");
+		assertEquals(artistadao.getLastId(), "MU7");
 	}
 	
 	//TESTEAR INSERTS?????

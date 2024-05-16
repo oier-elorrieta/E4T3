@@ -22,7 +22,7 @@ public class TGustokoaDao {
 	@Before
 	public void setUp() throws Exception {
 		bezeroa = new Free(1, "unai", "souto", "euskera", "unaisouto", "1234", null, null);
-		abestia = new Abestia("AU3", "izena", 120, null);
+		abestia = new Abestia("AU3", "izena", 120, "");
 
 		gustokoadao = new GustokoaDao();
 	}

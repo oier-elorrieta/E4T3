@@ -76,8 +76,8 @@ public class Login extends JFrame {
 		passwordFieldPasahitza.setBounds(160, 80, 150, 20); // Pasahitzaren testu eremua
 		panel.add(passwordFieldPasahitza);
 		comboBoxRoles = new JComboBox<String>();
-		comboBoxRoles.addItem("Admin");
 		comboBoxRoles.addItem("Bezeroa");
+		comboBoxRoles.addItem("Admin");
 		comboBoxRoles.setBounds(160, 110, 150, 20); // ComboBox-aren kokapena eta neurriak
 		panel.add(comboBoxRoles);
 
