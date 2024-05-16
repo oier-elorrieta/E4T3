@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.objektuak.bezero.Free;
 import model.objektuak.bezero.Premium;
 
 @SuppressWarnings("deprecation")

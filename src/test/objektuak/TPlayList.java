@@ -14,6 +14,10 @@ import model.objektuak.bezero.Free;
 public class TPlayList {
 
 	private static PlayList pl1;
+	private static PlayList pl2;
+	private static PlayList pl3;
+	private static PlayList pl4;
+	private static PlayList pl5;
 	private static Free f1;
 	private static Date eguna;
 	private static ArrayList<Audio> abestiak;
@@ -24,6 +28,10 @@ public class TPlayList {
 		abestiak = new ArrayList<Audio>();
 		f1 = new Free("unai", "souto", "euskera", "unaisouto", "1234", eguna, eguna);
 		pl1 = new PlayList("1", "Rock lista", eguna, f1, abestiak);
+		pl2 = new PlayList("1", "Rock lista", eguna, f1);
+		pl3 = new PlayList("1", "Rock lista", 3);
+		pl4 = new PlayList("1", "Rock lista");
+		pl5 = new PlayList();
 	}
 
 	// ********************** ID **********************
@@ -155,6 +163,42 @@ public class TPlayList {
 		abestiak.add(null);
 		pl1.setAbestiak(abestiak2);
 		assertNotEquals(abestiak, pl1.getAbestiak());
+	}
+	
+	// ********************** ABESTI KONT **********************
+
+	@Test
+	public void TestGetAbestiKont() {
+		assertEquals(3, pl3.getAbestiKont());
+	}
+
+	@Test
+	public void TestSetAbestiKont() {
+		pl3.setAbestiKont(2);
+		assertEquals(2, pl3.getAbestiKont());
+	}
+	
+	@Test
+	public void TestGetAbestiKontTxarto() {
+		assertNotEquals(4, pl3.getAbestiKont());
+	}
+
+	@Test
+	public void TestSetAbestiKontTxarto() {
+		pl3.setAbestiKont(2);
+		assertNotEquals(3, pl3.getAbestiKont());
+	}
+	
+	@Test
+	public void TestAbestiKontGehi() {
+		pl3.gehituAbestiKont();
+		assertEquals(4, pl3.getAbestiKont());
+	}
+
+	@Test
+	public void TestAbestiKontKen() {
+		pl3.kenduAbestiKont();
+		assertEquals(2, pl3.getAbestiKont());
 	}
 
 	// ********************** TO STRING **********************

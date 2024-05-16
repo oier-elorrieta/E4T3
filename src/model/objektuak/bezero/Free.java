@@ -44,17 +44,6 @@ public class Free extends Bezero {
         super(izena, abizena, hizkuntza, erabiltzaileIzena, 
               pasahitza, jaioteguna, erregistroEguna);
     }
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		return true;
-	}
     
     
 }

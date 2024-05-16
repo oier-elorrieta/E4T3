@@ -27,6 +27,7 @@ public class TAlbumDao {
 	public void setUp() throws Exception {
 		m1 = new Musikaria("MU1", "E", null, "deskribapena", "ezaugarria");
 		albumdao = new AlbumDao();
+		DB_Konexioa.testAdmin("a", "a");
 		
 	}
 	
@@ -50,4 +51,12 @@ public class TAlbumDao {
 	public void testgetAlbumById() throws SQLException {
 		assertEquals(albumdao.getAlbumById("AL1").getDeskripzioa(), "Estoparen lehen albuma");
 	}
+	
+	// SI SE AÑADE UNO HAY QUE CAMBIAR EL ID AL MÁS RECIENTE
+	@Test
+	public void testgetLastId() throws SQLException {
+		assertEquals(albumdao.getLastId(), "AL4");
+	}
+	
+	//TESTEAR LOS INSERTS????????
 }

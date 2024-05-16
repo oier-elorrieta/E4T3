@@ -54,7 +54,6 @@ public class AbestiaDao {
 			kontsulta = "select * from Gustokoak join Audio using(ID_Audio) where ID_Bezeroa ='" + Aldagaiak.erabiltzailea.getId() + "'";
 			
 		}else {
-			System.out.println("playlist");
 			kontsulta = "select * from Playlist_Abestiak join Audio using(ID_Audio) where ID_List ='" + playlist.getId() + "'";
 		}
 		ResultSet abestiak = sentencia.executeQuery(kontsulta);
@@ -65,7 +64,7 @@ public class AbestiaDao {
 			AbestiAux = new Abestia(abestiak.getString("ID_Audio"), abestiak.getString("Izena"), abestiak.getInt("Iraupena"), abestiak.getBlob("Irudia"));
 			retArray.add(AbestiAux);
 		}
-
+		System.out.println(retArray);
 		DB_Konexioa.itxi();
 		return retArray;
 	}

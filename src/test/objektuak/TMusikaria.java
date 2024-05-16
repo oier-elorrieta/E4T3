@@ -10,11 +10,17 @@ import model.objektuak.Musikaria;
 
 public class TMusikaria {
 
-	private Musikaria m1;
+	private static Musikaria m1;
+	private static Musikaria m2;
+	private static Musikaria m3;
+	private static Musikaria m4;
 
 	@Before
 	public void setUp() throws Exception {
 		m1 = new Musikaria("1", "unai", null, "deskribapena", "ezaugarria");
+		m2 = new Musikaria("1", "izena", "deskribapena", "ezaugarria");
+		m3 = new Musikaria("1", "izena");
+		m4 = new Musikaria("izena");
 	}
 
 	// ********************** EZAUGARRIA **********************
