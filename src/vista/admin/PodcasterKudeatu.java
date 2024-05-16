@@ -175,7 +175,13 @@ public class PodcasterKudeatu extends JFrame {
 				
 				if (index != -1) {
 					
-					Podcaster podcaster = (Podcaster) podcasterList.get(index);
+					Podcaster podcaster = null;
+					try {
+						podcaster = podcasterdao.getPodcasterByIzena(podcasterList.get(index).getIzen_Artistikoa());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
 					FuntzioBista.irekiEditPodcaster(podcaster);

@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import model.db.DB_Konexioa;
+import model.objektuak.Abestia;
 import model.objektuak.Artista;
 import model.objektuak.Musikaria;
 import model.objektuak.Podcaster;
@@ -118,5 +119,20 @@ public class PodcasterDao {
 			return false;
 		}
 
+	}
+	
+	public boolean updatePodcaster(Podcaster podcaster) throws SQLException {
+		Connection conex = DB_Konexioa.admin();
+
+		Statement statement = conex.createStatement();
+
+		
+		String kontsulta = "UPDATE Podcaster SET Izen_Artistikoa ='"+podcaster.getIzen_Artistikoa()+"',Deskribapena ='"+podcaster.getDeskribapena()+"' where ID_Podcaster ='"+podcaster.getId()+"';";
+		
+		statement.executeUpdate(kontsulta);
+	
+
+		DB_Konexioa.itxi();
+		return true;
 	}
 }
