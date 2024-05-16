@@ -118,6 +118,15 @@ public class EditAbestia extends JFrame implements Header {
 		JLabel lblNewLabel_5_1 = new JLabel(" ");
 		panel_1.add(lblNewLabel_5_1);
 		
+		JPanel panelBotoiak = new JPanel();
+		contentPane.add(panelBotoiak, BorderLayout.SOUTH);
+		
+		JButton btnApply = new JButton("Gorde");
+		panelBotoiak.add(btnApply);
+		
+		JButton btnAtzera = new JButton("Atzera");
+		panelBotoiak.add(btnAtzera);
+		
 		
 	}
 

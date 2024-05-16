@@ -324,4 +324,16 @@ public class FuntzioBista {
 	}
 	
 	
+	/**
+	 * EstadistikakIkusi bista irekitzen duen metodoa.
+	 */
+	public static void irekiEstadistikakIkusi() {
+		try {
+			EstadistikakIkusi frame = new EstadistikakIkusi();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
