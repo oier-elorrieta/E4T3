@@ -18,13 +18,18 @@ public class TAbestiaDao {
 
 	@Before
 	public void setUp() throws Exception {
-		album = new Album("AL1", "Album 1", null, 2, 120, null, "deskripzioa");
+		album = new Album("AL1", "Album 1", null, null, 2, 120, null, "deskripzioa");
 		abestidao = new AbestiaDao();
-		abestia = new Abestia("AU3", "Como Camaron", 218, null);
+		abestia = new Abestia("AU3", "Como Camaron", 218, "3");
 	}
 
 	@Test
 	public void testGetAbestiaByAlbumId() throws SQLException {
+		assertEquals(abestidao.getAbestiaByAlbumId(album).get(0), abestia);
+	}
+	
+	@Test
+	public void testGetAbestiaByAlbumIds() throws SQLException {
 		assertEquals(abestidao.getAbestiaByAlbumId(album).get(0), abestia);
 	}
 
