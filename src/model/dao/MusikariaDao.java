@@ -3,8 +3,11 @@ package model.dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import model.Aldagaiak;
 import model.db.DB_Konexioa;
 import model.objektuak.Musikaria;
+import model.objektuak.bezero.Bezero;
+import model.objektuak.bezero.Premium;
 
 public class MusikariaDao {
 	
@@ -60,5 +63,20 @@ public class MusikariaDao {
 		
 		return musikariaRet;
 		
+	}
+	
+	public boolean updateMusikaria(Musikaria musikaria) throws SQLException {
+		Connection conex = DB_Konexioa.admin();
+
+		Statement statement = conex.createStatement();
+		
+		
+		String kontsulta = "UPDATE Musikaria SET Izen_Artistikoa ='"+musikaria.getIzen_Artistikoa()+"', Ezaugarria ='"+musikaria.getEzaugarria()+"',Deskribapena ='"+musikaria.getDeskribapena()+"' where ID_Musikaria ='"+musikaria.getId()+"';";
+		
+		statement.executeUpdate(kontsulta);
+	
+
+		DB_Konexioa.itxi();
+		return true;
 	}
 }
