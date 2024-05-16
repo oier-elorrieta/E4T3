@@ -14,14 +14,14 @@ import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.dao.AbestiaDao;
 import model.dao.PlayListDao;
-import model.objektuak.Abestia;
 import model.objektuak.Audio;
 import model.objektuak.PlayList;
+import vista.interfaseak.Header;
 
 import java.awt.*;
 import javax.swing.JTable;
 
-public class NirePlaylist extends JFrame {
+public class NirePlaylist extends JFrame implements Header {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -46,9 +46,6 @@ public class NirePlaylist extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panelHeader = new JPanel();
-		contentPane.add(panelHeader, BorderLayout.NORTH);
-		panelHeader.setLayout(new BorderLayout(0, 0));
 		
 		playlistak = new ArrayList<PlayList>();
 	
@@ -57,35 +54,9 @@ public class NirePlaylist extends JFrame {
 		playlistak = playlistdao.getPlayListak(true);
 		
 		/* TO DELETE */ System.out.println(playlistak);
-
-		// Erabiltzailearen izena bistaratzeko botoia
-		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
-		btnPerfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiErregistroa();
-				dispose();
-			}
-		});
-		btnPerfil.setSize(325, 20);
-		panelHeader.add(btnPerfil, BorderLayout.EAST);
-
-		// Atzera botoia
-		JButton btnAtzera = new JButton("Atzera");
-		btnAtzera.setSize(325, 20);
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-				FuntzioBista.irekiBezeroMenu();
-				dispose();
-			}
-		});
-		panelHeader.add(btnAtzera, BorderLayout.WEST);
-
-		JLabel lblNewLabel = new JLabel("Nire Playlist");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
+		
+		
+		headerKokatu("Nire Playlist");
 
 		JPanel panelKontenidoa = new JPanel();
 		contentPane.add(panelKontenidoa, BorderLayout.CENTER);
@@ -240,6 +211,44 @@ public class NirePlaylist extends JFrame {
 		panelBotoiak.add(btnJarraitu);
 
 
+	}
+
+	@Override
+	public void headerKokatu(String text) {
+		JPanel panelHeader = new JPanel();
+		contentPane.add(panelHeader, BorderLayout.NORTH);
+		panelHeader.setLayout(new BorderLayout(0, 0));
+		
+		
+
+		// Erabiltzailearen izena bistaratzeko botoia
+		JButton btnPerfil = new JButton(Aldagaiak.erabiltzailea.getErabiltzaileIzena());
+		btnPerfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiErregistroa();
+				dispose();
+			}
+		});
+		btnPerfil.setSize(325, 20);
+		panelHeader.add(btnPerfil, BorderLayout.EAST);
+
+		// Atzera botoia
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setSize(325, 20);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiBezeroMenu();
+				dispose();
+			}
+		});
+		panelHeader.add(btnAtzera, BorderLayout.WEST);
+
+		JLabel lblNewLabel = new JLabel(text);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		panelHeader.add(lblNewLabel, BorderLayout.CENTER);
 	}
 
 }

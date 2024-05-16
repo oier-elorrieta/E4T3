@@ -107,7 +107,9 @@ public class AdminMenu extends JFrame {
 		
 		btnEstatistikak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "😅", "", JOptionPane.INFORMATION_MESSAGE);
+				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+				FuntzioBista.irekiEstadistikakIkusi();
+				dispose();
 			}
 		});
 		

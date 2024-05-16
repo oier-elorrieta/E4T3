@@ -177,6 +177,10 @@ public class EditAbestia extends JFrame implements Header {
 		});
 		panelBotoiak.add(btnApply);
 		
+
+
+		
+
 		
 	}
 
