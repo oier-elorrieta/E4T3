@@ -23,6 +23,7 @@ import model.objektuak.Artista;
 import model.objektuak.Audio;
 import model.objektuak.Musikaria;
 import model.objektuak.PlayList;
+import model.objektuak.Podcast;
 import model.objektuak.Podcaster;
 
 import java.awt.*;
@@ -37,12 +38,15 @@ public class PodcastKudeatu extends JFrame {
 	private DefaultTableModel model;
 	
 	ArrayList<Audio> audioList = new ArrayList<Audio>();
+	
+	Podcaster podcasterAux;
 
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
 	public PodcastKudeatu(Podcaster podcaster) throws SQLException {
+		podcasterAux = podcaster;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PodcastKudeatu.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
@@ -117,7 +121,7 @@ public class PodcastKudeatu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String newIzena = null;
 				String newDenborast = null;
-				String newDeskribapena = null;
+				String newKolaboratzaileak = null;
 				int newDenbora = 0;
 			
 			
@@ -125,42 +129,45 @@ public class PodcastKudeatu extends JFrame {
 				newIzena = JOptionPane.showInputDialog("Sartu izena mesedez");
 				if(newIzena != null) {
 					
-					newDeskribapena = JOptionPane.showInputDialog("Sartu deskribapena mesedez");
-					if (newDeskribapena != null) {
+					
+						
+					newKolaboratzaileak = JOptionPane.showInputDialog("Sartu kolaboratzaileak mesedez");
+					
+					if (newKolaboratzaileak != null) {
 					
 					newDenborast = JOptionPane.showInputDialog("Sartu denbora (segundutan)");
 					
-					if(newDenborast != null) {
-						
-						newDenbora = Funtzioak.stringToInt(newDenborast);
-						if(newDenbora != -1) {
-							String newID = "";
-							try {
-								newID = audiodao.getLastId();
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+						if(newDenborast != null) {
+							
+							newDenbora = Funtzioak.stringToInt(newDenborast);
+							if(newDenbora != -1) {
+								String newID = "";
+								try {
+									newID = audiodao.getLastId();
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								newID = Funtzioak.gehituID(newID);
+								
+								Podcast audioAux = new Podcast(newID,newIzena,newKolaboratzaileak,newDenbora);
+								
+								try {
+									podcastdao.podcastGehitu(audioAux,podcaster);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+								FuntzioBista.irekiPodcastKudeatu(podcasterAux);
+								dispose();
+							}else {
+								JOptionPane.showMessageDialog(null, "Denbora ondo sartu mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 							}
-							newID = Funtzioak.gehituID(newID);
-							
-							Audio audioAux = new Abestia(newID,newIzena,newDenbora,newDeskribapena);
-							
-							try {
-								audiodao.audioGehitu(audioAux);
-								abestiadao.abestiaGehitu(audioAux, album);
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							
-							FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-							FuntzioBista.irekiAbestiaKudeatu(album,musikariAux);
-							dispose();
-						}else {
-							JOptionPane.showMessageDialog(null, "Denbora ondo sartu mesedez", "", JOptionPane.INFORMATION_MESSAGE);
 						}
-					}
-					}
+						}
+					
 					
 					
 				}
@@ -174,9 +181,9 @@ public class PodcastKudeatu extends JFrame {
 				
 				if (index != -1) {
 					try {
-						audiodao.deleteAudioById(audioList.get(index));
+						podcastdao.deletePodcastKolab(audioList.get(index));
 						FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-						FuntzioBista.irekiAbestiaKudeatu(album, musikariAux);
+						FuntzioBista.irekiPodcastKudeatu(podcaster);
 						dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -191,18 +198,11 @@ public class PodcastKudeatu extends JFrame {
 		
 		btnEditatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = table.getSelectedRow();
 				
-				if (index != -1) {
-					
-					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-					FuntzioBista.irekiEditAbestia(audioList.get(index));
-					dispose();
-				}else {
-					JOptionPane.showMessageDialog(null, "Aukeratu abesti bat mesedez", "", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Comming soon...", "", JOptionPane.INFORMATION_MESSAGE);
 				}
 				
-			}
+			
 		});
 		
 	
