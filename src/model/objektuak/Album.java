@@ -18,10 +18,11 @@ public class Album {
 	private Musikaria musikaria;
 	private ArrayList<Abestia> abestiak;
 
-	public Album(String id, String izenburua, Date urtea, int kontAbestiak, int iraupena, Blob irudia, String deskripzioa) {
+	public Album(String id, String izenburua, Date urtea,String generoa, int kontAbestiak, int iraupena, Blob irudia, String deskripzioa) {
 		this.id = id;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
+		this.generoa = generoa;
 		this.kontAbestiak = kontAbestiak;
 		this.iraupena = iraupena;
 		this.irudia = irudia;

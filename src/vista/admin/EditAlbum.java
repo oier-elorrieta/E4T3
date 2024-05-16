@@ -6,18 +6,29 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import java.sql.SQLException;
+
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import model.dao.AlbumDao;
+
 import control.funtzioak.FuntzioBista;
+import control.funtzioak.Funtzioak;
 import model.Aldagaiak;
 import model.objektuak.Album;
+import model.objektuak.Musikaria;
 import vista.bezeroa.playlist.NirePlaylist;
 import vista.interfaseak.Header;
 
@@ -28,10 +39,15 @@ public class EditAlbum extends JFrame implements Header {
 	private JTextField textFieldDekribapena;
 	private JTextField textFieldIzena;
 	private JTextField textFieldUrtea;
+	
+	Musikaria musikarRet = null;
+	
+	AlbumDao albumdao = new AlbumDao();
 
-	public EditAlbum(Album album) {
+	public EditAlbum(Album album, Musikaria musikaria) {
+		musikarRet = musikaria;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(NirePlaylist.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EditAlbum.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -56,6 +72,7 @@ public class EditAlbum extends JFrame implements Header {
 		
 		textFieldIzena = new JTextField();
 		textFieldIzena.setColumns(10);
+		textFieldIzena.setText(album.getIzenburua());
 		panelLabel.add(textFieldIzena);
 		
 		JLabel lblUrtea = new JLabel("Urtea:  ");
@@ -64,6 +81,8 @@ public class EditAlbum extends JFrame implements Header {
 		
 		textFieldUrtea = new JTextField();
 		textFieldUrtea.setColumns(10);
+		String urteaTxt = Funtzioak.dateToString(album.getUrtea());
+		textFieldUrtea.setText(urteaTxt);
 		panelLabel.add(textFieldUrtea);
 		
 		JLabel lblGeneroa = new JLabel("Generoa:  ");
@@ -72,6 +91,7 @@ public class EditAlbum extends JFrame implements Header {
 		
 		JTextField textFieldGeneroa = new JTextField();
 		textFieldGeneroa.setColumns(10);
+		textFieldGeneroa.setText(album.getGeneroa());
 		panelLabel.add(textFieldGeneroa);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:  ");
@@ -80,6 +100,7 @@ public class EditAlbum extends JFrame implements Header {
 		
 		textFieldDekribapena = new JTextField();
 		textFieldDekribapena.setColumns(10);
+		textFieldDekribapena.setText(album.getDeskripzioa());
 		panelLabel.add(textFieldDekribapena);
 		
 		JLabel lblNewLabel = new JLabel("                                                                                                 ");
@@ -127,10 +148,39 @@ public class EditAlbum extends JFrame implements Header {
 		contentPane.add(panelBotoiak, BorderLayout.SOUTH);
 		
 		JButton btnApply = new JButton("Gorde");
+		btnApply.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String izena = textFieldIzena.getText();
+				String urteatxt = textFieldUrtea.getText();
+				Date urtea = Funtzioak.stringToDate(urteaTxt);
+				String generoa = textFieldGeneroa.getText();
+				String deskribapena = textFieldDekribapena.getText();
+				
+				
+				if (izena.equals("") || generoa.equals("") || deskribapena.equals("") || urteatxt.equals("")) {
+					JOptionPane.showMessageDialog(null, "Guztia bete mesedez!", "", JOptionPane.ERROR_MESSAGE);
+					
+				}else {
+				
+					Album newAlbum = new Album(album.getId(),izena,urtea,generoa,album.getKontAbestiak(),album.getIraupena(),album.getIrudia(),deskribapena);
+					
+					try {
+						albumdao.updateAlbum(newAlbum);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+	                FuntzioBista.irekiAdminMenu();
+	                dispose();
+				}
+			}
+		});
 		panelBotoiak.add(btnApply);
 		
-		JButton btnAtzera = new JButton("Atzera");
-		panelBotoiak.add(btnAtzera);
+		
+	
 	}
 
 	@Override
@@ -151,7 +201,8 @@ public class EditAlbum extends JFrame implements Header {
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-                FuntzioBista.irekiLogin();
+                
+				FuntzioBista.irekiAlbumKudeatu(musikarRet);
                 dispose();
             }
         });

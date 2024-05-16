@@ -39,7 +39,7 @@ public class EditMusikaria extends JFrame implements Header {
 
 	public EditMusikaria(Musikaria musikaria) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(NirePlaylist.class.getResource(Aldagaiak.logo)));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Musikaria.class.getResource(Aldagaiak.logo)));
 		setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
 		setResizable(false);
 		contentPane = new JPanel();
@@ -155,27 +155,28 @@ public class EditMusikaria extends JFrame implements Header {
 				String ezaugarria = rdbGroup.getSelection().getActionCommand();
 				String deskribapena = textFieldDeskribapena.getText();
 				
-				Musikaria newMusikaria = new Musikaria(musikaria.getId(),izena,musikaria.getIrudia(),deskribapena,ezaugarria);
-				
-				try {
-					musikariadao.updateMusikaria(newMusikaria);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(izena.equals("") || ezaugarria.equals("") || deskribapena.equals("")) {
+					JOptionPane.showMessageDialog(null, "Guztia bete mesedez!", "", JOptionPane.ERROR_MESSAGE);
+				}else {
+					Musikaria newMusikaria = new Musikaria(musikaria.getId(),izena,musikaria.getIrudia(),deskribapena,ezaugarria);
+					
+					try {
+						musikariadao.updateMusikaria(newMusikaria);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
+					FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
+	                FuntzioBista.irekiAdminMenu();
+	                dispose();
 				}
-				JOptionPane.showMessageDialog(null, "Dena ondo gorde da!", "", JOptionPane.INFORMATION_MESSAGE);
-				FuntzioBista.bistaAldatu(getBounds(), getWidth(), getHeight());
-                FuntzioBista.irekiMusikaKudeatu();
-                dispose();
+				
+				
 			}
 		});
 		panelBotoiak.add(btnApply);
 		
-		
-		
-		
-
-		panelBotoiak.add(btnApply);
 
 	}
 
