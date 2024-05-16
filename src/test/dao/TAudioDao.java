@@ -38,7 +38,7 @@ public class TAudioDao {
 	
 	@Test
 	public void testgetLastId() throws SQLException {
-		assertEquals(audiodao.getLastId(), "AU16");
+		assertEquals(audiodao.getLastId(), "AU17");
 	}
 
 

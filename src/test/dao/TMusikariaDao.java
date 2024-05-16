@@ -23,7 +23,7 @@ public class TMusikariaDao {
 	@Before
 	public void setUp() throws Exception {
 		musikaridao = new MusikariaDao();
-		m1 = new Musikaria("Estopa", 2);
+		m1 = new Musikaria("Estopa", 4);
 		
 	}
 

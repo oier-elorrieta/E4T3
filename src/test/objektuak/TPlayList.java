@@ -17,6 +17,7 @@ public class TPlayList {
 	private static PlayList pl3;
 	private static PlayList pl4;
 	private static PlayList pl5;
+	private static PlayList pl6;
 	private static Free f1;
 	private static Date eguna;
 	private static ArrayList<Audio> abestiak;
@@ -30,6 +31,7 @@ public class TPlayList {
 		pl3 = new PlayList("1", "Rock lista", 3);
 		pl4 = new PlayList("1", "Rock lista");
 		pl5 = new PlayList();
+		pl6 = new PlayList("1", "Rock lista", eguna, f1);
 	}
 
 	// ********************** ID **********************
@@ -223,5 +225,10 @@ public class TPlayList {
 	public void TestEqualsClaseEzberdinak() {
 		String txarra = "";
 		assertFalse(pl2.equals(txarra));
+	}
+	
+	@Test
+	public void TestEqualsBerdinak() {
+		assertEquals(pl2, pl6);
 	}
 }

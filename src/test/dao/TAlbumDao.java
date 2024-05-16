@@ -55,7 +55,7 @@ public class TAlbumDao {
 	// SI SE AÑADE UNO HAY QUE CAMBIAR EL ID AL MÁS RECIENTE
 	@Test
 	public void testgetLastId() throws SQLException {
-		assertEquals(albumdao.getLastId(), "AL2");
+		assertEquals(albumdao.getLastId(), "AL3");
 	}
 	
 	//TESTEAR LOS INSERTS????????

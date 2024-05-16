@@ -14,12 +14,16 @@ import model.objektuak.Podcaster;
 public class TPodcast {
 
 	private static Podcast podcast;
+	private static Podcast podcast3;
+	private static Podcast podcast2;
 	private static Podcaster podcaster;
 
 	@Before
 	public void setUp() throws Exception {
 		podcaster = new Podcaster("1", "unai", null, "deskribapena");
 		podcast = new Podcast("1", "izena", 120, "kolab",null);
+		podcast2 = new Podcast("1", "izena", "kolab", 2);
+		podcast3 = new Podcast("1", "izena", 120, "kolab",null);
 	}
 
 	// ********************** KOLABORATZAILEAK **********************
@@ -75,6 +79,29 @@ public class TPodcast {
 				+ podcast.getKolaboratzaileak() + ", podcaster=" + podcast.getPodcaster() + "]";
 		
 		assertEquals(txt, esperotakoa);
+	}
+	
+	// ********************** EQUALS **********************
+
+	@Test
+	public void TestEqualsObjetuBerdina() {
+		assertTrue(podcast.equals(podcast));
+	}
+
+	@Test
+	public void TestEqualsNull() {
+		assertFalse(podcast.equals(null));
+	}
+
+	@Test
+	public void TestEqualsClaseEzberdinak() {
+		String txarra = "";
+		assertFalse(podcast.equals(txarra));
+	}
+	
+	@Test
+	public void TestEqualsBerdinak() {
+		assertEquals(podcast, podcast3);
 	}
 
 }
