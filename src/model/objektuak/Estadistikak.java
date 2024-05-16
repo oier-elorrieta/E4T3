@@ -68,12 +68,11 @@ public class Estadistikak {
 		this.erreprodukzioKopUrtea = erreprodukzioKopUrtea;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Estadiktikak [ID_Audio=" + ID_Audio + ", erreprodukzioKopEguna=" + erreprodukzioKopEguna
-				+ ", erreprodukzioKopHilabetea=" + erreprodukzioKopHilabetea + ", erreprodukzioKopUrtea="
-				+ erreprodukzioKopUrtea + "]";
+		return "Estadistikak [ID_Audio=" + ID_Audio + ", izena=" + izena + ", erreprodukzioKopEguna="
+				+ erreprodukzioKopEguna + ", erreprodukzioKopHilabetea=" + erreprodukzioKopHilabetea
+				+ ", erreprodukzioKopUrtea=" + erreprodukzioKopUrtea + "]";
 	}
 
 	@Override
