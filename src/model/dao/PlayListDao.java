@@ -10,6 +10,7 @@ import model.db.DB_Konexioa;
 import model.objektuak.Audio;
 import model.objektuak.PlayList;
 import model.salbuespenak.PlayListLimit;
+import model.salbuespenak.noLastID;
 import vista.interfaseak.daoGetId;
 
 public class PlayListDao implements daoGetId{
@@ -105,10 +106,21 @@ public class PlayListDao implements daoGetId{
 		String kontsulta = "select ID_List from Playlist ORDER BY char_length(ID_List) desc, substr(ID_List,3) desc;";
 		ResultSet lastID = sentencia.executeQuery(kontsulta);
 		
-		lastID.next();
-		ret = lastID.getString(1);
-		
-		return ret;
+		try {
+			if (!lastID.next()) {
+				throw new noLastID();
+			}
+			ret = lastID.getString(1);
+			conex.close();
+			return ret;	
+		}catch(noLastID nl) {
+			conex.close();
+			ret = "PL0";
+			return ret;
+		}catch(SQLException e) {
+			
+			return ret;
+		}
 		
 		
 	}

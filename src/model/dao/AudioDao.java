@@ -10,6 +10,7 @@ import model.objektuak.Abestia;
 import model.objektuak.Album;
 import model.objektuak.Audio;
 import model.objektuak.Musikaria;
+import model.salbuespenak.noLastID;
 import vista.interfaseak.daoGetId;
 
 
@@ -58,12 +59,18 @@ public class AudioDao implements daoGetId{
 		String kontsulta = "select ID_Audio from Audio ORDER BY char_length(ID_Audio) desc, substr(ID_Audio,3) desc;";
 		ResultSet lastID = sentencia.executeQuery(kontsulta);
 		try {
-			lastID.next();
+			if (!lastID.next()) {
+				throw new noLastID();
+			}
 			ret = lastID.getString(1);
 			conex.close();
 			return ret;	
-		}catch(SQLException e) {
+		}catch(noLastID nl) {
+			conex.close();
 			ret = "AU0";
+			return ret;
+		}catch(SQLException e) {
+			
 			return ret;
 		}
 		

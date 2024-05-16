@@ -8,6 +8,7 @@ import model.objektuak.Abestia;
 import model.objektuak.Artista;
 import model.objektuak.Musikaria;
 import model.objektuak.Podcaster;
+import model.salbuespenak.noLastID;
 import vista.interfaseak.daoGetId;
 
 public class PodcasterDao implements daoGetId{
@@ -77,12 +78,18 @@ public class PodcasterDao implements daoGetId{
 		String kontsulta = "select ID_Podcaster from Podcaster ORDER BY char_length(ID_Podcaster) desc, substr(ID_Podcaster,3) desc;";
 		ResultSet lastID = sentencia.executeQuery(kontsulta);
 		try {
-			lastID.next();
+			if (!lastID.next()) {
+				throw new noLastID();
+			}
 			ret = lastID.getString(1);
 			conex.close();
 			return ret;	
-		}catch(SQLException e) {
+		}catch(noLastID nl) {
+			conex.close();
 			ret = "PO0";
+			return ret;
+		}catch(SQLException e) {
+			
 			return ret;
 		}
 		

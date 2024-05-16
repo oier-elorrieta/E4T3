@@ -15,6 +15,7 @@ import model.objektuak.Audio;
 import model.objektuak.Hizkuntza;
 import model.objektuak.Musikaria;
 import model.objektuak.PlayList;
+import model.salbuespenak.noLastID;
 import vista.interfaseak.daoGetId;
 
 public class ArtistaDao implements daoGetId{
@@ -51,12 +52,18 @@ public class ArtistaDao implements daoGetId{
 		String kontsulta = "select ID_Musikaria from Musikaria ORDER BY char_length(ID_Musikaria) desc, substr(ID_Musikaria,3) desc;";
 		ResultSet lastID = sentencia.executeQuery(kontsulta);
 		try {
-			lastID.next();
+			if (!lastID.next()) {
+				throw new noLastID();
+			}
 			ret = lastID.getString(1);
 			conex.close();
 			return ret;	
-		}catch(SQLException e) {
+		}catch(noLastID nl) {
+			conex.close();
 			ret = "MU0";
+			return ret;
+		}catch(SQLException e) {
+			
 			return ret;
 		}
 		
