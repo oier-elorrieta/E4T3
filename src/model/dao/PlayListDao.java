@@ -81,7 +81,7 @@ public class PlayListDao implements daoGetId{
 		
 		try {
 		
-			if(maxPlaylist < 3) {
+			if(maxPlaylist > 3) {
 				throw new PlayListLimit();
 			}
 			sentencia.executeUpdate(kontsulta);

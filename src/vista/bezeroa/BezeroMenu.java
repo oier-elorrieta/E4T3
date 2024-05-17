@@ -19,7 +19,7 @@ public class BezeroMenu extends JFrame implements Header {
 	// Frame-a sortzeko konstruktorea
 	public BezeroMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
+        // setIconImage(Toolkit.getDefaultToolkit().getImage(BezeroMenu.class.getResource(Aldagaiak.logo)));
         setBounds(Aldagaiak.cordX, Aldagaiak.cordY, Aldagaiak.resolucionX, Aldagaiak.resolucionY);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
